@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PlayerNameController">
+   <top>
+      <Label text="One More Step to Start Game" textFill="#4696ff" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+   </top>
+   <bottom>
+      <Button fx:id="backBtn" mnemonicParsing="false" onAction="#back" text="Back" textFill="#4696ff" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </BorderPane.margin>
+      </Button>
+   </bottom>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="playerName" promptText="Enter Player Name" />
+            <Button fx:id="enterBtn" mnemonicParsing="false" onAction="#goPlay" text="Go Play" textFill="#4696ff" />
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

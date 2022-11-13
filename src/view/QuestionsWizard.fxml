@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.QuestionsWizardController">
+   <children>
+      <BorderPane prefHeight="1024.0" prefWidth="1440.0">
+         <top>
+            <Label text="Questions" textFill="#4696ff" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="25.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </BorderPane.margin>
+            </Label>
+         </top>
+         <bottom>
+            <Button fx:id="backBtn" mnemonicParsing="false" onAction="#back" text="Back" textFill="#4696ff" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </BorderPane.margin>
+            </Button>
+         </bottom>
+         <center>
+            <TableView prefHeight="847.0" prefWidth="1025.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn prefWidth="75.0" text="ID" />
+                <TableColumn prefWidth="75.0" text="Difficulty" />
+                  <TableColumn prefWidth="677.0" text="Text" />
+              </columns>
+               <BorderPane.margin>
+                  <Insets left="25.0" />
+               </BorderPane.margin>
+            </TableView>
+         </center>
+         <right>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="AddNewQuestionBtn" mnemonicParsing="false" onAction="#addQuestion" text="Add New Question" textFill="#4696ff">
+                     <VBox.margin>
+                        <Insets bottom="25.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button layoutX="10.0" layoutY="479.0" mnemonicParsing="false" text="Delete Selected Question" textFill="#4696ff">
+                     <VBox.margin>
+                        <Insets bottom="25.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button layoutX="10.0" layoutY="492.0" mnemonicParsing="false" text="Update Selected Question" textFill="#4696ff">
+                     <VBox.margin>
+                        <Insets bottom="25.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+               <BorderPane.margin>
+                  <Insets left="25.0" />
+               </BorderPane.margin>
+            </VBox>
+         </right>
+      </BorderPane>
+   </children>
+</AnchorPane>

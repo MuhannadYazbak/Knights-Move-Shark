@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainMenuController">
+   <children>
+      <BorderPane prefHeight="1024.0" prefWidth="1440.0">
+         <top>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Shark - Knight's Move" textFill="#4696ff" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+         </top>
+         <center>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="startNewGameBtn" mnemonicParsing="false" onAction="#enterPlayerName" text="Start New Game" textFill="#4696ff">
+                     <VBox.margin>
+                        <Insets bottom="25.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="historyBtn" mnemonicParsing="false" onAction="#history" text="History" textFill="#4696ff">
+                     <VBox.margin>
+                        <Insets bottom="25.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="questionsWizardBtn" mnemonicParsing="false" onAction="#showQuestionsWizard" text="Questions Wizard" textFill="#4696ff">
+                     <VBox.margin>
+                        <Insets bottom="25.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="exitBtn" mnemonicParsing="false" text="Exit" textFill="#4696ff">
+                     <VBox.margin>
+                        <Insets bottom="25.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
