@@ -18,7 +18,7 @@ public class AddQuestionController {
 	
 	@FXML
 	private void back(ActionEvent event) throws IOException {
-		Parent pane = FXMLLoader.load(getClass().getResource("/View/QuestionsWizard.fxml"));
+		Parent pane = FXMLLoader.load(getClass().getResource("/Views/QuestionsWizard.fxml"));
 		Scene scene = new Scene(pane);
 		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(scene);

@@ -4,10 +4,11 @@ module KnightMove {
 	requires java.desktop;
 	requires javafx.base;
 	requires transitive javafx.graphics;
+	requires org.json;
 	exports controller;
 	exports model;
-	exports view;
+	exports views;
 	opens controller to javafx.graphics,javafx.fxml;
 	opens model to javafx.base, javafx.fxml;
-	opens view to javafx.graphics, java.desktop;
+	opens views to javafx.graphics, java.desktop;
 }

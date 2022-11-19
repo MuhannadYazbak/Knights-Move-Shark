@@ -16,7 +16,7 @@ public class QuestionsWizardController {
 	
 	@FXML
 	private void back(ActionEvent event) throws IOException {
-		Parent pane = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
+		Parent pane = FXMLLoader.load(getClass().getResource("/Views/MainMenu.fxml"));
 		Scene scene = new Scene(pane);
 		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(scene);
@@ -27,7 +27,7 @@ public class QuestionsWizardController {
 	
 	@FXML
 	private void addQuestion(ActionEvent event) throws IOException {
-		Parent pane = FXMLLoader.load(getClass().getResource("/View/AddQuestion.fxml"));
+		Parent pane = FXMLLoader.load(getClass().getResource("/Views/AddQuestion.fxml"));
 		Scene scene = new Scene(pane);
 		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(scene);

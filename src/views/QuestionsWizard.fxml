@@ -28,7 +28,7 @@
             </Button>
          </bottom>
          <center>
-            <TableView prefHeight="847.0" prefWidth="1025.0" BorderPane.alignment="CENTER">
+            <TableView prefHeight="923.0" prefWidth="1144.0" BorderPane.alignment="CENTER">
               <columns>
                 <TableColumn prefWidth="75.0" text="ID" />
                 <TableColumn prefWidth="75.0" text="Difficulty" />
@@ -40,7 +40,7 @@
             </TableView>
          </center>
          <right>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
                   <Button fx:id="AddNewQuestionBtn" mnemonicParsing="false" onAction="#addQuestion" text="Add New Question" textFill="#4696ff">
                      <VBox.margin>

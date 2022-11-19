@@ -18,7 +18,7 @@ public class PlayerNameController {
 	
 	@FXML
 	private void back(ActionEvent event) throws IOException {
-		Parent pane = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
+		Parent pane = FXMLLoader.load(getClass().getResource("/Views/MainMenu.fxml"));
 		Scene scene = new Scene(pane);
 		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(scene);
@@ -29,7 +29,7 @@ public class PlayerNameController {
 	
 	@FXML
 	private void goPlay(ActionEvent event) throws IOException {
-		Parent pane = FXMLLoader.load(getClass().getResource("/View/Game.fxml"));
+		Parent pane = FXMLLoader.load(getClass().getResource("/Views/Game.fxml"));
 		Scene scene = new Scene(pane);
 		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(scene);
