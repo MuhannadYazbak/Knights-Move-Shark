@@ -2,11 +2,13 @@ package model;
 
 import javafx.scene.paint.Color;
 
-public class Square {
+public class Square implements Cloneable {
+	private static final long SerialVersionUID = 1L;
 	public int row;
 	public int col;
 	public boolean isVisisted;
 	public Color squareColor;
+	public Piece piece;
 	public boolean isVisisted() {
 		return isVisisted;
 	}
@@ -32,6 +34,10 @@ public class Square {
 		this.squareColor = squareColor;
 		this.isVisisted = false;
 		this.squareColor = Color.WHITE;
+	}
+	public Object getpiece() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

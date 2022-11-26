@@ -8,34 +8,44 @@
 <?import javafx.scene.layout.BorderPane?>
 
 
-<BorderPane prefHeight="1024.0" prefWidth="1440.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controller.HistoryController">
-   <top>
-      <Label text="Games Histroy" textFill="#4696ff" BorderPane.alignment="CENTER">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HistoryController">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="704.0" layoutY="38.0" text="GAME HISTORY" textFill="WHITE">
+         <font>
+            <Font size="50.0" />
+         </font>
+      </Label>
+      <Button fx:id="backBtn" layoutX="835.0" layoutY="827.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: white;" text="Back">
          <font>
             <Font size="25.0" />
          </font>
-         <BorderPane.margin>
-            <Insets bottom="10.0" top="10.0" />
-         </BorderPane.margin>
-      </Label>
-   </top>
-   <center>
-      <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn prefWidth="75.0" text="No." />
-          <TableColumn prefWidth="99.0" text="Player Name" />
-            <TableColumn prefWidth="91.0" text="Score" />
-        </columns>
-         <BorderPane.margin>
-            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
-         </BorderPane.margin>
-      </TableView>
-   </center>
-   <bottom>
-      <Button fx:id="backBtn" mnemonicParsing="false" onAction="#back" text="Back" textFill="#4696ff" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets bottom="10.0" top="10.0" />
-         </BorderPane.margin>
       </Button>
-   </bottom>
-</BorderPane>
+      <AnchorPane layoutX="51.0" layoutY="182.0" prefHeight="600.0" prefWidth="1800.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" text="Game Histrory">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <TableView layoutX="14.0" layoutY="61.0" prefHeight="464.0" prefWidth="420.0" style="-fx-border-color: transparent;">
+              <columns>
+                <TableColumn prefWidth="110.0" text="Player Name" />
+                <TableColumn prefWidth="89.0" text="Score" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+            <TableView layoutX="718.0" layoutY="61.0" prefHeight="464.0" prefWidth="420.0" style="-fx-border-color: transparent;">
+               <columns>
+                  <TableColumn prefWidth="110.0" text="Player Name" />
+                  <TableColumn prefWidth="89.0" text="Score" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

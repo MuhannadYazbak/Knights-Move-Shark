@@ -4,6 +4,7 @@ package controller;
 
 import java.io.IOException;
 
+import javafx.application.Platform;
 //import Model.SysData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -49,6 +50,11 @@ public class MainMenuController {
 		stage.setMaximized(true);
 		stage.setTitle("Questions Wizard");
 		stage.show();
+	}
+	
+	@FXML
+	private void exit(ActionEvent event) {
+		Platform.exit();
 	}
 
 }

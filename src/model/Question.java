@@ -1,19 +1,18 @@
 package model;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Question {
-	private static int ID = 1;
-	public int id;
-	public String text;
-	public Difficulty diff;
-	public ObservableList<Answer> answers = FXCollections.observableArrayList();
-	public int rightAnswer;
-	public String author;
+	private static int ID = 1;                           										   // Automatic ID for the class to generate automatic id for the instances.
+	public int id;                                        										   // the question id.
+	public String text;                                   										   // The Question's text.
+	public Difficulty diff;                               										   // Difficulty level (easy,medium,hard).
+	public ObservableList<Answer> answers = FXCollections.observableArrayList();          		   // DataStructure of the four possible answers for the question.
+	public int rightAnswer;																		   // the number of the right answer.
+	public String author;																		   // indicates the name of the author who wrote the question.
 	
 	public int getId() {
 		return id;
@@ -42,8 +41,12 @@ public class Question {
 	public int getRightAnswer() {
 		return rightAnswer;
 	}
+	/*
+	 * set the right answer and update the asnwer of id (rightanswer - 1) to be the correct answer for the question.
+	 */
 	public void setRightAnswer(int rightAnswer) {
 		this.rightAnswer = rightAnswer;
+		this.answers.get(rightAnswer - 1).setCorrect(true);
 	}
 	public String getAuthor() {
 		return author;
@@ -83,5 +86,20 @@ public class Question {
 		this.rightAnswer = rightAnswer;
 		this.author = author;
 	}
+	
+	
+	public Question() {
+		super();
+		this.id = Question.ID++;
+	}
+	/*
+	 * adds answer to the answers data structure of this question, is used when adding a new question.
+	 */
+	public void addAnswer(String aText) {
+		Answer answer = new Answer(aText, this.id);
+		answers.addAll(answer);
+	}
+	
+	
 
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -7,42 +8,41 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainMenuController">
+<AnchorPane prefHeight="1250.0" prefWidth="1250.0" style="-fx-background-color: Black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainMenuController">
    <children>
-      <BorderPane prefHeight="1024.0" prefWidth="1440.0">
-         <top>
-            <Label alignment="CENTER" contentDisplay="CENTER" text="Shark - Knight's Move" textFill="#4696ff" BorderPane.alignment="CENTER">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
-         </top>
-         <center>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button fx:id="startNewGameBtn" mnemonicParsing="false" onAction="#enterPlayerName" text="Start New Game" textFill="#4696ff">
-                     <VBox.margin>
-                        <Insets bottom="25.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="historyBtn" mnemonicParsing="false" onAction="#history" text="History" textFill="#4696ff">
-                     <VBox.margin>
-                        <Insets bottom="25.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="questionsWizardBtn" mnemonicParsing="false" onAction="#showQuestionsWizard" text="Questions Wizard" textFill="#4696ff">
-                     <VBox.margin>
-                        <Insets bottom="25.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="exitBtn" mnemonicParsing="false" text="Exit" textFill="#4696ff">
-                     <VBox.margin>
-                        <Insets bottom="25.0" />
-                     </VBox.margin>
-                  </Button>
-               </children>
-            </VBox>
-         </center>
-      </BorderPane>
+      <ImageView fitHeight="240.0" fitWidth="691.0" layoutX="309.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../lib/image%201.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="820.0" fitWidth="630.0" layoutY="430.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../lib/chess-pieces-on-old-wood-tom-mc-nemar%201.png" />
+         </image>
+      </ImageView>
+      <VBox alignment="CENTER" layoutX="951.0" layoutY="727.0" prefHeight="300.0" prefWidth="257.0">
+         <children>
+            <Button fx:id="startNewGameBtn" mnemonicParsing="false" onAction="#enterPlayerName" prefHeight="67.0" prefWidth="257.0" style="-fx-background-color: white;" text="Start New Game">
+               <VBox.margin>
+                  <Insets bottom="25.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="historyBtn" mnemonicParsing="false" onAction="#history" prefHeight="67.0" prefWidth="257.0" style="-fx-background-color: white;" text="History">
+               <VBox.margin>
+                  <Insets bottom="25.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="questionsWizardBtn" mnemonicParsing="false" onAction="#showQuestionsWizard" prefHeight="67.0" prefWidth="257.0" style="-fx-background-color: white;" text="Questions Wizard">
+               <VBox.margin>
+                  <Insets bottom="25.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exit" prefHeight="67.0" prefWidth="257.0" style="-fx-background-color: white;" text="Exit">
+               <VBox.margin>
+                  <Insets bottom="25.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

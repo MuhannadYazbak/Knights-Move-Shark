@@ -8,66 +8,38 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
-   <top>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="25.0" BorderPane.alignment="CENTER">
-         <children>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Label text="Player Name" textFill="#4696ff">
-                     <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label layoutX="10.0" layoutY="10.0" text="Score" textFill="#4696ff">
-                     <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
-                     </VBox.margin>
-                  </Label>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" prefHeight="100.0" prefWidth="576.0">
-               <children>
-                  <Label text="Knight's Move" textFill="#4696ff">
-                     <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Label>
-                  <Label text="User Notifications" textFill="#4bc922">
-                     <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
-                     </VBox.margin>
-                  </Label>
-               </children>
-            </VBox>
-            <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Label text="Level" textFill="#4696ff">
-                     <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label layoutX="10.0" layoutY="20.0" text="Timer" textFill="#4696ff" />
-               </children>
-            </VBox>
-         </children>
-      </HBox>
-   </top>
-   <center>
-      <ImageView fitHeight="341.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
+   <children>
+      <ImageView fitHeight="800.0" fitWidth="800.0" layoutX="271.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Downloads/08-%20SWE/Knight's%20Move%20Shark/images.jpg" />
          </image>
       </ImageView>
-   </center>
-   <bottom>
-      <Button fx:id="backBtn" mnemonicParsing="false" onAction="#back" text="Back" textFill="#4696ff" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets bottom="10.0" top="10.0" />
-         </BorderPane.margin>
+      <Button fx:id="backBtn" layoutX="1264.0" layoutY="988.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: white;" text="Back">
+         <font>
+            <Font size="20.0" />
+         </font>
       </Button>
-   </bottom>
-</BorderPane>
+      <Label layoutX="1186.0" layoutY="42.0" text="Player: John" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="37.0" layoutY="42.0" text="Score: 3" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="604.0" layoutY="142.0" text="Time Remaining: 0:25" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="606.0" layoutY="42.0" text="Level 1l" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

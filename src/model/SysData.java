@@ -34,8 +34,7 @@ public class SysData {
 	 * add a new question to questions.
 	 * @param text the String of the question
 	 */
-	public void addQuestion(String text, Difficulty level, ObservableList<Answer> answers,int rightAnswer, String author) {
-		Question q = new Question(text, level, answers, rightAnswer,  author);
+	public void addQuestion(Question q) {
 		getInstance().questions.add(q);
 	}
 	public void writeToJson() throws IOException {
@@ -61,12 +60,12 @@ public class SysData {
 			
 			//ObservableList<Answer> array =q.getAnswers();
 			for(Answer a:q.getAnswers()) {
-				array.put(a.getText());
+				array.put(a.getAnswerText());
 			}
 			questionObject.put("answers", array);
 			questionObject.put("correct_ans", (q.getRightAnswer()));
 			questionObject.put("level", q.getDiff());
-			questionObject.put("team", "Viper");
+			questionObject.put("team", "Shark");
 
 			
 			
@@ -110,12 +109,10 @@ public class SysData {
         	ObservableList<Answer>  answersArray = FXCollections.observableArrayList();
         	int correctAnsw =  question.getInt("correct_ans");
         	
-        	Boolean flag = false;
         	for(int j=0;j<answers.length();j++) {
         		if(correctAnsw==j+1) {
-        			flag =true;
         		}
-        		answersArray.add(new Answer(answers.getString(j)));
+        		answersArray.add(new Answer(answers.getString(j) ));
         	}
         	
         	
@@ -132,18 +129,15 @@ public class SysData {
 	
 	
 	public void readJson() throws IOException {
-		String resourceName ="/questions.json";
 		String loc = new String(System.getProperty("user.dir")+"\\questions.json");
         File file = new File(loc);
         String content = new String(Files.readAllBytes(Paths.get(file.toURI())));
         //System.out.println(content);
         JSONObject jsonContent = new JSONObject(content);
         JSONArray jsonQuestions = jsonContent.getJSONArray("questions");
-        int questionId = 0;
         System.out.println(jsonQuestions.length());
         for (int i = 0; i<jsonQuestions.length();i++) {
         	JSONObject question = (JSONObject) jsonQuestions.get(i);
-        	questionId = i+1;
         	String questionName=question.getString("question");
         	String level = question.getString("level");
         	System.out.println(questionName+" "+ level);
