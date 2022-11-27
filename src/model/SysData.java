@@ -1,171 +1,117 @@
 package model;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+
+import controller.JsonDataManager;
+
 
 
 public class SysData {
-	private  ObservableList<Question> questions; 
-	static SysData data = null;
-	private SysData() {
-		questions = FXCollections.observableArrayList();
-	}
+	
+	private ArrayList<Player> historyGamesForShow;
+	private HashMap<String, Question> easyQuestions;
+	private HashMap<String, Question> mediumQuestions;
+	private HashMap<String, Question> HardQuestions;
+	private HashMap<String,Question> questions;
+
+	
+	
+    private static SysData instance;
+	
 	public static SysData getInstance() {
-		if(data == null)
-			data = new SysData();
-		return data;
+			if(instance == null)
+				instance = new SysData();
+			return instance; 
+		}
+	
+	private SysData() {
+		
+		this.easyQuestions = new HashMap<String, Question>(); 
+		this.mediumQuestions = new HashMap<String, Question>(); 
+		this.HardQuestions = new HashMap<String, Question>();
+		this.historyGamesForShow = new ArrayList<Player>();
+		this.questions = JsonDataManager.getInstance().readJSONDataFRomFile(); //Reads the Question Json File
+		putQuestions(JsonDataManager.getInstance().readJSONDataFRomFile()); //Calls the method that put the questions in the right places
+		historyGamesForShow = JsonDataManager.getInstance().readHistoryDataFRomFile(); //Reads the History Json File
+		sortArrayList(); // Sort the top 10
 	}
 	
+	public void sortArrayList() {
+		Collections.sort(historyGamesForShow, new Comparator<Player>(){
+		    public int compare(Player p1, Player p2) {
+		        return p2.getScore().compareTo(p1.getScore());
+		    }
+		});
+	}
 	
-	public ObservableList<Question> getQuestions() {
-		return getInstance().questions;
+	//Checks the difficulty and add the questions to the right places
+	public void putQuestions(HashMap <String, Question> questions)
+	{
+		this.easyQuestions.clear();
+		this.mediumQuestions.clear();
+		this.HardQuestions.clear();
+		for(Question q : questions.values())
+		{
+		
+			if(q.getDiff() == Difficulty.easy)
+				this.easyQuestions.put(q.getText(), q);
+			if(q.getDiff()  == Difficulty.medium)
+				this.mediumQuestions.put(q.getText(), q);
+			if(q.getDiff()  == Difficulty.hard)
+				this.HardQuestions.put(q.getText(), q);
+		}
 	}
-	public void setQuestions(ObservableList<Question> questions) {
-		getInstance().questions = questions;
-	}
+	
+
 	/**
-	 * add a new question to questions.
-	 * @param text the String of the question
+	 * 
+	 * Adds a question to the DB and write it the json file. This is the Observers
 	 */
 	public void addQuestion(Question q) {
-		getInstance().questions.add(q);
+		this.questions.put(q.getText(), q);
+		JsonDataManager.getInstance().writeQuestionsIntoJsonFile(questions);
 	}
-	public void writeToJson() throws IOException {
-		//add existing questions
-//		String resourceName ="/questions.json";
-//		String loc = new String(System.getProperty("user.dir")+"\\questions.json");
-//        File file1 = new File(loc);
-//        if(file1.exists()) {+
-//        	readQuestions();
-//        }
+	public HashMap<String, Question> getQuestions() {
+		return questions;
+	}
 
-        JSONObject finalOutput = new JSONObject();
-		JSONArray QuestionList = new JSONArray();
-        
+	public void setQuestions(HashMap<String, Question> questions) {
+		this.questions = questions;
+	}
 
-        
+	public ArrayList<Player> getHistoryGamesForShow() {
+		return historyGamesForShow;
+	}
+
+	public HashMap<String, Question> getEasyQuestions() {
+		return easyQuestions;
+	}
+
+	public HashMap<String, Question> getMediumQuestions() {
+		return mediumQuestions;
+	}
+
+	public HashMap<String, Question> getHardQuestions() {
+		return HardQuestions;
+	}
+
+	public void setHistoryGamesForShow(ArrayList<Player> historyGamesForShow) {
+		this.historyGamesForShow = historyGamesForShow;
+	}
+
+	public void setEasyQuestions(HashMap<String, Question> easyQuestions) {
+		this.easyQuestions = easyQuestions;
+	}
+
+	public void setMediumQuestions(HashMap<String, Question> mediumQuestions) {
+		this.mediumQuestions = mediumQuestions;
+	}
+
+	public void setHardQuestions(HashMap<String, Question> hardQuestions) {
+		HardQuestions = hardQuestions;
+	}
 		
-		
-		for (Question q: questions) {
-			JSONObject questionObject = new JSONObject();
-			questionObject.put("question", q.getText());
-			JSONArray array = new JSONArray();
-			
-			//ObservableList<Answer> array =q.getAnswers();
-			for(Answer a:q.getAnswers()) {
-				array.put(a.getAnswerText());
-			}
-			questionObject.put("answers", array);
-			questionObject.put("correct_ans", (q.getRightAnswer()));
-			questionObject.put("level", q.getDiff());
-			questionObject.put("team", "Shark");
-
-			
-			
-		    QuestionList.put(questionObject);
-		}
-		//finalOutput.put("questions", QuestionList);
-		finalOutput.append("questions", QuestionList);
-      
-        try (FileWriter file = new FileWriter("questions.json")) {
-            //We can write any JSONArray or JSONObject instance to the file
-            file.write((finalOutput).toString()); 
-            file.flush();
- 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-	}
-	public void readQuestions() throws IOException {
-		
-		String loc = new String(System.getProperty("user.dir")+"\\questions.json");
-        File file = new File(loc);
-       
-        String content = new String(Files.readAllBytes(Paths.get(file.toURI())));
-        //System.out.println(content);
-        JSONObject jsonContent = new JSONObject(content);
-        JSONArray jsonQuestions = jsonContent.getJSONArray("questions").getJSONArray(0);
-        //JSONArray jsonArrayQuestion = jsonQuestions.getJSONArray("question");
-        //int questionId = 0;
-        System.out.println(jsonQuestions.length());
-        for (int i = 0; i<jsonQuestions.length();i++) {
-        	JSONObject question =  (jsonQuestions.getJSONObject(i));
-        	//questionId = i+1;
-        	//jsonQuestions.get
-        	String questionName=question.getString("question");
-        	String author = "";
-        	
-        	Difficulty level = Difficulty.valueOf(question.getString("level"));
-        	//System.out.println(questionName+" "+ level);
-        	JSONArray answers = new JSONArray();
-        	answers = question.getJSONArray("answers");
-        	ObservableList<Answer>  answersArray = FXCollections.observableArrayList();
-        	int correctAnsw =  question.getInt("correct_ans");
-        	
-        	for(int j=0;j<answers.length();j++) {
-        		if(correctAnsw==j+1) {
-        		}
-        		answersArray.add(new Answer(answers.getString(j) ));
-        	}
-        	
-        	
-        	Question q =new Question(questionName,level, answersArray,correctAnsw, author);
-        	if(!SysData.getInstance().getQuestions().contains(q)) {
-        		getInstance().questions.add(q);
-    		}
-        	
-        	
-        	
-        }
-
-	}
-	
-	
-	public void readJson() throws IOException {
-		String loc = new String(System.getProperty("user.dir")+"\\questions.json");
-        File file = new File(loc);
-        String content = new String(Files.readAllBytes(Paths.get(file.toURI())));
-        //System.out.println(content);
-        JSONObject jsonContent = new JSONObject(content);
-        JSONArray jsonQuestions = jsonContent.getJSONArray("questions");
-        System.out.println(jsonQuestions.length());
-        for (int i = 0; i<jsonQuestions.length();i++) {
-        	JSONObject question = (JSONObject) jsonQuestions.get(i);
-        	String questionName=question.getString("question");
-        	String level = question.getString("level");
-        	System.out.println(questionName+" "+ level);
-        	
-        }
-
-	}
-	/**
-	 * remove a question from questions.
-	 * @param id the ID of the question to be removed
-	 * @return true if the wanted question was removed, false otherwise.
-	 */
-	public boolean removeQuestion(Question question) {
-		for (Question q : questions) {
-			if (q.getId()== question.getId()) {
-				questions.remove(q);
-				return true;
-			}
-		}
-		return false;
-	}
-	public int getQuestionIdByText(String text) {
-		for (Question q: questions) {
-			if(q.getText().equals(text))
-				return q.getId();
-		}
-		return 0;
-	}
-
-
 }

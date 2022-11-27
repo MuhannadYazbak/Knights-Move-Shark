@@ -45,7 +45,7 @@ public class AddQuestionController implements Initializable {
 		questions = FXCollections.observableArrayList(SysData.getInstance().getQuestions());
 		//answers = FXCollections.observableArrayList();
 		ObservableList<Difficulty> levels = FXCollections.observableArrayList();
-		levels.addAll(Difficulty.easy, Difficulty.meduim, Difficulty.hard);
+		levels.addAll(Difficulty.easy, Difficulty.medium, Difficulty.hard);
 		diffBox.setItems(levels);
 		ObservableList<Integer> positions = FXCollections.observableArrayList();
 		positions.addAll(1, 2, 3, 4);
