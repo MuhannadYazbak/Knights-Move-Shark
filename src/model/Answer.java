@@ -3,7 +3,7 @@ package model;
 import java.util.Objects;
 
 public class Answer {
-	private static int ID=1;                          // Automatic id generator to be restarted to 1 when reaches 4.
+	private static int ID=10;                          // Automatic id generator to be restarted to 1 when reaches 4.
 	public int answerID;							  // the answer id
 	public int questionID;                            // indicates to which question's answers this answer belongs.
 	public boolean isCorrect;						  // indicates whether the answer is the correct answer for the question or not.	
