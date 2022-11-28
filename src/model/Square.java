@@ -1,6 +1,5 @@
 package model;
 
-import javafx.scene.paint.Color;
 
 public class Square implements Cloneable {
 	private static final long SerialVersionUID = 1L;

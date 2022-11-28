@@ -1,25 +1,47 @@
 package model;
 
-import java.util.Objects;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import utils.Difficulty;
 
 public class Question {
-	private static int ID = 1;                           										   // Automatic ID for the class to generate automatic id for the instances.
-	public int id;                                        										   // the question id.
-	public String text;                                   										   // The Question's text.
-	public Difficulty diff;                               										   // Difficulty level (easy,medium,hard).
-	public ObservableList<Answer> answers = FXCollections.observableArrayList();          		   // DataStructure of the four possible answers for the question.
-	public int rightAnswer;																		   // the number of the right answer.
-	public String author;																		   // indicates the name of the author who wrote the question.
+
+	public String text;                                   										 
+	public Difficulty diff;                               										 
+	public String answer1;
+	public String answer2;
+	public String answer3;
+	public String answer4;
+	public int rightAnswer;																		  
+	public String author;	
+
+	public Question(String text, Difficulty diff, String answer1, String answer2, String answer3, String answer4,
+			int rightAnswer, String author) {
+		this.text = text;
+		this.diff = diff;
+		this.answer1 = answer1;
+		this.answer2 = answer2;
+		this.answer3 = answer3;
+		this.answer4 = answer4;
+		this.rightAnswer = rightAnswer;
+		this.author = author;
+	}
 	
-	public int getId() {
-		return id;
+	public String getCorrectAnswer() {
+		
+		switch (getRightAnswer()) {
+		case 1:
+			return getAnswer1();
+		case 2:
+			return getAnswer2();
+		case 3:
+			return getAnswer3();
+		case 4:
+			return getAnswer4();
+
+		}
+		return "";
+		
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 	public String getText() {
 		return text;
 	}
@@ -32,73 +54,46 @@ public class Question {
 	public void setDiff(Difficulty diff) {
 		this.diff = diff;
 	}
-	public ObservableList<Answer> getAnswers() {
-		return answers;
+	public String getAnswer1() {
+		return answer1;
 	}
-	public void setAnswers(ObservableList<Answer> answers) {
-		this.answers = answers;
+	public void setAnswer1(String answer1) {
+		this.answer1 = answer1;
+	}
+	public String getAnswer2() {
+		return answer2;
+	}
+	public void setAnswer2(String answer2) {
+		this.answer2 = answer2;
+	}
+	public String getAnswer3() {
+		return answer3;
+	}
+	public void setAnswer3(String answer3) {
+		this.answer3 = answer3;
+	}
+	public String getAnswer4() {
+		return answer4;
+	}
+	public void setAnswer4(String answer4) {
+		this.answer4 = answer4;
 	}
 	public int getRightAnswer() {
 		return rightAnswer;
 	}
-	/*
-	 * set the right answer and update the asnwer of id (rightanswer - 1) to be the correct answer for the question.
-	 */
 	public void setRightAnswer(int rightAnswer) {
 		this.rightAnswer = rightAnswer;
-		this.answers.get(rightAnswer - 1).setCorrect(true);
 	}
 	public String getAuthor() {
 		return author;
 	}
-	public void setAuthor(String newAuthor) {
-		this.author = newAuthor;
-	}
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Question other = (Question) obj;
-		return id == other.id;
-	}
-	
-	
-	@Override
-	public String toString() {
-		return "Question [id=" + id + ", text=" + text + ", diff=" + diff + ", answers=" + answers + ", rightAnswer="
-				+ rightAnswer + ", author=" + author + "]";
-	}
-	public Question(String text, Difficulty diff, ObservableList<Answer> answers, int rightAnswer, String author) {
-		super();
-		this.id = Question.ID++;
-		this.text = text;
-		this.diff = diff;
-		this.answers = answers;
-		this.rightAnswer = rightAnswer;
+	public void setAuthor(String author) {
 		this.author = author;
 	}
 	
 	
-	public Question() {
-		super();
-		this.id = Question.ID++;
-	}
-	/*
-	 * adds answer to the answers data structure of this question, is used when adding a new question.
-	 */
-	public void addAnswer(String aText) {
-		Answer answer = new Answer(aText, this.id);
-		answers.addAll(answer);
-	}
+	
+	
 	
 
 }
