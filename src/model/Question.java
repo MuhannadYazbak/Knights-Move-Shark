@@ -12,6 +12,7 @@ public class Question {
 	public String answer4;
 	public int rightAnswer;																		  
 	public String author;	
+	public String test;
 
 	public Question(String text, Difficulty diff, String answer1, String answer2, String answer3, String answer4,
 			int rightAnswer, String author) {
