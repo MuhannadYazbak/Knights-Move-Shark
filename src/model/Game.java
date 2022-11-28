@@ -4,8 +4,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class Game {
-	public static int ID=18;
-	public int num=5;
+	public static int ID=1;
 	public int id;
 	public String player;
 	public int level;
