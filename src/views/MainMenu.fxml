@@ -6,53 +6,78 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="900.0" style="-fx-background-color: Black;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainMenuController">
+<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainMenuController">
    <children>
+      <MediaView fx:id="mediaView" fitHeight="750.0" fitWidth="1124.0" />
       <ImageView fitHeight="240.0" fitWidth="691.0" layoutX="105.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../lib/logo-removebg-preview.png" />
+            <Image url="@../../lib/knights-move-high-resolution-logo-color-on-transparent-background%20(1).png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="456.0" fitWidth="398.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../lib/chess-pieces-on-old-wood-tom-mc-nemar%201.png" />
-         </image>
-      </ImageView>
-      <VBox alignment="CENTER" layoutX="441.0" layoutY="303.0" prefHeight="437.0" prefWidth="432.0">
+      <VBox alignment="CENTER" layoutX="235.0" layoutY="266.0" prefHeight="437.0" prefWidth="432.0">
          <children>
-            <Button fx:id="startNewGameBtn" mnemonicParsing="false" onAction="#enterPlayerName" prefHeight="67.0" prefWidth="257.0" style="-fx-background-color: white;" text="Start New Game">
+            <Button fx:id="startNewGameBtn" mnemonicParsing="false" onAction="#enterPlayerName" prefHeight="67.0" prefWidth="306.0" style="-fx-background-color: white; -fx-border-color: #612D00; -fx-border-width: 0px 5px 0px 5px;" text="Start New Game" textFill="#024b10">
                <VBox.margin>
                   <Insets bottom="25.0" />
                </VBox.margin>
                <font>
                   <Font name="System Bold Italic" size="24.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../lib/play.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
-            <Button fx:id="historyBtn" mnemonicParsing="false" onAction="#history" prefHeight="67.0" prefWidth="257.0" style="-fx-background-color: white;" text="History">
+            <Button fx:id="historyBtn" mnemonicParsing="false" onAction="#history" prefHeight="67.0" prefWidth="306.0" style="-fx-background-color: white; -fx-border-color: #612D00; -fx-border-width: 0px 5px 0px 5px;" text="History" textFill="#024b10">
                <VBox.margin>
                   <Insets bottom="25.0" />
                </VBox.margin>
                <font>
                   <Font name="System Bold Italic" size="24.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../lib/history.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
-            <Button fx:id="questionsWizardBtn" mnemonicParsing="false" onAction="#showQuestionsWizard" prefHeight="67.0" prefWidth="257.0" style="-fx-background-color: white;" text="Questions Wizard">
+            <Button fx:id="questionsWizardBtn" mnemonicParsing="false" onAction="#showQuestionsWizard" prefHeight="67.0" prefWidth="306.0" style="-fx-background-color: white; -fx-border-color: #612D00; -fx-border-width: 0px 5px 0px 5px;" text="Questions Wizard" textFill="#024b10">
                <VBox.margin>
                   <Insets bottom="25.0" />
                </VBox.margin>
                <font>
                   <Font name="System Bold Italic" size="24.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../lib/magic-wand.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
-            <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exit" prefHeight="67.0" prefWidth="257.0" style="-fx-background-color: white;" text="Exit">
+            <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exit" prefHeight="67.0" prefWidth="306.0" style="-fx-background-color: white; -fx-border-color: #612D00; -fx-border-width: 0px 5px 0px 5px;" text="Exit" textFill="#024b10">
                <VBox.margin>
                   <Insets bottom="25.0" />
                </VBox.margin>
                <font>
                   <Font name="System Bold Italic" size="24.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../lib/log-out.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
          </children>
       </VBox>

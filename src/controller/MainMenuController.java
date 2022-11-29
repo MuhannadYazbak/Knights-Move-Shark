@@ -1,25 +1,76 @@
 package controller;
 
 
-
-import java.io.IOException;
-
 import javafx.application.Platform;
 //import Model.SysData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
+import javafx.scene.control.Labeled;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.util.Duration;
 
-public class MainMenuController {
+
+public class MainMenuController implements Initializable, Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	@FXML
-	Button startNewGameBtn, historyBtn, questionsWizardBtn, exitBtn;
+	private Parent parent;
+	  @FXML
+	    private Button exitBtn;
+
+	    @FXML
+	    private Button historyBtn;
+
+	    @FXML
+	    private MediaView mediaView;
+
+	    @FXML
+	    private Button questionsWizardBtn;
+
+	    @FXML
+	    private Button startNewGameBtn;
+	    
+	    @FXML
+		private AnchorPane screen;
+	    
+	    private Media media;
+		private MediaPlayer backgroundvideo;
+		
+		/*@Override
+		public void initialize(URL arg0, ResourceBundle arg1) {
+
+			if (backgroundvideo == null) {//starts the background video
+				media = new Media(getResource("/lib/pexels-tima-miroshnichenko-6689888.mp4").toExternalForm());
+
+				backgroundvideo = new MediaPlayer(media);
+				mediaView.setMediaPlayer(backgroundvideo);
+
+				backgroundvideo.setOnEndOfMedia(new Runnable() {
+					@Override
+					public void run() {
+						backgroundvideo.seek(Duration.ZERO);
+						backgroundvideo.play();
+					}
+				});
+				backgroundvideo.play();
+			}
+			mediaView.toBack();
+		}*/
 	@FXML
 	private void history(ActionEvent event) throws IOException {
 		Parent pane = FXMLLoader.load(getClass().getResource("/Views/History.fxml"));
@@ -57,4 +108,5 @@ public class MainMenuController {
 		Platform.exit();
 	}
 
+	
 }

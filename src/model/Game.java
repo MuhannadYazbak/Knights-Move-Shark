@@ -10,6 +10,7 @@ public class Game {
 	public int level;
 	public int score;
 	public Square[][] board = new Square[8][8];
+	
 	public String getPlayer() {
 		return player;
 	}
