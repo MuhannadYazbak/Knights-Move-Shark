@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1124.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddQuestionController">
+<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1124.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddQuestionController">
    <children>
       <ImageView fitHeight="750.0" fitWidth="1124.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -43,7 +43,7 @@
                   <Insets left="30.0" right="10.0" top="30.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="qText1" prefHeight="43.0" prefWidth="250.0" promptText="Answer Text" style="-fx-border-color: brown; -fx-border-width: 0px 0px 0px 5px;">
+            <TextField fx:id="qText1" prefHeight="43.0" prefWidth="250.0" promptText="Answer Text" style="-fx-border-color: #612D00; -fx-border-width: 0px 0px 0px 5px;">
                <HBox.margin>
                   <Insets left="70.0" top="25.0" />
                </HBox.margin>
@@ -63,7 +63,7 @@
                   <Insets left="30.0" right="10.0" top="30.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="qText2" prefHeight="43.0" prefWidth="250.0" promptText="Answer Text" style="-fx-border-color: brown; -fx-border-width: 0px 0px 0px 5px;">
+            <TextField fx:id="qText2" prefHeight="43.0" prefWidth="250.0" promptText="Answer Text" style="-fx-border-color: #612D00; -fx-border-width: 0px 0px 0px 5px;">
                <HBox.margin>
                   <Insets left="70.0" top="25.0" />
                </HBox.margin>
@@ -83,7 +83,7 @@
                   <Insets left="30.0" right="10.0" top="30.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="qText3" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="43.0" prefWidth="250.0" promptText="Answer Text" style="-fx-border-color: brown; -fx-border-width: 0px 0px 0px 5px;">
+            <TextField fx:id="qText3" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="43.0" prefWidth="250.0" promptText="Answer Text" style="-fx-border-color: #612D00; -fx-border-width: 0px 0px 0px 5px;">
                <HBox.margin>
                   <Insets left="70.0" top="25.0" />
                </HBox.margin>
@@ -103,7 +103,7 @@
                   <Insets left="30.0" right="10.0" top="30.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="qText4" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="43.0" prefWidth="250.0" promptText="Answer Text" style="-fx-border-color: brown; -fx-border-width: 0px 0px 0px 5px;">
+            <TextField fx:id="qText4" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="43.0" prefWidth="250.0" promptText="Answer Text" style="-fx-border-color: #612D00; -fx-border-width: 0px 0px 0px 5px;">
                <HBox.margin>
                   <Insets left="70.0" top="25.0" />
                </HBox.margin>
@@ -118,13 +118,13 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <ComboBox fx:id="diffBox" layoutX="268.0" layoutY="165.0" prefHeight="43.0" prefWidth="250.0" promptText="Select Difficulty" style="-fx-background-color: white; -fx-border-color: brown; -fx-border-width: 0px 0px 0px 5px;" />
+      <ComboBox fx:id="diffBox" layoutX="268.0" layoutY="165.0" prefHeight="43.0" prefWidth="250.0" promptText="Select Difficulty" style="-fx-background-color: white; -fx-border-color: #612D00; -fx-border-width: 0px 0px 0px 5px;" />
       <Text fill="WHITE" layoutX="93.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question" wrappingWidth="100.80000686645508">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="qText" layoutX="268.0" layoutY="40.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="43.0" prefWidth="250.0" promptText="Question Text" style="-fx-border-width: 0px 0px 0px 5px; -fx-border-color: brown;">
+      <TextField fx:id="qText" layoutX="268.0" layoutY="40.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="43.0" prefWidth="250.0" promptText="Question Text" style="-fx-border-width: 0px 0px 0px 5px; -fx-border-color: #612D00;">
          <font>
             <Font size="20.0" />
          </font>
