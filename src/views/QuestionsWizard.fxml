@@ -7,31 +7,31 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="900.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.QuestionsWizardController">
+<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1124.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.QuestionsWizardController">
    <children>
-      <TableView layoutX="32.0" layoutY="125.0" prefHeight="500.0" prefWidth="840.0">
+      <TableView layoutX="142.0" layoutY="125.0" prefHeight="500.0" prefWidth="840.0">
         <columns>
           <TableColumn minWidth="20.0" prefWidth="570.4000053405762" text="Question" />
           <TableColumn minWidth="20.0" prefWidth="330.4000244140625" text="level" />
             <TableColumn minWidth="20.0" prefWidth="100.0" />
         </columns>
       </TableView>
-      <Label layoutX="338.0" layoutY="33.0" text="Questions" textFill="WHITE">
+      <Label layoutX="448.0" layoutY="31.0" text="Questions">
          <font>
             <Font size="50.0" />
          </font>
       </Label>
-      <Button fx:id="backBtn" layoutX="569.0" layoutY="651.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: white;" text="Back">
+      <Button fx:id="backBtn" layoutX="679.0" layoutY="651.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: white;" text="Back">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <Button fx:id="AddNewQuestionBtn" layoutX="246.0" layoutY="651.0" mnemonicParsing="false" onAction="#addQuestion" style="-fx-background-color: white;" text="Add ">
+      <Button fx:id="AddNewQuestionBtn" layoutX="356.0" layoutY="651.0" mnemonicParsing="false" onAction="#addQuestion" style="-fx-background-color: white;" text="Add ">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <Button layoutX="391.0" layoutY="651.0" mnemonicParsing="false" style="-fx-background-color: white;" text="Update">
+      <Button layoutX="501.0" layoutY="651.0" mnemonicParsing="false" style="-fx-background-color: white;" text="Update">
          <font>
             <Font size="25.0" />
          </font>

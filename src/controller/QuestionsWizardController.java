@@ -51,8 +51,8 @@ public class QuestionsWizardController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		@SuppressWarnings("unused")
-		ObservableList<Question> questions = SysData.getInstance().getQuestions();
+//		@SuppressWarnings("unused")
+//		ObservableList<Question> questions = SysData.getInstance().getQuestions();
 //		questionsTable.getColumns().add((TableColumn<Question, ?>) questions);
 	}
 

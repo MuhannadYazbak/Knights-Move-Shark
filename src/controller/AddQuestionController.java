@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import model.SysData;
@@ -23,8 +24,8 @@ import javafx.stage.Stage;
 import model.Question;
 
 public class AddQuestionController implements Initializable {
-	Question selected = new Question();                       // The question instance that we will fit the values from the view into.
-	ObservableList<Question> questions;                      
+	Question selected = new Question(null, null, null, null, null, null, 0, null);                       // The question instance that we will fit the values from the view into.
+	ObservableList<HashMap<String, Question>> questions;                      
 	ObservableList<Integer> rightAnswer;
 	@FXML
 	Button backBtn, addQuestionBtn;
@@ -73,10 +74,10 @@ public class AddQuestionController implements Initializable {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 		selected.setText(qText.getText());
 		selected.setDiff(diffBox.getValue());
-		selected.addAnswer(a1Text.getText());
-		selected.addAnswer(a2Text.getText());
-		selected.addAnswer(a3Text.getText());
-		selected.addAnswer(a4Text.getText());
+//		selected.addAnswer(a1Text.getText());
+//		selected.addAnswer(a2Text.getText());
+//		selected.addAnswer(a3Text.getText());
+//		selected.addAnswer(a4Text.getText());
 		selected.setRightAnswer(rightAnswerBox.getValue());
 		SysData.getInstance().addQuestion(selected);
 		alert.setContentText(selected.toString());

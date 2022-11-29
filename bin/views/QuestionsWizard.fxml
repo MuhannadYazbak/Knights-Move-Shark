@@ -1,38 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.QuestionsWizardController">
+<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1124.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.QuestionsWizardController">
    <children>
-      <TableView layoutX="434.0" layoutY="202.0" prefHeight="500.0" prefWidth="1000.0">
+      <TableView layoutX="142.0" layoutY="125.0" prefHeight="500.0" prefWidth="840.0">
         <columns>
-          <TableColumn minWidth="20.0" prefWidth="700.0" text="Question" />
-          <TableColumn minWidth="20.0" prefWidth="200.0" text="level" />
+          <TableColumn minWidth="20.0" prefWidth="570.4000053405762" text="Question" />
+          <TableColumn minWidth="20.0" prefWidth="330.4000244140625" text="level" />
             <TableColumn minWidth="20.0" prefWidth="100.0" />
         </columns>
       </TableView>
-      <VBox alignment="CENTER" layoutX="304.0" layoutY="215.0" prefHeight="200.0" prefWidth="200.0" />
-      <Label layoutX="882.0" layoutY="35.0" text="Questions" textFill="WHITE">
+      <Label layoutX="448.0" layoutY="31.0" text="Questions">
          <font>
             <Font size="50.0" />
          </font>
       </Label>
-      <Button fx:id="backBtn" layoutX="934.0" layoutY="766.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: white;" text="Back">
+      <Button fx:id="backBtn" layoutX="679.0" layoutY="651.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: white;" text="Back">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <Button fx:id="AddNewQuestionBtn" layoutX="611.0" layoutY="766.0" mnemonicParsing="false" onAction="#addQuestion" style="-fx-background-color: white;" text="Add ">
+      <Button fx:id="AddNewQuestionBtn" layoutX="356.0" layoutY="651.0" mnemonicParsing="false" onAction="#addQuestion" style="-fx-background-color: white;" text="Add ">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <Button layoutX="756.0" layoutY="766.0" mnemonicParsing="false" style="-fx-background-color: white;" text="Update">
+      <Button layoutX="501.0" layoutY="651.0" mnemonicParsing="false" style="-fx-background-color: white;" text="Update">
          <font>
             <Font size="25.0" />
          </font>
