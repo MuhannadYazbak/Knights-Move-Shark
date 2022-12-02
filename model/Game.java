@@ -2,7 +2,7 @@ package model;
 
 import java.util.Arrays;
 import java.util.Objects;
-
+//* new one //
 public class Game {
 	public static int ID=1;
 	public int id;
