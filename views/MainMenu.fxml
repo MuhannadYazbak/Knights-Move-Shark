@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1124.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainMenuController">
+   <children>
+      <ImageView fitHeight="240.0" fitWidth="691.0" layoutX="244.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../lib/knights-move-high-resolution-logo-color-on-transparent-background%20(1).png" />
+         </image>
+      </ImageView>
+      <VBox alignment="CENTER" layoutX="374.0" layoutY="274.0" prefHeight="437.0" prefWidth="432.0">
+         <children>
+            <Button fx:id="startNewGameBtn" mnemonicParsing="false" onAction="#enterPlayerName" prefHeight="67.0" prefWidth="306.0" style="-fx-background-color: white; -fx-border-color: #612D00; -fx-border-width: 0px 5px 0px 5px;" text="Start New Game" textFill="#024b10">
+               <VBox.margin>
+                  <Insets bottom="25.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../lib/play.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="historyBtn" mnemonicParsing="false" onAction="#history" prefHeight="67.0" prefWidth="306.0" style="-fx-background-color: white; -fx-border-color: #612D00; -fx-border-width: 0px 5px 0px 5px;" text="History" textFill="#024b10">
+               <VBox.margin>
+                  <Insets bottom="25.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../lib/history.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="questionsWizardBtn" mnemonicParsing="false" onAction="#showQuestionsWizard" prefHeight="67.0" prefWidth="306.0" style="-fx-background-color: white; -fx-border-color: #612D00; -fx-border-width: 0px 5px 0px 5px;" text="Questions Wizard" textFill="#024b10">
+               <VBox.margin>
+                  <Insets bottom="25.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../lib/magic-wand.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exit" prefHeight="67.0" prefWidth="306.0" style="-fx-background-color: white; -fx-border-color: #612D00; -fx-border-width: 0px 5px 0px 5px;" text="Exit" textFill="#024b10">
+               <VBox.margin>
+                  <Insets bottom="25.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../lib/log-out.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
