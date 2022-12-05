@@ -117,6 +117,7 @@ public class King extends Piece{
 	public void moveThePiec(Set<Square> possibleMoves) {
 		// TODO Auto-generated method stub
 		
+		
 	}
 	
 	

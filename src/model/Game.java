@@ -10,7 +10,52 @@ public class Game {
 	public int level;
 	public int score;
 	public static Square[][] board = new Square[8][8];
+	public King king;
+	public Knight knight;
+	public Queen queen;
 	
+	
+	public Game(String player, int level, int score, King king, Knight knight, Queen queen) {
+		super();
+		this.player = player;
+		this.level = level;
+		this.score = score;
+		this.king = king;
+		this.knight = knight;
+		this.queen = queen;
+		this.id = getID();
+		setID(getID()+1);
+	}
+	public static int getID() {
+		return ID;
+	}
+	public static void setID(int iD) {
+		ID = iD;
+	}
+	public static Square[][] getBoard() {
+		return board;
+	}
+	public static void setBoard(Square[][] board) {
+		Game.board = board;
+	}
+	public King getKing() {
+		return king;
+	}
+	public void setKing(King king) {
+		this.king = king;
+	}
+	public Knight getKnight() {
+		return knight;
+	}
+	public void setKnight(Knight knight) {
+		this.knight = knight;
+	}
+	public Queen getQueen() {
+		return queen;
+	}
+	public void setQueen(Queen queen) {
+		this.queen = queen;
+	}
 	public String getPlayer() {
 		return player;
 	}
