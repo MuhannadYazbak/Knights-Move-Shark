@@ -58,7 +58,7 @@ public class MainMenuController implements Initializable{
 		public void initialize(URL arg0, ResourceBundle arg1) {
 			
 			if (backgroundvideo == null) {//starts the background video
-				media = new Media(getClass().getResource("/lib/B3.mp4").toExternalForm());
+				media = new Media(getClass().getResource("/lib/B1.mp4").toExternalForm());
 
 				backgroundvideo = new MediaPlayer(media);
 				mediaView.setMediaPlayer(backgroundvideo);
