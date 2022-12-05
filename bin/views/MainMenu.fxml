@@ -14,10 +14,10 @@
    <children>
       <ImageView fitHeight="240.0" fitWidth="691.0" layoutX="244.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../lib/knights-move-high-resolution-logo-color-on-transparent-background%20(1).png" />
+            <Image url="@../lib/knights-move-high-resolution-logo-color-on-transparent-background%20(1).png" />
          </image>
       </ImageView>
-      <VBox alignment="CENTER" layoutX="374.0" layoutY="274.0" prefHeight="437.0" prefWidth="432.0">
+      <VBox fx:id="vbox" alignment="CENTER" layoutX="374.0" layoutY="274.0" prefHeight="437.0" prefWidth="432.0">
          <children>
             <Button fx:id="startNewGameBtn" mnemonicParsing="false" onAction="#enterPlayerName" prefHeight="67.0" prefWidth="306.0" style="-fx-background-color: white; -fx-border-color: #612D00; -fx-border-width: 0px 5px 0px 5px;" text="Start New Game" textFill="#024b10">
                <VBox.margin>
@@ -29,7 +29,7 @@
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../lib/play.png" />
+                        <Image url="@../lib/play.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -47,7 +47,7 @@
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../lib/history.png" />
+                        <Image url="@../lib/history.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -65,7 +65,7 @@
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../lib/magic-wand.png" />
+                        <Image url="@../lib/magic-wand.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -83,7 +83,7 @@
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../lib/log-out.png" />
+                        <Image url="@../lib/log-out.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -93,5 +93,6 @@
             </Button>
          </children>
       </VBox>
+      <MediaView fx:id="mediaView" fitHeight="750.0" fitWidth="1124.0" />
    </children>
 </AnchorPane>

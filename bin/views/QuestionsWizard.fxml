@@ -4,11 +4,33 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1124.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.QuestionsWizardController">
    <children>
+      <ImageView fitHeight="134.0" fitWidth="499.0" layoutX="800.0" layoutY="308.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+         <image>
+            <Image url="@../lib/knights-move-high-resolution-logo-color-on-transparent-background%20(2).png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="119.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/black.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="169.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/brown.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="220.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/white.png" />
+         </image>
+      </ImageView>
       <TableView layoutX="142.0" layoutY="125.0" prefHeight="500.0" prefWidth="840.0">
         <columns>
           <TableColumn minWidth="20.0" prefWidth="570.4000053405762" text="Question" />
@@ -21,19 +43,34 @@
             <Font size="50.0" />
          </font>
       </Label>
-      <Button fx:id="backBtn" layoutX="679.0" layoutY="651.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: white;" text="Back">
+      <ImageView fitHeight="62.0" fitWidth="89.0" layoutX="388.0" layoutY="649.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/check-button.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="AddNewQuestionBtn" layoutX="388.0" layoutY="646.0" mnemonicParsing="false" onAction="#addQuestion" opacity="0.0" prefHeight="62.0" prefWidth="62.0" style="-fx-background-color: white;">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <Button fx:id="AddNewQuestionBtn" layoutX="356.0" layoutY="651.0" mnemonicParsing="false" onAction="#addQuestion" style="-fx-background-color: white;" text="Add ">
+      <ImageView fitHeight="62.0" fitWidth="115.0" layoutX="531.0" layoutY="646.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/updated.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="531.0" layoutY="651.0" mnemonicParsing="false" opacity="0.0" prefHeight="52.0" prefWidth="62.0" style="-fx-background-color: white;">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <Button layoutX="501.0" layoutY="651.0" mnemonicParsing="false" style="-fx-background-color: white;" text="Update">
+      <ImageView fitHeight="62.0" fitWidth="69.0" layoutX="681.0" layoutY="646.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/undo.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="backBtn" contentDisplay="CENTER" layoutX="681.0" layoutY="655.0" mnemonicParsing="false" onAction="#back" opacity="0.0" prefHeight="50.0" prefWidth="62.0" style="-fx-background-color: white;">
          <font>
-            <Font size="25.0" />
+            <Font size="20.0" />
          </font>
       </Button>
    </children>
