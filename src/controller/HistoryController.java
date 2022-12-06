@@ -16,12 +16,11 @@ public class HistoryController {
 	
 	@FXML
 	private void back(ActionEvent event) throws IOException {
-		Parent pane = FXMLLoader.load(getClass().getResource("/Views/MainMenu.fxml"));
+		Parent pane = FXMLLoader.load(getClass().getResource("/views/MainMenu.fxml"));
 		Scene scene = new Scene(pane);
 		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(scene);
 		stage.setTitle("Main Menu");
-		stage.setMaximized(true);
 		stage.show();
 	}
 

@@ -6,10 +6,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1124.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
    <children>
-      <ImageView fitHeight="750.0" fitWidth="1124.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="750.0" fitWidth="1124.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../lib/chess-5038731_640.jpg" />
          </image>
@@ -49,6 +50,473 @@
             <Font size="20.0" />
          </font>
       </Button>
+      <ImageView fx:id="S60" fitHeight="70.0" fitWidth="70.0" layoutX="308.0" layoutY="547.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S61" fitHeight="70.0" fitWidth="70.0" layoutX="376.0" layoutY="547.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S62" fitHeight="70.0" fitWidth="70.0" layoutX="446.0" layoutY="547.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S63" fitHeight="70.0" fitWidth="70.0" layoutX="515.0" layoutY="547.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S64" fitHeight="70.0" fitWidth="70.0" layoutX="585.0" layoutY="547.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S65" fitHeight="70.0" fitWidth="70.0" layoutX="654.0" layoutY="547.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S66" fitHeight="70.0" fitWidth="70.0" layoutX="724.0" layoutY="547.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S67" fitHeight="70.0" fitWidth="70.0" layoutX="792.0" layoutY="547.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S70" fitHeight="70.0" fitWidth="70.0" layoutX="307.0" layoutY="617.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S71" fitHeight="70.0" fitWidth="70.0" layoutX="377.0" layoutY="617.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S72" fitHeight="70.0" fitWidth="70.0" layoutX="446.0" layoutY="617.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S73" fitHeight="70.0" fitWidth="70.0" layoutX="516.0" layoutY="617.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S74" fitHeight="70.0" fitWidth="70.0" layoutX="585.0" layoutY="617.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S75" fitHeight="70.0" fitWidth="70.0" layoutX="655.0" layoutY="617.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S76" fitHeight="70.0" fitWidth="70.0" layoutX="724.0" layoutY="617.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S77" fitHeight="70.0" fitWidth="70.0" layoutX="793.0" layoutY="617.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S40" fitHeight="70.0" fitWidth="70.0" layoutX="308.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S41" fitHeight="70.0" fitWidth="70.0" layoutX="376.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S42" fitHeight="70.0" fitWidth="70.0" layoutX="445.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S43" fitHeight="70.0" fitWidth="70.0" layoutX="514.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S44" fitHeight="70.0" fitWidth="70.0" layoutX="584.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S45" fitHeight="70.0" fitWidth="70.0" layoutX="653.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S46" fitHeight="70.0" fitWidth="70.0" layoutX="723.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S47" fitHeight="70.0" fitWidth="70.0" layoutX="792.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S50" fitHeight="70.0" fitWidth="70.0" layoutX="308.0" layoutY="477.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S51" fitHeight="70.0" fitWidth="70.0" layoutX="376.0" layoutY="477.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S52" fitHeight="70.0" fitWidth="70.0" layoutX="445.0" layoutY="477.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S53" fitHeight="70.0" fitWidth="70.0" layoutX="515.0" layoutY="477.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S54" fitHeight="70.0" fitWidth="70.0" layoutX="584.0" layoutY="477.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S55" fitHeight="70.0" fitWidth="70.0" layoutX="654.0" layoutY="477.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S56" fitHeight="70.0" fitWidth="70.0" layoutX="723.0" layoutY="477.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S57" fitHeight="70.0" fitWidth="70.0" layoutX="792.0" layoutY="477.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S20" fitHeight="70.0" fitWidth="70.0" layoutX="308.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S21" fitHeight="70.0" fitWidth="70.0" layoutX="377.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S22" fitHeight="70.0" fitWidth="70.0" layoutX="446.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S23" fitHeight="70.0" fitWidth="70.0" layoutX="515.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S24" fitHeight="70.0" fitWidth="70.0" layoutX="585.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S25" fitHeight="70.0" fitWidth="70.0" layoutX="654.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S26" fitHeight="70.0" fitWidth="70.0" layoutX="724.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S27" fitHeight="70.0" fitWidth="70.0" layoutX="792.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S30" fitHeight="70.0" fitWidth="70.0" layoutX="308.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S31" fitHeight="70.0" fitWidth="70.0" layoutX="377.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S32" fitHeight="70.0" fitWidth="70.0" layoutX="446.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S33" fitHeight="70.0" fitWidth="70.0" layoutX="516.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S34" fitHeight="70.0" fitWidth="70.0" layoutX="585.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S35" fitHeight="70.0" fitWidth="70.0" layoutX="655.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S36" fitHeight="70.0" fitWidth="70.0" layoutX="724.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S37" fitHeight="70.0" fitWidth="70.0" layoutX="792.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S00" fitHeight="70.0" fitWidth="70.0" layoutX="308.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S01" fitHeight="70.0" fitWidth="70.0" layoutX="378.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S02" fitHeight="70.0" fitWidth="70.0" layoutX="447.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S03" fitHeight="70.0" fitWidth="70.0" layoutX="516.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S04" fitHeight="70.0" fitWidth="70.0" layoutX="586.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S05" fitHeight="70.0" fitWidth="70.0" layoutX="655.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S06" fitHeight="70.0" fitWidth="70.0" layoutX="725.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S07" fitHeight="70.0" fitWidth="70.0" layoutX="794.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S10" fitHeight="70.0" fitWidth="70.0" layoutX="308.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S11" fitHeight="70.0" fitWidth="70.0" layoutX="378.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S12" fitHeight="70.0" fitWidth="70.0" layoutX="447.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S13" fitHeight="70.0" fitWidth="70.0" layoutX="517.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S14" fitHeight="70.0" fitWidth="70.0" layoutX="586.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S15" fitHeight="70.0" fitWidth="70.0" layoutX="656.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S16" fitHeight="70.0" fitWidth="70.0" layoutX="724.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/sb.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="S17" fitHeight="70.0" fitWidth="70.0" layoutX="793.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/gb.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="278.0" layoutY="97.0" prefHeight="30.0" prefWidth="586.0" style="-fx-background-color: white;" />
+      <Label layoutX="14.0" layoutY="392.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="557.0" rotate="90.0" style="-fx-background-color: white;" />
+      <Text fill="#612d00" layoutX="335.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#612d00" layoutX="286.0" layoutY="450.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#612d00" layoutX="286.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#612d00" layoutX="286.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#612d00" layoutX="473.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#612d00" layoutX="612.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#612d00" layoutX="753.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#612d00" layoutX="286.0" layoutY="591.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#612d00" layoutX="286.0" layoutY="660.0" strokeType="OUTSIDE" strokeWidth="0.0" text="7">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#612d00" layoutX="286.0" layoutY="521.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#612d00" layoutX="286.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#612d00" layoutX="286.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#612d00" layoutX="404.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#612d00" layoutX="545.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#612d00" layoutX="684.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#612d00" layoutX="821.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="7">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="I00" fitHeight="60.0" fitWidth="60.0" layoutX="313.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I01" fitHeight="60.0" fitWidth="60.0" layoutX="383.0" layoutY="131.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I02" fitHeight="60.0" fitWidth="60.0" layoutX="452.0" layoutY="131.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I03" fitHeight="60.0" fitWidth="60.0" layoutX="521.0" layoutY="131.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I04" fitHeight="60.0" fitWidth="60.0" layoutX="590.0" layoutY="132.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I05" fitHeight="60.0" fitWidth="60.0" layoutX="660.0" layoutY="132.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I06" fitHeight="60.0" fitWidth="60.0" layoutX="728.0" layoutY="132.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I07" fitHeight="60.0" fitWidth="60.0" layoutX="799.0" layoutY="131.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I10" fitHeight="60.0" fitWidth="60.0" layoutX="313.0" layoutY="200.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I11" fitHeight="60.0" fitWidth="60.0" layoutX="382.0" layoutY="202.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I12" fitHeight="60.0" fitWidth="60.0" layoutX="452.0" layoutY="200.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I13" fitHeight="60.0" fitWidth="60.0" layoutX="520.0" layoutY="202.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I14" fitHeight="60.0" fitWidth="60.0" layoutX="591.0" layoutY="202.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I15" fitHeight="60.0" fitWidth="60.0" layoutX="661.0" layoutY="202.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I16" fitHeight="60.0" fitWidth="60.0" layoutX="728.0" layoutY="202.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I17" fitHeight="60.0" fitWidth="60.0" layoutX="798.0" layoutY="202.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I20" fitHeight="60.0" fitWidth="60.0" layoutX="313.0" layoutY="271.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I21" fitHeight="60.0" fitWidth="60.0" layoutX="382.0" layoutY="272.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I22" fitHeight="60.0" fitWidth="60.0" layoutX="451.0" layoutY="271.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I23" fitHeight="60.0" fitWidth="60.0" layoutX="520.0" layoutY="272.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I24" fitHeight="60.0" fitWidth="60.0" layoutX="590.0" layoutY="271.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I25" fitHeight="60.0" fitWidth="60.0" layoutX="658.0" layoutY="272.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I26" fitHeight="60.0" fitWidth="60.0" layoutX="728.0" layoutY="271.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I27" fitHeight="60.0" fitWidth="60.0" layoutX="796.0" layoutY="272.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I30" fitHeight="60.0" fitWidth="60.0" layoutX="312.0" layoutY="342.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I31" fitHeight="60.0" fitWidth="60.0" layoutX="382.0" layoutY="342.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I32" fitHeight="60.0" fitWidth="60.0" layoutX="450.0" layoutY="342.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I33" fitHeight="60.0" fitWidth="60.0" layoutX="519.0" layoutY="340.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I34" fitHeight="60.0" fitWidth="60.0" layoutX="589.0" layoutY="342.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I35" fitHeight="60.0" fitWidth="60.0" layoutX="658.0" layoutY="342.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I36" fitHeight="60.0" fitWidth="60.0" layoutX="728.0" layoutY="342.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I37" fitHeight="60.0" fitWidth="60.0" layoutX="797.0" layoutY="342.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I40" fitHeight="60.0" fitWidth="60.0" layoutX="313.0" layoutY="410.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I41" fitHeight="60.0" fitWidth="60.0" layoutX="381.0" layoutY="412.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I42" fitHeight="60.0" fitWidth="60.0" layoutX="450.0" layoutY="412.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I43" fitHeight="60.0" fitWidth="60.0" layoutX="519.0" layoutY="412.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I44" fitHeight="60.0" fitWidth="60.0" layoutX="589.0" layoutY="412.0" onMouseClicked="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I45" fitHeight="60.0" fitWidth="60.0" layoutX="658.0" layoutY="412.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I46" fitHeight="60.0" fitWidth="60.0" layoutX="728.0" layoutY="412.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I47" fitHeight="60.0" fitWidth="60.0" layoutX="798.0" layoutY="412.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I50" fitHeight="60.0" fitWidth="60.0" layoutX="312.0" layoutY="482.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I51" fitHeight="60.0" fitWidth="60.0" layoutX="381.0" layoutY="482.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I52" fitHeight="60.0" fitWidth="60.0" layoutX="450.0" layoutY="482.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I53" fitHeight="60.0" fitWidth="60.0" layoutX="519.0" layoutY="481.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I54" fitHeight="60.0" fitWidth="60.0" layoutX="589.0" layoutY="482.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I55" fitHeight="60.0" fitWidth="60.0" layoutX="658.0" layoutY="481.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I56" fitHeight="60.0" fitWidth="60.0" layoutX="728.0" layoutY="482.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I57" fitHeight="60.0" fitWidth="60.0" layoutX="797.0" layoutY="481.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I60" fitHeight="60.0" fitWidth="60.0" layoutX="312.0" layoutY="551.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I61" fitHeight="60.0" fitWidth="60.0" layoutX="381.0" layoutY="551.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I62" fitHeight="60.0" fitWidth="60.0" layoutX="450.0" layoutY="551.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I63" fitHeight="60.0" fitWidth="60.0" layoutX="521.0" layoutY="552.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I64" fitHeight="60.0" fitWidth="60.0" layoutX="589.0" layoutY="552.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I65" fitHeight="60.0" fitWidth="60.0" layoutX="658.0" layoutY="552.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I66" fitHeight="60.0" fitWidth="60.0" layoutX="728.0" layoutY="551.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I67" fitHeight="60.0" fitWidth="60.0" layoutX="797.0" layoutY="552.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I70" fitHeight="60.0" fitWidth="60.0" layoutX="313.0" layoutY="622.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I71" fitHeight="60.0" fitWidth="60.0" layoutX="381.0" layoutY="622.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I72" fitHeight="60.0" fitWidth="60.0" layoutX="451.0" layoutY="622.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I73" fitHeight="60.0" fitWidth="60.0" layoutX="521.0" layoutY="622.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I74" fitHeight="60.0" fitWidth="60.0" layoutX="590.0" layoutY="622.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I75" fitHeight="60.0" fitWidth="60.0" layoutX="659.0" layoutY="622.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I76" fitHeight="60.0" fitWidth="60.0" layoutX="728.0" layoutY="622.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="I77" fitHeight="60.0" fitWidth="60.0" layoutX="797.0" layoutY="622.0" onDragDetected="#MoveTo" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="CI00" layoutX="313.0" layoutY="131.0" mnemonicParsing="false" onAction="#MoveTo" opacity="0.0" prefHeight="60.0" prefWidth="60.0" />
    
    </children>
 </AnchorPane>

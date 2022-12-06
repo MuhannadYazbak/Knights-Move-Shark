@@ -57,12 +57,11 @@ public class AddQuestionController implements Initializable {
 	
 	@FXML
 	private void back(ActionEvent event) throws IOException {
-		Parent pane = FXMLLoader.load(getClass().getResource("/Views/QuestionsWizard.fxml"));
+		Parent pane = FXMLLoader.load(getClass().getResource("/views/QuestionsWizard.fxml"));
 		Scene scene = new Scene(pane);
 		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(scene);
 		stage.setTitle("Questions Wizard");
-		stage.setMaximized(true);
 		stage.show();
 	}
 	/*
@@ -84,12 +83,11 @@ public class AddQuestionController implements Initializable {
 		alert.setTitle("Adding new question");
 		alert.setHeaderText("About to add a new question");
 		alert.showAndWait();
-		Parent pane = FXMLLoader.load(getClass().getResource("/Views/QuestionsWizard.fxml"));
+		Parent pane = FXMLLoader.load(getClass().getResource("/views/QuestionsWizard.fxml"));
 		Scene scene = new Scene(pane);
 		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(scene);
 		stage.setTitle("Questions Wizard");
-		stage.setMaximized(true);
 		stage.show();
 		
 	}

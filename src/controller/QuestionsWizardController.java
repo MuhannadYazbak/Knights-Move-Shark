@@ -26,23 +26,21 @@ public class QuestionsWizardController implements Initializable {
 	
 	@FXML
 	private void back(ActionEvent event) throws IOException {
-		Parent pane = FXMLLoader.load(getClass().getResource("/Views/MainMenu.fxml"));
+		Parent pane = FXMLLoader.load(getClass().getResource("/views/MainMenu.fxml"));
 		Scene scene = new Scene(pane);
 		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(scene);
-		stage.setMaximized(true);
 		stage.setTitle("Main Menu");
 		stage.show();
 	}
 	
 	@FXML
 	private void addQuestion(ActionEvent event) throws IOException {
-		Parent pane = FXMLLoader.load(getClass().getResource("/Views/AddQuestion.fxml"));
+		Parent pane = FXMLLoader.load(getClass().getResource("/views/AddQuestion.fxml"));
 		Scene scene = new Scene(pane);
 		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(scene);
 		stage.setTitle("Add New Question");
-		stage.setMaximized(true);
 		stage.show();
 	}
 	/*

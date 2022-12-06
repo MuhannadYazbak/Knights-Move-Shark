@@ -2,6 +2,9 @@ package model;
 
 import java.util.Arrays;
 import java.util.Objects;
+
+import utils.Difficulty;
+import utils.PlusOrMinus;
 //* new one //
 public class Game {
 	public static int ID=1;
@@ -107,6 +110,38 @@ public class Game {
 		this.score = 0;
 		this.level = 1;
 	}
+	
+	public int UpdateScore(int score, PlusOrMinus POM, Difficulty d) {
+		if(d == d.Easy && POM == POM.Plus)
+			return score+=1;		
+		
+		else if(d == d.Easy && POM == POM.Minus)
+			return score-=2;
+		
+		if(d == d.Medium && POM == POM.Plus)
+			return score+=2;		
+		
+		else if(d == d.Medium && POM == POM.Minus)
+			return score-=3;
+		
+		if(d == d.Hard && POM == POM.Plus)
+			return score+=3;		
+		
+		else return score-=4;
+		
+	}
+	
+	public int NextLevel(int score, int level) {
+		if(score>=15)
+			return ++level;
+		
+		else return level;
+	}
+	
+	/*public Square[][] LeadBoard(){
+		
+		
+	}*/
 	
 	
 	
