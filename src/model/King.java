@@ -1,7 +1,12 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
+
+import utils.Type;
 
 public class King extends Piece{
 
@@ -115,8 +120,26 @@ public class King extends Piece{
 
 	@Override
 	public void moveThePiec(Set<Square> possibleMoves) {
-		// TODO Auto-generated method stub
-		
+		ArrayList<Square> toRemove = new ArrayList<Square>();
+		TreeSet<Square> toReturn = new TreeSet<Square>(new Comparator<Square>() {
+			public int compare(Square o1, Square o2) {
+				Double o1d=Math.sqrt((o1.getCol() - Game.getKnight().getCurrentPlace().getCol()) * (o1.getCol() - Game.getKnight().getCurrentPlace().getCol())
+						+ (o1.getRow() - Game.getKnight().getCurrentPlace().getRow()) * (o1.getRow() - Game.getKnight().getCurrentPlace().getRow()));
+				Double o2d=Math.sqrt((o2.getCol() - Game.getKnight().getCurrentPlace().getCol()) * (o2.getCol() - Game.getKnight().getCurrentPlace().getCol())
+						+ (o2.getRow() - Game.getKnight().getCurrentPlace().getRow()) * (o2.getRow() - Game.getKnight().getCurrentPlace().getRow()));
+				return Double.compare(o1d, o2d);
+			}
+		});
+		for(Square s : possibleMoves) {
+			if(Game.squareByIndx(s.getRow(), s.getCol()).squareType==Type.Blocked) {
+				toRemove.add(s);
+			}
+		}
+		possibleMoves.removeAll(toRemove);
+		for(Square square : possibleMoves) {
+			toReturn.add(square);
+		}
+		Game.getKing().setCurrentPlace(toReturn.first()); 
 		
 	}
 	
