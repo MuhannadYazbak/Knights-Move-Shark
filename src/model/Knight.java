@@ -45,7 +45,7 @@ public class Knight extends Piece{
 	@Override
 	public void moveThePiec(Set<Square> possibleMoves) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("ff");
 		
 	}
 	
