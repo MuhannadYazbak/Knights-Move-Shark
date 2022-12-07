@@ -143,6 +143,39 @@ public class Game {
 		
 	}*/
 	
+	public boolean Winner(int score) {
+		if(score>200)
+			return true;
+		return false;
+	}
+	
+	public Game GameOver(Game g) {
+		/*
+		 * 
+		 * if(game is over return game*/
+		
+		return null;
+	}
+	
+	public void ForgetLast3() {
+		
+	}
+	
+	public Square JumpRandomly(Knight k, Square s) {
+		
+		// choose random move from the possible moves
+		
+		return null;
+	}
+	
+	public void ChangeSquareType() {
+		
+	}
+	
+	public boolean PauseGame(Game g) {
+		return false;
+	}
+	
 	
 	
 	

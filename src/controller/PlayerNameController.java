@@ -1,6 +1,9 @@
 package controller;
 
 import java.io.IOException;
+import model.Game;
+import model.Player;
+import model.SysData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +32,10 @@ public class PlayerNameController {
 	
 	@FXML
 	private void goPlay(ActionEvent event) throws IOException {
+		//Player p= new Player(playerName.getText(),0,"01/01/2022");
+		//String s=playerName.getText();
+		//Game g= new Game(s);
+		//SysData.getInstance().setHistoryGamesForShow(p);
 		Parent pane = FXMLLoader.load(getClass().getResource("/views/Game.fxml"));
 		Scene scene = new Scene(pane);
 		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
