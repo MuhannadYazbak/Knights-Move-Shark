@@ -13,9 +13,9 @@ public class Game {
 	public int level;
 	public int score;
 	public static Square[][] board = new Square[8][8];
-	public King king;
-	public Knight knight;
-	public Queen queen;
+	public static King king;
+	public static Knight knight;
+	public static Queen queen;
 	
 	
 	public Game(String player, int level, int score, King king, Knight knight, Queen queen) {
@@ -23,9 +23,9 @@ public class Game {
 		this.player = player;
 		this.level = level;
 		this.score = score;
-		this.king = king;
-		this.knight = knight;
-		this.queen = queen;
+		Game.king = king;
+		Game.knight = knight;
+		Game.queen = queen;
 		this.id = getID();
 		setID(getID()+1);
 	}
@@ -41,23 +41,23 @@ public class Game {
 	public static void setBoard(Square[][] board) {
 		Game.board = board;
 	}
-	public King getKing() {
+	public static King getKing() {
 		return king;
 	}
-	public void setKing(King king) {
-		this.king = king;
+	public static void setKing(King king) {
+		Game.king = king;
 	}
-	public Knight getKnight() {
+	public static Knight getKnight() {
 		return knight;
 	}
-	public void setKnight(Knight knight) {
-		this.knight = knight;
+	public static void setKnight(Knight knight) {
+		Game.knight = knight;
 	}
-	public Queen getQueen() {
+	public static Queen getQueen() {
 		return queen;
 	}
-	public void setQueen(Queen queen) {
-		this.queen = queen;
+	public static void setQueen(Queen queen) {
+		Game.queen = queen;
 	}
 	public String getPlayer() {
 		return player;
@@ -110,7 +110,11 @@ public class Game {
 		this.score = 0;
 		this.level = 1;
 	}
-	
+	public static Square squareByIndx(int i, int j) {
+		if(board == null)
+			return null;
+		return board[i][j];
+	}
 	public int UpdateScore(int score, PlusOrMinus POM, Difficulty d) {
 		if(d == d.Easy && POM == POM.Plus)
 			return score+=1;		
