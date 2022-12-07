@@ -57,11 +57,11 @@ public class SysData {
 		for(Question q : questions.values())
 		{
 		
-			if(q.getDiff() == Difficulty.Easy)
+			if(q.getDiff() == Difficulty.EASY)
 				this.easyQuestions.put(q.getText(), q);
-			if(q.getDiff()  == Difficulty.Medium)
+			if(q.getDiff()  == Difficulty.MEDIUM)
 				this.mediumQuestions.put(q.getText(), q);
-			if(q.getDiff()  == Difficulty.Hard)
+			if(q.getDiff()  == Difficulty.HARD)
 				this.HardQuestions.put(q.getText(), q);
 		}
 	}

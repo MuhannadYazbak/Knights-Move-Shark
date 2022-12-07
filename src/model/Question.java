@@ -5,7 +5,7 @@ import utils.Difficulty;
 public class Question {
 
 	public String text;                                   										 
-	public Difficulty diff;                               										 
+	public Difficulty diff;                             										 
 	public String answer1;
 	public String answer2;
 	public String answer3;
@@ -48,12 +48,15 @@ public class Question {
 	public void setText(String text) {
 		this.text = text;
 	}
+	
 	public Difficulty getDiff() {
 		return diff;
 	}
+
 	public void setDiff(Difficulty diff) {
 		this.diff = diff;
 	}
+
 	public String getAnswer1() {
 		return answer1;
 	}
