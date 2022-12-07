@@ -34,10 +34,10 @@ public class SysData {
 		this.mediumQuestions = new HashMap<String, Question>(); 
 		this.HardQuestions = new HashMap<String, Question>();
 		this.historyGamesForShow = new ArrayList<Player>();
-//		this.questions = JsonDataManager.getInstance().readJSONDataFRomFile(); //Reads the Question Json File
-//		putQuestions(JsonDataManager.getInstance().readJSONDataFRomFile()); //Calls the method that put the questions in the right places
-//		historyGamesForShow = JsonDataManager.getInstance().readHistoryDataFRomFile(); //Reads the History Json File
-		sortArrayList(); // Sort the top 10
+		this.questions = JsonDataManager.getInstance().readJSONDataFRomFile(); //Reads the Question Json File
+		putQuestions(JsonDataManager.getInstance().readJSONDataFRomFile()); //Calls the method that put the questions in the right places
+		historyGamesForShow = JsonDataManager.getInstance().readHistoryDataFRomFile(); //Reads the History Json File
+		sortArrayList(); 
 	}
 	
 	public void sortArrayList() {
@@ -73,7 +73,7 @@ public class SysData {
 	 */
 	public void addQuestion(Question q) {
 		this.questions.put(q.getText(), q);
-//		JsonDataManager.getInstance().writeQuestionsIntoJsonFile(questions);
+		JsonDataManager.getInstance().writeQuestionsIntoJsonFile(questions);
 	}
 	public HashMap<String, Question> getQuestions() {
 		return questions;
