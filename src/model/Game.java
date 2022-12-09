@@ -9,7 +9,7 @@ import utils.PlusOrMinus;
 public class Game {
 	public static int ID=1;
 	public int id;
-	public String player;
+	public static String player;
 	public int level;
 	public int score;
 	public static Square[][] board = new Square[8][8];
@@ -59,7 +59,7 @@ public class Game {
 	public static void setQueen(Queen queen) {
 		Game.queen = queen;
 	}
-	public String getPlayer() {
+	public static String getPlayer() {
 		return player;
 	}
 	public void setPlayer(String player) {

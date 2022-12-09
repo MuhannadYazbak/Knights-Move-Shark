@@ -26,6 +26,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.Game;
 import model.Player;
 
 public class GameController implements Initializable{
@@ -44,16 +45,7 @@ public class GameController implements Initializable{
     private Button backBtn;
 
     @FXML
-    private Label level;
-
-    @FXML
-    private Label playerName;
-
-    @FXML
-    private Label remainingTime;
-
-    @FXML
-    private Label score;
+    private Label level,playerName,remainingTime,score;
 
     @FXML
     private AnchorPane screen;
@@ -71,12 +63,12 @@ public class GameController implements Initializable{
     	Image KNIGHT = new Image(getClass().getResourceAsStream("/lib/knight.png"));
     	
     	if(CI00.isPressed()) {
-    		I00.setImage(KING);
+    		I00.setImage(KNIGHT);
     	}
     		
     	
     	if(CI01.isPressed())
-    		I01.setImage(KING);
+    		I01.setImage(KNIGHT);
     }
     
 	@FXML
@@ -103,8 +95,9 @@ public class GameController implements Initializable{
         timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(STARTTIME+1),new KeyValue(timeSeconds, 0)));
         timeline.playFromStart();
         
+      //  playerName.setText(Game.getPlayer());
         
-       // playerName.setText();      
+            
          
 
 	}

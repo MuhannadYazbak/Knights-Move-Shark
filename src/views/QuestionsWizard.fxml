@@ -58,7 +58,7 @@
             <Image url="@../lib/updated.png" />
          </image>
       </ImageView>
-      <Button layoutX="531.0" layoutY="651.0" mnemonicParsing="false" opacity="0.0" prefHeight="52.0" prefWidth="62.0" style="-fx-background-color: white;">
+      <Button fx:id="updateQuestion" layoutX="531.0" layoutY="651.0" mnemonicParsing="false" onAction="#updaetQuestion" opacity="0.0" prefHeight="52.0" prefWidth="62.0" style="-fx-background-color: white;">
          <font>
             <Font size="25.0" />
          </font>

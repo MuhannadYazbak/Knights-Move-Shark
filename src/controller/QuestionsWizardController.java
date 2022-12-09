@@ -43,6 +43,17 @@ public class QuestionsWizardController implements Initializable {
 		stage.setTitle("Add New Question");
 		stage.show();
 	}
+	
+
+    @FXML
+    void updaetQuestion(ActionEvent event) throws IOException {
+    	Parent pane = FXMLLoader.load(getClass().getResource("/views/AddQuestion.fxml"));
+		Scene scene = new Scene(pane);
+		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+		stage.setScene(scene);
+		stage.setTitle("Add New Question");
+		stage.show();
+    }
 	/*
 	 * Initializes the view, reading the questions from the Json file and loading it into the tableview.
 	 */
