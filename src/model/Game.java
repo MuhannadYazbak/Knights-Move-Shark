@@ -166,6 +166,8 @@ public class Game {
 			return null;
 		return board[i][j];
 	}
+	
+	// will rewrite tomorrow
 	public int UpdateScore(int score, PlusOrMinus POM, Difficulty d) {
 		if(d == d.EASY && POM == POM.Plus)
 			return score+=1;		
