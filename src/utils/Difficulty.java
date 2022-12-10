@@ -5,21 +5,21 @@ public enum Difficulty {
 	
 	EASY("Easy",0),MEDIUM("Medium",1),HARD("Hard",2);
 	private String name;
-	private int score;
+	private int reward;
 	private int punishment;
 	private Difficulty(String name,int difficulty) {
 		this.name = name;
 		switch (difficulty) {
 		case 0:
-			this.score = Constants.EASY_QUEST_SCORE;
+			this.reward = Constants.EASY_QUEST_SCORE;
 			this.punishment = Constants.EASY_QUEST_PUNISH;
 			break;
 		case 1:
-			this.score = Constants.MEDIUM_QUEST_SCORE;
+			this.reward = Constants.MEDIUM_QUEST_SCORE;
 			this.punishment = Constants.MEDIUM_QUEST_PUNISH;
 			break;
 		case 2:
-			this.score = Constants.HARD_QUEST_SCORE;
+			this.reward = Constants.HARD_QUEST_SCORE;
 			this.punishment = Constants.HARD_QUEST_PUNISH;
 			break;
 		}
@@ -27,8 +27,8 @@ public enum Difficulty {
 	public String getName() {
 		return name;
 	}
-	public int getScore() {
-		return score;
+	public int getReward() {
+		return reward;
 	}
 	public int getPunish() {
 		return punishment;

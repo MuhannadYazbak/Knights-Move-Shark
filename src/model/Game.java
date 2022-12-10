@@ -13,9 +13,33 @@ public class Game {
 	public int level;
 	public int score;
 	public static Square[][] board = new Square[8][8];
-	public static King king;
-	public static Knight knight;
-	public static Queen queen;
+	public static King king = new King(); //add starting location
+	public static Knight knight = new Knight(); //add starting location
+	public static Queen queen = new Queen(); //add starting location
+	private static Game instance;
+	private static boolean gameOver;
+    private static boolean youWon;
+	
+	//Singleton class
+    public static Game getInstance() {
+		if(instance == null)
+			instance = new Game();
+		return instance; 
+	}
+    
+    // if no game has been started, this constructor is called
+    private Game() { 
+        this.startNewGame();
+    }
+    
+    //method thats starts a new game and initialises values to their starting position
+    public void startNewGame() {
+        gameOver = false;
+        youWon = false;
+        this.score = 0;
+        this.level = 1;
+        // need to add level initialisation
+    }
 	
 	
 	public Game(String player, int level, int score, King king, Knight knight, Queen queen) {
@@ -29,6 +53,33 @@ public class Game {
 		this.id = getID();
 		setID(getID()+1);
 	}
+	
+	public static boolean isGameOver() {
+		return gameOver;
+	}
+
+	public static void setGameOver(boolean gameOver) {
+		Game.gameOver = gameOver;
+	}
+
+	public static boolean isYouWon() {
+		return youWon;
+	}
+
+	public static void setYouWon(boolean youWon) {
+		Game.youWon = youWon;
+	}
+
+	public static void setInstance(Game instance) {
+		Game.instance = instance;
+	}
+
+	// we need to write it
+    public void restartGame()
+    {
+    	
+    }
+    
 	public static int getID() {
 		return ID;
 	}
