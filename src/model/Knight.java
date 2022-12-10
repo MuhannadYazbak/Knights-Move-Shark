@@ -48,6 +48,14 @@ public class Knight extends Piece{
 		
 		
 	}
-	
+	public void moveThePiecK(Set<Square> possibleMoves, int i, int j) {
+		for (Square S : possibleMoves) {
+			if(S.getCol() ==i && S.getRow()== j) {
+				this.setCurrentPlace(S);
+			}
+		}
+	}
+	}
+
 	
 }
