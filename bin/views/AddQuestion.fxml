@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -11,7 +17,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1124.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddQuestionController">
+<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1124.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddQuestionController">
    <children>
       <ImageView fitHeight="750.0" fitWidth="1124.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -32,97 +38,144 @@
             </Label>
          </children>
       </AnchorPane>
-      <HBox layoutX="25.0" layoutY="252.0" prefHeight="100.0" prefWidth="510.0">
+      <VBox layoutX="18.0" layoutY="40.0" prefHeight="600.0" prefWidth="600.0">
          <children>
-            <Label text="1st Answer" textFill="#024b10">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <HBox.margin>
-                  <Insets left="30.0" right="10.0" top="30.0" />
-               </HBox.margin>
-            </Label>
-            <TextField fx:id="qText1" prefHeight="43.0" prefWidth="250.0" promptText="Answer Text" style="-fx-border-color: #612D00; -fx-border-width: 0px 0px 0px 5px;">
-               <HBox.margin>
-                  <Insets left="70.0" top="25.0" />
-               </HBox.margin>
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </TextField>
+            <HBox layoutX="51.0" layoutY="40.0" prefHeight="60.0" prefWidth="510.0">
+               <children>
+                  <Label layoutX="51.0" layoutY="40.0" prefHeight="38.0" prefWidth="80.0" text="Question" textFill="#024b10">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" right="10.0" top="30.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="qText" layoutX="233.0" layoutY="40.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#checkQuestion" prefHeight="43.0" prefWidth="250.0" promptText="Question Text" style="-fx-border-width: 0px 0px 0px 5px; -fx-border-color: #612D00;">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="80.0" top="25.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox layoutX="53.0" layoutY="165.0" prefHeight="60.0" prefWidth="510.0">
+               <children>
+                  <Label layoutX="53.0" layoutY="165.0" prefHeight="30.0" prefWidth="81.0" text="Difficulty" textFill="#024b10">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" right="10.0" top="30.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ComboBox fx:id="diffBox" layoutX="233.0" layoutY="165.0" onKeyPressed="#checkQuestion" prefHeight="43.0" prefWidth="250.0" promptText="Select Difficulty" style="-fx-background-color: white; -fx-border-color: #612D00; -fx-border-width: 0px 0px 0px 5px;">
+                     <HBox.margin>
+                        <Insets left="85.0" top="25.0" />
+                     </HBox.margin>
+                  </ComboBox>
+               </children>
+            </HBox>
+            <HBox layoutX="25.0" layoutY="252.0" prefHeight="60.0" prefWidth="510.0">
+               <children>
+                  <Label text="1st Answer" textFill="#024b10">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" right="10.0" top="30.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="a1Text" onKeyTyped="#checkQuestion" prefHeight="43.0" prefWidth="250.0" promptText="Answer Text" style="-fx-border-color: #612D00; -fx-border-width: 0px 0px 0px 5px;">
+                     <HBox.margin>
+                        <Insets left="74.0" top="25.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox layoutX="18.0" layoutY="352.0" prefHeight="60.0" prefWidth="510.0">
+               <children>
+                  <Label text="2nd Answer" textFill="#024b10">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" right="10.0" top="30.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="a2Text" onKeyTyped="#checkQuestion" prefHeight="43.0" prefWidth="250.0" promptText="Answer Text" style="-fx-border-color: #612D00; -fx-border-width: 0px 0px 0px 5px;">
+                     <HBox.margin>
+                        <Insets left="70.0" top="25.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox layoutX="22.0" layoutY="452.0" prefHeight="60.0" prefWidth="510.0">
+               <children>
+                  <Label text="3rd Answer" textFill="#024b10">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" right="10.0" top="30.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="a3Text" maxHeight="-Infinity" maxWidth="-Infinity" onKeyTyped="#checkQuestion" prefHeight="43.0" prefWidth="250.0" promptText="Answer Text" style="-fx-border-color: #612D00; -fx-border-width: 0px 0px 0px 5px;">
+                     <HBox.margin>
+                        <Insets left="70.0" top="25.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox layoutX="23.0" layoutY="552.0" prefHeight="60.0" prefWidth="510.0">
+               <children>
+                  <Label text="4th Answer" textFill="#024b10">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" right="10.0" top="30.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="a4Text" maxHeight="-Infinity" maxWidth="-Infinity" onKeyTyped="#checkQuestion" prefHeight="43.0" prefWidth="250.0" promptText="Answer Text" style="-fx-border-color: #612D00; -fx-border-width: 0px 0px 0px 5px;">
+                     <HBox.margin>
+                        <Insets left="70.0" top="25.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="337.0" prefHeight="60.0" prefWidth="510.0">
+               <children>
+                  <Label text="Right Answer" textFill="#024b10">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" right="10.0" top="30.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ComboBox fx:id="rightAnswerBox" layoutX="233.0" layoutY="165.0" onKeyPressed="#checkQuestion" prefHeight="43.0" prefWidth="250.0" promptText="Right Answer" style="-fx-background-color: white; -fx-border-color: #612D00; -fx-border-width: 0px 0px 0px 5px;">
+                     <HBox.margin>
+                        <Insets left="57.0" top="25.0" />
+                     </HBox.margin>
+                  </ComboBox>
+               </children>
+            </HBox>
          </children>
-      </HBox>
-      <HBox layoutX="18.0" layoutY="352.0" prefHeight="100.0" prefWidth="510.0">
-         <children>
-            <Label text="2nd Answer" textFill="#024b10">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <HBox.margin>
-                  <Insets left="30.0" right="10.0" top="30.0" />
-               </HBox.margin>
-            </Label>
-            <TextField fx:id="qText2" prefHeight="43.0" prefWidth="250.0" promptText="Answer Text" style="-fx-border-color: #612D00; -fx-border-width: 0px 0px 0px 5px;">
-               <HBox.margin>
-                  <Insets left="70.0" top="25.0" />
-               </HBox.margin>
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </TextField>
-         </children>
-      </HBox>
-      <HBox layoutX="22.0" layoutY="452.0" prefHeight="100.0" prefWidth="510.0">
-         <children>
-            <Label text="3rd Answer" textFill="#024b10">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <HBox.margin>
-                  <Insets left="30.0" right="10.0" top="30.0" />
-               </HBox.margin>
-            </Label>
-            <TextField fx:id="qText3" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="43.0" prefWidth="250.0" promptText="Answer Text" style="-fx-border-color: #612D00; -fx-border-width: 0px 0px 0px 5px;">
-               <HBox.margin>
-                  <Insets left="70.0" top="25.0" />
-               </HBox.margin>
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </TextField>
-         </children>
-      </HBox>
-      <HBox layoutX="23.0" layoutY="552.0" prefHeight="100.0" prefWidth="510.0">
-         <children>
-            <Label text="4th Answer" textFill="#024b10">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <HBox.margin>
-                  <Insets left="30.0" right="10.0" top="30.0" />
-               </HBox.margin>
-            </Label>
-            <TextField fx:id="qText4" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="43.0" prefWidth="250.0" promptText="Answer Text" style="-fx-border-color: #612D00; -fx-border-width: 0px 0px 0px 5px;">
-               <HBox.margin>
-                  <Insets left="70.0" top="25.0" />
-               </HBox.margin>
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </TextField>
-         </children>
-      </HBox>
-      <Label layoutX="53.0" layoutY="165.0" prefHeight="43.0" prefWidth="130.0" text="Difficulty" textFill="#024b10">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="diffBox" layoutX="233.0" layoutY="165.0" prefHeight="43.0" prefWidth="250.0" promptText="Select Difficulty" style="-fx-background-color: white; -fx-border-color: #612D00; -fx-border-width: 0px 0px 0px 5px;" />
-      <TextField fx:id="qText" layoutX="233.0" layoutY="40.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="43.0" prefWidth="250.0" promptText="Question Text" style="-fx-border-width: 0px 0px 0px 5px; -fx-border-color: #612D00;">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </TextField>
+      </VBox>
       <ImageView fitHeight="76.0" fitWidth="97.0" layoutX="315.0" layoutY="651.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../lib/check-button.png" />
@@ -133,11 +186,6 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Label layoutX="51.0" layoutY="40.0" prefHeight="43.0" prefWidth="130.0" text="Question" textFill="#024b10">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
       <ImageView fitHeight="62.0" fitWidth="69.0" layoutX="100.0" layoutY="658.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../lib/undo.png" />

@@ -50,7 +50,7 @@ public class JsonDataManager {
 				Question q = questValid(questObj);
 				if(q != null)
 				{
-					questionsMap.put(q.getText(), q);
+					questionsMap.put(q.getQuestionText(), q);
 				}
 			});	
 		}
@@ -112,8 +112,8 @@ public class JsonDataManager {
 		{
 			if(q!=null) {
 				JsonObject obj = new JsonObject();
-				obj.put("question", q.getText());
-				obj.put("level", Difficulty.getIDByDifficulty(q.getDiff()));
+				obj.put("question", q.getQuestionText());
+				obj.put("level", Difficulty.getIDByDifficulty(q.getLevel()));
 				JsonArray answers = new JsonArray();
 // TODO: Add answers as text fields in question
 				answers.add(q.getAnswer1());
@@ -224,13 +224,13 @@ public class JsonDataManager {
 	// Checks validation of each question in the json file
 	private boolean validateValue(Question q) {
 		try {
-			int qnum = Integer.parseInt(Difficulty.getIDByDifficulty(q.getDiff()));
+			int qnum = Integer.parseInt(Difficulty.getIDByDifficulty(q.getLevel()));
 			
 			if(qnum!=1 && qnum!=2 && qnum!=3) {
 				return false;
 			}
 			int caNum = q.getRightAnswer();
-			String content = q.getText();
+			String content = q.getQuestionText();
 			String a1 = q.getAnswer1(), a2 = q.getAnswer2(), a3 = q.getAnswer3(), a4 = q.getAnswer4();
 			if(content == null || content.isEmpty()) {
 				return false;

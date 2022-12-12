@@ -18,15 +18,18 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Question;
 import model.SysData;
 import utils.Difficulty;
 
 public class AddQuestionController implements Initializable {
-	Question selected = new Question(null, null, null, null, null, null, 0, null);                       // The question instance that we will fit the values from the view into.
-	ObservableList<HashMap<String, Question>> questions;                      
-	ObservableList<Integer> rightAnswer;
+	private Question selected;                    // The question instance that we will fit the values from the view into.
+	private Question onScreen;
+	
+	//private ObservableList<Integer> rightAnswer;
 	@FXML
 	Button backBtn, addQuestionBtn;
 	
@@ -43,14 +46,23 @@ public class AddQuestionController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		questions = FXCollections.observableArrayList(SysData.getInstance().getQuestions());
-		//answers = FXCollections.observableArrayList();
+		if (SysData.getInstance().getSelectedQ() != null) {
+			selected = SysData.getInstance().getSelectedQ();
+			qText.setText(selected.getQuestionText());
+			a1Text.setText(selected.getAnswer1());
+			a2Text.setText(selected.getAnswer2());
+			a3Text.setText(selected.getAnswer3());
+			a4Text.setText(selected.getAnswer4());
+			diffBox.setValue(selected.getLevel());
+			rightAnswerBox.setValue(selected.getRightAnswer());
+		}
 		ObservableList<Difficulty> levels = FXCollections.observableArrayList();
 		levels.addAll(Difficulty.EASY, Difficulty.MEDIUM, Difficulty.HARD);
 		diffBox.setItems(levels);
 		ObservableList<Integer> positions = FXCollections.observableArrayList();
 		positions.addAll(1, 2, 3, 4);
 		rightAnswerBox.setItems(positions);
+		addQuestionBtn.setDisable(true);
 	}
 
 	
@@ -70,26 +82,43 @@ public class AddQuestionController implements Initializable {
 	
 	@FXML
 	private void submitQuestion(ActionEvent event) throws IOException {
-		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-		selected.setText(qText.getText());
-		selected.setDiff(diffBox.getValue());
-//		selected.addAnswer(a1Text.getText());
-//		selected.addAnswer(a2Text.getText());
-//		selected.addAnswer(a3Text.getText());
-//		selected.addAnswer(a4Text.getText());
-		selected.setRightAnswer(rightAnswerBox.getValue());
-		SysData.getInstance().addQuestion(selected);
-		alert.setContentText(selected.toString());
-		alert.setTitle("Adding new question");
-		alert.setHeaderText("About to add a new question");
-		alert.showAndWait();
-		Parent pane = FXMLLoader.load(getClass().getResource("/views/QuestionsWizard.fxml"));
+		String original = selected.getQuestionText();
+		// check if it is adding new question
+		if (original.isBlank()) {
+			SysData.getInstance().addQuestion(onScreen);
+			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+			alert.setContentText(onScreen.toString());
+			alert.setTitle("Adding new question");
+			alert.setHeaderText("About to add a new question");
+			alert.showAndWait();
+		}
+		// updating an existing question
+		else {
+			SysData.getInstance().updateQuestion(SysData.getInstance().getQuestions().get(original), onScreen);
+			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+			alert.setContentText(onScreen.toString());
+			alert.setTitle("Updating question");
+			alert.setHeaderText("About to update an existing question");
+			alert.showAndWait();
+			
+		}
+	 Parent pane = FXMLLoader.load(getClass().getResource("/application/QuestionsWizard.fxml"));
 		Scene scene = new Scene(pane);
 		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(scene);
 		stage.setTitle("Questions Wizard");
 		stage.show();
 		
+	}
+	
+	@FXML
+	private void checkQuestion(KeyEvent event) throws IOException {
+		// Verify that the user supplied all needed fields in order to add/update question
+		onScreen = new Question(qText.getText(), diffBox.getValue(), a1Text.getText(), a2Text.getText(), a3Text.getText(), a4Text.getText(),rightAnswerBox.getValue(), "Shark" );
+				if (!onScreen.getQuestionText().isBlank() && onScreen.getLevel() != null && !onScreen.getAnswer1().isBlank()
+						&& !onScreen.getAnswer2().isBlank() && !onScreen.getAnswer3().isBlank() && !onScreen.getAnswer4().isBlank()
+						&& onScreen.getRightAnswer() != 0)
+						addQuestionBtn.setDisable(false);
 	}
 
 }
