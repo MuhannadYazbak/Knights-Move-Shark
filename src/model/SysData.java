@@ -6,6 +6,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 
 import controller.JsonDataManager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import utils.Difficulty;
 
 

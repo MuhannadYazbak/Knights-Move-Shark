@@ -102,7 +102,7 @@ public class AddQuestionController implements Initializable {
 			alert.showAndWait();
 			
 		}
-	 Parent pane = FXMLLoader.load(getClass().getResource("/application/QuestionsWizard.fxml"));
+	 Parent pane = FXMLLoader.load(getClass().getResource("/views/QuestionsWizard.fxml"));
 		Scene scene = new Scene(pane);
 		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(scene);
