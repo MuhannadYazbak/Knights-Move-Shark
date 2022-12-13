@@ -11,11 +11,12 @@ public abstract class Piece{
 	}
 	
 	abstract public Set<Square> allPossibleMoves();
-	abstract public void moveThePiec(Set<Square> possibleMoves);
+	abstract public void moveThePiece(Set<Square> possibleMoves);
 	
-	public final void movie() {
+	// A template method to be used as is in the class which extends Piece with modification to moveThePiece according to movements rules.
+	public final void move() {
 		
-		moveThePiec(allPossibleMoves());
+		moveThePiece(allPossibleMoves());
 	}
 	
 	public Square getCurrentPlace() {

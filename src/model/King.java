@@ -119,7 +119,7 @@ public class King extends Piece{
 	}
 
 	@Override
-	public void moveThePiec(Set<Square> possibleMoves) {
+	public void moveThePiece(Set<Square> possibleMoves) {
 		ArrayList<Square> toRemove = new ArrayList<Square>();
 		TreeSet<Square> toReturn = new TreeSet<Square>(new Comparator<Square>() {
 			public int compare(Square o1, Square o2) {

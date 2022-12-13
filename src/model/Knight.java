@@ -43,7 +43,7 @@ public class Knight extends Piece{
 	}
 
 	@Override
-	public void moveThePiec(Set<Square> possibleMoves) {
+	public void moveThePiece(Set<Square> possibleMoves) {
 		// TODO Auto-generated method stub
 		
 		

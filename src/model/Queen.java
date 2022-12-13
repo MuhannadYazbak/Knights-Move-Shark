@@ -60,7 +60,7 @@ public class Queen extends Piece{
 	}
 
 	@Override
-	public void moveThePiec(Set<Square> possibleMoves) {
+	public void moveThePiece(Set<Square> possibleMoves) {
 		// TODO Auto-generated method stub
 		ArrayList<Square> toRemove = new ArrayList<Square>();
 		TreeSet<Square> toReturn = new TreeSet<Square>(new Comparator<Square>() {
