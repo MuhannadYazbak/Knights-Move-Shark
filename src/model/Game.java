@@ -13,12 +13,13 @@ public class Game {
 	public int level;
 	public int score;
 	public static Square[][] board = new Square[8][8];
-	public static King king = new King(); //add starting location
-	public static Knight knight = new Knight(); //add starting location
-	public static Queen queen = new Queen(); //add starting location
+	public static King king ; //add starting location
+	public static Knight knight ; //add starting location
+	public static Queen queen  ; //add starting location
 	private static Game instance;
 	private static boolean gameOver;
     private static boolean youWon;
+    private PieceFactory pieceFactory;
 	
 	//Singleton class
     public static Game getInstance() {
@@ -29,6 +30,10 @@ public class Game {
     
     // if no game has been started, this constructor is called
     private Game() { 
+    	pieceFactory = new PieceFactory();
+    	king = (King) pieceFactory.makePiece("King",null);
+    	queen = (Queen) pieceFactory.makePiece("Queen", null);
+    	knight = (Knight) pieceFactory.makePiece("Knight", null);
         this.startNewGame();
     }
     
@@ -167,7 +172,6 @@ public class Game {
 		return board[i][j];
 	}
 	
-	// will rewrite tomorrow
 	public int UpdateScore(int score, PlusOrMinus POM, Difficulty d) {
 		if(d == d.EASY && POM == POM.Plus)
 			return score+=1;		

@@ -13,6 +13,7 @@ public abstract class Piece{
 	abstract public Set<Square> allPossibleMoves();
 	abstract public void moveThePiece(Set<Square> possibleMoves);
 	
+	//	Template Design Pattern
 	// A template method to be used as is in the class which extends Piece with modification to moveThePiece according to movements rules.
 	public final void move() {
 		
