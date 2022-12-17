@@ -78,6 +78,7 @@ public class GameController implements Initializable{
 		Scene scene = new Scene(pane);
 		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(scene);
+		stage.setResizable(false);
 		stage.setTitle("Main Menu");
 		stage.show();
 	}
@@ -95,7 +96,7 @@ public class GameController implements Initializable{
         timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(STARTTIME+1),new KeyValue(timeSeconds, 0)));
         timeline.playFromStart();
         
-      //  playerName.setText(Game.getPlayer());
+     // playerName.setText(g);
         
             
          
