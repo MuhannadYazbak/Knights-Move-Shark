@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashSet;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -28,13 +29,15 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Game;
 import model.Player;
+import model.Square;
+import model.SysData;
 
 public class GameController implements Initializable{
 	
 	
 	@FXML
     private ImageView S00,S01,S02,S03,S04,S05,S06,S07,S10,S11,S12,S13,S14,S15,S16,S17,S20,S21,S22,S23,S24,S25,S26,S27,S30,S31,S32,S33,S34,S35,S36,S37,S40,S41,S42,S43,S44,S45,S46,S47,S50,S51,S52,S53,S54,S55,S56,S57,S60,S61,S62,S63,S64,S65,S66,S67,S70,S71,S72,S73,S74,S75,S76,S77;
-
+	private HashSet<ImageView> allImages = new HashSet<ImageView>();
 	@FXML
     private ImageView I00,I01,I02,I03,I04,I05,I06,I07,I10,I11,I12,I13,I14,I15,I16,I17,I20,I21,I22,I23,I24,I25,I26,I27,I30,I31,I32,I33,I34,I35,I36,I37,I40,I41,I42,I43,I44,I45,I46,I47,I50,I51,I52,I53,I54,I55,I56,I57,I60,I61,I62,I63,I64,I65,I66,I67,I70,I71,I72,I73,I74,I75,I76,I77;
     
@@ -69,6 +72,20 @@ public class GameController implements Initializable{
     	
     	if(CI01.isPressed())
     		I01.setImage(KNIGHT);
+    	
+    	if(CI11.isPressed()) {
+    		for(Square s : Game.king.allPossibleMoves()) {
+    	    	getImageByString("I"+s.getRow()+s.col).setImage(KNIGHT);
+    		}
+    	}
+    }
+    private ImageView getImageByString(String s) {
+    	for(ImageView i : getAllImages()) {
+    		if(s.equals(i.getId())) {
+    			return i;
+    		}
+    	}
+    	return null;
     }
     
 	@FXML
@@ -86,7 +103,7 @@ public class GameController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		
+
         remainingTime.textProperty().bind(timeSeconds.asString());
         if (timeline != null) 
         	timeline.stop();
@@ -95,12 +112,20 @@ public class GameController implements Initializable{
         timeline = new Timeline();
         timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(STARTTIME+1),new KeyValue(timeSeconds, 0)));
         timeline.playFromStart();
-        
-     // playerName.setText(g);
+        level.setText(Integer.toString(SysData.getInstance().getGame().getLevel()));
+        score.setText(Integer.toString(SysData.getInstance().getGame().getScore()));
+        playerName.setText(Game.getPlayer());
         
             
          
 
 	}
+	public HashSet<ImageView> getAllImages() {
+		return allImages;
+	}
+	public void setAllImages(HashSet<ImageView> allImages) {
+		this.allImages = allImages;
+	}
+	
 
 }

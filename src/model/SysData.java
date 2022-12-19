@@ -20,6 +20,7 @@ public class SysData {
 	private HashMap<String, Question> HardQuestions;
 	private HashMap<String,Question> questions;
 	private Question selectedQ;
+	private Game game;
 	
 	
     private static SysData instance;
@@ -128,6 +129,18 @@ public class SysData {
 
 	public void setMediumQuestions(HashMap<String, Question> mediumQuestions) {
 		this.mediumQuestions = mediumQuestions;
+	}
+
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	public static void setInstance(SysData instance) {
+		SysData.instance = instance;
 	}
 
 	public void setHardQuestions(HashMap<String, Question> hardQuestions) {
