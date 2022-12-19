@@ -154,6 +154,7 @@ public class Game {
 		Game other = (Game) obj;
 		return id == other.id;
 	}
+	
 	@Override
 	public String toString() {
 		return "Game [id=" + id + ", player=" + player + ", level=" + level + ", score=" + score + ", board="
@@ -162,9 +163,10 @@ public class Game {
 	public Game(String player) {
 		super();
 		this.id = Game.ID++;
-		this.player = player;
 		this.score = 0;
 		this.level = 1;
+		Game.knight = new Knight(new Square(0, 0));
+		Game.king = new King(new Square(0,0));
 	}
 	public static Square squareByIndx(int i, int j) {
 		if(board == null)
