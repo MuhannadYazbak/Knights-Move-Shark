@@ -78,6 +78,7 @@ public class SysData {
 	public void addQuestion(Question q) {
 		this.questions.put(q.getQuestionText(), q);
 		JsonDataManager.getInstance().writeQuestionsIntoJsonFile(questions);
+		putQuestions(questions);
 	}
 	public void removeQuestion(Question q) {
 		switch(q.getLevel()) {
@@ -161,6 +162,7 @@ public class SysData {
 
 	
 	public void updateQuestion (Question oldQ, Question newQ) {
+		removeQuestion(oldQ);
 		oldQ.setQuestionText(newQ.getQuestionText());
 		oldQ.setAnswer1(newQ.getAnswer1());
 		oldQ.setAnswer2(newQ.getAnswer2());
@@ -169,8 +171,7 @@ public class SysData {
 		oldQ.setLevel(newQ.getLevel());
 		oldQ.setRightAnswer(newQ.getRightAnswer());
 		oldQ.setAuthor(newQ.getAuthor());
-		JsonDataManager.getInstance().writeQuestionsIntoJsonFile(questions);
-		
+		addQuestion(oldQ);
 	}
 		
 }

@@ -10,6 +10,7 @@ module KnightMovesGame {
 	requires javafx.graphics;
 	requires javafx.media;
 	requires json.simple;
+	requires org.junit.jupiter.api;
 	
 	opens controller to javafx.fxml;
 }
