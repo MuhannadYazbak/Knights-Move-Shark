@@ -80,7 +80,7 @@ public class Game {
 	}
 
 	// we need to write it
-    public void restartGame()
+    public void restartGame()/////////////////////////////////////////////////////////////////////////////////////////
     {
     	
     }
@@ -165,7 +165,7 @@ public class Game {
 		this.id = Game.ID++;
 		this.score = 0;
 		this.level = 1;
-		Game.knight = new Knight(new Square(0, 0));
+		Game.knight = new Knight(new Square(0,0));
 		Game.king = new King(new Square(0,0));
 	}
 	public static Square squareByIndx(int i, int j) {
