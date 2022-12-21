@@ -167,6 +167,7 @@ public class Game {
 		this.level = 1;
 		Game.knight = new Knight(new Square(0,0));
 		Game.king = new King(new Square(0,0));
+		Game.queen = new Queen(new Square(0,7));
 	}
 	public static Square squareByIndx(int i, int j) {
 		if(board == null)
