@@ -46,6 +46,8 @@ public class GameController implements Initializable{
 	@FXML
     private Button CI00,CI01,CI02,CI03,CI04,CI05,CI06,CI07,CI10,CI11,CI12,CI13,CI14,CI15,CI16,CI17,CI20,CI21,CI22,CI23,CI24,CI25,CI26,CI27,CI30,CI31,CI32,CI33,CI34,CI35,CI36,CI37,CI40,CI41,CI42,CI43,CI44,CI45,CI46,CI47,CI50,CI51,CI52,CI53,CI54,CI55,CI56,CI57,CI60,CI61,CI62,CI63,CI64,CI65,CI66,CI67,CI70,CI71,CI72,CI73,CI74,CI75,CI76,CI77;
 	private HashSet<Button> allButtons = new HashSet<Button>();
+	private HashSet<Button> PossibleButtons = new HashSet<Button>();
+	
 	@FXML
     private Button backBtn;
 
@@ -55,7 +57,7 @@ public class GameController implements Initializable{
     @FXML
     private AnchorPane screen;
     
-    private static final Integer STARTTIME = 60;
+    private static final Integer STARTTIME = 15;
     private Timeline timeline;
     private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
     
@@ -66,47 +68,81 @@ public class GameController implements Initializable{
 	private Image Visited = new Image(getClass().getResourceAsStream("/lib/yellow.png"));
     private HashSet<ImageView> PossibleMovesKnight = new HashSet<ImageView>();
     private HashSet<ImageView> PossibleMovesQueen = new HashSet<ImageView>();
-    private HashSet<Button> PossibleButtons = new HashSet<Button>();
+    
+//    @FXML
+//    void checkTime() {
+//    	if(remainingTime.getText().equals("0")) {
+//    		System.out.println("Gameoverrrrrrr");
+//    	}
+//    }
     @FXML
     void MoveTo() {
 
-    	boolean knightFlag=true, queenFlag=false, kingFlag=false;
     	
-    	//do {
+    	
+    	while(!remainingTime.getText().equals("0")) {
     		
-    		if(knightFlag) {
-    			//Knight Kn=SysData.getInstance().getGame().getKnight().getCurrentPlace();
-    	    	//	Set<Square> KnAllPM=Kn.allPossibleMoves();
-    	    		//if(CI00.isPressed()) {
-    	    			for(Square s : Game.knight.allPossibleMoves()) {
-    	    				PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));
-    	        	    	//getImageByString("S"+s.getRow()+s.col).setImage(Possible);
-    	        		}
-    	    			
-    	    			for(Button b: PossibleButtons) {
-    	    				if(b.isPressed())
-    	    					PressedButton(b.getId());
-    	    					
-    	    				// else popup message ( please press on the white squares only 
-    	    			}
-    	    			
-    	    			//PossibleButtons.removeAll(PossibleButtons);    	        	
-    	    		//	knightFlag=false;
-    	    			queenFlag=true;
-    		}
+    		switch(level.getText()) {
     		
-    		if(queenFlag) {
-    			for(Square s: Game.queen.allPossibleMoves()) {
-    				PossibleMovesQueen.add(getImageByString("I"+s.getRow()+s.getCol()));
-    			}
+    			case"1":{
+    				for(Square s : Game.knight.allPossibleMoves()) {
+    					PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));
+    	    	
+    					}
+			
+    			for(Button b: PossibleButtons) {
+    				if(b.isPressed())
+					PressedButton(b.getId());
+					
+				// else popup message ( please press on the white squares only 
+    					}
+			
+			for(Button b: PossibleButtons)
+				PossibleButtons.remove(b);
+			
+			if(SysData.getInstance().getHistoryGamesForShow().contains(Game.getInstance().getPlayer())) {
+				for(Player p: SysData.getInstance().getHistoryGamesForShow()) {
+					if(p.getName().equals(Game.getInstance().getPlayer().getName()) && p.getScore()>15 )
+						Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
+						
+				}
+			}
+			
+			
+			 System.out.println("makhoul");
+			/*
+			 * use wait()....................................
+			 */try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 
+			 System.out.println("jawad");
+			
+			//	for(Square s: Game.queen.allPossibleMoves()) {
+			//		PossibleMovesQueen.add(getImageByString("I"+s.getRow()+s.getCol()));
+			//	}
+			//	
+			//	Game.queen.moveThePiece(PossibleMovesQueen);
+			//}
+			    	
+    		
     			
-    			Game.queen.moveThePiece(PossibleMovesQueen);
+    	    			
+    		
+    		
+    		
+    		/**
+    		 * popup window GAME OVER
+    		 */
+    		break;
     		}
+    			
     		
-    		
-    //	}
-    	//while(level.getText().equals("1"));
-    	
+    
+    	}break;	}
     }
     private ImageView getImageByString(String s) {
     	for(ImageView i : getAllImages()) {
@@ -246,6 +282,8 @@ public class GameController implements Initializable{
     		RemovePossible();
     		I12.setImage(KNIGHT);
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		prevPlace.setVisisted(true);
+    		//getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
     		Square sq=new Square(1,2);
     		Game.knight.setCurrentPlace(sq);
@@ -800,135 +838,28 @@ public class GameController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		allImages.add(I00);
-		allImages.add(I01);
-		allImages.add(I02);
-		allImages.add(I03);
-		allImages.add(I04);
-		allImages.add(I05);
-		allImages.add(I06);
-		allImages.add(I07);
-		allImages.add(I10);
-		allImages.add(I11);
-		allImages.add(I12);
-		allImages.add(I13);
-		allImages.add(I14);
-		allImages.add(I15);
-		allImages.add(I16);
-		allImages.add(I17);
-		allImages.add(I20);
-		allImages.add(I21);
-		allImages.add(I22);
-		allImages.add(I23);
-		allImages.add(I24);
-		allImages.add(I25);
-		allImages.add(I26);
-		allImages.add(I27);
-		allImages.add(I30);
-		allImages.add(I31);
-		allImages.add(I32);
-		allImages.add(I33);
-		allImages.add(I34);
-		allImages.add(I35);
-		allImages.add(I36);
-		allImages.add(I37);
-		allImages.add(I40);
-		allImages.add(I41);
-		allImages.add(I42);
-		allImages.add(I43);
-		allImages.add(I44);
-		allImages.add(I45);
-		allImages.add(I46);
-		allImages.add(I47);
-		allImages.add(I50);
-		allImages.add(I51);
-		allImages.add(I52);
-		allImages.add(I53);
-		allImages.add(I54);
-		allImages.add(I55);
-		allImages.add(I56);
-		allImages.add(I57);
-		allImages.add(I60);
-		allImages.add(I61);
-		allImages.add(I62);
-		allImages.add(I63);
-		allImages.add(I64);
-		allImages.add(I65);
-		allImages.add(I66);
-		allImages.add(I67);
-		allImages.add(I70);
-		allImages.add(I71);
-		allImages.add(I72);
-		allImages.add(I73);
-		allImages.add(I74);
-		allImages.add(I75);
-		allImages.add(I76);
+		allImages.add(I00);allImages.add(I01);allImages.add(I02);allImages.add(I03);allImages.add(I04);allImages.add(I05);allImages.add(I06);
+		allImages.add(I07);allImages.add(I10);allImages.add(I11);allImages.add(I12);allImages.add(I13);allImages.add(I14);allImages.add(I15);
+		allImages.add(I16);allImages.add(I17);allImages.add(I20);allImages.add(I21);allImages.add(I22);allImages.add(I23);allImages.add(I24);
+		allImages.add(I25);allImages.add(I26);allImages.add(I27);allImages.add(I30);allImages.add(I31);allImages.add(I32);allImages.add(I33);
+		allImages.add(I34);allImages.add(I35);allImages.add(I36);allImages.add(I37);allImages.add(I40);allImages.add(I41);allImages.add(I42);
+		allImages.add(I43);allImages.add(I44);allImages.add(I45);allImages.add(I46);allImages.add(I47);allImages.add(I50);allImages.add(I51);
+		allImages.add(I52);allImages.add(I53);allImages.add(I54);allImages.add(I55);allImages.add(I56);allImages.add(I57);allImages.add(I60);
+		allImages.add(I61);allImages.add(I62);allImages.add(I63);allImages.add(I64);allImages.add(I65);allImages.add(I66);allImages.add(I67);
+		allImages.add(I70);allImages.add(I71);allImages.add(I72);allImages.add(I73);allImages.add(I74);allImages.add(I75);allImages.add(I76);
 		allImages.add(I77);
 		
-		allButtons.add(CI00);
-		allButtons.add(CI01);
-		allButtons.add(CI02);
-		allButtons.add(CI03);
-		allButtons.add(CI04);
-		allButtons.add(CI05);
-		allButtons.add(CI06);
-		allButtons.add(CI07);
-		allButtons.add(CI10);
-		allButtons.add(CI11);
-		allButtons.add(CI12);
-		allButtons.add(CI13);
-		allButtons.add(CI14);
-		allButtons.add(CI15);
-		allButtons.add(CI16);
-		allButtons.add(CI17);
-		allButtons.add(CI20);
-		allButtons.add(CI21);
-		allButtons.add(CI22);
-		allButtons.add(CI23);
-		allButtons.add(CI24);
-		allButtons.add(CI25);
-		allButtons.add(CI26);
-		allButtons.add(CI27);
-		allButtons.add(CI30);
-		allButtons.add(CI31);
-		allButtons.add(CI32);
-		allButtons.add(CI33);
-		allButtons.add(CI34);
-		allButtons.add(CI35);
-		allButtons.add(CI36);
-		allButtons.add(CI37);
-		allButtons.add(CI40);
-		allButtons.add(CI41);
-		allButtons.add(CI42);
-		allButtons.add(CI43);
-		allButtons.add(CI44);
-		allButtons.add(CI45);
-		allButtons.add(CI46);
-		allButtons.add(CI47);
-		allButtons.add(CI50);
-		allButtons.add(CI51);
-		allButtons.add(CI52);
-		allButtons.add(CI53);
-		allButtons.add(CI54);
-		allButtons.add(CI55);
-		allButtons.add(CI56);
-		allButtons.add(CI57);
-		allButtons.add(CI60);
-		allButtons.add(CI61);
-		allButtons.add(CI62);
-		allButtons.add(CI63);
-		allButtons.add(CI64);
-		allButtons.add(CI65);
-		allButtons.add(CI66);
-		allButtons.add(CI67);
-		allButtons.add(CI70);
-		allButtons.add(CI71);
-		allButtons.add(CI72);
-		allButtons.add(CI73);
-		allButtons.add(CI74);
-		allButtons.add(CI75);
-		allButtons.add(CI76);
-		allButtons.add(CI77);
+		allButtons.add(CI00);allButtons.add(CI01);allButtons.add(CI02);allButtons.add(CI03);allButtons.add(CI04);allButtons.add(CI05);
+		allButtons.add(CI06);allButtons.add(CI07);allButtons.add(CI10);allButtons.add(CI11);allButtons.add(CI12);allButtons.add(CI13);
+		allButtons.add(CI14);allButtons.add(CI15);allButtons.add(CI16);allButtons.add(CI17);allButtons.add(CI20);allButtons.add(CI21);
+		allButtons.add(CI22);allButtons.add(CI23);allButtons.add(CI24);allButtons.add(CI25);allButtons.add(CI26);allButtons.add(CI27);
+		allButtons.add(CI30);allButtons.add(CI31);allButtons.add(CI32);allButtons.add(CI33);allButtons.add(CI34);allButtons.add(CI35);
+		allButtons.add(CI36);allButtons.add(CI37);allButtons.add(CI40);allButtons.add(CI41);allButtons.add(CI42);allButtons.add(CI43);
+		allButtons.add(CI44);allButtons.add(CI45);allButtons.add(CI46);allButtons.add(CI47);allButtons.add(CI50);allButtons.add(CI51);
+		allButtons.add(CI52);allButtons.add(CI53);allButtons.add(CI54);allButtons.add(CI55);allButtons.add(CI56);allButtons.add(CI57);
+		allButtons.add(CI60);allButtons.add(CI61);allButtons.add(CI62);allButtons.add(CI63);allButtons.add(CI64);allButtons.add(CI65);
+		allButtons.add(CI66);allButtons.add(CI67);allButtons.add(CI70);allButtons.add(CI71);allButtons.add(CI72);allButtons.add(CI73);
+		allButtons.add(CI74);allButtons.add(CI75);allButtons.add(CI76);allButtons.add(CI77);
 		
 		remainingTime.textProperty().bind(timeSeconds.asString());
         if (timeline != null) 
@@ -938,11 +869,13 @@ public class GameController implements Initializable{
         timeline = new Timeline();
         timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(STARTTIME+1),new KeyValue(timeSeconds, 0)));
         timeline.playFromStart();
+        
         level.setText(Integer.toString(SysData.getInstance().getGame().getLevel()));
         score.setText(Integer.toString(SysData.getInstance().getGame().getScore()));
-        playerName.setText(Game.getPlayer());
+        playerName.setText(Game.getInstance().getPlayer().getName());
 
     	I00.setImage(KNIGHT);
+    	// set Square 00 as visited.........................................................
     	I07.setImage(QUEEN);
     	SetPossible();
 

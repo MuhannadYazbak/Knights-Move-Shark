@@ -46,9 +46,9 @@ public class PlayerNameController implements Initializable {
 	@FXML
 	private void goPlay(ActionEvent event) throws IOException {
 		Player p= new Player(playerName.getText(),0,"01/01/2022");
-		String s=playerName.getText();
-		Game g= new Game(s);
-		g.setPlayer(p.getName());
+		//String s=playerName.getText();
+		Game g= new Game(p);
+		//g.setPlayer(p.getName());
 		SysData.getInstance().setGame(g);
 		Parent pane = FXMLLoader.load(getClass().getResource("/views/Game.fxml"));
 		Scene scene = new Scene(pane);

@@ -2,14 +2,13 @@ package model;
 
 import java.util.Arrays;
 import java.util.Objects;
-
 import utils.Difficulty;
 import utils.PlusOrMinus;
 //* new one //
 public class Game {
 	public static int ID=1;
 	public int id;
-	public static String player;
+	private static Player player;
 	public int level;
 	public int score;
 	public static Square[][] board = new Square[8][8];
@@ -47,7 +46,7 @@ public class Game {
     }
 	
 	
-	public Game(String player, int level, int score, King king, Knight knight, Queen queen) {
+	public Game(Player player, int level, int score, King king, Knight knight, Queen queen) {
 		super();
 		this.player = player;
 		this.level = level;
@@ -115,10 +114,10 @@ public class Game {
 	public static void setQueen(Queen queen) {
 		Game.queen = queen;
 	}
-	public static String getPlayer() {
+	public static Player getPlayer() {
 		return player;
 	}
-	public void setPlayer(String player) {
+	public void setPlayer(Player player) {
 		this.player = player;
 	}
 	public int getLevel() {
@@ -160,11 +159,12 @@ public class Game {
 		return "Game [id=" + id + ", player=" + player + ", level=" + level + ", score=" + score + ", board="
 				+ Arrays.toString(board) + "]";
 	}
-	public Game(String player) {
+	public Game(Player player) {
 		super();
 		this.id = Game.ID++;
 		this.score = 0;
 		this.level = 1;
+		this.player=player;
 		Game.knight = new Knight(new Square(0,0));
 		Game.king = new King(new Square(0,0));
 		Game.queen = new Queen(new Square(0,7));

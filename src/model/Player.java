@@ -1,9 +1,9 @@
 package model;
 
 public class Player {
-	String name;
-	Integer score;
-	String date;
+	private String name;
+	private Integer score;
+	private String date;
 	
 	public Player(String name, Integer score, String date) {
 		super();
