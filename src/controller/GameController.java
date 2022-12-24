@@ -39,15 +39,16 @@ public class GameController implements Initializable{
 	
 	@FXML
     private ImageView S00,S01,S02,S03,S04,S05,S06,S07,S10,S11,S12,S13,S14,S15,S16,S17,S20,S21,S22,S23,S24,S25,S26,S27,S30,S31,S32,S33,S34,S35,S36,S37,S40,S41,S42,S43,S44,S45,S46,S47,S50,S51,S52,S53,S54,S55,S56,S57,S60,S61,S62,S63,S64,S65,S66,S67,S70,S71,S72,S73,S74,S75,S76,S77;
-	private HashSet<ImageView> allImages = new HashSet<ImageView>();
+	private HashSet<ImageView> BoardImages = new HashSet<ImageView>();
 	@FXML
     private ImageView I00,I01,I02,I03,I04,I05,I06,I07,I10,I11,I12,I13,I14,I15,I16,I17,I20,I21,I22,I23,I24,I25,I26,I27,I30,I31,I32,I33,I34,I35,I36,I37,I40,I41,I42,I43,I44,I45,I46,I47,I50,I51,I52,I53,I54,I55,I56,I57,I60,I61,I62,I63,I64,I65,I66,I67,I70,I71,I72,I73,I74,I75,I76,I77;
-    
+	private HashSet<ImageView> allImages = new HashSet<ImageView>();
 	@FXML
     private Button CI00,CI01,CI02,CI03,CI04,CI05,CI06,CI07,CI10,CI11,CI12,CI13,CI14,CI15,CI16,CI17,CI20,CI21,CI22,CI23,CI24,CI25,CI26,CI27,CI30,CI31,CI32,CI33,CI34,CI35,CI36,CI37,CI40,CI41,CI42,CI43,CI44,CI45,CI46,CI47,CI50,CI51,CI52,CI53,CI54,CI55,CI56,CI57,CI60,CI61,CI62,CI63,CI64,CI65,CI66,CI67,CI70,CI71,CI72,CI73,CI74,CI75,CI76,CI77;
 	private HashSet<Button> allButtons = new HashSet<Button>();
 	private HashSet<Button> PossibleButtons = new HashSet<Button>();
 	
+	private Square[][] Board = new Square[8][8];
 	@FXML
     private Button backBtn;
 
@@ -78,71 +79,64 @@ public class GameController implements Initializable{
     @FXML
     void MoveTo() {
 
-    	
+    	boolean buttonFlag=true;
     	
     	while(!remainingTime.getText().equals("0")) {
     		
-    		switch(level.getText()) {
-    		
-    			case"1":{
-    				for(Square s : Game.knight.allPossibleMoves()) {
-    					PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));
-    	    	
-    					}
-			
-    			for(Button b: PossibleButtons) {
-    				if(b.isPressed())
-					PressedButton(b.getId());
+	    		switch(level.getText()) {
+	    		
+		    		case"1":{
+		    			for(Square s : Game.knight.allPossibleMoves())
+		    				PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));
 					
-				// else popup message ( please press on the white squares only 
-    					}
-			
-			for(Button b: PossibleButtons)
-				PossibleButtons.remove(b);
-			
-			if(SysData.getInstance().getHistoryGamesForShow().contains(Game.getInstance().getPlayer())) {
-				for(Player p: SysData.getInstance().getHistoryGamesForShow()) {
-					if(p.getName().equals(Game.getInstance().getPlayer().getName()) && p.getScore()>15 )
-						Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
+		    			for(Button b: PossibleButtons) {
+		    				if(buttonFlag) {
+		    					if(b.isPressed())
+									{
+		    							PressedButton(b.getId());
+		    							buttonFlag=false;
+									}
+		    				}
+		    			}
+		    			if(buttonFlag)
+		    					// else popup message ( please press on the white squares only 
+		    					
+					
+		    			for(Button b: PossibleButtons)
+		    				PossibleButtons.remove(b);
+					
+		    			if(SysData.getInstance().getHistoryGamesForShow().contains(Game.getInstance().getPlayer())) {
+		    				for(Player p: SysData.getInstance().getHistoryGamesForShow()) {
+		    					if(p.getName().equals(Game.getInstance().getPlayer().getName()) && p.getScore()>15 )
+		    						Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
+								
+		    				}
+		    			}
+					
+		    			try {
+		    				 Thread.sleep(3000);
+		    			} catch (InterruptedException e) {
+		    				 // TODO Auto-generated catch block
+		    				 e.printStackTrace();
+		    			}
+					
+						for(Square s: Game.queen.allPossibleMoves()) {
+							PossibleMovesQueen.add(getImageByString("I"+s.getRow()+s.getCol()));
+						}
 						
-				}
-			}
-			
-			
-			 System.out.println("makhoul");
-			/*
-			 * use wait()....................................
-			 */try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			 
-			 System.out.println("jawad");
-			
-			//	for(Square s: Game.queen.allPossibleMoves()) {
-			//		PossibleMovesQueen.add(getImageByString("I"+s.getRow()+s.getCol()));
-			//	}
-			//	
-			//	Game.queen.moveThePiece(PossibleMovesQueen);
-			//}
-			    	
-    		
-    			
-    	    			
-    		
-    		
-    		
-    		/**
-    		 * popup window GAME OVER
-    		 */
-    		break;
-    		}
-    			
-    		
-    
-    	}break;	}
+						Game.queen.moveThePiece(Game.queen.allPossibleMoves());
+		    		
+		    		/**
+		    		 * popup window GAME OVER
+		    		 */
+		    			break;
+		    		}
+	    			
+	    		
+	    
+	    	}
+    		break;	
+    	}
     }
     private ImageView getImageByString(String s) {
     	for(ImageView i : getAllImages()) {
@@ -181,90 +175,99 @@ public class GameController implements Initializable{
     	case "CI00":{
     		I00.setImage(KNIGHT);
     		RemovePossible();
-    		Square sq=new Square(0,0);
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[0][0].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[0][0]);
     		break;
     		}
     	
     	case "CI01":{
     		I01.setImage(KNIGHT);
     		RemovePossible();
-    		Square sq=new Square(0,1);
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[0][1].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[0][1]);
     		break;
     		}
     	
     	case "CI02":{
     		I02.setImage(KNIGHT);
     		RemovePossible();
-    		Square sq=new Square(0,2);
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[0][2].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[0][2]);
     		break;
     		}
     	
     	case "CI03":{
     		I03.setImage(KNIGHT);
     		RemovePossible();
-    		Square sq=new Square(0,3);
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[0][3].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[0][3]);
     		break;
     		}
     	
     	case "CI04":{
     		I04.setImage(KNIGHT);
     		RemovePossible();
-    		Square sq=new Square(0,4);
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[0][4].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[0][4]);
     		break;
     		}
     	
     	case "CI05":{
     		I05.setImage(KNIGHT);
     		RemovePossible();
-    		Square sq=new Square(0,5);
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[0][5].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[0][5]);
     		break;
     		}
     	
     	case "CI06":{
     		I06.setImage(KNIGHT);
     		RemovePossible();
-    		Square sq=new Square(0,6);
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[0][6].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[0][6]);
     		break;
     		}
     	
     	case "CI07":{
     		I07.setImage(KNIGHT);
     		RemovePossible();
-    		Square sq=new Square(0,7);
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[0][7].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[0][7]);
     		break;
     		}
     	
     	case "CI10":{
     		I10.setImage(KNIGHT);
     		RemovePossible();
-    		Square sq=new Square(1,0);
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[1][0].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[1][0]);
     		break;
     		}
     	
@@ -272,9 +275,10 @@ public class GameController implements Initializable{
     		RemovePossible();
     		I11.setImage(KNIGHT);
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(1,1);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[1][1].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[1][1]);
     		break;
     		}
     	
@@ -282,11 +286,10 @@ public class GameController implements Initializable{
     		RemovePossible();
     		I12.setImage(KNIGHT);
     		Square prevPlace=Game.knight.getCurrentPlace();
-    		prevPlace.setVisisted(true);
-    		//getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(1,2);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[1][2].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[1][2]);
     		break;
     		}
     	
@@ -294,9 +297,10 @@ public class GameController implements Initializable{
     		I13.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(1,3);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[1][3].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[1][3]);
     		break;
     		}
     	
@@ -304,9 +308,10 @@ public class GameController implements Initializable{
     		I14.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(1,4);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[1][4].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[1][4]);
     		break;
     		}
     	
@@ -314,9 +319,10 @@ public class GameController implements Initializable{
     		I15.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(1,5);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[1][5].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[1][5]);
     		break;
     		}
     	
@@ -324,9 +330,10 @@ public class GameController implements Initializable{
     		I16.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(1,6);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[1][6].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[1][6]);
     		break;
     		}
     	
@@ -334,9 +341,10 @@ public class GameController implements Initializable{
     		I17.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(1,7);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[1][7].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[1][7]);
     		break;
     		}
     	
@@ -344,9 +352,10 @@ public class GameController implements Initializable{
     		I20.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(2,0);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[2][0].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[2][0]);
     		break;
     		}
     	
@@ -354,9 +363,10 @@ public class GameController implements Initializable{
     		I21.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(2,1);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[2][1].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[2][1]);
     		break;
     		}
     	
@@ -364,9 +374,10 @@ public class GameController implements Initializable{
     		I22.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(2,2);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[2][2].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[2][2]);
     		break;
     		}
     	
@@ -374,9 +385,10 @@ public class GameController implements Initializable{
     		I23.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(2,3);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[2][3].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[2][3]);
     		break;
     		}
     	
@@ -384,9 +396,10 @@ public class GameController implements Initializable{
     		I24.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(2,4);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[2][4].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[2][4]);
     		break;
     		}
     	
@@ -394,9 +407,10 @@ public class GameController implements Initializable{
     		I25.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(2,5);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[2][5].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[2][5]);
     		break;
     		}
     	
@@ -404,9 +418,10 @@ public class GameController implements Initializable{
     		I26.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(2,6);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[2][6].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[2][6]);
     		break;
     		}
     	
@@ -414,9 +429,10 @@ public class GameController implements Initializable{
     		I27.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(2,7);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[2][7].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[2][7]);
     		break;
     		}
     	
@@ -424,9 +440,10 @@ public class GameController implements Initializable{
     		I30.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(3,0);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[3][0].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[3][0]);
     		break;
     		}
     	
@@ -434,9 +451,10 @@ public class GameController implements Initializable{
     		I31.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(3,1);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[3][1].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[3][1]);
     		break;
     		}
     	
@@ -444,9 +462,10 @@ public class GameController implements Initializable{
     		I32.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(3,2);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[3][2].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[3][2]);
     		break;
     		}
     	
@@ -454,9 +473,10 @@ public class GameController implements Initializable{
     		I33.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(3,3);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[3][3].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[3][3]);
     		break;
     		}
     	
@@ -464,9 +484,10 @@ public class GameController implements Initializable{
     		I34.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(3,4);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[3][4].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[3][4]);
     		break;
     		}
     	
@@ -474,9 +495,10 @@ public class GameController implements Initializable{
     		I35.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(3,5);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[3][5].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[3][5]);
     		break;
     		}
     	
@@ -484,9 +506,10 @@ public class GameController implements Initializable{
     		I36.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(3,6);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[3][6].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[3][6]);
     		break;
     		}
     	
@@ -494,9 +517,10 @@ public class GameController implements Initializable{
     		I37.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(3,7);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[3][7].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[3][7]);
     		break;
     		}
     	
@@ -504,9 +528,10 @@ public class GameController implements Initializable{
     		I40.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(4,0);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[4][0].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[4][0]);
     		break;
     		}
     	
@@ -514,9 +539,10 @@ public class GameController implements Initializable{
     		I41.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(4,1);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[4][1].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[4][1]);
     		break;
     		}
     	
@@ -524,9 +550,10 @@ public class GameController implements Initializable{
     		I42.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(4,2);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[4][2].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[4][2]);
     		break;
     		}
     	
@@ -534,9 +561,10 @@ public class GameController implements Initializable{
     		I43.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(4,3);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[4][3].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[4][3]);
     		break;
     		}
     	
@@ -544,9 +572,10 @@ public class GameController implements Initializable{
     		I44.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(4,4);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[4][4].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[4][4]);
     		break;
     		}
     	
@@ -554,9 +583,10 @@ public class GameController implements Initializable{
     		I45.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(4,5);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[4][5].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[4][5]);
     		break;
     		}
     	
@@ -564,9 +594,10 @@ public class GameController implements Initializable{
     		I46.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(4,6);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[4][6].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[4][6]);
     		break;
     		}
     	
@@ -574,9 +605,10 @@ public class GameController implements Initializable{
     		I47.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(4,7);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[4][7].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[4][7]);
     		break;
     		}
     	
@@ -584,9 +616,10 @@ public class GameController implements Initializable{
     		I50.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(5,0);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[5][0].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[5][0]);
     		break;
     		}
     	
@@ -594,9 +627,10 @@ public class GameController implements Initializable{
     		I51.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(5,1);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[5][1].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[5][1]);
     		break;
     		}
     	
@@ -604,9 +638,10 @@ public class GameController implements Initializable{
     		I52.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(5,2);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[5][2].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[5][2]);
     		break;
     		}
     	
@@ -614,9 +649,10 @@ public class GameController implements Initializable{
     		I53.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(5,3);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[5][3].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[5][3]);
     		break;
     		}
     	
@@ -624,9 +660,10 @@ public class GameController implements Initializable{
     		I54.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(5,4);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[5][4].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[5][4]);
     		break;
     		}
     	
@@ -634,9 +671,10 @@ public class GameController implements Initializable{
     		I55.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(5,5);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[5][5].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[5][5]);
     		break;
     		}
     	
@@ -644,9 +682,10 @@ public class GameController implements Initializable{
     		I56.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(5,6);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[5][6].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[5][6]);
     		break;
     		}
     	
@@ -654,9 +693,10 @@ public class GameController implements Initializable{
     		I57.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(5,7);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[5][7].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[5][7]);
     		break;
     		}
     	
@@ -664,9 +704,10 @@ public class GameController implements Initializable{
     		I60.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(6,0);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[6][0].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[6][0]);
     		break;
     		}
     	
@@ -674,9 +715,10 @@ public class GameController implements Initializable{
     		I61.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(6,1);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[6][1].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[6][1]);
     		break;
     		}
     	
@@ -684,9 +726,10 @@ public class GameController implements Initializable{
     		I62.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(6,2);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[6][2].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[6][2]);
     		break;
     		}
     	
@@ -694,9 +737,10 @@ public class GameController implements Initializable{
     		I63.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(6,3);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[6][3].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[6][3]);
     		break;
     		}
     	
@@ -704,9 +748,10 @@ public class GameController implements Initializable{
     		I64.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(6,4);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[6][4].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[6][4]);
     		break;
     		}
     	
@@ -714,9 +759,10 @@ public class GameController implements Initializable{
     		I65.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(6,5);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[6][5].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[6][5]);
     		break;
     		}
     	
@@ -724,9 +770,10 @@ public class GameController implements Initializable{
     		I66.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(6,6);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[6][6].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[6][6]);
     		break;
     		}
     	
@@ -734,9 +781,10 @@ public class GameController implements Initializable{
     		I67.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(6,7);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[6][7].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[6][7]);
     		break;
     		}
     	
@@ -744,9 +792,10 @@ public class GameController implements Initializable{
     		I70.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(7,0);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[7][0].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[7][0]);
     		break;
     		}
     	
@@ -754,9 +803,10 @@ public class GameController implements Initializable{
     		I71.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(7,1);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[7][1].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[7][1]);
     		break;
     		}
     	
@@ -764,9 +814,10 @@ public class GameController implements Initializable{
     		I72.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(7,2);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[7][2].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[7][2]);
     		break;
     		}
     	
@@ -774,9 +825,10 @@ public class GameController implements Initializable{
     		I73.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(7,3);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[7][3].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[7][3]);
     		break;
     		}
     	
@@ -784,9 +836,10 @@ public class GameController implements Initializable{
     		I74.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(7,4);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[7][4].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[7][4]);
     		break;
     		}
     	
@@ -794,9 +847,10 @@ public class GameController implements Initializable{
     		I75.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(7,5);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[7][5].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[7][5]);
     		break;
     		}
     	
@@ -804,9 +858,10 @@ public class GameController implements Initializable{
     		I76.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(7,6);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[7][6].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[7][6]);
     		break;
     		}
     	
@@ -815,9 +870,10 @@ public class GameController implements Initializable{
     		I77.setImage(KNIGHT);
     		RemovePossible();
     		Square prevPlace=Game.knight.getCurrentPlace();
+    		getImageByString("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Square sq=new Square(7,7);
-    		Game.knight.setCurrentPlace(sq);
+    		Board[7][7].setVisisted(true);
+    		Game.knight.setCurrentPlace(Board[7][7]);
     		break;
     		}
     	
@@ -838,6 +894,34 @@ public class GameController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		Board[0][0] = new Square(0,0);Board[0][1] = new Square(0,1);Board[0][2] = new Square(0,2);Board[0][3] = new Square(0,3);
+		Board[0][4] = new Square(0,4);Board[0][5] = new Square(0,5);Board[0][6] = new Square(0,6);Board[0][7] = new Square(0,7);
+		Board[1][0] = new Square(1,0);Board[1][1] = new Square(1,1);Board[1][2] = new Square(1,2);Board[1][3] = new Square(1,3);
+		Board[1][4] = new Square(1,4);Board[1][5] = new Square(1,5);Board[1][6] = new Square(1,6);Board[1][7] = new Square(1,7);
+		Board[2][0] = new Square(2,0);Board[2][1] = new Square(2,1);Board[2][2] = new Square(2,2);Board[2][3] = new Square(2,3);
+		Board[2][4] = new Square(2,4);Board[2][5] = new Square(2,5);Board[2][6] = new Square(2,6);Board[2][7] = new Square(2,7);
+		Board[3][0] = new Square(3,0);Board[3][1] = new Square(3,1);Board[3][2] = new Square(3,2);Board[3][3] = new Square(3,3);
+		Board[3][4] = new Square(3,4);Board[3][5] = new Square(3,5);Board[3][6] = new Square(3,6);Board[3][7] = new Square(3,7);
+		Board[4][0] = new Square(4,0);Board[4][1] = new Square(4,1);Board[4][2] = new Square(4,2);Board[4][3] = new Square(4,3);
+		Board[4][4] = new Square(4,4);Board[4][5] = new Square(4,5);Board[4][6] = new Square(4,6);Board[4][7] = new Square(4,7);
+		Board[5][0] = new Square(5,0);Board[5][1] = new Square(5,1);Board[5][2] = new Square(5,2);Board[5][3] = new Square(5,3);
+		Board[5][4] = new Square(5,4);Board[5][5] = new Square(5,5);Board[5][6] = new Square(5,6);Board[5][7] = new Square(5,7);
+		Board[6][0] = new Square(6,0);Board[6][1] = new Square(6,1);Board[6][2] = new Square(6,2);Board[6][3] = new Square(6,3);
+		Board[6][4] = new Square(6,4);Board[6][5] = new Square(6,5);Board[6][6] = new Square(6,6);Board[6][7] = new Square(6,7);
+		Board[7][0] = new Square(7,0);Board[7][1] = new Square(7,1);Board[7][2] = new Square(7,2);Board[7][3] = new Square(7,3);
+		Board[7][4] = new Square(7,4);Board[7][5] = new Square(7,5);Board[7][6] = new Square(7,6);Board[7][7] = new Square(7,7);
+		
+		BoardImages.add(S00);BoardImages.add(S01);BoardImages.add(S02);BoardImages.add(S03);BoardImages.add(S04);BoardImages.add(S05);BoardImages.add(S06);
+		BoardImages.add(S07);BoardImages.add(S10);BoardImages.add(S11);BoardImages.add(S12);BoardImages.add(S13);BoardImages.add(S14);BoardImages.add(S15);
+		BoardImages.add(S16);BoardImages.add(S17);BoardImages.add(S20);BoardImages.add(S21);BoardImages.add(S22);BoardImages.add(S23);BoardImages.add(S24);
+		BoardImages.add(S25);BoardImages.add(S26);BoardImages.add(S27);BoardImages.add(S30);BoardImages.add(S31);BoardImages.add(S32);BoardImages.add(S33);
+		BoardImages.add(S34);BoardImages.add(S35);BoardImages.add(S36);BoardImages.add(S37);BoardImages.add(S40);BoardImages.add(S41);BoardImages.add(S42);
+		BoardImages.add(S43);BoardImages.add(S44);BoardImages.add(S45);BoardImages.add(S46);BoardImages.add(S47);BoardImages.add(S50);BoardImages.add(S51);
+		BoardImages.add(S52);BoardImages.add(S53);BoardImages.add(S54);BoardImages.add(S55);BoardImages.add(S56);BoardImages.add(S57);BoardImages.add(S60);
+		BoardImages.add(S61);BoardImages.add(S62);BoardImages.add(S63);BoardImages.add(S64);BoardImages.add(S65);BoardImages.add(S66);BoardImages.add(S67);
+		BoardImages.add(S70);BoardImages.add(S71);BoardImages.add(S72);BoardImages.add(S73);BoardImages.add(S74);BoardImages.add(S75);BoardImages.add(S76);
+		BoardImages.add(S77);
+		
 		allImages.add(I00);allImages.add(I01);allImages.add(I02);allImages.add(I03);allImages.add(I04);allImages.add(I05);allImages.add(I06);
 		allImages.add(I07);allImages.add(I10);allImages.add(I11);allImages.add(I12);allImages.add(I13);allImages.add(I14);allImages.add(I15);
 		allImages.add(I16);allImages.add(I17);allImages.add(I20);allImages.add(I21);allImages.add(I22);allImages.add(I23);allImages.add(I24);
@@ -861,6 +945,7 @@ public class GameController implements Initializable{
 		allButtons.add(CI66);allButtons.add(CI67);allButtons.add(CI70);allButtons.add(CI71);allButtons.add(CI72);allButtons.add(CI73);
 		allButtons.add(CI74);allButtons.add(CI75);allButtons.add(CI76);allButtons.add(CI77);
 		
+		Game.getInstance().setBoard(Board);
 		remainingTime.textProperty().bind(timeSeconds.asString());
         if (timeline != null) 
         	timeline.stop();
@@ -875,7 +960,8 @@ public class GameController implements Initializable{
         playerName.setText(Game.getInstance().getPlayer().getName());
 
     	I00.setImage(KNIGHT);
-    	// set Square 00 as visited.........................................................
+    	Board[0][0].setVisisted(true);
+    	S00.setImage(Visited);
     	I07.setImage(QUEEN);
     	SetPossible();
 

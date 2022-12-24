@@ -11,7 +11,7 @@ public class Game {
 	private static Player player;
 	public int level;
 	public int score;
-	public static Square[][] board = new Square[8][8];
+	public Square[][] board = new Square[8][8];
 	public static King king ; //add starting location
 	public static Knight knight ; //add starting location
 	public static Queen queen  ; //add starting location
@@ -90,11 +90,11 @@ public class Game {
 	public static void setID(int iD) {
 		ID = iD;
 	}
-	public static Square[][] getBoard() {
+	public  Square[][] getBoard() {
 		return board;
 	}
-	public static void setBoard(Square[][] board) {
-		Game.board = board;
+	public  void setBoard(Square[][] board) {
+		this.board = board;
 	}
 	public static King getKing() {
 		return king;
@@ -114,11 +114,11 @@ public class Game {
 	public static void setQueen(Queen queen) {
 		Game.queen = queen;
 	}
-	public static Player getPlayer() {
+	public  Player getPlayer() {
 		return player;
 	}
 	public void setPlayer(Player player) {
-		this.player = player;
+		Game.player = player;
 	}
 	public int getLevel() {
 		return level;
@@ -164,12 +164,12 @@ public class Game {
 		this.id = Game.ID++;
 		this.score = 0;
 		this.level = 1;
-		this.player=player;
+		Game.player=player;
 		Game.knight = new Knight(new Square(0,0));
 		Game.king = new King(new Square(0,0));
 		Game.queen = new Queen(new Square(0,7));
 	}
-	public static Square squareByIndx(int i, int j) {
+	public  Square squareByIndx(int i, int j) {
 		if(board == null)
 			return null;
 		return board[i][j];

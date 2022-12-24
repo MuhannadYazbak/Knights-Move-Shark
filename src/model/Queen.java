@@ -73,7 +73,7 @@ public class Queen extends Piece{
 			}
 		});
 		for(Square s : possibleMoves) {
-			if(Game.squareByIndx(s.getRow(), s.getCol()).squareType==Type.Blocked) {
+			if(Game.getInstance().squareByIndx(s.getRow(), s.getCol()).squareType==Type.Blocked) {
 				toRemove.add(s);
 			}
 		}
