@@ -131,7 +131,7 @@ public class King extends Piece{
 			}
 		});
 		for(Square s : possibleMoves) {
-			if(Game.getInstance().squareByIndx(s.getRow(), s.getCol()).squareType==Type.Blocked) {
+			if(Game.getInstance().squareByIndx(s.getRow(), s.getCol()).getSquareType()==Type.Blocked) {
 				toRemove.add(s);
 			}
 		}
@@ -139,7 +139,7 @@ public class King extends Piece{
 		for(Square square : possibleMoves) {
 			toReturn.add(square);
 		}
-		Game.getKing().setCurrentPlace(toReturn.first()); 
+		Game.getInstance().getKing().setCurrentPlace(toReturn.first()); 
 		
 	}
 	

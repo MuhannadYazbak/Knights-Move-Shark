@@ -3,10 +3,10 @@ package model;
 import utils.Type;
 
 public class Square {
-	public int row;
-	public int col;
-	public boolean isVisisted = false;
-	public Type squareType;
+	private int row;
+	private int col;
+	private boolean isVisisted = false;
+	private Type squareType;
 	
 	public Square(int row, int col) {
 		super();

@@ -1,23 +1,21 @@
 package model;
 
-import java.util.Arrays;
-import java.util.Objects;
 import utils.Difficulty;
 import utils.PlusOrMinus;
 //* new one //
 public class Game {
-	public static int ID=1;
-	public int id;
-	private static Player player;
-	public int level;
-	public int score;
-	public Square[][] board = new Square[8][8];
-	public static King king ; //add starting location
-	public static Knight knight ; //add starting location
-	public static Queen queen  ; //add starting location
+	private static int ID=1;
+	private int id;
+	private Player player;
+	private int level;
+	private int score;
+	private Square[][] board;
+	private King king ; 
+	private Knight knight; 
+	private Queen queen  ; 
 	private static Game instance;
-	private static boolean gameOver;
-    private static boolean youWon;
+	private boolean gameOver;
+    private boolean youWon;
     private PieceFactory pieceFactory;
 	
 	//Singleton class
@@ -30,9 +28,9 @@ public class Game {
     // if no game has been started, this constructor is called
     private Game() { 
     	pieceFactory = new PieceFactory();
-    	king = (King) pieceFactory.makePiece("King",null);
-    	queen = (Queen) pieceFactory.makePiece("Queen", null);
-    	knight = (Knight) pieceFactory.makePiece("Knight", null);
+    	king = (King) pieceFactory.makePiece("King",new Square(2, 2));
+    	queen = (Queen) pieceFactory.makePiece("Queen", new Square(1, 1));
+    	knight = (Knight) pieceFactory.makePiece("Knight", new Square(0, 0));
         this.startNewGame();
     }
     
@@ -45,33 +43,102 @@ public class Game {
         // need to add level initialisation
     }
 	
-	
-	public Game(Player player, int level, int score, King king, Knight knight, Queen queen) {
-		super();
-		this.player = player;
-		this.level = level;
-		this.score = score;
-		Game.king = king;
-		Game.knight = knight;
-		Game.queen = queen;
-		this.id = getID();
-		setID(getID()+1);
+
+
+	public static int getID() {
+		return ID;
 	}
-	
-	public static boolean isGameOver() {
+
+	public static void setID(int iD) {
+		ID = iD;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	public Square[][] getBoard() {
+		return board;
+	}
+
+	public void setBoard(Square[][] board) {
+		this.board = board;
+	}
+
+	public King getKing() {
+		return king;
+	}
+
+	public void setKing(King king) {
+		this.king = king;
+	}
+
+	public Knight getKnight() {
+		return knight;
+	}
+
+	public void setKnight(Knight knight) {
+		this.knight = knight;
+	}
+
+	public Queen getQueen() {
+		return queen;
+	}
+
+	public void setQueen(Queen queen) {
+		this.queen = queen;
+	}
+
+	public boolean isGameOver() {
 		return gameOver;
 	}
 
-	public static void setGameOver(boolean gameOver) {
-		Game.gameOver = gameOver;
+	public void setGameOver(boolean gameOver) {
+		this.gameOver = gameOver;
 	}
 
-	public static boolean isYouWon() {
+	public boolean isYouWon() {
 		return youWon;
 	}
 
-	public static void setYouWon(boolean youWon) {
-		Game.youWon = youWon;
+	public void setYouWon(boolean youWon) {
+		this.youWon = youWon;
+	}
+
+	public PieceFactory getPieceFactory() {
+		return pieceFactory;
+	}
+
+	public void setPieceFactory(PieceFactory pieceFactory) {
+		this.pieceFactory = pieceFactory;
 	}
 
 	public static void setInstance(Game instance) {
@@ -84,91 +151,7 @@ public class Game {
     	
     }
     
-	public static int getID() {
-		return ID;
-	}
-	public static void setID(int iD) {
-		ID = iD;
-	}
-	public  Square[][] getBoard() {
-		return board;
-	}
-	public  void setBoard(Square[][] board) {
-		this.board = board;
-	}
-	public static King getKing() {
-		return king;
-	}
-	public static void setKing(King king) {
-		Game.king = king;
-	}
-	public static Knight getKnight() {
-		return knight;
-	}
-	public static void setKnight(Knight knight) {
-		Game.knight = knight;
-	}
-	public static Queen getQueen() {
-		return queen;
-	}
-	public static void setQueen(Queen queen) {
-		Game.queen = queen;
-	}
-	public  Player getPlayer() {
-		return player;
-	}
-	public void setPlayer(Player player) {
-		Game.player = player;
-	}
-	public int getLevel() {
-		return level;
-	}
-	public void setLevel(int level) {
-		this.level = level;
-	}
-	public int getScore() {
-		return score;
-	}
-	public void setScore(int score) {
-		this.score = score;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Game other = (Game) obj;
-		return id == other.id;
-	}
 	
-	@Override
-	public String toString() {
-		return "Game [id=" + id + ", player=" + player + ", level=" + level + ", score=" + score + ", board="
-				+ Arrays.toString(board) + "]";
-	}
-	public Game(Player player) {
-		super();
-		this.id = Game.ID++;
-		this.score = 0;
-		this.level = 1;
-		Game.player=player;
-		Game.knight = new Knight(new Square(0,0));
-		Game.king = new King(new Square(0,0));
-		Game.queen = new Queen(new Square(0,7));
-	}
 	public  Square squareByIndx(int i, int j) {
 		if(board == null)
 			return null;
