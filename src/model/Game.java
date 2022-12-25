@@ -29,8 +29,8 @@ public class Game {
     private Game() { 
     	pieceFactory = new PieceFactory();
     	king = (King) pieceFactory.makePiece("King",new Square(2, 2));
-    	queen = (Queen) pieceFactory.makePiece("Queen", new Square(1, 1));
-    	knight = (Knight) pieceFactory.makePiece("Knight", new Square(0, 0));
+    	queen = (Queen) pieceFactory.makePiece("Queen", new Square(0, 7));
+    	this.knight = (Knight) pieceFactory.makePiece("Knight", new Square(0, 0));
         this.startNewGame();
     }
     
