@@ -11,6 +11,7 @@ public abstract class Piece{
 	}
 	
 	abstract public Set<Square> allPossibleMoves();
+	abstract public Set<Square> EmptyPossibleMoves();
 	abstract public void moveThePiece(Set<Square> possibleMoves);
 	
 	//	Template Design Pattern
@@ -27,6 +28,8 @@ public abstract class Piece{
 	public void setCurrentPlace(Square currentPlace) {
 		this.currentPlace = currentPlace;
 	}
+
+	
 
 	
 }
