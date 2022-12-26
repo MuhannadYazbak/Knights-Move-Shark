@@ -65,10 +65,10 @@ public class Queen extends Piece{
 		ArrayList<Square> toRemove = new ArrayList<Square>();
 		TreeSet<Square> toReturn = new TreeSet<Square>(new Comparator<Square>() {
 			public int compare(Square o1, Square o2) {
-				Double o1d=Math.sqrt((o1.getCol() - Game.getInstance().getQueen().getCurrentPlace().getCol()) * (o1.getCol() - Game.getInstance().getQueen().getCurrentPlace().getCol())
-						+ (o1.getRow() - Game.getInstance().getQueen().getCurrentPlace().getRow()) * (o1.getRow() - Game.getInstance().getQueen().getCurrentPlace().getRow()));
-				Double o2d=Math.sqrt((o2.getCol() - Game.getInstance().getQueen().getCurrentPlace().getCol()) * (o2.getCol() - Game.getInstance().getQueen().getCurrentPlace().getCol())
-						+ (o2.getRow() - Game.getInstance().getQueen().getCurrentPlace().getRow()) * (o2.getRow() - Game.getInstance().getQueen().getCurrentPlace().getRow()));
+				Double o1d=Math.sqrt((o1.getCol() - Game.getInstance().getKnight().getCurrentPlace().getCol()) * (o1.getCol() - Game.getInstance().getKnight().getCurrentPlace().getCol())
+						+ (o1.getRow() - Game.getInstance().getKnight().getCurrentPlace().getRow()) * (o1.getRow() - Game.getInstance().getKnight().getCurrentPlace().getRow()));
+				Double o2d=Math.sqrt((o2.getCol() - Game.getInstance().getKnight().getCurrentPlace().getCol()) * (o2.getCol() - Game.getInstance().getKnight().getCurrentPlace().getCol())
+						+ (o2.getRow() - Game.getInstance().getKnight().getCurrentPlace().getRow()) * (o2.getRow() - Game.getInstance().getKnight().getCurrentPlace().getRow()));
 				return Double.compare(o1d, o2d);
 			}
 		});
@@ -81,8 +81,17 @@ public class Queen extends Piece{
 		for(Square square : possibleMoves) {
 			toReturn.add(square);
 		}
-		Game.getInstance().getQueen().setCurrentPlace(toReturn.first()); 
 		
+		Game.getInstance().getQueen().setCurrentPlace(toReturn.first()); 
+
+
+		
+	}
+
+	@Override
+	public Set<Square> EmptyPossibleMoves() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

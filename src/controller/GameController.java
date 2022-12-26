@@ -112,8 +112,11 @@ public class GameController implements Initializable{
 						for(Square s: 	Game.getInstance().getQueen().allPossibleMoves()) {
 							PossibleMovesQueen.add(getImageByString("I"+s.getRow()+s.getCol()));
 						}
-						
 						Game.getInstance().getQueen().moveThePiece(	Game.getInstance().getQueen().allPossibleMoves());
+				
+
+
+						
 		    		
 		    		/**
 		    		 * popup window GAME OVER
@@ -906,7 +909,10 @@ public class GameController implements Initializable{
     		break;
     		}
     	
+    	
     	}
+
+
     }
 	@FXML
 	 private void back(ActionEvent event) throws IOException {

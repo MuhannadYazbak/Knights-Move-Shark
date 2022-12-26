@@ -142,6 +142,12 @@ public class King extends Piece{
 		Game.getInstance().getKing().setCurrentPlace(toReturn.first()); 
 		
 	}
+
+	@Override
+	public Set<Square> EmptyPossibleMoves() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }
