@@ -76,18 +76,18 @@ public class GameController implements Initializable{
 	    		
 		    		case"1":{
 		    			Boolean movedFlag = false, buttonFlag=true;
-		    			System.out.println("aaaaaa");
-
+		    		
 		    			for(Square s : Game.getInstance().getKnight().allPossibleMoves()) {
 		    				PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));
-		    				String pos = "I"+s.getRow()+s.getCol();
-		    				for(ImageView i : allImages ) {
-								if(i.getId().equals(pos)) {
-									i.setImage(Possible);
-									
-								}
-								
-							}
+//		    				String pos = "I"+s.getRow()+s.getCol();
+//		    				for(ImageView i : allImages ) {
+//								if(i.getId().equals(pos)) {
+//									i.setImage(Possible);
+//									
+//								}
+//								
+//							}
+		    				SetPossible();
 		    				
 		    			}
 					
@@ -110,7 +110,9 @@ public class GameController implements Initializable{
 		    					
 					
 		    			
-					
+		    			/*
+		    			 * If statment to check if the player can move on to the next level 
+		    			 */
 		    			if(SysData.getInstance().getHistoryGamesForShow().contains(Game.getInstance().getPlayer())) {
 		    				for(Player p: SysData.getInstance().getHistoryGamesForShow()) {
 		    					if(p.getName().equals(Game.getInstance().getPlayer().getName()) && p.getScore()>=15 )
@@ -199,6 +201,8 @@ public class GameController implements Initializable{
     	return null;
     }
     
+    
+    
 	private Button getButtonByString(String s) {
     	for(Button i : getAllButtons()) {
     		if(s.equals(i.getId())) {
@@ -227,9 +231,6 @@ public class GameController implements Initializable{
     	
     	int i = Character.getNumericValue(s.charAt(2));
     	int j = Character.getNumericValue(s.charAt(3));
-    	System.out.println(s);
-    	System.out.println("this is i: " + i + "\n");
-    	System.out.println("this is j: " + j);
     	getImageByString("I"+i+j).setImage(KNIGHT);
     	RemovePossible();
     	Square prevPlace=Game.getInstance().getKnight().getCurrentPlace();
@@ -997,12 +998,7 @@ public class GameController implements Initializable{
 
 
     }
-	public Square[][] getBoard() {
-		return Board;
-	}
-	public void setBoard(Square[][] board) {
-		Board = board;
-	}
+	
 	@FXML
 	 private void back(ActionEvent event) throws IOException {
 		
@@ -1021,16 +1017,49 @@ public class GameController implements Initializable{
 		for(int i=0 ; i<8 ; i++) {
 			for(int j=0; j<8 ; j++) {
 				Board[i][j] = new Square(i,j);
-				String location = ""+ i+j;
-				BoardImages.add(getImageByStringBoard("S" + location));
-				allImages.add(getImageByString("I" + location));
-				allButtons.add(getButtonByString("CI" + location));
+//				BoardImages.add(getImageByStringBoard("S"+i+j));
+//				allImages.add(getImageByString("I"+i+j));
+//				allButtons.add(getButtonByString("CI"+i+j));
 				
 			}
 			
 		}
-
 		
+		BoardImages.add(S00);BoardImages.add(S01);BoardImages.add(S02);BoardImages.add(S03);BoardImages.add(S04);BoardImages.add(S05);
+		BoardImages.add(S06);BoardImages.add(S07);BoardImages.add(S10);BoardImages.add(S11);BoardImages.add(S12);BoardImages.add(S13);
+		BoardImages.add(S14);BoardImages.add(S15);BoardImages.add(S16);BoardImages.add(S17);BoardImages.add(S20);BoardImages.add(S21);
+		BoardImages.add(S22);BoardImages.add(S23);BoardImages.add(S24);BoardImages.add(S25);BoardImages.add(S26);BoardImages.add(S27);
+		BoardImages.add(S30);BoardImages.add(S31);BoardImages.add(S32);BoardImages.add(S33);BoardImages.add(S34);BoardImages.add(S35);
+		BoardImages.add(S36);BoardImages.add(S37);BoardImages.add(S40);BoardImages.add(S41);BoardImages.add(S42);BoardImages.add(S43);
+		BoardImages.add(S44);BoardImages.add(S45);BoardImages.add(S46);BoardImages.add(S47);BoardImages.add(S50);BoardImages.add(S51);
+		BoardImages.add(S52);BoardImages.add(S53);BoardImages.add(S54);BoardImages.add(S55);BoardImages.add(S56);BoardImages.add(S57);
+		BoardImages.add(S60);BoardImages.add(S61);BoardImages.add(S62);BoardImages.add(S63);BoardImages.add(S64);BoardImages.add(S65);
+		BoardImages.add(S66);BoardImages.add(S67);BoardImages.add(S70);BoardImages.add(S71);BoardImages.add(S72);BoardImages.add(S73);
+		BoardImages.add(S74);BoardImages.add(S75);BoardImages.add(S76);BoardImages.add(S77);
+		
+		allImages.add(I00);allImages.add(I01);allImages.add(I02);allImages.add(I03);allImages.add(I04);allImages.add(I05);
+		allImages.add(I06);allImages.add(I07);allImages.add(I10);allImages.add(I11);allImages.add(I12);allImages.add(I13);
+		allImages.add(I14);allImages.add(I15);allImages.add(I16);allImages.add(I17);allImages.add(I20);allImages.add(I21);
+		allImages.add(I22);allImages.add(I23);allImages.add(I24);allImages.add(I25);allImages.add(I26);allImages.add(I27);
+		allImages.add(I30);allImages.add(I31);allImages.add(I32);allImages.add(I33);allImages.add(I34);allImages.add(I35);
+		allImages.add(I36);allImages.add(I37);allImages.add(I40);allImages.add(I41);allImages.add(I42);allImages.add(I43);
+		allImages.add(I44);allImages.add(I45);allImages.add(I46);allImages.add(I47);allImages.add(I50);allImages.add(I51);
+		allImages.add(I52);allImages.add(I53);allImages.add(I54);allImages.add(I55);allImages.add(I56);allImages.add(I57);
+		allImages.add(I60);allImages.add(I61);allImages.add(I62);allImages.add(I63);allImages.add(I64);allImages.add(I65);
+		allImages.add(I66);allImages.add(I67);allImages.add(I70);allImages.add(I71);allImages.add(I72);allImages.add(I73);
+		allImages.add(I74);allImages.add(I75);allImages.add(I76);allImages.add(I77);
+		
+		allButtons.add(CI00);allButtons.add(CI13);allButtons.add(CI26);allButtons.add(CI41);allButtons.add(CI54);allButtons.add(CI66);
+		allButtons.add(CI01);allButtons.add(CI14);allButtons.add(CI27);allButtons.add(CI42);allButtons.add(CI55);allButtons.add(CI67);
+		allButtons.add(CI02);allButtons.add(CI15);allButtons.add(CI30);allButtons.add(CI43);allButtons.add(CI56);allButtons.add(CI70);
+		allButtons.add(CI03);allButtons.add(CI16);allButtons.add(CI31);allButtons.add(CI44);allButtons.add(CI57);allButtons.add(CI71);
+		allButtons.add(CI04);allButtons.add(CI17);allButtons.add(CI32);allButtons.add(CI45);allButtons.add(CI60);allButtons.add(CI72);
+		allButtons.add(CI05);allButtons.add(CI20);allButtons.add(CI33);allButtons.add(CI46);allButtons.add(CI61);allButtons.add(CI73);
+		allButtons.add(CI06);allButtons.add(CI21);allButtons.add(CI34);allButtons.add(CI47);allButtons.add(CI62);allButtons.add(CI74);
+		allButtons.add(CI07);allButtons.add(CI22);allButtons.add(CI35);allButtons.add(CI50);allButtons.add(CI63);allButtons.add(CI75);
+		allButtons.add(CI10);allButtons.add(CI23);allButtons.add(CI36);allButtons.add(CI51);allButtons.add(CI64);allButtons.add(CI76);
+		allButtons.add(CI11);allButtons.add(CI24);allButtons.add(CI37);allButtons.add(CI52);allButtons.add(CI65);allButtons.add(CI77);
+		allButtons.add(CI12);allButtons.add(CI25);allButtons.add(CI40);allButtons.add(CI53);
 		Game.getInstance().setBoard(Board);
 		remainingTime.textProperty().bind(timeSeconds.asString());
         if (timeline != null) 
@@ -1071,5 +1100,12 @@ public class GameController implements Initializable{
 	}
 	public void setBoardImages(HashSet<ImageView> boardImages) {
 		BoardImages = boardImages;
+	}
+	
+	public Square[][] getBoard() {
+		return Board;
+	}
+	public void setBoard(Square[][] board) {
+		Board = board;
 	}
 }

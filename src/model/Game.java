@@ -48,17 +48,17 @@ public class Game {
     public Square randomSquare() {
     	
     	boolean flag = true;
-    	
+    	int randomNumber1, randomNumber2;
     	do {
-    		int randomNumber1 = (int) (Math.random() * 8);
-        	int randomNumber2 = (int) (Math.random() * 8);
-        	if(Game.getBoard[randomNumber1][randomNumber2].getSquareType().equals(Type.Regular))
+    		 randomNumber1 = (int) (Math.random() * 8);
+        	 randomNumber2 = (int) (Math.random() * 8);
+        	if(board[randomNumber1][randomNumber2].getSquareType().equals(Type.Regular))
         		flag = false;
     		
     	}while(flag);
     	
     	
-    	return square;
+    	return board[randomNumber1][randomNumber2];
 
 
     }
