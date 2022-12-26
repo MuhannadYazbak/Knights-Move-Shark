@@ -73,9 +73,24 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <Button fx:id="Rules" mnemonicParsing="false" onAction="#rulesPage" prefHeight="67.0" prefWidth="306.0" style="-fx-background-color: white; -fx-border-color: #612D00; -fx-border-width: 0px 5px 0px 5px;" text="Rules Of The Game" textFill="#024b10">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../lib/rules.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
             <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exit" prefHeight="67.0" prefWidth="306.0" style="-fx-background-color: white; -fx-border-color: #612D00; -fx-border-width: 0px 5px 0px 5px;" text="Exit" textFill="#024b10">
                <VBox.margin>
-                  <Insets bottom="25.0" />
+                  <Insets bottom="25.0" top="25.0" />
                </VBox.margin>
                <font>
                   <Font name="System Bold Italic" size="24.0" />

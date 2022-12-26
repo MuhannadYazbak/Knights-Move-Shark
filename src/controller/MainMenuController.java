@@ -32,6 +32,9 @@ public class MainMenuController implements Initializable{
 	@FXML
     private Button exitBtn;
 
+	@FXML
+    private Button Rules;
+	
     @FXML
     private Button historyBtn;
 
@@ -103,6 +106,16 @@ public class MainMenuController implements Initializable{
 		stage.setTitle("Questions Wizard");
 		stage.show();
 	}
+	
+	@FXML
+    void rulesPage(ActionEvent event) throws IOException {
+		Parent pane = FXMLLoader.load(getClass().getResource("/views/Rules.fxml"));
+		Scene scene = new Scene(pane);
+		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+		stage.setScene(scene);
+		stage.setTitle("Start New Game");
+		stage.show();
+    }
 	
 	@FXML
 	private void exit(ActionEvent event) {

@@ -65,7 +65,7 @@ public class GameController implements Initializable{
     private HashSet<ImageView> PossibleMovesKnight = new HashSet<ImageView>();
     private HashSet<ImageView> PossibleMovesQueen = new HashSet<ImageView>();
     
-    boolean buttonFlag=true;
+    
 
     @FXML
     void MoveTo() {
@@ -74,7 +74,7 @@ public class GameController implements Initializable{
 	    		switch(level.getText()) {
 	    		
 		    		case"1":{
-		    			Boolean movedFlag = false;
+		    			Boolean movedFlag = false, buttonFlag=true;
 		    			System.out.println("aaaaaa");
 
 		    			for(Square s : Game.getInstance().getKnight().allPossibleMoves()) {
@@ -99,9 +99,11 @@ public class GameController implements Initializable{
 		    							movedFlag = true;
 									}
 		    				}
+		    				
 		    			}
 		    			
 		    			PossibleButtons.clear();
+		    			//buttonFlag=true;
 		    			if(buttonFlag)
 		    					// else popup message ( please press on the white squares only 
 		    					
@@ -152,7 +154,7 @@ public class GameController implements Initializable{
 		    			movedFlag= false;
 				    
 				    	
-				
+		    			
 
 
 						
@@ -229,8 +231,13 @@ public class GameController implements Initializable{
     		Square prevPlace=Game.getInstance().getKnight().getCurrentPlace();
     		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[0][0].setVisisted(true);
-    		Game.getInstance().getKnight().setCurrentPlace(Board[0][0]);
+    		if(Board[0][0].isVisisted())
+    			Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-1);
+    		else {
+    			Board[0][0].setVisisted(true);
+    			Game.getInstance().getKnight().setCurrentPlace(Board[0][0]);
+        		Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+1);
+    		}
     		for(Button b: PossibleButtons)
 				PossibleButtons.remove(b);
     		if(Game.getInstance().getKnight().getCurrentPlace().getSquareType()==utils.Type.RandomJump) {
