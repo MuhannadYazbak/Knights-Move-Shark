@@ -113,6 +113,19 @@ public class GameController implements Initializable{
 							PossibleMovesQueen.add(getImageByString("I"+s.getRow()+s.getCol()));
 						}
 						Game.getInstance().getQueen().moveThePiece(	Game.getInstance().getQueen().allPossibleMoves());
+						ImageView temp = null;
+						String s = "I" +Integer.toString(Game.getInstance().getQueen().getCurrentPlace().getRow())
+								+Integer.toString(Game.getInstance().getQueen().getCurrentPlace().getCol());
+						System.out.println(s);
+						for(ImageView i : allImages ) {
+							if(i.getId().equals(s)) {
+								System.out.println("AAAAAAAAA");
+								i.setImage(QUEEN);
+								
+							}
+						}
+				    
+				    	
 				
 
 
@@ -911,6 +924,7 @@ public class GameController implements Initializable{
     	
     	
     	}
+    
 
 
     }
