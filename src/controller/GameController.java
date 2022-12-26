@@ -28,6 +28,7 @@ import model.Game;
 import model.Player;
 import model.Square;
 import model.SysData;
+import utils.Type;
 
 public class GameController implements Initializable{
 	
@@ -222,746 +223,786 @@ public class GameController implements Initializable{
     }
     
     private void PressedButton(String s) {
-    	System.out.println("hoooooooooooo");
-    	switch(s) {
     	
-    	case "CI00":{
-    		I00.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		if(Board[0][0].isVisisted())
-    			Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-1);
-    		else {
-    			Board[0][0].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[0][0]);
-        		Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+1);
-    		}
-    		for(Button b: PossibleButtons)
-				PossibleButtons.remove(b);
-    		if(Game.getInstance().getKnight().getCurrentPlace().getSquareType()==utils.Type.RandomJump) {
-    			for(Square sq : Game.getInstance().getKnight().EmptyPossibleMoves())
-    				PossibleButtons.add(getButtonByString("CI"+sq.getRow()+sq.getCol()));
-			
-    			for(Button b: PossibleButtons) {
-    				if(b.isPressed())
-						PressedButton(b.getId());
-    				}
-    			}
-    			
-//    				if(SysData.getInstance().getHistoryGamesForShow().contains(Game.getInstance().getPlayer())) {
-//    					for(Player p: SysData.getInstance().getHistoryGamesForShow()) {
-//    						if(p.getName().equals(Game.getInstance().getPlayer().getName()) && p.getScore()>=15 )
-//    							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
-//					
-//    					}
+    	
+    	int i = Character.getNumericValue(s.charAt(2));
+    	int j = Character.getNumericValue(s.charAt(3));
+    	System.out.println(s);
+    	System.out.println("this is i: " + i + "\n");
+    	System.out.println("this is j: " + j);
+    	getImageByString("I"+i+j).setImage(KNIGHT);
+    	RemovePossible();
+    	Square prevPlace=Game.getInstance().getKnight().getCurrentPlace();
+    	getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+		if(Board[i][j].isVisisted())
+			Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-1);
+		else {
+			Board[i][j].setVisisted(true);
+			Game.getInstance().getKnight().setCurrentPlace(Board[0][0]);
+			Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+1);
+		}
+		
+		Type squareType = Game.getInstance().getKnight().getCurrentPlace().getSquareType();
+		Game.getInstance().handleSquare(i, j, squareType);
+
+		
+//		if(SysData.getInstance().getHistoryGamesForShow().contains(Game.getInstance().getPlayer())) {
+//		for(Player p: SysData.getInstance().getHistoryGamesForShow()) {
+//			if(p.getName().equals(Game.getInstance().getPlayer().getName()) && p.getScore()>=15 )
+//				Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
+//	
+//		}
+//	}
+    	
+    	
+//    	switch(s) {
+//    	
+//    	case "CI00":{
+//    		//Type squareType = Game.getInstance().getKnight().getCurrentPlace().getSquareType();
+//    		//Game.getInstance().handleSquare(i, j, squareType);
+//    		I00.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		if(Board[0][0].isVisisted())
+//    			Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-1);
+//    		else {
+//    			Board[0][0].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[0][0]);
+//        		Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+1);
+//    		}
+//    		for(Button b: PossibleButtons)
+//				PossibleButtons.remove(b);
+//    		if(Game.getInstance().getKnight().getCurrentPlace().getSquareType()==utils.Type.RandomJump) {
+//    			for(Square sq : Game.getInstance().getKnight().EmptyPossibleMoves())
+//    				PossibleButtons.add(getButtonByString("CI"+sq.getRow()+sq.getCol()));
+//			
+//    			for(Button b: PossibleButtons) {
+//    				if(b.isPressed())
+//						PressedButton(b.getId());
 //    				}
-    			
-    		break;
-    		}
-    	
-    	case "CI01":{
-    		I01.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[0][1].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[0][1]);
-    		break;
-    		}
-    	
-    	case "CI02":{
-    		I02.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[0][2].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[0][2]);
-    		break;
-    		}
-    	
-    	case "CI03":{
-    		I03.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[0][3].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[0][3]);
-    		break;
-    		}
-    	
-    	case "CI04":{
-    		I04.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[0][4].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[0][4]);
-    		break;
-    		}
-    	
-    	case "CI05":{
-    		I05.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[0][5].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[0][5]);
-    		break;
-    		}
-    	
-    	case "CI06":{
-    		I06.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[0][6].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[0][6]);
-    		break;
-    		}
-    	
-    	case "CI07":{
-    		I07.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[0][7].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[0][7]);
-    		break;
-    		}
-    	
-    	case "CI10":{
-    		I10.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[1][0].setVisisted(true);
-    		Game.getInstance().getKnight().setCurrentPlace(Board[1][0]);
-    		break;
-    		}
-    
-    	case "CI11":{
-    		RemovePossible();
-    		I11.setImage(KNIGHT);
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[1][1].setVisisted(true);
-    		Game.getInstance().getKnight().setCurrentPlace(Board[1][1]);
-    		break;
-    		}
-    	
-    	case "CI12":{
-    		RemovePossible();
-    		I12.setImage(KNIGHT);
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[1][2].setVisisted(true);
-    		Game.getInstance().getKnight().setCurrentPlace(Board[1][2]);
-    		break;
-    		}
-    	
-    	case "CI13":{
-    		I13.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[1][3].setVisisted(true);
-    		Game.getInstance().getKnight().setCurrentPlace(Board[1][3]);
-    		break;
-    		}
-    	
-    	case "CI14":{
-    		I14.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[1][4].setVisisted(true);
-    		Game.getInstance().getKnight().setCurrentPlace(Board[1][4]);
-    		break;
-    		}
-    	
-    	case "CI15":{
-    		I15.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[1][5].setVisisted(true);
-    		Game.getInstance().getKnight().setCurrentPlace(Board[1][5]);
-    		break;
-    		}
-    	
-    	case "CI16":{
-    		I16.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[1][6].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[1][6]);
-    		break;
-    		}
-    	
-    	case "CI17":{
-    		I17.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[1][7].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[1][7]);
-    		break;
-    		}
-    	
-    	case "CI20":{
-    		I20.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[2][0].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[2][0]);
-    		break;
-    		}
-    	
-    	case "CI21":{
-    		I21.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[2][1].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[2][1]);
-    		break;
-    		}
-    	
-    	case "CI22":{
-    		I22.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[2][2].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[2][2]);
-    		break;
-    		}
-    	
-    	case "CI23":{
-    		I23.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[2][3].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[2][3]);
-    		break;
-    		}
-    	
-    	case "CI24":{
-    		I24.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[2][4].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[2][4]);
-    		break;
-    		
-    		}
-    	
-    	case "CI25":{
-    		I25.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[2][5].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[2][5]);
-    		break;
-    		}
-    	
-    	case "CI26":{
-    		I26.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[2][6].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[2][6]);
-    		break;
-    		}
-    	
-    	case "CI27":{
-    		I27.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[2][7].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[2][7]);
-    		break;
-    		}
-    	
-    	case "CI30":{
-    		I30.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[3][0].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[3][0]);
-    		break;
-    		}
-    	
-    	case "CI31":{
-    		I31.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[3][1].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[3][1]);
-    		break;
-    		}
-    	
-    	case "CI32":{
-    		I32.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[3][2].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[3][2]);
-    		break;
-    		}
-    	
-    	case "CI33":{
-    		I33.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[3][3].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[3][3]);
-    		break;
-    		}
-    	
-    	case "CI34":{
-    		I34.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[3][4].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[3][4]);
-    		break;
-    		}
-    	
-    	case "CI35":{
-    		I35.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[3][5].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[3][5]);
-    		break;
-    		}
-    	
-    	case "CI36":{
-    		I36.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[3][6].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[3][6]);
-    		break;
-    		}
-    	
-    	case "CI37":{
-    		I37.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[3][7].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[3][7]);
-    		break;
-    		}
-    	
-    	case "CI40":{
-    		I40.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[4][0].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[4][0]);
-    		break;
-    		}
-    	
-    	case "CI41":{
-    		I41.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[4][1].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[4][1]);
-    		break;
-    		}
-    	
-    	case "CI42":{
-    		I42.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[4][2].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[4][2]);
-    		break;
-    		}
-    	
-    	case "CI43":{
-    		I43.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[4][3].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[4][3]);
-    		break;
-    		}
-    	
-    	case "CI44":{
-    		I44.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[4][4].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[4][4]);
-    		break;
-    		}
-    	
-    	case "CI45":{
-    		I45.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[4][5].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[4][5]);
-    		break;
-    		}
-    	
-    	case "CI46":{
-    		I46.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[4][6].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[4][6]);
-    		break;
-    		}
-    	
-    	case "CI47":{
-    		I47.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[4][7].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[4][7]);
-    		break;
-    		}
-    	
-    	case "CI50":{
-    		I50.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[5][0].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[5][0]);
-    		break;
-    		}
-    	
-    	case "CI51":{
-    		I51.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[5][1].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[5][1]);
-    		break;
-    		}
-    	
-    	case "CI52":{
-    		I52.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[5][2].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[5][2]);
-    		break;
-    		}
-    	
-    	case "CI53":{
-    		I53.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[5][3].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[5][3]);
-    		break;
-    		}
-    	
-    	case "CI54":{
-    		I54.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[5][4].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[5][4]);
-    		break;
-    		}
-    	
-    	case "CI55":{
-    		I55.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[5][5].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[5][5]);
-    		break;
-    		}
-    	
-    	case "CI56":{
-    		I56.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[5][6].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[5][6]);
-    		break;
-    		}
-    	
-    	case "CI57":{
-    		I57.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[5][7].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[5][7]);
-    		break;
-    		}
-    	
-    	case "CI60":{
-    		I60.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[6][0].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[6][0]);
-    		break;
-    		}
-    	
-    	case "CI61":{
-    		I61.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[6][1].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[6][1]);
-    		break;
-    		}
-    	
-    	case "CI62":{
-    		I62.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[6][2].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[6][2]);
-    		break;
-    		}
-    	
-    	case "CI63":{
-    		I63.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[6][3].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[6][3]);
-    		break;
-    		}
-    	
-    	case "CI64":{
-    		I64.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[6][4].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[6][4]);
-    		break;
-    		}
-    	
-    	case "CI65":{
-    		I65.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[6][5].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[6][5]);
-    		break;
-    		}
-    	
-    	case "CI66":{
-    		I66.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[6][6].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[6][6]);
-    		break;
-    		}
-    	
-    	case "CI67":{
-    		I67.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[6][7].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[6][7]);
-    		break;
-    		}
-    	
-    	case "CI70":{
-    		I70.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[7][0].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[7][0]);
-    		break;
-    		}
-    	
-    	case "CI71":{
-    		I71.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[7][1].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[7][1]);
-    		break;
-    		}
-    	
-    	case "CI72":{
-    		I72.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[7][2].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[7][2]);
-    		break;
-    		}
-    	
-    	case "CI73":{
-    		I73.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[7][3].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[7][3]);
-    		break;
-    		}
-    	
-    	case "CI74":{
-    		I74.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[7][4].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[7][4]);
-    		break;
-    		}
-    	
-    	case "CI75":{
-    		I75.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[7][5].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[7][5]);
-    		break;
-    		}
-    	
-    	case "CI76":{
-    		I76.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[7][6].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[7][6]);
-    		break;
-    		}
-    	
-    	
-    	case "CI77":{
-    		I77.setImage(KNIGHT);
-    		RemovePossible();
-    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
-    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-    		Board[7][7].setVisisted(true);
-    			Game.getInstance().getKnight().setCurrentPlace(Board[7][7]);
-    		break;
-    		}
-    	
-    	
-    	}
-    
+//    			}
+//    			
+////    				if(SysData.getInstance().getHistoryGamesForShow().contains(Game.getInstance().getPlayer())) {
+////    					for(Player p: SysData.getInstance().getHistoryGamesForShow()) {
+////    						if(p.getName().equals(Game.getInstance().getPlayer().getName()) && p.getScore()>=15 )
+////    							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
+////					
+////    					}
+////    				}
+//    			
+//    		break;
+//    		}
+//    	
+//    	case "CI01":{
+//    		I01.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[0][1].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[0][1]);
+//    		break;
+//    		}
+//    	
+//    	case "CI02":{
+//    		I02.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[0][2].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[0][2]);
+//    		break;
+//    		}
+//    	
+//    	case "CI03":{
+//    		I03.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[0][3].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[0][3]);
+//    		break;
+//    		}
+//    	
+//    	case "CI04":{
+//    		I04.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[0][4].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[0][4]);
+//    		break;
+//    		}
+//    	
+//    	case "CI05":{
+//    		I05.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[0][5].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[0][5]);
+//    		break;
+//    		}
+//    	
+//    	case "CI06":{
+//    		I06.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[0][6].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[0][6]);
+//    		break;
+//    		}
+//    	
+//    	case "CI07":{
+//    		I07.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[0][7].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[0][7]);
+//    		break;
+//    		}
+//    	
+//    	case "CI10":{
+//    		I10.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[1][0].setVisisted(true);
+//    		Game.getInstance().getKnight().setCurrentPlace(Board[1][0]);
+//    		break;
+//    		}
+//    
+//    	case "CI11":{
+//    		RemovePossible();
+//    		I11.setImage(KNIGHT);
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[1][1].setVisisted(true);
+//    		Game.getInstance().getKnight().setCurrentPlace(Board[1][1]);
+//    		break;
+//    		}
+//    	
+//    	case "CI12":{
+//    		RemovePossible();
+//    		I12.setImage(KNIGHT);
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[1][2].setVisisted(true);
+//    		Game.getInstance().getKnight().setCurrentPlace(Board[1][2]);
+//    		break;
+//    		}
+//    	
+//    	case "CI13":{
+//    		I13.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[1][3].setVisisted(true);
+//    		Game.getInstance().getKnight().setCurrentPlace(Board[1][3]);
+//    		break;
+//    		}
+//    	
+//    	case "CI14":{
+//    		I14.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[1][4].setVisisted(true);
+//    		Game.getInstance().getKnight().setCurrentPlace(Board[1][4]);
+//    		break;
+//    		}
+//    	
+//    	case "CI15":{
+//    		I15.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[1][5].setVisisted(true);
+//    		Game.getInstance().getKnight().setCurrentPlace(Board[1][5]);
+//    		break;
+//    		}
+//    	
+//    	case "CI16":{
+//    		I16.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[1][6].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[1][6]);
+//    		break;
+//    		}
+//    	
+//    	case "CI17":{
+//    		I17.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[1][7].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[1][7]);
+//    		break;
+//    		}
+//    	
+//    	case "CI20":{
+//    		I20.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[2][0].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[2][0]);
+//    		break;
+//    		}
+//    	
+//    	case "CI21":{
+//    		I21.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[2][1].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[2][1]);
+//    		break;
+//    		}
+//    	
+//    	case "CI22":{
+//    		I22.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[2][2].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[2][2]);
+//    		break;
+//    		}
+//    	
+//    	case "CI23":{
+//    		I23.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[2][3].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[2][3]);
+//    		break;
+//    		}
+//    	
+//    	case "CI24":{
+//    		I24.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[2][4].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[2][4]);
+//    		break;
+//    		
+//    		}
+//    	
+//    	case "CI25":{
+//    		I25.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[2][5].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[2][5]);
+//    		break;
+//    		}
+//    	
+//    	case "CI26":{
+//    		I26.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[2][6].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[2][6]);
+//    		break;
+//    		}
+//    	
+//    	case "CI27":{
+//    		I27.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[2][7].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[2][7]);
+//    		break;
+//    		}
+//    	
+//    	case "CI30":{
+//    		I30.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[3][0].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[3][0]);
+//    		break;
+//    		}
+//    	
+//    	case "CI31":{
+//    		I31.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[3][1].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[3][1]);
+//    		break;
+//    		}
+//    	
+//    	case "CI32":{
+//    		I32.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[3][2].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[3][2]);
+//    		break;
+//    		}
+//    	
+//    	case "CI33":{
+//    		I33.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[3][3].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[3][3]);
+//    		break;
+//    		}
+//    	
+//    	case "CI34":{
+//    		I34.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[3][4].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[3][4]);
+//    		break;
+//    		}
+//    	
+//    	case "CI35":{
+//    		I35.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[3][5].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[3][5]);
+//    		break;
+//    		}
+//    	
+//    	case "CI36":{
+//    		I36.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[3][6].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[3][6]);
+//    		break;
+//    		}
+//    	
+//    	case "CI37":{
+//    		I37.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[3][7].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[3][7]);
+//    		break;
+//    		}
+//    	
+//    	case "CI40":{
+//    		I40.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[4][0].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[4][0]);
+//    		break;
+//    		}
+//    	
+//    	case "CI41":{
+//    		I41.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[4][1].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[4][1]);
+//    		break;
+//    		}
+//    	
+//    	case "CI42":{
+//    		I42.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[4][2].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[4][2]);
+//    		break;
+//    		}
+//    	
+//    	case "CI43":{
+//    		I43.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[4][3].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[4][3]);
+//    		break;
+//    		}
+//    	
+//    	case "CI44":{
+//    		I44.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[4][4].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[4][4]);
+//    		break;
+//    		}
+//    	
+//    	case "CI45":{
+//    		I45.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[4][5].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[4][5]);
+//    		break;
+//    		}
+//    	
+//    	case "CI46":{
+//    		I46.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[4][6].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[4][6]);
+//    		break;
+//    		}
+//    	
+//    	case "CI47":{
+//    		I47.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[4][7].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[4][7]);
+//    		break;
+//    		}
+//    	
+//    	case "CI50":{
+//    		I50.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[5][0].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[5][0]);
+//    		break;
+//    		}
+//    	
+//    	case "CI51":{
+//    		I51.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[5][1].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[5][1]);
+//    		break;
+//    		}
+//    	
+//    	case "CI52":{
+//    		I52.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[5][2].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[5][2]);
+//    		break;
+//    		}
+//    	
+//    	case "CI53":{
+//    		I53.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[5][3].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[5][3]);
+//    		break;
+//    		}
+//    	
+//    	case "CI54":{
+//    		I54.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[5][4].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[5][4]);
+//    		break;
+//    		}
+//    	
+//    	case "CI55":{
+//    		I55.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[5][5].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[5][5]);
+//    		break;
+//    		}
+//    	
+//    	case "CI56":{
+//    		I56.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[5][6].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[5][6]);
+//    		break;
+//    		}
+//    	
+//    	case "CI57":{
+//    		I57.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[5][7].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[5][7]);
+//    		break;
+//    		}
+//    	
+//    	case "CI60":{
+//    		I60.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[6][0].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[6][0]);
+//    		break;
+//    		}
+//    	
+//    	case "CI61":{
+//    		I61.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[6][1].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[6][1]);
+//    		break;
+//    		}
+//    	
+//    	case "CI62":{
+//    		I62.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[6][2].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[6][2]);
+//    		break;
+//    		}
+//    	
+//    	case "CI63":{
+//    		I63.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[6][3].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[6][3]);
+//    		break;
+//    		}
+//    	
+//    	case "CI64":{
+//    		I64.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[6][4].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[6][4]);
+//    		break;
+//    		}
+//    	
+//    	case "CI65":{
+//    		I65.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[6][5].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[6][5]);
+//    		break;
+//    		}
+//    	
+//    	case "CI66":{
+//    		I66.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[6][6].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[6][6]);
+//    		break;
+//    		}
+//    	
+//    	case "CI67":{
+//    		I67.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[6][7].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[6][7]);
+//    		break;
+//    		}
+//    	
+//    	case "CI70":{
+//    		I70.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[7][0].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[7][0]);
+//    		break;
+//    		}
+//    	
+//    	case "CI71":{
+//    		I71.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[7][1].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[7][1]);
+//    		break;
+//    		}
+//    	
+//    	case "CI72":{
+//    		I72.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[7][2].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[7][2]);
+//    		break;
+//    		}
+//    	
+//    	case "CI73":{
+//    		I73.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[7][3].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[7][3]);
+//    		break;
+//    		}
+//    	
+//    	case "CI74":{
+//    		I74.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[7][4].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[7][4]);
+//    		break;
+//    		}
+//    	
+//    	case "CI75":{
+//    		I75.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[7][5].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[7][5]);
+//    		break;
+//    		}
+//    	
+//    	case "CI76":{
+//    		I76.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[7][6].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[7][6]);
+//    		break;
+//    		}
+//    	
+//    	
+//    	case "CI77":{
+//    		I77.setImage(KNIGHT);
+//    		RemovePossible();
+//    		Square prevPlace=	Game.getInstance().getKnight().getCurrentPlace();
+//    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+//    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+//    		Board[7][7].setVisisted(true);
+//    			Game.getInstance().getKnight().setCurrentPlace(Board[7][7]);
+//    		break;
+//    		}
+//    	
+//    	
+//    	}
+//    
 
 
     }
+	public Square[][] getBoard() {
+		return Board;
+	}
+	public void setBoard(Square[][] board) {
+		Board = board;
+	}
 	@FXML
 	 private void back(ActionEvent event) throws IOException {
 		
@@ -977,56 +1018,18 @@ public class GameController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		Board[0][0] = new Square(0,0);Board[0][1] = new Square(0,1);Board[0][2] = new Square(0,2);Board[0][3] = new Square(0,3);
-		Board[0][4] = new Square(0,4);Board[0][5] = new Square(0,5);Board[0][6] = new Square(0,6);Board[0][7] = new Square(0,7);
-		Board[1][0] = new Square(1,0);Board[1][1] = new Square(1,1);Board[1][2] = new Square(1,2);Board[1][3] = new Square(1,3);
-		Board[1][4] = new Square(1,4);Board[1][5] = new Square(1,5);Board[1][6] = new Square(1,6);Board[1][7] = new Square(1,7);
-		Board[2][0] = new Square(2,0);Board[2][1] = new Square(2,1);Board[2][2] = new Square(2,2);Board[2][3] = new Square(2,3);
-		Board[2][4] = new Square(2,4);Board[2][5] = new Square(2,5);Board[2][6] = new Square(2,6);Board[2][7] = new Square(2,7);
-		Board[3][0] = new Square(3,0);Board[3][1] = new Square(3,1);Board[3][2] = new Square(3,2);Board[3][3] = new Square(3,3);
-		Board[3][4] = new Square(3,4);Board[3][5] = new Square(3,5);Board[3][6] = new Square(3,6);Board[3][7] = new Square(3,7);
-		Board[4][0] = new Square(4,0);Board[4][1] = new Square(4,1);Board[4][2] = new Square(4,2);Board[4][3] = new Square(4,3);
-		Board[4][4] = new Square(4,4);Board[4][5] = new Square(4,5);Board[4][6] = new Square(4,6);Board[4][7] = new Square(4,7);
-		Board[5][0] = new Square(5,0);Board[5][1] = new Square(5,1);Board[5][2] = new Square(5,2);Board[5][3] = new Square(5,3);
-		Board[5][4] = new Square(5,4);Board[5][5] = new Square(5,5);Board[5][6] = new Square(5,6);Board[5][7] = new Square(5,7);
-		Board[6][0] = new Square(6,0);Board[6][1] = new Square(6,1);Board[6][2] = new Square(6,2);Board[6][3] = new Square(6,3);
-		Board[6][4] = new Square(6,4);Board[6][5] = new Square(6,5);Board[6][6] = new Square(6,6);Board[6][7] = new Square(6,7);
-		Board[7][0] = new Square(7,0);Board[7][1] = new Square(7,1);Board[7][2] = new Square(7,2);Board[7][3] = new Square(7,3);
-		Board[7][4] = new Square(7,4);Board[7][5] = new Square(7,5);Board[7][6] = new Square(7,6);Board[7][7] = new Square(7,7);
-		
-		BoardImages.add(S00);BoardImages.add(S01);BoardImages.add(S02);BoardImages.add(S03);BoardImages.add(S04);BoardImages.add(S05);BoardImages.add(S06);
-		BoardImages.add(S07);BoardImages.add(S10);BoardImages.add(S11);BoardImages.add(S12);BoardImages.add(S13);BoardImages.add(S14);BoardImages.add(S15);
-		BoardImages.add(S16);BoardImages.add(S17);BoardImages.add(S20);BoardImages.add(S21);BoardImages.add(S22);BoardImages.add(S23);BoardImages.add(S24);
-		BoardImages.add(S25);BoardImages.add(S26);BoardImages.add(S27);BoardImages.add(S30);BoardImages.add(S31);BoardImages.add(S32);BoardImages.add(S33);
-		BoardImages.add(S34);BoardImages.add(S35);BoardImages.add(S36);BoardImages.add(S37);BoardImages.add(S40);BoardImages.add(S41);BoardImages.add(S42);
-		BoardImages.add(S43);BoardImages.add(S44);BoardImages.add(S45);BoardImages.add(S46);BoardImages.add(S47);BoardImages.add(S50);BoardImages.add(S51);
-		BoardImages.add(S52);BoardImages.add(S53);BoardImages.add(S54);BoardImages.add(S55);BoardImages.add(S56);BoardImages.add(S57);BoardImages.add(S60);
-		BoardImages.add(S61);BoardImages.add(S62);BoardImages.add(S63);BoardImages.add(S64);BoardImages.add(S65);BoardImages.add(S66);BoardImages.add(S67);
-		BoardImages.add(S70);BoardImages.add(S71);BoardImages.add(S72);BoardImages.add(S73);BoardImages.add(S74);BoardImages.add(S75);BoardImages.add(S76);
-		BoardImages.add(S77);
-		
-		allImages.add(I00);allImages.add(I01);allImages.add(I02);allImages.add(I03);allImages.add(I04);allImages.add(I05);allImages.add(I06);
-		allImages.add(I07);allImages.add(I10);allImages.add(I11);allImages.add(I12);allImages.add(I13);allImages.add(I14);allImages.add(I15);
-		allImages.add(I16);allImages.add(I17);allImages.add(I20);allImages.add(I21);allImages.add(I22);allImages.add(I23);allImages.add(I24);
-		allImages.add(I25);allImages.add(I26);allImages.add(I27);allImages.add(I30);allImages.add(I31);allImages.add(I32);allImages.add(I33);
-		allImages.add(I34);allImages.add(I35);allImages.add(I36);allImages.add(I37);allImages.add(I40);allImages.add(I41);allImages.add(I42);
-		allImages.add(I43);allImages.add(I44);allImages.add(I45);allImages.add(I46);allImages.add(I47);allImages.add(I50);allImages.add(I51);
-		allImages.add(I52);allImages.add(I53);allImages.add(I54);allImages.add(I55);allImages.add(I56);allImages.add(I57);allImages.add(I60);
-		allImages.add(I61);allImages.add(I62);allImages.add(I63);allImages.add(I64);allImages.add(I65);allImages.add(I66);allImages.add(I67);
-		allImages.add(I70);allImages.add(I71);allImages.add(I72);allImages.add(I73);allImages.add(I74);allImages.add(I75);allImages.add(I76);
-		allImages.add(I77);
-		
-		allButtons.add(CI00);allButtons.add(CI01);allButtons.add(CI02);allButtons.add(CI03);allButtons.add(CI04);allButtons.add(CI05);
-		allButtons.add(CI06);allButtons.add(CI07);allButtons.add(CI10);allButtons.add(CI11);allButtons.add(CI12);allButtons.add(CI13);
-		allButtons.add(CI14);allButtons.add(CI15);allButtons.add(CI16);allButtons.add(CI17);allButtons.add(CI20);allButtons.add(CI21);
-		allButtons.add(CI22);allButtons.add(CI23);allButtons.add(CI24);allButtons.add(CI25);allButtons.add(CI26);allButtons.add(CI27);
-		allButtons.add(CI30);allButtons.add(CI31);allButtons.add(CI32);allButtons.add(CI33);allButtons.add(CI34);allButtons.add(CI35);
-		allButtons.add(CI36);allButtons.add(CI37);allButtons.add(CI40);allButtons.add(CI41);allButtons.add(CI42);allButtons.add(CI43);
-		allButtons.add(CI44);allButtons.add(CI45);allButtons.add(CI46);allButtons.add(CI47);allButtons.add(CI50);allButtons.add(CI51);
-		allButtons.add(CI52);allButtons.add(CI53);allButtons.add(CI54);allButtons.add(CI55);allButtons.add(CI56);allButtons.add(CI57);
-		allButtons.add(CI60);allButtons.add(CI61);allButtons.add(CI62);allButtons.add(CI63);allButtons.add(CI64);allButtons.add(CI65);
-		allButtons.add(CI66);allButtons.add(CI67);allButtons.add(CI70);allButtons.add(CI71);allButtons.add(CI72);allButtons.add(CI73);
-		allButtons.add(CI74);allButtons.add(CI75);allButtons.add(CI76);allButtons.add(CI77);
+		for(int i=0 ; i<8 ; i++) {
+			for(int j=0; j<8 ; j++) {
+				Board[i][j] = new Square(i,j);
+				String location = ""+ i+j;
+				BoardImages.add(getImageByStringBoard("S" + location));
+				allImages.add(getImageByString("I" + location));
+				allButtons.add(getButtonByString("CI" + location));
+				
+			}
+			
+		}
+
 		
 		Game.getInstance().setBoard(Board);
 		remainingTime.textProperty().bind(timeSeconds.asString());

@@ -2,6 +2,7 @@ package model;
 
 import utils.Difficulty;
 import utils.PlusOrMinus;
+import utils.Type;
 //* new one //
 public class Game {
 	private static int ID=1;
@@ -42,16 +43,63 @@ public class Game {
         this.level = 1;
         // need to add level initialisation
     }
-	
+    
+    // a method that returns a random regular square 
+    public Square randomSquare() {
+    	
+    	boolean flag = true;
+    	
+    	do {
+    		int randomNumber1 = (int) (Math.random() * 8);
+        	int randomNumber2 = (int) (Math.random() * 8);
+        	if(Game.getBoard[randomNumber1][randomNumber2].getSquareType().equals(Type.Regular))
+        		flag = false;
+    		
+    	}while(flag);
+    	
+    	
+    	return square;
 
 
-	public static int getID() {
-		return ID;
-	}
+    }
+    
+    // a function to handle RandomJump ,Forget , Blocked, Question squares.
+    public void handleSquare(int i, int j, Type squareType) {
+    	switch(squareType) {
+    	
+    	case RandomJump:
+    		Square jumpTo = randomSquare();
+    		
+    		break;
+    		
+    	case Forget:
+    		
+    		break;
+    		
+    	case Blocked:
+    		
+    		break;
+    		
+    	case Regular:
+    		
+    		break;
+    		
+        case EasyQuestion:
+    		
+    		break;
+    		
+    	case MediumQuestion:
+    		
+    		break;
+    		
+    	case HardQuestion:
+    		
+    		break;
+    	
+    	}
+    }
+    
 
-	public static void setID(int iD) {
-		ID = iD;
-	}
 
 	public int getId() {
 		return id;
