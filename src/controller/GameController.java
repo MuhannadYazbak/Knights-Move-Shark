@@ -71,13 +71,24 @@ public class GameController implements Initializable{
     void MoveTo() {
     	
     	while(!remainingTime.getText().equals("0")) {
-    		
 	    		switch(level.getText()) {
 	    		
 		    		case"1":{
-		    			
+		    			Boolean movedFlag = false;
+		    			System.out.println("aaaaaa");
+
 		    			for(Square s : Game.getInstance().getKnight().allPossibleMoves()) {
-		    				PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));}
+		    				PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));
+		    				String pos = "I"+s.getRow()+s.getCol();
+		    				for(ImageView i : allImages ) {
+								if(i.getId().equals(pos)) {
+									i.setImage(Possible);
+									
+								}
+								
+							}
+		    				
+		    			}
 					
 		    			for(Button b: PossibleButtons) {
 		    				if(buttonFlag) {
@@ -85,9 +96,12 @@ public class GameController implements Initializable{
 									{
 		    							PressedButton(b.getId());
 		    							buttonFlag=false;
+		    							movedFlag = true;
 									}
 		    				}
 		    			}
+		    			
+		    			PossibleButtons.clear();
 		    			if(buttonFlag)
 		    					// else popup message ( please press on the white squares only 
 		    					
@@ -109,7 +123,7 @@ public class GameController implements Initializable{
 		    				 // TODO Auto-generated catch block
 		    				 e.printStackTrace();
 		    			}
-		    		
+		    			if(movedFlag == true) {
 						for(Square s: 	Game.getInstance().getQueen().allPossibleMoves()) {
 							PossibleMovesQueen.add(getImageByString("I"+s.getRow()+s.getCol()));
 						}
@@ -124,16 +138,18 @@ public class GameController implements Initializable{
 							}
 							
 						}
+						
 						String prev = "I" +Integer.toString(Game.getInstance().getQueen().getPrev_Place().getRow())
 						+Integer.toString(Game.getInstance().getQueen().getPrev_Place().getCol());
 						for(ImageView i : allImages ) {
-							System.out.println(prev);
 							if(i.getId().equals(prev)) {
 								i.setImage(null);
 								
 							}
 							
 						}
+						}
+		    			movedFlag= false;
 				    
 				    	
 				
@@ -204,6 +220,7 @@ public class GameController implements Initializable{
     }
     
     private void PressedButton(String s) {
+    	System.out.println("hoooooooooooo");
     	switch(s) {
     	
     	case "CI00":{
