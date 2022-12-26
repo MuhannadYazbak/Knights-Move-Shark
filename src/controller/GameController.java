@@ -76,8 +76,8 @@ public class GameController implements Initializable{
 	    		
 		    		case"1":{
 		    			
-		    			for(Square s : Game.getInstance().getKnight().allPossibleMoves())
-		    				PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));
+		    			for(Square s : Game.getInstance().getKnight().allPossibleMoves()) {
+		    				PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));}
 					
 		    			for(Button b: PossibleButtons) {
 		    				if(buttonFlag) {
@@ -103,12 +103,13 @@ public class GameController implements Initializable{
 		    			}
 					
 		    			try {
+		    				
 		    				 Thread.sleep(1000);
 		    			} catch (InterruptedException e) {
 		    				 // TODO Auto-generated catch block
 		    				 e.printStackTrace();
 		    			}
-					
+		    		
 						for(Square s: 	Game.getInstance().getQueen().allPossibleMoves()) {
 							PossibleMovesQueen.add(getImageByString("I"+s.getRow()+s.getCol()));
 						}
@@ -116,13 +117,22 @@ public class GameController implements Initializable{
 						ImageView temp = null;
 						String s = "I" +Integer.toString(Game.getInstance().getQueen().getCurrentPlace().getRow())
 								+Integer.toString(Game.getInstance().getQueen().getCurrentPlace().getCol());
-						System.out.println(s);
 						for(ImageView i : allImages ) {
 							if(i.getId().equals(s)) {
-								System.out.println("AAAAAAAAA");
 								i.setImage(QUEEN);
 								
 							}
+							
+						}
+						String prev = "I" +Integer.toString(Game.getInstance().getQueen().getPrev_Place().getRow())
+						+Integer.toString(Game.getInstance().getQueen().getPrev_Place().getCol());
+						for(ImageView i : allImages ) {
+							System.out.println(prev);
+							if(i.getId().equals(prev)) {
+								i.setImage(null);
+								
+							}
+							
 						}
 				    
 				    	
