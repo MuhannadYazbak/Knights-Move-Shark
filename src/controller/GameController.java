@@ -65,12 +65,12 @@ public class GameController implements Initializable{
 	private Image Visited = new Image(getClass().getResourceAsStream("/lib/yellow.png"));
     private HashSet<ImageView> PossibleMovesKnight = new HashSet<ImageView>();
     private HashSet<ImageView> PossibleMovesQueen = new HashSet<ImageView>();
-    
+    boolean levelUp=false;
     
 
     @FXML
     void MoveTo() {
-    	
+    		
     	while(!remainingTime.getText().equals("0")) {
 	    		switch(level.getText()) {
 	    		
@@ -116,7 +116,27 @@ public class GameController implements Initializable{
 		    			if(SysData.getInstance().getHistoryGamesForShow().contains(Game.getInstance().getPlayer())) {
 		    				for(Player p: SysData.getInstance().getHistoryGamesForShow()) {
 		    					if(p.getName().equals(Game.getInstance().getPlayer().getName()) && p.getScore()>=15 )
-		    						Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
+		    						{
+		    							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
+		    							levelUp=true;
+		    							/*
+		    							 * popup message that the level is up CONGRATS....
+		    							 */
+		    							remainingTime.textProperty().bind(timeSeconds.asString());
+		    					        if (timeline != null) 
+		    					        	timeline.stop();
+		    					                
+		    					        timeSeconds.set(STARTTIME);
+		    					        timeline = new Timeline();
+		    					        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(STARTTIME+1),new KeyValue(timeSeconds, 0)));
+		    					        timeline.playFromStart();
+		    					        
+		    					        level.setText(Integer.toString(SysData.getInstance().getGame().getLevel()));
+		    					        score.setText(Integer.toString(SysData.getInstance().getGame().getScore()));
+		    					        playerName.setText(Game.getInstance().getPlayer().getName());
+		    					        
+		    					        break;
+		    						}
 								
 		    				}
 		    			}
@@ -128,6 +148,7 @@ public class GameController implements Initializable{
 		    				 // TODO Auto-generated catch block
 		    				 e.printStackTrace();
 		    			}
+		    			
 		    			if(movedFlag == true) {
 						for(Square s: 	Game.getInstance().getQueen().allPossibleMoves()) {
 							PossibleMovesQueen.add(getImageByString("I"+s.getRow()+s.getCol()));
@@ -1016,7 +1037,7 @@ public class GameController implements Initializable{
 		// TODO Auto-generated method stub
 		for(int i=0 ; i<8 ; i++) {
 			for(int j=0; j<8 ; j++) {
-				Board[i][j] = new Square(i,j);
+				Board[i][j] = new Square(i,j); // SquareFactory ????????????????????????????????????????????????????????
 //				BoardImages.add(getImageByStringBoard("S"+i+j));
 //				allImages.add(getImageByString("I"+i+j));
 //				allButtons.add(getButtonByString("CI"+i+j));
@@ -1060,7 +1081,9 @@ public class GameController implements Initializable{
 		allButtons.add(CI10);allButtons.add(CI23);allButtons.add(CI36);allButtons.add(CI51);allButtons.add(CI64);allButtons.add(CI76);
 		allButtons.add(CI11);allButtons.add(CI24);allButtons.add(CI37);allButtons.add(CI52);allButtons.add(CI65);allButtons.add(CI77);
 		allButtons.add(CI12);allButtons.add(CI25);allButtons.add(CI40);allButtons.add(CI53);
+		
 		Game.getInstance().setBoard(Board);
+		
 		remainingTime.textProperty().bind(timeSeconds.asString());
         if (timeline != null) 
         	timeline.stop();
