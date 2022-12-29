@@ -27,6 +27,7 @@ import javafx.util.Duration;
 import model.Game;
 import model.Player;
 import model.Square;
+import model.SquareFactory;
 import model.SysData;
 import utils.Type;
 
@@ -122,18 +123,7 @@ public class GameController implements Initializable{
 		    							/*
 		    							 * popup message that the level is up CONGRATS....
 		    							 */
-		    							remainingTime.textProperty().bind(timeSeconds.asString());
-		    					        if (timeline != null) 
-		    					        	timeline.stop();
-		    					                
-		    					        timeSeconds.set(STARTTIME);
-		    					        timeline = new Timeline();
-		    					        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(STARTTIME+1),new KeyValue(timeSeconds, 0)));
-		    					        timeline.playFromStart();
-		    					        
-		    					        level.setText(Integer.toString(SysData.getInstance().getGame().getLevel()));
-		    					        score.setText(Integer.toString(SysData.getInstance().getGame().getScore()));
-		    					        playerName.setText(Game.getInstance().getPlayer().getName());
+		    							countDown();
 		    					        
 		    					        break;
 		    						}
@@ -247,6 +237,59 @@ public class GameController implements Initializable{
 		}
     }
     
+    private Square[][] BuildSquares(Square B[][]){
+    	
+    	for(int i=0 ; i<8 ; i++) {
+			for(int j=0; j<8 ; j++) {
+				B[i][j] = SquareFactory.makeSquare(i,j,Type.Regular);
+			}
+			
+		}
+    	
+    	switch(Game.getInstance().getLevel()) {
+    	
+    	case 1:{
+    		
+    		for(int k=0;k<3;k++) {
+    			Square s= Game.getInstance().randomSquare();
+        		s.setSquareType(Type.RandomJump);
+    		}
+    		
+    		break;
+    	}
+    	
+    	case 2:{
+    		
+    		for(int k=0;k<3;k++) {
+    			Square s= Game.getInstance().randomSquare();
+        		s.setSquareType(Type.Forget);
+    		}
+    		break;
+    	}
+    	
+    	case 3:{
+    		
+    		for(int k=0;k<2;k++) {
+    			Square s1= Game.getInstance().randomSquare();
+        		s1.setSquareType(Type.Forget);
+        		Square s2= Game.getInstance().randomSquare();
+        		s2.setSquareType(Type.RandomJump);
+    		}
+    		
+    		break;
+    	}
+    	
+    	case 4:{
+    		
+    		for(int k=0;k<8;k++) {
+    			Square s= Game.getInstance().randomSquare();
+        		s.setSquareType(Type.Blocked);
+    		}
+    		break;
+    	}
+    	}
+    	return B;
+    }
     private void PressedButton(String s) {
     	
     	
@@ -1020,6 +1063,17 @@ public class GameController implements Initializable{
 
     }
 	
+    private void countDown() {
+    	remainingTime.textProperty().bind(timeSeconds.asString());
+        if (timeline != null) 
+        	timeline.stop();
+                
+        timeSeconds.set(STARTTIME);
+        timeline = new Timeline();
+        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(STARTTIME+1),new KeyValue(timeSeconds, 0)));
+        timeline.playFromStart();
+    }
+    
 	@FXML
 	 private void back(ActionEvent event) throws IOException {
 		
@@ -1035,16 +1089,6 @@ public class GameController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		for(int i=0 ; i<8 ; i++) {
-			for(int j=0; j<8 ; j++) {
-				Board[i][j] = new Square(i,j); // SquareFactory ????????????????????????????????????????????????????????
-//				BoardImages.add(getImageByStringBoard("S"+i+j));
-//				allImages.add(getImageByString("I"+i+j));
-//				allButtons.add(getButtonByString("CI"+i+j));
-				
-			}
-			
-		}
 		
 		BoardImages.add(S00);BoardImages.add(S01);BoardImages.add(S02);BoardImages.add(S03);BoardImages.add(S04);BoardImages.add(S05);
 		BoardImages.add(S06);BoardImages.add(S07);BoardImages.add(S10);BoardImages.add(S11);BoardImages.add(S12);BoardImages.add(S13);
@@ -1082,21 +1126,15 @@ public class GameController implements Initializable{
 		allButtons.add(CI11);allButtons.add(CI24);allButtons.add(CI37);allButtons.add(CI52);allButtons.add(CI65);allButtons.add(CI77);
 		allButtons.add(CI12);allButtons.add(CI25);allButtons.add(CI40);allButtons.add(CI53);
 		
-		Game.getInstance().setBoard(Board);
-		
-		remainingTime.textProperty().bind(timeSeconds.asString());
-        if (timeline != null) 
-        	timeline.stop();
-                
-        timeSeconds.set(STARTTIME);
-        timeline = new Timeline();
-        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(STARTTIME+1),new KeyValue(timeSeconds, 0)));
-        timeline.playFromStart();
+		countDown();
         
         level.setText(Integer.toString(SysData.getInstance().getGame().getLevel()));
         score.setText(Integer.toString(SysData.getInstance().getGame().getScore()));
         playerName.setText(Game.getInstance().getPlayer().getName());
 
+        
+        Game.getInstance().setBoard(BuildSquares(Board));
+        
     	I00.setImage(KNIGHT);
     	Board[0][0].setVisisted(true);
     	S00.setImage(Visited);
