@@ -255,7 +255,7 @@ public class GameController implements Initializable{
     	case 1:{
     		
     		for(int k=0;k<3;k++) {
-    			Square s= Game.getInstance().randomSquare();
+    			Square s= randomSquare();
         		s.setSquareType(Type.RandomJump);
     		}
     			
@@ -265,7 +265,7 @@ public class GameController implements Initializable{
     	case 2:{
     		
     		for(int k=0;k<3;k++) {
-    			Square s= Game.getInstance().randomSquare();
+    			Square s= randomSquare();
         		s.setSquareType(Type.Forget);
     		}
     		
@@ -275,9 +275,9 @@ public class GameController implements Initializable{
     	case 3:{
     		
     		for(int k=0;k<2;k++) {
-    			Square s1= Game.getInstance().randomSquare();
+    			Square s1= randomSquare();
         		s1.setSquareType(Type.Forget);
-        		Square s2= Game.getInstance().randomSquare();
+        		Square s2= randomSquare();
         		s2.setSquareType(Type.RandomJump);
     		}
     		
@@ -287,7 +287,7 @@ public class GameController implements Initializable{
     	case 4:{
     		
     		for(int k=0;k<8;k++) {
-    			Square s= Game.getInstance().randomSquare();
+    			Square s= randomSquare();
         		s.setSquareType(Type.Blocked);
     		}
     		break;
@@ -302,7 +302,7 @@ public class GameController implements Initializable{
     	
     	
     	while(flag) {
-    		Square s = Game.getInstance().randomSquare();
+    		Square s = randomSquare();
     		if(!(s.getRow()==r&&s.getCol()==c)) {
     			switch(t.toString()) {
     			
@@ -328,32 +328,115 @@ public class GameController implements Initializable{
     	}
     }
     
+    // method to handle player pressing any button based on button type
     private void PressedButton(String s) {
     	
     	int i = Character.getNumericValue(s.charAt(2));
     	int j = Character.getNumericValue(s.charAt(3));
-    	getImageByString("I"+i+j).setImage(KNIGHT);
-    	RemovePossible();
-    	Square prevPlace=Game.getInstance().getKnight().getCurrentPlace();
-    	getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
-		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
-		if(Board[i][j].isVisisted())
-			Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-1);
-		else {
-			Board[i][j].setVisisted(true);
-			Game.getInstance().getKnight().setCurrentPlace(Board[0][0]);
-			Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+1);
-		}
+
+    	//Nothing happens if a player presses on a blocked square
+    	if(!Board[i][j].getSquareType().equals(Type.Blocked)) {
+    		RemovePossible();
+    		Square prevPlace=Game.getInstance().getKnight().getCurrentPlace();
+    		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
+    		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
+		
+		// if player pressed a regular square
+    		if((Board[i][j].getSquareType().equals(Type.Regular))) {
+    			getImageByString("I"+i+j).setImage(KNIGHT);
+    			if(Board[i][j].isVisisted()) {
+    				Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-1);
+    				Game.getInstance().getKnight().setCurrentPlace(Board[i][j]);
+    			}
+    			else {
+    				Board[i][j].setVisisted(true);
+    				Game.getInstance().getKnight().setCurrentPlace(Board[i][j]);
+    				Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+1);
+					}
+    		}
+		// if the square is anything but a regular square
+    		else {
+    			handleSquare(i, j, Board[i][j].getSquareType());
+    		}
+		
+    	}
+    }
 		/*
 		 * to check if we need to set new type for another square
 		 */
-		if((Board[i][j].getSquareType().equals(Type.Forget)) || (Board[i][j].getSquareType().equals(Type.RandomJump)) || (Board[i][j].getSquareType().equals(Type.Blocked)))
-		for(int r=0;r<8;r++) {
-			for(int c=0;c<8;c++) {
-				if(r==i&&c==j)
-					GetNewSquareByType(i,j,Board[i][j].getSquareType());
-			}
-		}
+//		if((Board[i][j].getSquareType().equals(Type.Forget)) || (Board[i][j].getSquareType().equals(Type.RandomJump)) || (Board[i][j].getSquareType().equals(Type.Blocked)))
+//		for(int r=0;r<8;r++) {
+//			for(int c=0;c<8;c++) {
+//				if(r==i&&c==j)
+//					GetNewSquareByType(i,j,Board[i][j].getSquareType());
+//			}
+//		}
+		
+    
+    // a function to handle RandomJump ,Forget, Question squares.
+    public void handleSquare(int i, int j, Type squareType) {
+    	switch(squareType) {
+    	
+    	// moving knight to random square and creating a new random jump square
+    	case RandomJump:
+    		
+    		Board[i][j].setSquareType(Type.Regular);
+    		Square newRandom = randomSquare();
+    		newRandom.setSquareType(Type.RandomJump);
+    		Square jumpTo = randomSquare();
+    		getImageByString("I"+jumpTo.getRow() + jumpTo.getCol()).setImage(KNIGHT);
+    		Game.getInstance().getKnight().setCurrentPlace(Board[jumpTo.getRow()][jumpTo.getCol()]);
+    		
+    		if(Board[jumpTo.getRow()][jumpTo.getCol()].isVisisted()) {
+				Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-1);
+		    }
+			else {
+				Board[i][j].setVisisted(true);
+				Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+1);
+				}
+    		
+    		break;
+    		
+    	case Forget:
+    		
+    		break;
+		
+        case EasyQuestion:
+    		
+    		break;
+    		
+    	case MediumQuestion:
+    		
+    		break;
+    		
+    	case HardQuestion:
+    		
+    		break;
+		default:
+			break;
+    	
+    	}
+    }
+    
+    
+    // a method that returns a random regular square 
+    public Square randomSquare() {
+    	
+    	boolean flag = true;
+    	int randomNumber1, randomNumber2;
+    	do {
+    		 randomNumber1 = (int) (Math.random() * 8);
+        	 randomNumber2 = (int) (Math.random() * 8);
+        	if(Board[randomNumber1][randomNumber2].getSquareType().equals(Type.Regular))
+        		flag = false;
+    		
+    	}while(flag);
+    	
+    	
+    	return Board[randomNumber1][randomNumber2];
+
+
+    }
 
 		
 //		if(SysData.getInstance().getHistoryGamesForShow().contains(Game.getInstance().getPlayer())) {
@@ -1105,7 +1188,6 @@ public class GameController implements Initializable{
 //    
 
 
-    }
 	
     private void countDown() {
     	remainingTime.textProperty().bind(timeSeconds.asString());
