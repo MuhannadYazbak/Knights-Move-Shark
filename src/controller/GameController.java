@@ -237,15 +237,19 @@ public class GameController implements Initializable{
 		}
     }
     
-    private Square[][] BuildSquares(Square B[][]){
+    private Square[][] BuildSquares(){
     	
     	for(int i=0 ; i<8 ; i++) {
 			for(int j=0; j<8 ; j++) {
-				B[i][j] = SquareFactory.makeSquare(i,j,Type.Regular);
+				Board[i][j] = SquareFactory.makeSquare(i,j,Type.Regular);
 			}
 			
 		}
-    	
+    return Board;
+    }
+    
+    private void GenerateSquareType() {// generate square types for each level
+
     	switch(Game.getInstance().getLevel()) {
     	
     	case 1:{
@@ -254,7 +258,7 @@ public class GameController implements Initializable{
     			Square s= Game.getInstance().randomSquare();
         		s.setSquareType(Type.RandomJump);
     		}
-    		
+    			
     		break;
     	}
     	
@@ -264,6 +268,7 @@ public class GameController implements Initializable{
     			Square s= Game.getInstance().randomSquare();
         		s.setSquareType(Type.Forget);
     		}
+    		
     		break;
     	}
     	
@@ -288,10 +293,42 @@ public class GameController implements Initializable{
     		break;
     	}
     	}
-    	return B;
-    }
-    private void PressedButton(String s) {
     	
+    }
+    
+    private void GetNewSquareByType(int r, int c, Type t) { // when the player press on a button with one of these types the game create square with the same type
+    	
+    	boolean flag=true;
+    	
+    	
+    	while(flag) {
+    		Square s = Game.getInstance().randomSquare();
+    		if(!(s.getRow()==r&&s.getCol()==c)) {
+    			switch(t.toString()) {
+    			
+    			case "RandomJump":{
+    				s.setSquareType(Type.RandomJump);
+    				break;
+    			}
+    			
+    			case "Forget":{
+    				s.setSquareType(Type.Forget);
+    				break;
+    			}
+    			
+    			case "Blocked":{
+    				s.setSquareType(Type.Blocked);
+    				break;
+    			}
+    		
+    		}
+    			
+    		flag=false;
+    		}
+    	}
+    }
+    
+    private void PressedButton(String s) {
     	
     	int i = Character.getNumericValue(s.charAt(2));
     	int j = Character.getNumericValue(s.charAt(3));
@@ -307,9 +344,16 @@ public class GameController implements Initializable{
 			Game.getInstance().getKnight().setCurrentPlace(Board[0][0]);
 			Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+1);
 		}
-		
-		Type squareType = Game.getInstance().getKnight().getCurrentPlace().getSquareType();
-		Game.getInstance().handleSquare(i, j, squareType);
+		/*
+		 * to check if we need to set new type for another square
+		 */
+		if((Board[i][j].getSquareType().equals(Type.Forget)) || (Board[i][j].getSquareType().equals(Type.RandomJump)) || (Board[i][j].getSquareType().equals(Type.Blocked)))
+		for(int r=0;r<8;r++) {
+			for(int c=0;c<8;c++) {
+				if(r==i&&c==j)
+					GetNewSquareByType(i,j,Board[i][j].getSquareType());
+			}
+		}
 
 		
 //		if(SysData.getInstance().getHistoryGamesForShow().contains(Game.getInstance().getPlayer())) {
@@ -1132,8 +1176,8 @@ public class GameController implements Initializable{
         score.setText(Integer.toString(SysData.getInstance().getGame().getScore()));
         playerName.setText(Game.getInstance().getPlayer().getName());
 
-        
-        Game.getInstance().setBoard(BuildSquares(Board));
+        Game.getInstance().setBoard(BuildSquares());
+        GenerateSquareType();
         
     	I00.setImage(KNIGHT);
     	Board[0][0].setVisisted(true);
