@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -66,12 +67,12 @@ public class GameController implements Initializable{
 	private Image Visited = new Image(getClass().getResourceAsStream("/lib/yellow.png"));
     private HashSet<ImageView> PossibleMovesKnight = new HashSet<ImageView>();
     private HashSet<ImageView> PossibleMovesQueen = new HashSet<ImageView>();
-    boolean levelUp=false;
-    
+    private boolean levelUp=false;
+    private Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
     @FXML
     void MoveTo() {
-    		
+    	
     	while(!remainingTime.getText().equals("0")) {
 	    		switch(level.getText()) {
 	    		
@@ -106,8 +107,19 @@ public class GameController implements Initializable{
 		    			
 		    			PossibleButtons.clear();
 		    			//buttonFlag=true;
-		    			if(buttonFlag)
-		    					// else popup message ( please press on the white squares only 
+		    			if(buttonFlag) {
+		    				try {
+		    					alert.setTitle("Wrong Square Pressed!");
+		    					alert.setContentText("Press ok to continue.");
+		    					alert.setHeaderText("Please press only on the white squares.");
+		    					alert.showAndWait();
+		    				} catch (Error e) {
+		    					e.printStackTrace();
+		    				} catch (Exception e) {
+		    					e.printStackTrace();
+		    				}
+		    			}
+		    					
 		    					
 					
 		    			
@@ -120,9 +132,16 @@ public class GameController implements Initializable{
 		    						{
 		    							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
 		    							levelUp=true;
-		    							/*
-		    							 * popup message that the level is up CONGRATS....
-		    							 */
+		    							try {
+		    								alert.setTitle("Congrats!");
+		    								alert.setContentText("Press ok to continue.");
+		    								alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have now reached to the next level!");
+		    								alert.showAndWait();
+		    							} catch (Error e) {
+		    								e.printStackTrace();
+		    							} catch (Exception e) {
+		    								e.printStackTrace();
+		    							}
 		    							countDown();
 		    					        
 		    					        break;
@@ -321,6 +340,29 @@ public class GameController implements Initializable{
     				break;
     			}
     		
+    			case "EasyQuestion":{
+    				s.setSquareType(Type.EasyQuestion);
+    				/*
+    				 * to add question when the player press on it
+    				 */
+    				break;
+    			}
+    			
+    			case "MediumQuestion":{
+    				s.setSquareType(Type.MediumQuestion);
+    				/*
+    				 * to add question when the player press on it
+    				 */
+    				break;
+    			}
+    			
+    			case "HardQuestion":{
+    				s.setSquareType(Type.HardQuestion);
+    				/*
+    				 * to add question when the player press on it
+    				 */
+    				break;
+    			}
     		}
     			
     		flag=false;
@@ -378,16 +420,15 @@ public class GameController implements Initializable{
     	switch(squareType) {
     	
     	// moving knight to random square and creating a new random jump square
-    	case RandomJump:
+    	case RandomJump: {
     		
     		Board[i][j].setSquareType(Type.Regular);
-    		Square newRandom = randomSquare();
-    		newRandom.setSquareType(Type.RandomJump);
-    		Square jumpTo = randomSquare();
-    		getImageByString("I"+jumpTo.getRow() + jumpTo.getCol()).setImage(KNIGHT);
-    		Game.getInstance().getKnight().setCurrentPlace(Board[jumpTo.getRow()][jumpTo.getCol()]);
+    		GetNewSquareByType(i,j,Type.RandomJump);
+    		Square jumpTo1 = randomSquare();
+    		getImageByString("I"+jumpTo1.getRow() + jumpTo1.getCol()).setImage(KNIGHT);
+    		Game.getInstance().getKnight().setCurrentPlace(Board[jumpTo1.getRow()][jumpTo1.getCol()]);
     		
-    		if(Board[jumpTo.getRow()][jumpTo.getCol()].isVisisted()) {
+    		if(Board[jumpTo1.getRow()][jumpTo1.getCol()].isVisisted()) {
 				Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-1);
 		    }
 			else {
@@ -396,22 +437,67 @@ public class GameController implements Initializable{
 				}
     		
     		break;
+    	}
+    	case Forget:{
+    		Board[i][j].setSquareType(Type.Regular);
+    		GetNewSquareByType(i,j,Type.Forget);
+    		getImageByString("I"+i+j).setImage(KNIGHT);
+    		Game.getInstance().getKnight().setCurrentPlace(Board[i][j]);
     		
-    	case Forget:
-    		
+    		if(Board[i][j].isVisisted()) {
+				Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-1);
+		    }
+			else {
+				Board[i][j].setVisisted(true);
+				Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+1);
+				}
     		break;
-		
-        case EasyQuestion:
+    	}
+        case EasyQuestion:{
+        	Board[i][j].setSquareType(Type.Regular);
+    		GetNewSquareByType(i,j,Type.EasyQuestion);
+    		getImageByString("I"+i+j).setImage(KNIGHT);
+    		Game.getInstance().getKnight().setCurrentPlace(Board[i][j]);
     		
+    		if(Board[i][j].isVisisted()) {
+				Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-1);
+		    }
+			else {
+				Board[i][j].setVisisted(true);
+				Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+1);
+				}
     		break;
+        }
+    	case MediumQuestion:{
+        	Board[i][j].setSquareType(Type.Regular);
+    		GetNewSquareByType(i,j,Type.MediumQuestion);
+    		getImageByString("I"+i+j).setImage(KNIGHT);
+    		Game.getInstance().getKnight().setCurrentPlace(Board[i][j]);
     		
-    	case MediumQuestion:
-    		
+    		if(Board[i][j].isVisisted()) {
+				Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-1);
+		    }
+			else {
+				Board[i][j].setVisisted(true);
+				Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+1);
+				}
     		break;
+        }
+    	case HardQuestion:{
+        	Board[i][j].setSquareType(Type.Regular);
+    		GetNewSquareByType(i,j,Type.HardQuestion);
+    		getImageByString("I"+i+j).setImage(KNIGHT);
+    		Game.getInstance().getKnight().setCurrentPlace(Board[i][j]);
     		
-    	case HardQuestion:
-    		
+    		if(Board[i][j].isVisisted()) {
+				Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-1);
+		    }
+			else {
+				Board[i][j].setVisisted(true);
+				Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+1);
+				}
     		break;
+        }
 		default:
 			break;
     	

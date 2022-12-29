@@ -44,7 +44,7 @@
       </Label>
       <ImageView fitHeight="62.0" fitWidth="89.0" layoutX="349.0" layoutY="651.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../lib/check-button.png" />
+            <Image url="@../lib/plus.png" />
          </image>
       </ImageView>
       <Button fx:id="AddNewQuestionBtn" layoutX="349.0" layoutY="648.0" mnemonicParsing="false" onAction="#addQuestion" opacity="0.0" prefHeight="62.0" prefWidth="62.0" style="-fx-background-color: white;">
