@@ -6,7 +6,7 @@ public class Square {
 	private int row;
 	private int col;
 	private boolean isVisisted = false;
-	private Type squareType;
+	private Type squareType ;
 	
 	public Square(int row, int col) {
 		super();

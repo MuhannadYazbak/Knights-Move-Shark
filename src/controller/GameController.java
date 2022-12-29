@@ -154,12 +154,20 @@ public class GameController implements Initializable{
 							PossibleMovesQueen.add(getImageByString("I"+s.getRow()+s.getCol()));
 						}
 						Game.getInstance().getQueen().moveThePiece(	Game.getInstance().getQueen().allPossibleMoves());
+					
 						ImageView temp = null;
 						String s = "I" +Integer.toString(Game.getInstance().getQueen().getCurrentPlace().getRow())
 								+Integer.toString(Game.getInstance().getQueen().getCurrentPlace().getCol());
+						Game.getInstance().getQueen().allPossibleMoves().clear();
+
 						for(ImageView i : allImages ) {
 							if(i.getId().equals(s)) {
 								i.setImage(QUEEN);
+						    	Square prevPlace=Game.getInstance().getQueen().getCurrentPlace();
+
+
+
+								
 								
 							}
 							
@@ -237,13 +245,17 @@ public class GameController implements Initializable{
     	
     	for(Square s : 	Game.getInstance().getKnight().allPossibleMoves()) {
     		PossibleMovesKnight.add(getImageByString("I"+s.getRow()+s.getCol()));
+	    	System.out.println("I"+s.getRow()+s.getCol());
+
 	    	getImageByString("I"+s.getRow()+s.getCol()).setImage(Possible);
 		}
     }
     
     private void RemovePossible() {
     	for(Square s : 	Game.getInstance().getKnight().allPossibleMoves()) {
+    		if(s!= Game.getInstance().getKnight().getCurrentPlace()) {
 	    	getImageByString("I"+s.getRow()+s.getCol()).setImage(null);
+    		}
 		}
     }
     
@@ -252,8 +264,8 @@ public class GameController implements Initializable{
     	
     	int i = Character.getNumericValue(s.charAt(2));
     	int j = Character.getNumericValue(s.charAt(3));
-    	getImageByString("I"+i+j).setImage(KNIGHT);
     	RemovePossible();
+    	getImageByString("I"+i+j).setImage(KNIGHT);
     	Square prevPlace=Game.getInstance().getKnight().getCurrentPlace();
     	getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
 		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
@@ -261,12 +273,14 @@ public class GameController implements Initializable{
 			Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-1);
 		else {
 			Board[i][j].setVisisted(true);
-			Game.getInstance().getKnight().setCurrentPlace(Board[0][0]);
+			Game.getInstance().getKnight().setCurrentPlace(Board[i][j]);
 			Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+1);
 		}
+    	RemovePossible();
+
 		
 		Type squareType = Game.getInstance().getKnight().getCurrentPlace().getSquareType();
-		Game.getInstance().handleSquare(i, j, squareType);
+		//Game.getInstance().handleSquare(i, j, squareType);
 
 		
 //		if(SysData.getInstance().getHistoryGamesForShow().contains(Game.getInstance().getPlayer())) {
