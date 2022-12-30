@@ -277,7 +277,6 @@ public class GameController implements Initializable{
     			Square s= randomSquare();
         		s.setSquareType(Type.RandomJump);
     		}
-    			
     		break;
     	}
     	
@@ -313,6 +312,15 @@ public class GameController implements Initializable{
     	}
     	}
     	
+
+		Square s1= randomSquare();
+		s1.setSquareType(Type.EasyQuestion);
+		
+		Square s2= randomSquare();
+		s2.setSquareType(Type.MediumQuestion);
+		
+		Square s3= randomSquare();
+		s3.setSquareType(Type.HardQuestion);
     }
     
     private void GetNewSquareByType(int r, int c, Type t) { // when the player press on a button with one of these types the game create square with the same type
