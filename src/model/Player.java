@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class Player {
 	private String name;
 	private Integer score;
@@ -39,4 +41,23 @@ public class Player {
 	public String toString() {
 		return "Player [name=" + name + ", score=" + score + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, score);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Player other = (Player) obj;
+		return Objects.equals(name, other.name) && Objects.equals(score, other.score);
+	}
+	
+	
 }

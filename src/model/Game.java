@@ -44,60 +44,7 @@ public class Game {
         // need to add level initialisation
     }
     
-    // a method that returns a random regular square 
-    public Square randomSquare() {
-    	
-    	boolean flag = true;
-    	int randomNumber1, randomNumber2;
-    	do {
-    		 randomNumber1 = (int) (Math.random() * 8);
-        	 randomNumber2 = (int) (Math.random() * 8);
-        	if(board[randomNumber1][randomNumber2].getSquareType().equals(Type.Regular))
-        		flag = false;
-    		
-    	}while(flag);
-    	
-    	
-    	return board[randomNumber1][randomNumber2];
 
-
-    }
-    
-    // a function to handle RandomJump ,Forget , Blocked, Question squares.
-    public void handleSquare(int i, int j, Type squareType) {
-    	switch(squareType) {
-    	
-    	case RandomJump:
-    		Square jumpTo = randomSquare();
-    		
-    		break;
-    		
-    	case Forget:
-    		
-    		break;
-    		
-    	case Blocked:
-    		
-    		break;
-    		
-    	case Regular:
-    		
-    		break;
-    		
-        case EasyQuestion:
-    		
-    		break;
-    		
-    	case MediumQuestion:
-    		
-    		break;
-    		
-    	case HardQuestion:
-    		
-    		break;
-    	
-    	}
-    }
     
 
 
