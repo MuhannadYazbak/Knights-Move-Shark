@@ -149,9 +149,6 @@ public class GameController implements Initializable{
 		    					e.printStackTrace();
 		    				}
 		    			}
-		    					
-		    					
-					
 		    			
 		    			/*
 		    			 * If statment to check if the player can move on to the next level 
