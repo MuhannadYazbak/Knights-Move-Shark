@@ -70,6 +70,11 @@ public class SysData {
 		}
 	}
 	
+	public void addHistory(Player p) {
+		SysData.getInstance().getHistoryGamesForShow().add(p);
+		JsonDataManager.getInstance().writeHistoryIntoJsonFile();
+	}
+	
 
 	/**
 	 * 
