@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
@@ -205,6 +206,7 @@ public class GameController implements Initializable{
 							
 						}
 						
+						
 						String prev = "I" +Integer.toString(Game.getInstance().getQueen().getPrev_Place().getRow())
 						+Integer.toString(Game.getInstance().getQueen().getPrev_Place().getCol());
 						for(ImageView i : allImages ) {
@@ -216,6 +218,27 @@ public class GameController implements Initializable{
 						}
 						}
 		    			movedFlag= false;
+		    
+
+		    			if(Game.getInstance().getQueen().getCurrentPlace().getCol()==Game.getInstance().getKnight().getCurrentPlace().getCol() && 
+		    					Game.getInstance().getQueen().getCurrentPlace().getRow() == Game.getInstance().getKnight().getCurrentPlace().getRow()) {
+		    				try {
+		    					alert.setTitle("game Over!");
+		    					alert.setContentText("good Luck Next Time.");
+		    					alert.setHeaderText("Thank You For Playing.");
+		    					alert.showAndWait();
+		    					backToMain();
+		    				
+
+		    					
+		    				} catch (Error e) {
+		    					e.printStackTrace();
+		    				} catch (Exception e) {
+		    					e.printStackTrace();
+		    				}
+		    				
+		    				
+		    			}
 				    
 				    	
 		    			
@@ -242,6 +265,18 @@ public class GameController implements Initializable{
 		    		}
 	    	}
     		break;	
+    	}
+    	if(remainingTime.getText().equals("0")){
+    	try {
+			alert.setTitle("game Over!");
+			alert.setContentText("Time Out.");
+			alert.setHeaderText("Thank You For Playing.");
+			alert.showAndWait();
+		} catch (Error e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     	}
     }
     
@@ -313,7 +348,7 @@ public class GameController implements Initializable{
     	case 1:{ // when the level is 1 the game builds 3 RandomJump squares.
     		
     		for(int k=0;k<3;k++) {
-    			Square s= randomSquare();
+    			Square s= randomRegularSquare();
         		s.setSquareType(Type.RandomJump);
         		System.out.println(s.getRow() + " "+ s.getCol());
     		}
@@ -323,7 +358,7 @@ public class GameController implements Initializable{
     	case 2:{ // when the level is 2 the game builds 3 Forget squares.
     		
     		for(int k=0;k<3;k++) {
-    			Square s= randomSquare();
+    			Square s= randomRegularSquare();
         		s.setSquareType(Type.Forget);
     		}
     		
@@ -333,9 +368,9 @@ public class GameController implements Initializable{
     	case 3:{ // when the level is 3 the game builds 2 Forget squares and 2 RandomJump Squares.
     		
     		for(int k=0;k<2;k++) {
-    			Square s1= randomSquare();
+    			Square s1= randomRegularSquare();
         		s1.setSquareType(Type.Forget);
-        		Square s2= randomSquare();
+        		Square s2= randomRegularSquare();
         		s2.setSquareType(Type.RandomJump);
     		}
     		
@@ -345,7 +380,7 @@ public class GameController implements Initializable{
     	case 4:{ // when the level is 4 the game builds 8 Blocked squares.
     		
     		for(int k=0;k<8;k++) {
-    			Square s= randomSquare();
+    			Square s= randomRegularSquare();
         		s.setSquareType(Type.Blocked);
     		}
     		break;
@@ -353,13 +388,13 @@ public class GameController implements Initializable{
     	}
     	
 
-		Square s1= randomSquare(); // build one square with easy question.
+		Square s1= randomRegularSquare(); // build one square with easy question.
 		s1.setSquareType(Type.EasyQuestion);
 		
-		Square s2= randomSquare(); // build one square with medium question.
+		Square s2= randomRegularSquare(); // build one square with medium question.
 		s2.setSquareType(Type.MediumQuestion);
 		
-		Square s3= randomSquare(); // build one square with hard question.
+		Square s3= randomRegularSquare(); // build one square with hard question.
 		s3.setSquareType(Type.HardQuestion);
     }
     
@@ -369,12 +404,13 @@ public class GameController implements Initializable{
     	
     	
     	while(flag) {
-    		Square s = randomSquare();
+    		Square s = randomRegularSquare();
     		if(!(s.getRow()==r&&s.getCol()==c)) {
     			switch(t.toString()) {
     			
     			case "RandomJump":{ // set new square with RandomJump type.
     				s.setSquareType(Type.RandomJump);
+    				System.out.println(s.getCol() + " " +s.getRow());
     				break;
     			}
     			
@@ -450,6 +486,8 @@ public class GameController implements Initializable{
 		
     	}
 		SetPossible();
+        score.setText(Integer.toString(Game.getInstance().getPlayer().getScore()));
+		
 	
 
     }
@@ -556,7 +594,7 @@ public class GameController implements Initializable{
     
     
     // a method that returns a random regular square 
-    public Square randomSquare() {
+    public Square randomRegularSquare() {
     	
     	boolean flag = true;
     	int randomNumber1, randomNumber2;
@@ -569,6 +607,16 @@ public class GameController implements Initializable{
     	}while(flag);
     	
     	
+    	return Board[randomNumber1][randomNumber2];
+
+
+    }
+    
+ public Square randomSquare() {
+    	
+    	int randomNumber1, randomNumber2;
+    		 randomNumber1 = (int) (Math.random() * 8);
+        	 randomNumber2 = (int) (Math.random() * 8);
     	return Board[randomNumber1][randomNumber2];
 
 
@@ -1346,6 +1394,18 @@ public class GameController implements Initializable{
 		stage.setResizable(false);
 		stage.setTitle("Main Menu");
 		stage.show();
+	}
+	private void backToMain()throws IOException{
+	
+		Parent pane = FXMLLoader.load(getClass().getResource("/views/MainMenu.fxml"));
+		Scene scene = new Scene(pane);
+		Stage stage = new Stage();
+		stage.setScene(scene);
+		stage.setResizable(false);
+		stage.setTitle("Main Menu");
+		stage.show();
+		
+
 	}
 
 	@Override
