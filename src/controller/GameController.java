@@ -119,7 +119,7 @@ public class GameController implements Initializable{
 //								}
 //								
 //							}
-		    				SetPossible();
+		    				//SetPossible();
 		    				
 		    			}
 					
@@ -180,7 +180,7 @@ public class GameController implements Initializable{
 					
 		    			try {
 		    				
-		    				 Thread.sleep(1000);
+		    				 Thread.sleep(2000);
 		    			} catch (InterruptedException e) {
 		    				 // TODO Auto-generated catch block
 		    				 e.printStackTrace();
@@ -190,6 +190,8 @@ public class GameController implements Initializable{
 						for(Square s: 	Game.getInstance().getQueen().allPossibleMoves()) {
 							PossibleMovesQueen.add(getImageByString("I"+s.getRow()+s.getCol()));
 						}
+						Game.getInstance().getQueen().setPrev_Place(Game.getInstance().getQueen().getCurrentPlace());
+						//Square queen_prev = Game.getInstance().getQueen().getCurrentPlace();
 						Game.getInstance().getQueen().moveThePiece(	Game.getInstance().getQueen().allPossibleMoves());
 						ImageView temp = null;
 						String s = "I" +Integer.toString(Game.getInstance().getQueen().getCurrentPlace().getRow())
@@ -197,6 +199,7 @@ public class GameController implements Initializable{
 						for(ImageView i : allImages ) {
 							if(i.getId().equals(s)) {
 								i.setImage(QUEEN);
+								
 								
 							}
 							
@@ -272,6 +275,7 @@ public class GameController implements Initializable{
     private void SetPossible() { // function to show the possible moves by setting white color on the square
     	
     	for(Square s : 	Game.getInstance().getKnight().allPossibleMoves()) {
+    		
     		//PossibleMovesKnight.add(getImageByString("I"+s.getRow()+s.getCol()));
 	    	getImageByString("I"+s.getRow()+s.getCol()).setImage(Possible); // set image with name Possible (White color) to show the possible moves
 		}
@@ -311,6 +315,7 @@ public class GameController implements Initializable{
     		for(int k=0;k<3;k++) {
     			Square s= randomSquare();
         		s.setSquareType(Type.RandomJump);
+        		System.out.println(s.getRow() + " "+ s.getCol());
     		}
     		break;
     	}
@@ -423,6 +428,7 @@ public class GameController implements Initializable{
     	if(!Board[i][j].getSquareType().equals(Type.Blocked)) {
     		RemovePossible();
     		Square prevPlace=Game.getInstance().getKnight().getCurrentPlace();
+			Game.getInstance().getKnight().setCurrentPlace(Board[i][j]);
     		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
 		
@@ -431,11 +437,9 @@ public class GameController implements Initializable{
     			getImageByString("I"+i+j).setImage(KNIGHT);
     			if(Board[i][j].isVisisted()) {
     				Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-1);
-    				Game.getInstance().getKnight().setCurrentPlace(Board[i][j]);
     			}
     			else {
     				Board[i][j].setVisisted(true);
-    				Game.getInstance().getKnight().setCurrentPlace(Board[i][j]);
     				Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+1);
 					}
     		}
@@ -445,6 +449,9 @@ public class GameController implements Initializable{
     		}
 		
     	}
+		SetPossible();
+	
+
     }
 		/*
 		 * to check if we need to set new type for another square

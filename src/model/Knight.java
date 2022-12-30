@@ -328,7 +328,7 @@ public class Knight extends Piece{
 				possibleMoves.add(new Square(getCurrentPlace().getRow()-2,getCurrentPlace().getCol()-1));
 			}
 		
-		if((getCurrentPlace().getCol()==6 && (getCurrentPlace().getRow()==2 || getCurrentPlace().getRow()==3 || getCurrentPlace().getRow()==4 || getCurrentPlace().getRow()==5))) {
+		if((getCurrentPlace().getCol()==1 && (getCurrentPlace().getRow()==2 || getCurrentPlace().getRow()==3 || getCurrentPlace().getRow()==4 || getCurrentPlace().getRow()==5))) {
 //			Square s1=new Square(getCurrentPlace().getRow()-1,getCurrentPlace().getCol()+2);
 //			Square s2=new Square(getCurrentPlace().getRow()+1,getCurrentPlace().getCol()+2);
 //			Square s3=new Square(getCurrentPlace().getRow()+2,getCurrentPlace().getCol()-1);
