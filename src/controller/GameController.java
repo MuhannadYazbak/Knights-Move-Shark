@@ -34,16 +34,42 @@ import utils.Type;
 
 public class GameController implements Initializable{
 	
-	
+	/*
+	 * ImageView for each square to build the board.
+	 */
 	@FXML
     private ImageView S00,S01,S02,S03,S04,S05,S06,S07,S10,S11,S12,S13,S14,S15,S16,S17,S20,S21,S22,S23,S24,S25,S26,S27,S30,S31,S32,S33,S34,S35,S36,S37,S40,S41,S42,S43,S44,S45,S46,S47,S50,S51,S52,S53,S54,S55,S56,S57,S60,S61,S62,S63,S64,S65,S66,S67,S70,S71,S72,S73,S74,S75,S76,S77;
+	
+	/*
+	 * HashSet to use all the board images.
+	 */
 	private HashSet<ImageView> BoardImages = new HashSet<ImageView>();
+	
+	/*
+	 * ImageView for each image to move the pieces.
+	 */
 	@FXML
     private ImageView I00,I01,I02,I03,I04,I05,I06,I07,I10,I11,I12,I13,I14,I15,I16,I17,I20,I21,I22,I23,I24,I25,I26,I27,I30,I31,I32,I33,I34,I35,I36,I37,I40,I41,I42,I43,I44,I45,I46,I47,I50,I51,I52,I53,I54,I55,I56,I57,I60,I61,I62,I63,I64,I65,I66,I67,I70,I71,I72,I73,I74,I75,I76,I77;
+	
+	/*
+	 * HashSet to use all the null (show the piece when it is on specific image.
+	 */
 	private HashSet<ImageView> allImages = new HashSet<ImageView>();
+	
+	/*
+	 * Button for each square.
+	 */
 	@FXML
     private Button CI00,CI01,CI02,CI03,CI04,CI05,CI06,CI07,CI10,CI11,CI12,CI13,CI14,CI15,CI16,CI17,CI20,CI21,CI22,CI23,CI24,CI25,CI26,CI27,CI30,CI31,CI32,CI33,CI34,CI35,CI36,CI37,CI40,CI41,CI42,CI43,CI44,CI45,CI46,CI47,CI50,CI51,CI52,CI53,CI54,CI55,CI56,CI57,CI60,CI61,CI62,CI63,CI64,CI65,CI66,CI67,CI70,CI71,CI72,CI73,CI74,CI75,CI76,CI77;
+	
+	/*
+	 * HashSet for Buttons
+	 */
 	private HashSet<Button> allButtons = new HashSet<Button>();
+	
+	/*
+	 * HashSet for the possible buttons to know where the player should press.
+	 */
 	private HashSet<Button> PossibleButtons = new HashSet<Button>();
 	
 	private Square[][] Board = new Square[8][8];
@@ -60,12 +86,16 @@ public class GameController implements Initializable{
     private Timeline timeline;
     private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
     
+    /*
+     * images to use on board
+     */
 	private Image KING = new Image(getClass().getResourceAsStream("/lib/king.png"));
 	private Image QUEEN = new Image(getClass().getResourceAsStream("/lib/queen.png"));
 	private Image KNIGHT = new Image(getClass().getResourceAsStream("/lib/knight.png"));
 	private Image Possible = new Image(getClass().getResourceAsStream("/lib/whitebg.png"));
 	private Image Visited = new Image(getClass().getResourceAsStream("/lib/yellow.png"));
-    private HashSet<ImageView> PossibleMovesKnight = new HashSet<ImageView>();
+    //private HashSet<ImageView> PossibleMovesKnight = new HashSet<ImageView>();
+	
     private HashSet<ImageView> PossibleMovesQueen = new HashSet<ImageView>();
     private boolean levelUp=false;
     private Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -132,6 +162,7 @@ public class GameController implements Initializable{
 		    						{
 		    							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
 		    							levelUp=true;
+		    							ResetSquareType(); // to set all the square as regular squares and be ready for the next level
 		    							try {
 		    								alert.setTitle("Congrats!");
 		    								alert.setContentText("Press ok to continue.");
@@ -213,16 +244,8 @@ public class GameController implements Initializable{
     		break;	
     	}
     }
-    private ImageView getImageByString(String s) {
-    	for(ImageView i : getAllImages()) {
-    		if(s.equals(i.getId())) {
-    			return i;
-    		}
-    	}
-    	return null;
-    }
     
-    private ImageView getImageByStringBoard(String s) {
+    private ImageView getImageByStringBoard(String s) { //by sending string (rowNum, colNum) to the function we will get ImageView that starts with the letter S+rowNum+colNum
     	for(ImageView i : getBoardImages()) {
     		if(s.equals(i.getId())) {
     			return i;
@@ -231,9 +254,16 @@ public class GameController implements Initializable{
     	return null;
     }
     
+    private ImageView getImageByString(String s) { //by sending string (rowNum, colNum) to the function we will get ImageView that starts with the letter I+rowNum+colNum
+    	for(ImageView i : getAllImages()) {
+    		if(s.equals(i.getId())) {
+    			return i;
+    		}
+    	}
+    	return null;
+    }
     
-    
-	private Button getButtonByString(String s) {
+	private Button getButtonByString(String s) { //by sending string (rowNum, colNum) to the function we will get Button that starts with the letter CI+rowNum+colNum
     	for(Button i : getAllButtons()) {
     		if(s.equals(i.getId())) {
     			return i;
@@ -242,21 +272,21 @@ public class GameController implements Initializable{
     	return null;
     }
     
-    private void SetPossible() {
+    private void SetPossible() { // function to show the possible moves by setting white color on the square
     	
     	for(Square s : 	Game.getInstance().getKnight().allPossibleMoves()) {
-    		PossibleMovesKnight.add(getImageByString("I"+s.getRow()+s.getCol()));
-	    	getImageByString("I"+s.getRow()+s.getCol()).setImage(Possible);
+    		//PossibleMovesKnight.add(getImageByString("I"+s.getRow()+s.getCol()));
+	    	getImageByString("I"+s.getRow()+s.getCol()).setImage(Possible); // set image with name Possible (White color) to show the possible moves
 		}
     }
     
-    private void RemovePossible() {
+    private void RemovePossible() { // function to remove the possible moves
     	for(Square s : 	Game.getInstance().getKnight().allPossibleMoves()) {
-	    	getImageByString("I"+s.getRow()+s.getCol()).setImage(null);
+	    	getImageByString("I"+s.getRow()+s.getCol()).setImage(null); // set image null to remove the possible moves
 		}
     }
     
-    private Square[][] BuildSquares(){
+    private Square[][] BuildSquares(){ // function to build 64 squares with Regular type
     	
     	for(int i=0 ; i<8 ; i++) {
 			for(int j=0; j<8 ; j++) {
@@ -267,11 +297,19 @@ public class GameController implements Initializable{
     return Board;
     }
     
+    private void ResetSquareType() { // when the level is up, all the squares will get Regular type to avoid square types more than required to each level.
+    	for(int i=0 ; i<8 ; i++) {
+			for(int j=0; j<8 ; j++) {
+				Board[i][j].setSquareType(Type.Regular);
+			}
+			
+		}
+    }
     private void GenerateSquareType() {// generate square types for each level
 
     	switch(Game.getInstance().getLevel()) {
     	
-    	case 1:{
+    	case 1:{ // when the level is 1 the game builds 3 RandomJump squares.
     		
     		for(int k=0;k<3;k++) {
     			Square s= randomSquare();
@@ -280,7 +318,7 @@ public class GameController implements Initializable{
     		break;
     	}
     	
-    	case 2:{
+    	case 2:{ // when the level is 2 the game builds 3 Forget squares.
     		
     		for(int k=0;k<3;k++) {
     			Square s= randomSquare();
@@ -290,7 +328,7 @@ public class GameController implements Initializable{
     		break;
     	}
     	
-    	case 3:{
+    	case 3:{ // when the level is 3 the game builds 2 Forget squares and 2 RandomJump Squares.
     		
     		for(int k=0;k<2;k++) {
     			Square s1= randomSquare();
@@ -302,7 +340,7 @@ public class GameController implements Initializable{
     		break;
     	}
     	
-    	case 4:{
+    	case 4:{ // when the level is 4 the game builds 8 Blocked squares.
     		
     		for(int k=0;k<8;k++) {
     			Square s= randomSquare();
@@ -313,13 +351,13 @@ public class GameController implements Initializable{
     	}
     	
 
-		Square s1= randomSquare();
+		Square s1= randomSquare(); // build one square with easy question.
 		s1.setSquareType(Type.EasyQuestion);
 		
-		Square s2= randomSquare();
+		Square s2= randomSquare(); // build one square with medium question.
 		s2.setSquareType(Type.MediumQuestion);
 		
-		Square s3= randomSquare();
+		Square s3= randomSquare(); // build one square with hard question.
 		s3.setSquareType(Type.HardQuestion);
     }
     
@@ -333,22 +371,22 @@ public class GameController implements Initializable{
     		if(!(s.getRow()==r&&s.getCol()==c)) {
     			switch(t.toString()) {
     			
-    			case "RandomJump":{
+    			case "RandomJump":{ // set new square with RandomJump type.
     				s.setSquareType(Type.RandomJump);
     				break;
     			}
     			
-    			case "Forget":{
+    			case "Forget":{ // set new square with Forget type.
     				s.setSquareType(Type.Forget);
     				break;
     			}
     			
-    			case "Blocked":{
+    			case "Blocked":{ // set new square with Blocked type.
     				s.setSquareType(Type.Blocked);
     				break;
     			}
     		
-    			case "EasyQuestion":{
+    			case "EasyQuestion":{ // set new square with EasyQuestion type.
     				s.setSquareType(Type.EasyQuestion);
     				/*
     				 * to add question when the player press on it
@@ -356,7 +394,7 @@ public class GameController implements Initializable{
     				break;
     			}
     			
-    			case "MediumQuestion":{
+    			case "MediumQuestion":{ // set new square with MediumQuestion type.
     				s.setSquareType(Type.MediumQuestion);
     				/*
     				 * to add question when the player press on it
@@ -364,7 +402,7 @@ public class GameController implements Initializable{
     				break;
     			}
     			
-    			case "HardQuestion":{
+    			case "HardQuestion":{ // set new square with HardQuestion type.
     				s.setSquareType(Type.HardQuestion);
     				/*
     				 * to add question when the player press on it
@@ -373,7 +411,7 @@ public class GameController implements Initializable{
     			}
     		}
     			
-    		flag=false;
+    		flag=false; // set flag=false to end the random searching for RegularSquare.
     		}
     	}
     }
@@ -381,8 +419,8 @@ public class GameController implements Initializable{
     // method to handle player pressing any button based on button type
     private void PressedButton(String s) {
     	
-    	int i = Character.getNumericValue(s.charAt(2));
-    	int j = Character.getNumericValue(s.charAt(3));
+    	int i = Character.getNumericValue(s.charAt(2)); // Row number for the pressed square
+    	int j = Character.getNumericValue(s.charAt(3)); // Column number for the pressed square
 
     	//Nothing happens if a player presses on a blocked square
     	if(!Board[i][j].getSquareType().equals(Type.Blocked)) {
@@ -521,7 +559,7 @@ public class GameController implements Initializable{
     	do {
     		 randomNumber1 = (int) (Math.random() * 8);
         	 randomNumber2 = (int) (Math.random() * 8);
-        	if(Board[randomNumber1][randomNumber2].getSquareType().equals(Type.Regular))
+        	if(Board[randomNumber1][randomNumber2].getSquareType().equals(Type.Regular)) // checking if the type is regular to continue
         		flag = false;
     		
     	}while(flag);
