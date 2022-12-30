@@ -1,4 +1,5 @@
-/module-info.class
+/controller/
 /model/
+/module-info.class
 /testUnits/
-/views/
+/utils/
