@@ -55,7 +55,7 @@ public class GameController implements Initializable{
 	/*
 	 * HashSet to use all the null (show the piece when it is on specific image.
 	 */
-	private HashSet<ImageView> allImages = new HashSet<ImageView>();
+	private static HashSet<ImageView> allImages = new HashSet<ImageView>();
 	
 	/*
 	 * Button for each square.
@@ -98,7 +98,15 @@ public class GameController implements Initializable{
     //private HashSet<ImageView> PossibleMovesKnight = new HashSet<ImageView>();
 	
     private HashSet<ImageView> PossibleMovesQueen = new HashSet<ImageView>();
-    private boolean levelUp=false;
+    private static HashSet<ImageView> PossibleMovesKing = new HashSet<ImageView>();
+    public static HashSet<ImageView> getPossibleMovesKing() {
+		return PossibleMovesKing;
+	}
+
+	public void setPossibleMovesKing(HashSet<ImageView> possibleMovesKing) {
+		PossibleMovesKing = possibleMovesKing;
+	}
+	private boolean levelUp=false;
     private Alert alert = new Alert(Alert.AlertType.INFORMATION);
 	
 
@@ -393,6 +401,82 @@ public class GameController implements Initializable{
 		    		}
 		    		
 		    		case "4":{
+//		    			Boolean buttonFlag=true, gameStillGoing = true;
+//		    			Timer timer = new Timer();
+//		    			// the king will move every 10 seconds
+//		    			timer.schedule(new kingMovement(), 0, 10000);
+//		    			
+//		    			while(gameStillGoing) {
+//		    				
+//		    				for(Square s : Game.getInstance().getKnight().allPossibleMoves()) {
+//		    				PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));
+//		    				}
+//		    				
+//		    				for(Button b: PossibleButtons) {
+//			    				if(buttonFlag) {
+//			    					if(b.isPressed())
+//										{	    							
+//			    							PressedButton(b.getId());
+//			    							buttonFlag=false;
+//			    							
+//										}
+//			    				}
+//			    				
+//			    			}
+//		    				
+//			    			PossibleButtons.clear();
+//			    			//buttonFlag=true;
+//			    			if(buttonFlag) {
+//			    				try {
+//			    					alert.setTitle("Wrong Square Pressed!");
+//			    					alert.setContentText("Press ok to continue.");
+//			    					alert.setHeaderText("Please press only on the white squares.");
+//			    					alert.showAndWait();
+//			    				} catch (Error e) {
+//			    					e.printStackTrace();
+//			    				} catch (Exception e) {
+//			    					e.printStackTrace();
+//			    				}
+//			    			}
+//			    			
+//			    			// checking if the player finished the game
+//			    			
+//			    			if(SysData.getInstance().getHistoryGamesForShow().contains(Game.getInstance().getPlayer())) {
+//		    				for(Player p: SysData.getInstance().getHistoryGamesForShow()) {
+//		    					if(p.getName().equals(Game.getInstance().getPlayer().getName()) && p.getScore()>=15 )
+//		    						{
+//		    						
+//		    							try {
+//		    								gameStillGoing = false;
+//		    								timer.cancel();
+//		    								alert.setTitle("Congrats!");
+//		    								alert.setContentText("Press ok to continue.");
+//		    								alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have won the game!");
+//		    								alert.showAndWait();
+//		    							} catch (Error e) {
+//		    								e.printStackTrace();
+//		    							} catch (Exception e) {
+//		    								e.printStackTrace();
+//		    							}
+//		    							countDown();
+//		    					        
+//		    					        break;
+//		    						}
+//								
+//		    				}
+//		    			}
+//			    			
+//			    			// checking timer because in case 4 there is a while loop
+//			    			
+//			    			if(remainingTime.getText().equals("0")){
+//			    				timer.cancel();
+//			    		    	gameStillGoing = false;
+//			    		    	}
+//			    			
+//			    			
+//			    			
+//		    				
+//		    			}
 		    			break;
 		    		}
 	    	}
@@ -421,7 +505,7 @@ public class GameController implements Initializable{
     	return null;
     }
     
-    private ImageView getImageByString(String s) { //by sending string (rowNum, colNum) to the function we will get ImageView that starts with the letter I+rowNum+colNum
+    static ImageView getImageByString(String s) { //by sending string (rowNum, colNum) to the function we will get ImageView that starts with the letter I+rowNum+colNum
     	for(ImageView i : getAllImages()) {
     		if(s.equals(i.getId())) {
     			return i;
@@ -1595,7 +1679,7 @@ public class GameController implements Initializable{
     	SetPossible();
 
 	}
-	public HashSet<ImageView> getAllImages() {
+	public static HashSet<ImageView> getAllImages() {
 		return allImages;
 	}
 	public HashSet<Button> getAllButtons() {
