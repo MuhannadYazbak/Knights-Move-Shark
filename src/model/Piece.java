@@ -13,6 +13,7 @@ public abstract class Piece{
 	}
 	
 	abstract public Set<Square> allPossibleMoves();
+	abstract public Set<Square> allPossibleMovesLevel2();
 	abstract public Set<Square> EmptyPossibleMoves();
 	abstract public void moveThePiece(Set<Square> possibleMoves);
 	
