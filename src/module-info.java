@@ -5,7 +5,7 @@ module KnightMovesGame {
 
 	requires java.desktop;
 	requires javafx.base;
-	requires javafx.controls;
+	requires transitive javafx.controls;
 	requires javafx.fxml;
 	requires javafx.graphics;
 	requires javafx.media;

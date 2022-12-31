@@ -100,8 +100,9 @@ public class GameController implements Initializable{
     private HashSet<ImageView> PossibleMovesQueen = new HashSet<ImageView>();
     private boolean levelUp=false;
     private Alert alert = new Alert(Alert.AlertType.INFORMATION);
+	
 
-    @FXML
+	@FXML
     void MoveTo() {
     	
     	while(!remainingTime.getText().equals("0")) {
@@ -127,7 +128,7 @@ public class GameController implements Initializable{
 		    			for(Button b: PossibleButtons) {
 		    				if(buttonFlag) {
 		    					if(b.isPressed())
-									{
+									{	    							
 		    							PressedButton(b.getId());
 		    							buttonFlag=false;
 		    							movedFlag = true;
