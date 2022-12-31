@@ -148,6 +148,12 @@ public class King extends Piece{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Set<Square> allPossibleMovesLevel2() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

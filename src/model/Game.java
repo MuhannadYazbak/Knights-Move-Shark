@@ -32,7 +32,7 @@ public class Game {
     	king = (King) pieceFactory.makePiece("King",new Square(2, 2));
     	queen = (Queen) pieceFactory.makePiece("Queen", new Square(0, 7));
     	this.knight = (Knight) pieceFactory.makePiece("Knight", new Square(0, 0));
-        this.startNewGame();
+        this.startNewGameLevel2();
     }
     
     //method thats starts a new game and initialises values to their starting position
@@ -43,6 +43,14 @@ public class Game {
         this.level = 1;
         // need to add level initialisation
     }
+    public void startNewGameLevel2() {
+        gameOver = false;
+        youWon = false;
+        this.score = 0;
+        this.level = 2;
+        // need to add level initialisation
+    }
+    
     
 
     

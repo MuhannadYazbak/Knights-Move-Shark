@@ -254,6 +254,137 @@ public class GameController implements Initializable{
 		    		}
 		    	
 		    		case "2":{
+		    			Boolean movedFlag = false, buttonFlag=true;
+			    		
+		    			for(Square s : Game.getInstance().getKnight().allPossibleMovesLevel2()) {
+		    				PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));
+//		    				String pos = "I"+s.getRow()+s.getCol();
+//		    				for(ImageView i : allImages ) {
+//								if(i.getId().equals(pos)) {
+//									i.setImage(Possible);
+//									
+//								}
+//								
+//							}
+		    				//SetPossible();
+		    				
+		    			}
+					
+		    			for(Button b: PossibleButtons) {
+		    				if(buttonFlag) {
+		    					if(b.isPressed())
+									{	    							
+		    							PressedButton(b.getId());
+		    							buttonFlag=false;
+		    							movedFlag = true;
+									}
+		    				}
+		    				
+		    			}
+		    			
+		    			PossibleButtons.clear();
+		    			//buttonFlag=true;
+		    			if(buttonFlag) {
+		    				try {
+		    					alert.setTitle("Wrong Square Pressed!");
+		    					alert.setContentText("Press ok to continue.");
+		    					alert.setHeaderText("Please press only on the white squares.");
+		    					alert.showAndWait();
+		    				} catch (Error e) {
+		    					e.printStackTrace();
+		    				} catch (Exception e) {
+		    					e.printStackTrace();
+		    				}
+		    			}
+		    			
+		    			/*
+		    			 * If statment to check if the player can move on to the next level 
+		    			 */
+		    			if(SysData.getInstance().getHistoryGamesForShow().contains(Game.getInstance().getPlayer())) {
+		    				for(Player p: SysData.getInstance().getHistoryGamesForShow()) {
+		    					if(p.getName().equals(Game.getInstance().getPlayer().getName()) && p.getScore()>=15 )
+		    						{
+		    							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
+		    							levelUp=true;
+		    							ResetSquareType(); // to set all the square as regular squares and be ready for the next level
+		    							try {
+		    								alert.setTitle("Congrats!");
+		    								alert.setContentText("Press ok to continue.");
+		    								alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have now reached to the next level!");
+		    								alert.showAndWait();
+		    							} catch (Error e) {
+		    								e.printStackTrace();
+		    							} catch (Exception e) {
+		    								e.printStackTrace();
+		    							}
+		    							countDown();
+		    					        
+		    					        break;
+		    						}
+								
+		    				}
+		    			}
+					
+		    			try {
+		    				
+		    				 Thread.sleep(2000);
+		    			} catch (InterruptedException e) {
+		    				 // TODO Auto-generated catch block
+		    				 e.printStackTrace();
+		    			}
+		    			
+		    			if(movedFlag == true) {
+						for(Square s: 	Game.getInstance().getQueen().allPossibleMoves()) {
+							PossibleMovesQueen.add(getImageByString("I"+s.getRow()+s.getCol()));
+						}
+						Game.getInstance().getQueen().setPrev_Place(Game.getInstance().getQueen().getCurrentPlace());
+						//Square queen_prev = Game.getInstance().getQueen().getCurrentPlace();
+						Game.getInstance().getQueen().moveThePiece(	Game.getInstance().getQueen().allPossibleMoves());
+						ImageView temp = null;
+						String s = "I" +Integer.toString(Game.getInstance().getQueen().getCurrentPlace().getRow())
+								+Integer.toString(Game.getInstance().getQueen().getCurrentPlace().getCol());
+						for(ImageView i : allImages ) {
+							if(i.getId().equals(s)) {
+								i.setImage(QUEEN);
+								
+								
+							}
+							
+						}
+						
+						
+						String prev = "I" +Integer.toString(Game.getInstance().getQueen().getPrev_Place().getRow())
+						+Integer.toString(Game.getInstance().getQueen().getPrev_Place().getCol());
+						for(ImageView i : allImages ) {
+							if(i.getId().equals(prev)) {
+								i.setImage(null);
+								
+							}
+							
+						}
+						}
+		    			movedFlag= false;
+		    
+
+		    			if(Game.getInstance().getQueen().getCurrentPlace().getCol()==Game.getInstance().getKnight().getCurrentPlace().getCol() && 
+		    					Game.getInstance().getQueen().getCurrentPlace().getRow() == Game.getInstance().getKnight().getCurrentPlace().getRow()) {
+		    				try {
+		    					alert.setTitle("game Over!");
+		    					alert.setContentText("good Luck Next Time.");
+		    					alert.setHeaderText("Thank You For Playing.");
+		    					alert.showAndWait();
+		    					backToMain();
+		    				
+
+		    					
+		    				} catch (Error e) {
+		    					e.printStackTrace();
+		    				} catch (Exception e) {
+		    					e.printStackTrace();
+		    				}
+		    				
+		    				
+		    			}
 		    			break;
 		    		}
 		    		
@@ -1405,8 +1536,6 @@ public class GameController implements Initializable{
 		stage.setResizable(false);
 		stage.setTitle("Main Menu");
 		stage.show();
-		
-
 	}
 
 	@Override

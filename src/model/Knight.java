@@ -429,6 +429,7 @@ public class Knight extends Piece{
 		return possibleMoves;
 	}
 	
+	
 	@Override
 	public Set<Square> allPossibleMovesLevel2() {
 		HashSet<Square> possibleMoves = new HashSet<Square>();
