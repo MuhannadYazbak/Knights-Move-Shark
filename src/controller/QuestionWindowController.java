@@ -13,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import model.Game;
 import model.Question;
 import model.SysData;
@@ -253,11 +254,15 @@ public class QuestionWindowController implements Initializable {
 		questions = qArray(GameController.getSelectedQuestionType());
 		System.out.println("Question: "+question);
 		questionLbl.setText(question.getQuestionText());
+		ToggleGroup group = new ToggleGroup();
 		option1.setText(question.getAnswer1());
+		option1.setToggleGroup(group);
 		option2.setText(question.getAnswer2());
+		option2.setToggleGroup(group);
 		option3.setText(question.getAnswer3());
+		option3.setToggleGroup(group);
 		option4.setText(question.getAnswer4());
-		
+		option4.setToggleGroup(group);
 	}
 
 }
