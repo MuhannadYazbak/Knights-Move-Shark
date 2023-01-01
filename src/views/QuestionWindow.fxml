@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="320.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controller.QuestionWindowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="321.0" prefWidth="524.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.QuestionWindowController">
    <children>
-      <Label fx:id="questionLbl" layoutX="14.0" layoutY="14.0" text="Question" />
-      <RadioButton fx:id="option1" layoutX="14.0" layoutY="45.0" mnemonicParsing="false" text="Option 1" />
-      <RadioButton fx:id="option2" layoutX="14.0" layoutY="78.0" mnemonicParsing="false" text="Option 2" />
-      <RadioButton fx:id="option3" layoutX="14.0" layoutY="112.0" mnemonicParsing="false" text="Option 3" />
-      <RadioButton fx:id="option4" layoutX="14.0" layoutY="145.0" mnemonicParsing="false" text="Option 4" />
-      <Button fx:id="submitBtn" layoutX="106.0" layoutY="192.0" mnemonicParsing="false" onAction="#Answer" text="Submit Answer" />
+      <Label fx:id="questionLbl" layoutX="38.0" layoutY="40.0" text="Question" />
+      <RadioButton fx:id="option1" layoutX="28.0" layoutY="90.0" mnemonicParsing="false" text="Option 1" />
+      <RadioButton fx:id="option2" layoutX="28.0" layoutY="123.0" mnemonicParsing="false" text="Option 2" />
+      <RadioButton fx:id="option3" layoutX="28.0" layoutY="157.0" mnemonicParsing="false" text="Option 3" />
+      <RadioButton fx:id="option4" layoutX="28.0" layoutY="190.0" mnemonicParsing="false" text="Option 4" />
+      <Button fx:id="submitBtn" layoutX="214.0" layoutY="262.0" mnemonicParsing="false" onAction="#Answer" text="Submit Answer" />
    </children>
 </AnchorPane>

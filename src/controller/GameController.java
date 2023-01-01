@@ -232,8 +232,8 @@ public class GameController implements Initializable{
 		    			if(Game.getInstance().getQueen().getCurrentPlace().getCol()==Game.getInstance().getKnight().getCurrentPlace().getCol() && 
 		    					Game.getInstance().getQueen().getCurrentPlace().getRow() == Game.getInstance().getKnight().getCurrentPlace().getRow()) {
 		    				try {
-		    					alert.setTitle("game Over!");
-		    					alert.setContentText("good Luck Next Time.");
+		    					alert.setTitle("Game Over!");
+		    					alert.setContentText("Good Luck Next Time.");
 		    					alert.setHeaderText("Thank You For Playing.");
 		    					alert.showAndWait();
 		    					backToMain();
@@ -249,15 +249,7 @@ public class GameController implements Initializable{
 		    				
 		    			}
 				    
-				    	
-		    			
-
-
-						
-		    		
-		    		/**
-		    		 * popup window GAME OVER
-		    		 */
+		    	
 		    			break;
 		    		}
 		    	
@@ -377,8 +369,8 @@ public class GameController implements Initializable{
 		    			if(Game.getInstance().getQueen().getCurrentPlace().getCol()==Game.getInstance().getKnight().getCurrentPlace().getCol() && 
 		    					Game.getInstance().getQueen().getCurrentPlace().getRow() == Game.getInstance().getKnight().getCurrentPlace().getRow()) {
 		    				try {
-		    					alert.setTitle("game Over!");
-		    					alert.setContentText("good Luck Next Time.");
+		    					alert.setTitle("Game Over!");
+		    					alert.setContentText("Good Luck Next Time.");
 		    					alert.setHeaderText("Thank You For Playing.");
 		    					alert.showAndWait();
 		    					backToMain();
@@ -838,7 +830,7 @@ public class GameController implements Initializable{
 
     }
 
-		
+	private void PressedButtonNotUsed() {	
 //		if(SysData.getInstance().getHistoryGamesForShow().contains(Game.getInstance().getPlayer())) {
 //		for(Player p: SysData.getInstance().getHistoryGamesForShow()) {
 //			if(p.getName().equals(Game.getInstance().getPlayer().getName()) && p.getScore()>=15 )
@@ -1586,7 +1578,7 @@ public class GameController implements Initializable{
 //    	
 //    	}
 //    
-
+	}
 
 	
     private void countDown() {
