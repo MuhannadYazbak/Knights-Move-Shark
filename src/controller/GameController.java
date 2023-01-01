@@ -84,7 +84,7 @@ public class GameController implements Initializable{
     @FXML
     private AnchorPane screen;
     
-    private static final Integer STARTTIME = 60;
+    private static final Integer STARTTIME = 90;
     private Timeline timeline;
     private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
     
@@ -656,7 +656,7 @@ public class GameController implements Initializable{
     		for(int k=0;k<3;k++) {
     			Square s= randomRegularSquare();
         		s.setSquareType(Type.RandomJump);
-        		System.out.println(s.getRow() + " "+ s.getCol());
+        		System.out.println("Random -> "+s.getRow() + " "+ s.getCol());
     		}
     		break;
     	}
