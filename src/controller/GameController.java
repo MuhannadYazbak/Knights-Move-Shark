@@ -102,6 +102,7 @@ public class GameController implements Initializable{
     private HashSet<ImageView> PossibleMovesQueen = new HashSet<ImageView>();
     private static HashSet<ImageView> PossibleMovesKing = new HashSet<ImageView>();
     private static Type selectedQuestionType;
+    private static Boolean level4Started = false;
     
     
     public static Type getSelectedQuestionType() {
@@ -125,6 +126,15 @@ public class GameController implements Initializable{
 
 	@FXML
     void MoveTo() {
+		
+		//checking if this is the first move in level 4 to start king movement
+		if(!level4Started && Game.getInstance().getLevel() == 4) {
+			level4Started = true;
+			System.out.println("first Move");
+			// the king will move every 10 seconds (currently set to 4 to see clearer)
+			Timer timer = new Timer();
+			timer.schedule(new kingMovement(), 0, 4000);
+		}
     	
     	while(!remainingTime.getText().equals("0")) {
 	    		switch(level.getText()) {
@@ -494,82 +504,80 @@ public class GameController implements Initializable{
 		    		}
 		    		
 		    		case "4":{
-//		    			Boolean buttonFlag=true, gameStillGoing = true;
+		    			Boolean buttonFlag=true, gameStillGoing = true;
 //		    			Timer timer = new Timer();
-//		    			// the king will move every 10 seconds
-//		    			timer.schedule(new kingMovement(), 0, 10000);
-//		    			
-//		    			while(gameStillGoing) {
-//		    				
-//		    				for(Square s : Game.getInstance().getKnight().allPossibleMoves()) {
-//		    				PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));
-//		    				}
-//		    				
-//		    				for(Button b: PossibleButtons) {
-//			    				if(buttonFlag) {
-//			    					if(b.isPressed())
-//										{	    							
-//			    							PressedButton(b.getId());
-//			    							buttonFlag=false;
-//			    							
-//										}
-//			    				}
-//			    				
-//			    			}
-//		    				
-//			    			PossibleButtons.clear();
-//			    			//buttonFlag=true;
-//			    			if(buttonFlag) {
-//			    				try {
-//			    					alert.setTitle("Wrong Square Pressed!");
-//			    					alert.setContentText("Press ok to continue.");
-//			    					alert.setHeaderText("Please press only on the white squares.");
-//			    					alert.showAndWait();
-//			    				} catch (Error e) {
-//			    					e.printStackTrace();
-//			    				} catch (Exception e) {
-//			    					e.printStackTrace();
-//			    				}
-//			    			}
-//			    			
-//			    			// checking if the player finished the game
-//			    			
-//			    			if(SysData.getInstance().getHistoryGamesForShow().contains(Game.getInstance().getPlayer())) {
-//		    				for(Player p: SysData.getInstance().getHistoryGamesForShow()) {
-//		    					if(p.getName().equals(Game.getInstance().getPlayer().getName()) && p.getScore()>=15 )
-//		    						{
-//		    						
-//		    							try {
-//		    								gameStillGoing = false;
-//		    								timer.cancel();
-//		    								alert.setTitle("Congrats!");
-//		    								alert.setContentText("Press ok to continue.");
-//		    								alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have won the game!");
-//		    								alert.showAndWait();
-//		    							} catch (Error e) {
-//		    								e.printStackTrace();
-//		    							} catch (Exception e) {
-//		    								e.printStackTrace();
-//		    							}
-//		    							countDown();
-//		    					        
-//		    					        break;
-//		    						}
-//								
-//		    				}
-//		    			}
-//			    			
-//			    			// checking timer because in case 4 there is a while loop
-//			    			
-//			    			if(remainingTime.getText().equals("0")){
-//			    				timer.cancel();
-//			    		    	gameStillGoing = false;
-//			    		    	}
-//			    			
-//			    			
-//			    			
-//		    				
-//		    			}
+//		    			timer.schedule(new kingMovement(), 0, 10000);		    			
+//    				System.out.println("game here");
+		    				
+		    				for(Square s : Game.getInstance().getKnight().allPossibleMoves()) {
+		    				PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));
+		    				}
+		    				
+		    				for(Button b: PossibleButtons) {
+			    				if(buttonFlag) {
+			    					if(b.isPressed())
+										{	    							
+			    							PressedButton(b.getId());
+			    							buttonFlag=false;
+			    							
+										}
+			    				}
+			    				
+			    			}
+		    				
+			    			PossibleButtons.clear();
+			    			//buttonFlag=true;
+			    			if(buttonFlag) {
+			    				try {
+			    					alert.setTitle("Wrong Square Pressed!");
+			    					alert.setContentText("Press ok to continue.");
+			    					alert.setHeaderText("Please press only on the white squares.");
+			    					alert.showAndWait();
+			    				} catch (Error e) {
+			    					e.printStackTrace();
+			    				} catch (Exception e) {
+			    					e.printStackTrace();
+			    				}
+			    			}
+			    			
+			    			// checking if the player finished the game
+			    			
+			    			if(SysData.getInstance().getHistoryGamesForShow().contains(Game.getInstance().getPlayer())) {
+		    				for(Player p: SysData.getInstance().getHistoryGamesForShow()) {
+		    					if(p.getName().equals(Game.getInstance().getPlayer().getName()) && p.getScore()>=15 )
+		    						{
+		    						
+		    							try {
+		    								gameStillGoing = false;
+		    								//timer.cancel();
+		    								alert.setTitle("Congrats!");
+		    								alert.setContentText("Press ok to continue.");
+		    								alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have won the game!");
+		    								alert.showAndWait();
+		    							} catch (Error e) {
+		    								e.printStackTrace();
+		    							} catch (Exception e) {
+		    								e.printStackTrace();
+		    							}
+		    							countDown();
+		    					        
+		    					        break;
+		    						}
+								
+		    				}
+		    			}
+			    			
+			    			// checking timer because in case 4 there is a while loop
+			    			
+			    			if(remainingTime.getText().equals("0")){
+			    				//timer.cancel();
+			    		    	gameStillGoing = false;
+			    		    	}
+			    			
+			    			
+			    			
+		    				
+		    			
 		    			break;
 		    		}
 	    	}

@@ -29,7 +29,7 @@ public class Game {
     // if no game has been started, this constructor is called
     private Game() { 
     	pieceFactory = new PieceFactory();
-    	king = (King) pieceFactory.makePiece("King",new Square(2, 2));
+    	king = (King) pieceFactory.makePiece("King",new Square(0, 7));
     	queen = (Queen) pieceFactory.makePiece("Queen", new Square(0, 7));
     	this.knight = (Knight) pieceFactory.makePiece("Knight", new Square(0, 0));
         this.startNewGame();

@@ -18,13 +18,15 @@ class kingMovement extends TimerTask  {
     @Override
     public void run() {
     	possibleMoves = Game.getInstance().getKing().allPossibleMoves();
-    	System.out.println("I am here"); 
+    	 
 	    
 	    for(Square s: possibleMoves) {
 			GameController.getPossibleMovesKing().add(GameController.getImageByString("I"+s.getRow()+s.getCol()));
 		}
+	    
 		Game.getInstance().getKing().setPrev_Place(Game.getInstance().getKing().getCurrentPlace());
-		//Square queen_prev = Game.getInstance().getQueen().getCurrentPlace();
+		System.out.println(Game.getInstance().getKing().getCurrentPlace().getRow());
+		System.out.println(Game.getInstance().getKing().getCurrentPlace().getCol());
 		Game.getInstance().getKing().moveThePiece(Game.getInstance().getKing().allPossibleMoves());
 		ImageView temp = null;
 		String s = "I" +Integer.toString(Game.getInstance().getKing().getCurrentPlace().getRow())
@@ -41,6 +43,7 @@ class kingMovement extends TimerTask  {
 		+Integer.toString(Game.getInstance().getQueen().getPrev_Place().getCol());
 		for(ImageView i : GameController.getAllImages() ) {
 			if(i.getId().equals(prev)) {
+				
 				i.setImage(null);
 				
 			}
