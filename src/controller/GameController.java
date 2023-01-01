@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Timer;
 
 import javafx.event.ActionEvent;
 import javafx.animation.KeyFrame;
@@ -99,7 +100,18 @@ public class GameController implements Initializable{
 	
     private HashSet<ImageView> PossibleMovesQueen = new HashSet<ImageView>();
     private static HashSet<ImageView> PossibleMovesKing = new HashSet<ImageView>();
-    public static HashSet<ImageView> getPossibleMovesKing() {
+    private static Type selectedQuestionType;
+    
+    
+    public static Type getSelectedQuestionType() {
+		return selectedQuestionType;
+	}
+
+	public static void setSelectedQuestionType(Type selectedQuestionType) {
+		GameController.selectedQuestionType = selectedQuestionType;
+	}
+
+	public static HashSet<ImageView> getPossibleMovesKing() {
 		return PossibleMovesKing;
 	}
 
@@ -389,6 +401,92 @@ public class GameController implements Initializable{
 		    		}
 		    		
 		    		case "3":{
+		    			Boolean buttonFlag=true, gameStillGoing = true;
+		    			Timer timer = new Timer();
+		    			// the king will move every 10 seconds
+		    			timer.schedule(new kingMovement(), 0, 10000);
+		    			// the king will move every 8 seconds
+		    			timer.schedule(new kingMovement(), 10000, 8000);
+		    			// the king will move every 7 seconds
+		    			timer.schedule(new kingMovement(), 20000, 70000);
+		    			// the king will move every 6 seconds
+		    			timer.schedule(new kingMovement(), 30000, 6000);
+		    			// the king will move every 5 seconds
+		    			timer.schedule(new kingMovement(), 40000, 5000);
+		    			// the king will move every 1 seconds
+		    			timer.schedule(new kingMovement(), 50000, 1000);
+		    			
+		    			while(gameStillGoing) {
+		    				
+		    				for(Square s : Game.getInstance().getKnight().allPossibleMoves()) {
+		    				PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));
+		    				}
+		    				
+		    				for(Button b: PossibleButtons) {
+			    				if(buttonFlag) {
+			    					if(b.isPressed())
+										{	    							
+			    							PressedButton(b.getId());
+			    							buttonFlag=false;
+			    							
+										}
+			    				}
+			    				
+			    			}
+		    				
+			    			PossibleButtons.clear();
+			    			//buttonFlag=true;
+			    			if(buttonFlag) {
+			    				try {
+			    					alert.setTitle("Wrong Square Pressed!");
+			    					alert.setContentText("Press ok to continue.");
+			    					alert.setHeaderText("Please press only on the white squares.");
+			    					alert.showAndWait();
+			    				} catch (Error e) {
+			    					e.printStackTrace();
+			    				} catch (Exception e) {
+			    					e.printStackTrace();
+			    				}
+			    			}
+			    			
+			    			// checking if the player finished the game
+			    			
+			    			if(SysData.getInstance().getHistoryGamesForShow().contains(Game.getInstance().getPlayer())) {
+			    				for(Player p: SysData.getInstance().getHistoryGamesForShow()) {
+			    					if(p.getName().equals(Game.getInstance().getPlayer().getName()) && p.getScore()>=15 )
+			    						{
+			    							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
+			    							levelUp=true;
+			    							ResetSquareType(); // to set all the square as regular squares and be ready for the next level
+			    							try {
+			    								alert.setTitle("Congrats!");
+			    								alert.setContentText("Press ok to continue.");
+			    								alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have now reached to the next level!");
+			    								alert.showAndWait();
+			    							} catch (Error e) {
+			    								e.printStackTrace();
+			    							} catch (Exception e) {
+			    								e.printStackTrace();
+			    							}
+			    							countDown();
+			    					        
+			    					        break;
+			    						}
+									
+			    				}
+			    			}
+			    			
+			    			// checking timer because in case 4 there is a while loop
+			    			
+			    			if(remainingTime.getText().equals("0")){
+			    				timer.cancel();
+			    		    	gameStillGoing = false;
+			    		    	}
+			    			
+			    			
+			    			
+		    				
+		    			}
 		    			break;
 		    		}
 		    		
@@ -750,6 +848,7 @@ public class GameController implements Initializable{
     		break;
     	}
         case EasyQuestion:{
+        	setSelectedQuestionType(Type.EasyQuestion);
         	Board[i][j].setSquareType(Type.Regular);
     		GetNewSquareByType(i,j,Type.EasyQuestion);
     		getImageByString("I"+i+j).setImage(KNIGHT);
@@ -762,10 +861,17 @@ public class GameController implements Initializable{
 				Board[i][j].setVisisted(true);
 				Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+1);
 				}
+    		try {
+				popQuestion();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
     		break;
         }
     	case MediumQuestion:{
-        	Board[i][j].setSquareType(Type.Regular);
+    		setSelectedQuestionType(Type.MediumQuestion);
+    		Board[i][j].setSquareType(Type.Regular);
     		GetNewSquareByType(i,j,Type.MediumQuestion);
     		getImageByString("I"+i+j).setImage(KNIGHT);
     		Game.getInstance().getKnight().setCurrentPlace(Board[i][j]);
@@ -777,10 +883,17 @@ public class GameController implements Initializable{
 				Board[i][j].setVisisted(true);
 				Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+1);
 				}
+    		try {
+				popQuestion();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
     		break;
         }
     	case HardQuestion:{
-        	Board[i][j].setSquareType(Type.Regular);
+    		setSelectedQuestionType(Type.HardQuestion);
+    		Board[i][j].setSquareType(Type.Regular);
     		GetNewSquareByType(i,j,Type.HardQuestion);
     		getImageByString("I"+i+j).setImage(KNIGHT);
     		Game.getInstance().getKnight().setCurrentPlace(Board[i][j]);
@@ -792,12 +905,27 @@ public class GameController implements Initializable{
 				Board[i][j].setVisisted(true);
 				Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+1);
 				}
+    		try {
+				popQuestion();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
     		break;
         }
 		default:
 			break;
     	
     	}
+    }
+    
+    private void popQuestion() throws IOException {
+		Parent pane = FXMLLoader.load(getClass().getResource("/view/QuestionPopUp.fxml"));
+		Scene scene = new Scene(pane);
+		Stage stage = new Stage();
+		stage.setScene(scene);
+		stage.setTitle("Question PopUp");
+		stage.show();
     }
     
     

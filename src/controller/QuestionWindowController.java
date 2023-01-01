@@ -250,7 +250,7 @@ public class QuestionWindowController implements Initializable {
 	 */
 	 @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		questions = qArray(Type.MediumQuestion);
+		questions = qArray(GameController.getSelectedQuestionType());
 		System.out.println("Question: "+question);
 		questionLbl.setText(question.getQuestionText());
 		option1.setText(question.getAnswer1());
