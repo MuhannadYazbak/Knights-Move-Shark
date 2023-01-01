@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 
 import javafx.event.ActionEvent;
 import javafx.animation.KeyFrame;
@@ -128,20 +129,11 @@ public class GameController implements Initializable{
     	while(!remainingTime.getText().equals("0")) {
 	    		switch(level.getText()) {
 	    		
-		    		case"1":{
+		    		case"1":{		    			
 		    			Boolean movedFlag = false, buttonFlag=true;
 		    		
 		    			for(Square s : Game.getInstance().getKnight().allPossibleMoves()) {
 		    				PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));
-//		    				String pos = "I"+s.getRow()+s.getCol();
-//		    				for(ImageView i : allImages ) {
-//								if(i.getId().equals(pos)) {
-//									i.setImage(Possible);
-//									
-//								}
-//								
-//							}
-		    				//SetPossible();
 		    				
 		    			}
 					
@@ -201,13 +193,6 @@ public class GameController implements Initializable{
 		    				}
 		    			}
 					
-		    			try {
-		    				
-		    				 Thread.sleep(2000);
-		    			} catch (InterruptedException e) {
-		    				 // TODO Auto-generated catch block
-		    				 e.printStackTrace();
-		    			}
 		    			
 		    			if(movedFlag == true) {
 						for(Square s: 	Game.getInstance().getQueen().allPossibleMoves()) {
@@ -263,8 +248,8 @@ public class GameController implements Initializable{
 		    				
 		    			}
 				    
-		    	
 		    			break;
+		    			
 		    		}
 		    	
 		    		case "2":{
@@ -408,17 +393,17 @@ public class GameController implements Initializable{
 		    			Boolean buttonFlag=true, gameStillGoing = true;
 		    			Timer timer = new Timer();
 		    			// the king will move every 10 seconds
-		    			timer.schedule(new kingMovement(), 0, 10000);
-		    			// the king will move every 8 seconds
-		    			timer.schedule(new kingMovement(), 10000, 8000);
-		    			// the king will move every 7 seconds
-		    			timer.schedule(new kingMovement(), 20000, 70000);
-		    			// the king will move every 6 seconds
-		    			timer.schedule(new kingMovement(), 30000, 6000);
-		    			// the king will move every 5 seconds
-		    			timer.schedule(new kingMovement(), 40000, 5000);
-		    			// the king will move every 1 seconds
-		    			timer.schedule(new kingMovement(), 50000, 1000);
+//		    			timer.schedule(new kingMovement(), 0, 10000);
+//		    			// the king will move every 8 seconds
+//		    			timer.schedule(new kingMovement(), 10000, 8000);
+//		    			// the king will move every 7 seconds
+//		    			timer.schedule(new kingMovement(), 20000, 70000);
+//		    			// the king will move every 6 seconds
+//		    			timer.schedule(new kingMovement(), 30000, 6000);
+//		    			// the king will move every 5 seconds
+//		    			timer.schedule(new kingMovement(), 40000, 5000);
+//		    			// the king will move every 1 seconds
+//		    			timer.schedule(new kingMovement(), 50000, 1000);
 		    			
 		    			while(gameStillGoing) {
 		    				
@@ -813,7 +798,14 @@ public class GameController implements Initializable{
 		SetPossible();
         score.setText(Integer.toString(Game.getInstance().getPlayer().getScore()));
 		
-	
+//		try {
+//			Thread.sleep(1000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+
+
 
     }
 		/*
@@ -947,6 +939,7 @@ public class GameController implements Initializable{
 		newstage.setTitle("Question PopUp");
 		newstage.showAndWait();
 		timeline.play();
+
     }
     
     
@@ -1753,7 +1746,10 @@ public class GameController implements Initializable{
 		stage.show();
 	}
 	private void backToMain()throws IOException{
-	
+		Game.getInstance().getKnight().setCurrentPlace(new Square(0, 0));
+		Game.getInstance().getKnight().setPrev_Place(new Square(0, 0));
+		Game.getInstance().getQueen().setPrev_Place(new Square(0, 7));
+		Game.getInstance().getQueen().setCurrentPlace(new Square(0, 7));
 		Parent pane = FXMLLoader.load(getClass().getResource("/views/MainMenu.fxml"));
 		Scene scene = new Scene(pane);
 		Stage stage = new Stage();
@@ -1761,6 +1757,7 @@ public class GameController implements Initializable{
 		stage.setResizable(false);
 		stage.setTitle("Main Menu");
 		stage.show();
+		PlayerNameController.stage.close();
 	}
 
 	@Override

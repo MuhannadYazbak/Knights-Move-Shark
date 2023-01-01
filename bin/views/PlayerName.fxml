@@ -17,42 +17,42 @@
    <children>
       <ImageView fitHeight="750.0" fitWidth="1124.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../lib/123.png" />
+            <Image url="@../lib/1.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="439.0" layoutY="161.0" text="Nick Name" textFill="WHITE">
+      <TextField fx:id="playerName" alignment="CENTER" layoutX="317.0" layoutY="330.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#checkName" prefHeight="80.0" prefWidth="489.0" promptText="Enter Nickname">
          <font>
-            <Font size="50.0" />
-         </font>
-      </Label>
-      <TextField fx:id="playerName" alignment="CENTER" layoutX="317.0" layoutY="321.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#checkName" prefHeight="107.0" prefWidth="489.0" promptText="Enter Nickname">
-         <font>
-            <Font size="50.0" />
+            <Font size="30.0" />
          </font>
       </TextField>
-      <ImageView fitHeight="86.0" fitWidth="192.0" layoutX="543.0" layoutY="628.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="86.0" fitWidth="192.0" layoutX="800.0" layoutY="328.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../lib/lets-go.png" />
+            <Image url="@../lib/12.png" />
          </image>
       </ImageView>
-      <Button fx:id="enterBtn" alignment="BASELINE_RIGHT" contentDisplay="RIGHT" layoutX="543.0" layoutY="628.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goPlay" opacity="0.0" prefHeight="86.0" prefWidth="86.0" style="-fx-background-color: Black;" textFill="WHITE">
+      <Button fx:id="enterBtn" alignment="BASELINE_RIGHT" contentDisplay="RIGHT" layoutX="800.0" layoutY="328.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goPlay" opacity="0.0" prefHeight="86.0" prefWidth="86.0" style="-fx-background-color: Black;" textFill="WHITE">
          <font>
             <Font size="40.0" />
          </font>
       </Button>
-      <ImageView fitHeight="62.0" fitWidth="69.0" layoutX="40.0" layoutY="662.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="82.0" fitWidth="89.0" layoutX="40.0" layoutY="662.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../lib/undo.png" />
+            <Image url="@../lib/back.png" />
          </image>
       </ImageView>
-      <Button fx:id="backBtn" contentDisplay="CENTER" layoutX="40.0" layoutY="671.0" mnemonicParsing="false" onAction="#back" opacity="0.0" prefHeight="50.0" prefWidth="62.0" style="-fx-background-color: white;">
+      <Button fx:id="backBtn" contentDisplay="CENTER" layoutX="40.0" layoutY="662.0" mnemonicParsing="false" onAction="#back" opacity="0.0" prefHeight="50.0" prefWidth="62.0" style="-fx-background-color: white;">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
       <Label fx:id="message" layoutX="427.0" layoutY="453.0" text="Player Name is Required" textFill="RED">
          <font>
-            <Font size="25.0" />
+        	<Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="title" layoutX="370.0" layoutY="250.0" text="Please Insert Your Nickname" textFill="WHITE">
+         <font>
+        	<Font name="System Bold" size="30.0" />
          </font>
       </Label>
    </children>

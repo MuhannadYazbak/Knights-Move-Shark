@@ -26,7 +26,7 @@ public class PlayerNameController implements Initializable {
 	private String name;
 	@FXML 
 	private TextField playerName;
-	
+	static Stage stage;
 	@FXML 
 	private Button enterBtn, backBtn;
 	
@@ -53,7 +53,7 @@ public class PlayerNameController implements Initializable {
 		SysData.getInstance().setGame(g);
 		Parent pane = FXMLLoader.load(getClass().getResource("/views/Game.fxml"));
 		Scene scene = new Scene(pane);
-		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+		stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(scene);
 		stage.setTitle("Game Board");
 		stage.show();

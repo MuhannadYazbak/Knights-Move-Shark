@@ -45,6 +45,11 @@ public class Square {
 	public void setSquareType(Type squareType) {
 		this.squareType = squareType;
 	}
+
+	@Override
+	public String toString() {
+		return "Square [row=" + row + ", col=" + col + "]";
+	}
 	
 	
 }

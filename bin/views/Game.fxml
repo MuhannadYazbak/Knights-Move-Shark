@@ -10,9 +10,9 @@
 
 <AnchorPane fx:id="screen" prefHeight="750.0" prefWidth="1124.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
    <children>
-      <ImageView fitHeight="750.0" fitWidth="1124.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="1900.0" fitWidth="1200.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../lib/chess-5038731_640.jpg" />
+            <Image url="@../lib/bgg.jpg" />
          </image>
       </ImageView>
       <Label prefHeight="70.0" prefWidth="1124.0" style="-fx-background-color: #612D00;" />
