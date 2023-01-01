@@ -182,6 +182,7 @@ public class GameController implements Initializable{
 		    							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
 		    							levelUp=true;
 		    							ResetSquareType(); // to set all the square as regular squares and be ready for the next level
+		    							GenerateSquareType();
 		    							try {
 		    								alert.setTitle("Congrats!");
 		    								alert.setContentText("Press ok to continue.");
@@ -248,6 +249,7 @@ public class GameController implements Initializable{
 		    					alert.setContentText("Good Luck Next Time.");
 		    					alert.setHeaderText("Thank You For Playing.");
 		    					alert.showAndWait();
+		    					SysData.getInstance().addHistory(Game.getInstance().getPlayer());
 		    					backToMain();
 		    				
 
@@ -319,6 +321,7 @@ public class GameController implements Initializable{
 		    							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
 		    							levelUp=true;
 		    							ResetSquareType(); // to set all the square as regular squares and be ready for the next level
+		    							GenerateSquareType();
 		    							try {
 		    								alert.setTitle("Congrats!");
 		    								alert.setContentText("Press ok to continue.");
@@ -385,6 +388,7 @@ public class GameController implements Initializable{
 		    					alert.setContentText("Good Luck Next Time.");
 		    					alert.setHeaderText("Thank You For Playing.");
 		    					alert.showAndWait();
+		    					SysData.getInstance().addHistory(Game.getInstance().getPlayer());
 		    					backToMain();
 		    				
 
@@ -458,6 +462,7 @@ public class GameController implements Initializable{
 			    							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
 			    							levelUp=true;
 			    							ResetSquareType(); // to set all the square as regular squares and be ready for the next level
+			    							GenerateSquareType();
 			    							try {
 			    								alert.setTitle("Congrats!");
 			    								alert.setContentText("Press ok to continue.");
@@ -475,13 +480,26 @@ public class GameController implements Initializable{
 									
 			    				}
 			    			}
-			    			
-			    			// checking timer because in case 4 there is a while loop
-			    			
-			    			if(remainingTime.getText().equals("0")){
-			    				timer.cancel();
-			    		    	gameStillGoing = false;
-			    		    	}
+			    			if(Game.getInstance().getKing().getCurrentPlace().getCol()==Game.getInstance().getKnight().getCurrentPlace().getCol() && 
+			    					Game.getInstance().getKing().getCurrentPlace().getRow() == Game.getInstance().getKnight().getCurrentPlace().getRow()) {
+			    				try {
+			    					alert.setTitle("Game Over!");
+			    					alert.setContentText("Good Luck Next Time.");
+			    					alert.setHeaderText("Thank You For Playing.");
+			    					alert.showAndWait();
+			    					SysData.getInstance().addHistory(Game.getInstance().getPlayer());
+			    					backToMain();
+			    				
+
+			    					
+			    				} catch (Error e) {
+			    					e.printStackTrace();
+			    				} catch (Exception e) {
+			    					e.printStackTrace();
+			    				}
+			    				
+			    				
+			    			}
 			    			
 			    			
 			    			
@@ -578,6 +596,7 @@ public class GameController implements Initializable{
 			alert.setContentText("Time Out.");
 			alert.setHeaderText("Thank You For Playing.");
 			alert.showAndWait();
+			SysData.getInstance().addHistory(Game.getInstance().getPlayer());
 		} catch (Error e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -920,12 +939,14 @@ public class GameController implements Initializable{
     }
     
     private void popQuestion() throws IOException {
-		Parent pane = FXMLLoader.load(getClass().getResource("/view/QuestionPopUp.fxml"));
+		timeline.pause();
+    	Parent pane = FXMLLoader.load(getClass().getResource("/views/QuestionWindow.fxml"));
 		Scene scene = new Scene(pane);
-		Stage stage = new Stage();
-		stage.setScene(scene);
-		stage.setTitle("Question PopUp");
-		stage.show();
+		Stage newstage = new Stage();
+		newstage.setScene(scene);
+		newstage.setTitle("Question PopUp");
+		newstage.showAndWait();
+		timeline.play();
     }
     
     
