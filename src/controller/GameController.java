@@ -99,6 +99,7 @@ public class GameController implements Initializable{
 	private Image Visited = new Image(getClass().getResourceAsStream("/lib/yellow.png"));
 	private Image Question = new Image(getClass().getResourceAsStream("/lib/Qm.png"));
 	private Image QuestionWhite = new Image(getClass().getResourceAsStream("/lib/Qw.png"));
+	private Image Blocked = new Image(getClass().getResourceAsStream("/lib/blocked.png"));
 
 
     //private HashSet<ImageView> PossibleMovesKnight = new HashSet<ImageView>();
@@ -824,6 +825,9 @@ public class GameController implements Initializable{
     		}
 		
     	}
+    	
+    	else if(Board[i][j].getSquareType().equals(Type.Blocked))
+    			getImageByString("I"+i+j).setImage(Blocked);
 		SetPossible();
         score.setText(Integer.toString(Game.getInstance().getPlayer().getScore()));
 		
