@@ -80,7 +80,7 @@
          </image>
       </ImageView>
       <ImageView fx:id="I02" fitHeight="60.0" fitWidth="60.0" layoutX="452.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="S03" fitHeight="70.0" fitWidth="70.0" layoutX="516.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="S03" fitHeight="70.0" fitWidth="70.0" layoutX="516.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../lib/sb.png" />
          </image>
@@ -92,7 +92,7 @@
          </image>
       </ImageView>
       <ImageView fx:id="I04" fitHeight="60.0" fitWidth="60.0" layoutX="590.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="S05" fitHeight="70.0" fitWidth="70.0" layoutX="654.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="S05" fitHeight="70.0" fitWidth="70.0" layoutX="654.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../lib/sb.png" />
          </image>
@@ -104,7 +104,7 @@
          </image>
       </ImageView>
       <ImageView fx:id="I06" fitHeight="60.0" fitWidth="60.0" layoutX="728.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="S07" fitHeight="70.0" fitWidth="70.0" layoutX="793.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="S07" fitHeight="70.0" fitWidth="70.0" layoutX="791.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../lib/sb.png" />
          </image>
