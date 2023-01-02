@@ -88,8 +88,16 @@ public class GameController implements Initializable{
     private static final Integer STARTTIME = 90;
     private Timeline timeline;
     private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
+    static Timer timer = new Timer();
     
-    /*
+    public static Timer getTimer() {
+		return timer;
+	}
+
+	public void setTimer(Timer timer) {
+		GameController.timer = timer;
+	}
+	/*
      * images to use on board
      */
 	private Image KING = new Image(getClass().getResourceAsStream("/lib/king.png"));
@@ -137,7 +145,7 @@ public class GameController implements Initializable{
 			level4Started = true;
 			System.out.println("first Move");
 			// the king will move every 10 seconds (currently set to 4 to see clearer)
-			Timer timer = new Timer();
+			
 			timer.schedule(new kingMovement(), 0, 4000);
 		}
     	
@@ -509,10 +517,9 @@ public class GameController implements Initializable{
 		    		}
 		    		
 		    		case "4":{
+		    			
 		    			Boolean buttonFlag=true, gameStillGoing = true;
-//		    			Timer timer = new Timer();
-//		    			timer.schedule(new kingMovement(), 0, 10000);		    			
-//    				System.out.println("game here");
+
 		    				
 		    				for(Square s : Game.getInstance().getKnight().allPossibleMoves()) {
 		    				PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));
@@ -527,6 +534,29 @@ public class GameController implements Initializable{
 			    							
 										}
 			    				}
+			    				
+			    			}
+		    				
+		    				if(Game.getInstance().getKing().getCurrentPlace().getCol()==Game.getInstance().getKnight().getCurrentPlace().getCol() && 
+			    					Game.getInstance().getKing().getCurrentPlace().getRow() == Game.getInstance().getKnight().getCurrentPlace().getRow()) {
+			    				try {
+			    					gameStillGoing = false;
+			    					timer.cancel();
+			    					timer.purge();
+			    					alert.setTitle("game Over!");
+			    					alert.setContentText("good Luck Next Time.");
+			    					alert.setHeaderText("Thank You For Playing.");
+			    					alert.showAndWait();
+			    					backToMain();
+			    				
+
+			    					
+			    				} catch (Error e) {
+			    					e.printStackTrace();
+			    				} catch (Exception e) {
+			    					e.printStackTrace();
+			    				}
+			    				
 			    				
 			    			}
 		    				
@@ -547,18 +577,20 @@ public class GameController implements Initializable{
 			    			
 			    			// checking if the player finished the game
 			    			
-			    			if(SysData.getInstance().getHistoryGamesForShow().contains(Game.getInstance().getPlayer())) {
-		    				for(Player p: SysData.getInstance().getHistoryGamesForShow()) {
-		    					if(p.getName().equals(Game.getInstance().getPlayer().getName()) && p.getScore()>=15 )
-		    						{
+			    			if(Game.getInstance().getPlayer().getScore() >=15) {
+//		    				for(Player p: SysData.getInstance().getHistoryGamesForShow()) {
+//		    					if(p.getName().equals(Game.getInstance().getPlayer().getName()) && p.getScore()>=15 )
+//		    						{
 		    						
 		    							try {
 		    								gameStillGoing = false;
-		    								//timer.cancel();
+		    								timer.cancel();
+		    		    					timer.purge();
 		    								alert.setTitle("Congrats!");
 		    								alert.setContentText("Press ok to continue.");
 		    								alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have won the game!");
 		    								alert.showAndWait();
+		    								backToMain();
 		    							} catch (Error e) {
 		    								e.printStackTrace();
 		    							} catch (Exception e) {
@@ -569,13 +601,14 @@ public class GameController implements Initializable{
 		    					        break;
 		    						}
 								
-		    				}
-		    			}
+//		    				}
+//		    			}
 			    			
 			    			// checking timer because in case 4 there is a while loop
 			    			
 			    			if(remainingTime.getText().equals("0")){
-			    				//timer.cancel();
+			    				timer.cancel();
+		    					timer.purge();
 			    		    	gameStillGoing = false;
 			    		    	}
 			    			
@@ -590,11 +623,15 @@ public class GameController implements Initializable{
     	}
     	if(remainingTime.getText().equals("0")){
     	try {
+    		timer.cancel();
+			timer.purge();
+//	    	gameStillGoing = false;
 			alert.setTitle("game Over!");
 			alert.setContentText("Time Out.");
 			alert.setHeaderText("Thank You For Playing.");
 			alert.showAndWait();
 			SysData.getInstance().addHistory(Game.getInstance().getPlayer());
+			backToMain();
 		} catch (Error e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -1800,7 +1837,7 @@ public class GameController implements Initializable{
 		stage.setTitle("Main Menu");
 		stage.show();
 	}
-	private void backToMain()throws IOException{
+	static void backToMain()throws IOException{
 		Game.getInstance().getKnight().setCurrentPlace(new Square(0, 0));
 		Game.getInstance().getKnight().setPrev_Place(new Square(0, 0));
 		Game.getInstance().getQueen().setPrev_Place(new Square(0, 7));
@@ -1871,8 +1908,24 @@ public class GameController implements Initializable{
     	Game.getInstance().getPlayer().setScore(1);
     	SetPossible();
 
+	}
+	
+	public static void gameOverMessage() {
+		try {
+			final Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("game Over!");
+			alert.setContentText("good Luck Next Time.");
+			alert.setHeaderText("Thank You For Playing.");
+			alert.showAndWait();
+//			GameController.backToMain();
+		
 
-
+			
+		} catch (Error e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	public static HashSet<ImageView> getAllImages() {
 		return allImages;

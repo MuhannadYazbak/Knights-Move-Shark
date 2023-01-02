@@ -40,7 +40,7 @@ class kingMovement extends TimerTask  {
 		}
 		
 		String prev = "I" +Integer.toString(Game.getInstance().getKing().getPrev_Place().getRow())
-		+Integer.toString(Game.getInstance().getQueen().getPrev_Place().getCol());
+		+Integer.toString(Game.getInstance().getKing().getPrev_Place().getCol());
 		for(ImageView i : GameController.getAllImages() ) {
 			if(i.getId().equals(prev)) {
 				
@@ -51,17 +51,9 @@ class kingMovement extends TimerTask  {
 		}
 		
 		if(Game.getInstance().getKing().getCurrentPlace().getCol()==Game.getInstance().getKnight().getCurrentPlace().getCol() && 
-				Game.getInstance().getQueen().getCurrentPlace().getRow() == Game.getInstance().getKnight().getCurrentPlace().getRow()) {
+				Game.getInstance().getKing().getCurrentPlace().getRow() == Game.getInstance().getKnight().getCurrentPlace().getRow()) {
 			try {
-				cancel();
-				alert.setTitle("game Over!");
-				alert.setContentText("good Luck Next Time.");
-				alert.setHeaderText("Thank You For Playing.");
-				alert.showAndWait();
-//				GameController.backToMain();
-			
-
-				
+				GameController.getTimer().cancel();		
 			} catch (Error e) {
 				e.printStackTrace();
 			} catch (Exception e) {
