@@ -97,6 +97,10 @@ public class GameController implements Initializable{
 	private Image KNIGHT = new Image(getClass().getResourceAsStream("/lib/knight.png"));
 	private Image Possible = new Image(getClass().getResourceAsStream("/lib/whitebg.png"));
 	private Image Visited = new Image(getClass().getResourceAsStream("/lib/yellow.png"));
+	private Image Question = new Image(getClass().getResourceAsStream("/lib/Qm.png"));
+	private Image QuestionWhite = new Image(getClass().getResourceAsStream("/lib/Qw.png"));
+
+
     //private HashSet<ImageView> PossibleMovesKnight = new HashSet<ImageView>();
 	
     private HashSet<ImageView> PossibleMovesQueen = new HashSet<ImageView>();
@@ -631,6 +635,10 @@ public class GameController implements Initializable{
     		
     		//PossibleMovesKnight.add(getImageByString("I"+s.getRow()+s.getCol()));
 	    	getImageByString("I"+s.getRow()+s.getCol()).setImage(Possible); // set image with name Possible (White color) to show the possible moves
+	    	if(Board[s.getRow()][s.getCol()].getSquareType().equals(Type.EasyQuestion) || Board[s.getRow()][s.getCol()].getSquareType().equals(Type.HardQuestion) || 
+	    			Board[s.getRow()][s.getCol()].getSquareType().equals(Type.MediumQuestion)) {
+		    	getImageByString("I"+s.getRow()+s.getCol()).setImage(QuestionWhite); 
+	    	}
 		}
     }
     
@@ -708,12 +716,18 @@ public class GameController implements Initializable{
 
 		Square s1= randomRegularSquare(); // build one square with easy question.
 		s1.setSquareType(Type.EasyQuestion);
+		getImageByString("I"+s1.getRow()+s1.getCol()).setImage(Question);
+
 		
 		Square s2= randomRegularSquare(); // build one square with medium question.
 		s2.setSquareType(Type.MediumQuestion);
+		getImageByString("I"+s2.getRow()+s2.getCol()).setImage(Question);
+
 		
 		Square s3= randomRegularSquare(); // build one square with hard question.
 		s3.setSquareType(Type.HardQuestion);
+		getImageByString("I"+s3.getRow()+s3.getCol()).setImage(Question);
+
     }
     
     private void GetNewSquareByType(int r, int c, Type t) { // when the player press on a button with one of these types the game create square with the same type
@@ -744,6 +758,8 @@ public class GameController implements Initializable{
     		
     			case "EasyQuestion":{ // set new square with EasyQuestion type.
     				s.setSquareType(Type.EasyQuestion);
+    				getImageByString("I"+r+c).setImage(Question);
+    				
     				/*
     				 * to add question when the player press on it
     				 */
@@ -752,6 +768,9 @@ public class GameController implements Initializable{
     			
     			case "MediumQuestion":{ // set new square with MediumQuestion type.
     				s.setSquareType(Type.MediumQuestion);
+    				System.err.println();
+    				getImageByString("I"+r+c).setImage(Question);
+
     				/*
     				 * to add question when the player press on it
     				 */
@@ -760,6 +779,8 @@ public class GameController implements Initializable{
     			
     			case "HardQuestion":{ // set new square with HardQuestion type.
     				s.setSquareType(Type.HardQuestion);
+    				getImageByString("I"+r+c).setImage(Question);
+
     				/*
     				 * to add question when the player press on it
     				 */
@@ -834,7 +855,19 @@ public class GameController implements Initializable{
     	
     	// moving knight to random square and creating a new random jump square
     	case RandomJump: {
-    		
+    		try {
+				alert.setTitle("OOPs!");
+				alert.setContentText("random jump.");
+				alert.setHeaderText("Get Ready, "+ Game.getInstance().getPlayer().getName());
+				alert.showAndWait();
+			} catch (Error e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			countDown();
+	        
+	        
     		Board[i][j].setSquareType(Type.Regular);
     		GetNewSquareByType(i,j,Type.RandomJump);
     		Square jumpTo1 = randomSquare();
@@ -870,6 +903,7 @@ public class GameController implements Initializable{
         	setSelectedQuestionType(Type.EasyQuestion);
         	Board[i][j].setSquareType(Type.Regular);
     		GetNewSquareByType(i,j,Type.EasyQuestion);
+
     		getImageByString("I"+i+j).setImage(KNIGHT);
     		Game.getInstance().getKnight().setCurrentPlace(Board[i][j]);
     		
@@ -886,12 +920,16 @@ public class GameController implements Initializable{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+    		Square s1= randomRegularSquare(); // build one square with easy question.
+    		s1.setSquareType(Type.EasyQuestion);
+    		getImageByString("I"+s1.getRow()+s1.getCol()).setImage(Question);
     		break;
         }
     	case MediumQuestion:{
     		setSelectedQuestionType(Type.MediumQuestion);
     		Board[i][j].setSquareType(Type.Regular);
     		GetNewSquareByType(i,j,Type.MediumQuestion);
+
     		getImageByString("I"+i+j).setImage(KNIGHT);
     		Game.getInstance().getKnight().setCurrentPlace(Board[i][j]);
     		
@@ -908,6 +946,9 @@ public class GameController implements Initializable{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+    		Square s1= randomRegularSquare(); // build one square with easy question.
+    		s1.setSquareType(Type.MediumQuestion);
+    		getImageByString("I"+s1.getRow()+s1.getCol()).setImage(Question);
     		break;
         }
     	case HardQuestion:{
@@ -930,6 +971,9 @@ public class GameController implements Initializable{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+    		Square s1= randomRegularSquare(); // build one square with easy question.
+    		s1.setSquareType(Type.HardQuestion);
+    		getImageByString("I"+s1.getRow()+s1.getCol()).setImage(Question);
     		break;
         }
 		default:
@@ -963,7 +1007,6 @@ public class GameController implements Initializable{
         		flag = false;
     		
     	}while(flag);
-    	
     	
     	return Board[randomNumber1][randomNumber2];
 
@@ -1758,14 +1801,14 @@ public class GameController implements Initializable{
 		Game.getInstance().getKnight().setPrev_Place(new Square(0, 0));
 		Game.getInstance().getQueen().setPrev_Place(new Square(0, 7));
 		Game.getInstance().getQueen().setCurrentPlace(new Square(0, 7));
-		Parent pane = FXMLLoader.load(getClass().getResource("/views/MainMenu.fxml"));
-		Scene scene = new Scene(pane);
-		Stage stage = new Stage();
-		stage.setScene(scene);
-		stage.setResizable(false);
-		stage.setTitle("Main Menu");
-		stage.show();
-		PlayerNameController.stage.close();
+//		Parent pane = FXMLLoader.load(getClass().getResource("/views/MainMenu.fxml"));
+//		Scene scene = new Scene(pane);
+//		Stage stage = new Stage();
+//		stage.setScene(scene);
+//		stage.setResizable(false);
+//		stage.setTitle("Main Menu");
+//		stage.show();
+		Platform.exit();
 	}
 
 	@Override
@@ -1823,6 +1866,8 @@ public class GameController implements Initializable{
     	I07.setImage(QUEEN);
     	Game.getInstance().getPlayer().setScore(1);
     	SetPossible();
+
+
 
 	}
 	public static HashSet<ImageView> getAllImages() {
