@@ -85,7 +85,7 @@ public class GameController implements Initializable{
     @FXML
     private AnchorPane screen;
     
-    private static final Integer STARTTIME = 90;
+    private static final Integer STARTTIME = 60;
     private Timeline timeline;
     private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
     static Timer timer = new Timer();
