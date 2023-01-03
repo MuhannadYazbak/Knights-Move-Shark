@@ -543,8 +543,8 @@ public class GameController implements Initializable{
 			    					gameStillGoing = false;
 			    					timer.cancel();
 			    					timer.purge();
-			    					alert.setTitle("game Over!");
-			    					alert.setContentText("good Luck Next Time.");
+			    					alert.setTitle("Game Over!");
+			    					alert.setContentText("Good Luck Next Time.");
 			    					alert.setHeaderText("Thank You For Playing.");
 			    					alert.showAndWait();
 			    					backToMain();
@@ -906,7 +906,17 @@ public class GameController implements Initializable{
     	else if(SysData.getInstance().getGame().getLevel()==2||SysData.getInstance().getGame().getLevel()==3|| SysData.getInstance().getGame().getLevel()==4)
     		SetPossibleLEVEL2();
         score.setText(Integer.toString(Game.getInstance().getPlayer().getScore()));
-		
+
+        if(Game.getInstance().Winner(Game.getInstance().getScore()))
+			{System.out.println("vvvvvv");
+        		try {
+			
+				popWinner();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			}
 //		try {
 //			Thread.sleep(1000);
 //		} catch (InterruptedException e) {
@@ -1074,6 +1084,17 @@ public class GameController implements Initializable{
 
     }
     
+    private void popWinner() throws IOException {
+		timeline.pause();
+    	Parent pane = FXMLLoader.load(getClass().getResource("/views/WinnerWindow.fxml"));
+		Scene scene = new Scene(pane);
+		Stage newstage = new Stage();
+		newstage.setScene(scene);
+		newstage.setTitle("You are the winner! Congrats.");
+		newstage.showAndWait();
+		timeline.play();
+
+    }
     
     // a method that returns a random regular square 
     public Square randomRegularSquare() {
@@ -1956,8 +1977,8 @@ public class GameController implements Initializable{
 	public static void gameOverMessage() {
 		try {
 			final Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			alert.setTitle("game Over!");
-			alert.setContentText("good Luck Next Time.");
+			alert.setTitle("Game Over!");
+			alert.setContentText("Good Luck Next Time.");
 			alert.setHeaderText("Thank You For Playing.");
 			alert.showAndWait();
 //			GameController.backToMain();

@@ -154,27 +154,6 @@ public class Game {
 		return board[i][j];
 	}
 	
-	public int UpdateScore(int score, PlusOrMinus POM, Difficulty d) {
-		if(d == d.EASY && POM == POM.Plus)
-			return score+=1;		
-		
-		else if(d == d.EASY && POM == POM.Minus)
-			return score-=2;
-		
-		if(d == d.MEDIUM && POM == POM.Plus)
-			return score+=2;		
-		
-		else if(d == d.MEDIUM && POM == POM.Minus)
-			return score-=3;
-		
-		if(d == d.HARD && POM == POM.Plus)
-			return score+=3;		
-		
-		else return score-=4;
-		
-	}
-
-	
 	public boolean Winner(int score) {
 		if(score>200)
 			return true;
