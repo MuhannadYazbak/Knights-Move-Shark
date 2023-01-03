@@ -67,7 +67,7 @@ public class King extends Piece{
 				possibleMoves.add(new Square(getCurrentPlace().getRow()-1, 0));
 				possibleMoves.add(new Square(getCurrentPlace().getRow(), 1));
 				possibleMoves.add(new Square(getCurrentPlace().getRow(), 7));
-				possibleMoves.add(new Square(getCurrentPlace().getRow()-1, getCurrentPlace().getCol()-1));
+				possibleMoves.add(new Square(getCurrentPlace().getRow()-1, 7));
 				possibleMoves.add(new Square(getCurrentPlace().getRow()+1, getCurrentPlace().getCol()+1));
 				possibleMoves.add(new Square(getCurrentPlace().getRow()-1, 7));
 				possibleMoves.add(new Square(getCurrentPlace().getRow()+1, 7));
