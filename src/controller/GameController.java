@@ -671,8 +671,22 @@ public class GameController implements Initializable{
     	
     	for(Square s : 	Game.getInstance().getKnight().allPossibleMoves()) {
     		
-    		//PossibleMovesKnight.add(getImageByString("I"+s.getRow()+s.getCol()));
-	    	getImageByString("I"+s.getRow()+s.getCol()).setImage(Possible); // set image with name Possible (White color) to show the possible moves
+    		if(Board[s.getRow()][s.getCol()].getSquareType().equals(Type.Regular) || Board[s.getRow()][s.getCol()].getSquareType().equals(Type.RandomJump))
+    			{System.out.println("test");
+    			getImageByString("I"+s.getRow()+s.getCol()).setImage(Possible); // set image with name Possible (White color) to show the possible moves
+    			}
+	    	if(Board[s.getRow()][s.getCol()].getSquareType().equals(Type.EasyQuestion) || Board[s.getRow()][s.getCol()].getSquareType().equals(Type.HardQuestion) || 
+	    			Board[s.getRow()][s.getCol()].getSquareType().equals(Type.MediumQuestion)) {System.out.println("Question????????????????????????");
+		    	getImageByString("I"+s.getRow()+s.getCol()).setImage(QuestionWhite); 
+	    	}
+		}System.out.println("************************************************");
+    }
+    
+    private void SetPossibleLEVEL2() { // function to show the possible moves by setting white color on the square
+    	
+    	for(Square s : 	Game.getInstance().getKnight().allPossibleMovesLevel2()) {
+    		if(Board[s.getRow()][s.getCol()].getSquareType().equals(Type.Regular) || Board[s.getRow()][s.getCol()].getSquareType().equals(Type.RandomJump))
+    			getImageByString("I"+s.getRow()+s.getCol()).setImage(Possible);// set image with name Possible (White color) to show the possible moves
 	    	if(Board[s.getRow()][s.getCol()].getSquareType().equals(Type.EasyQuestion) || Board[s.getRow()][s.getCol()].getSquareType().equals(Type.HardQuestion) || 
 	    			Board[s.getRow()][s.getCol()].getSquareType().equals(Type.MediumQuestion)) {
 		    	getImageByString("I"+s.getRow()+s.getCol()).setImage(QuestionWhite); 
@@ -682,7 +696,25 @@ public class GameController implements Initializable{
     
     private void RemovePossible() { // function to remove the possible moves
     	for(Square s : 	Game.getInstance().getKnight().allPossibleMoves()) {
-	    	getImageByString("I"+s.getRow()+s.getCol()).setImage(null); // set image null to remove the possible moves
+    		if(Board[s.getRow()][s.getCol()].getSquareType().equals(Type.Regular) || Board[s.getRow()][s.getCol()].getSquareType().equals(Type.RandomJump))
+    			getImageByString("I"+s.getRow()+s.getCol()).setImage(null); // set image null to remove the possible moves
+    		if(Board[s.getRow()][s.getCol()].getSquareType().equals(Type.EasyQuestion) || (Board[s.getRow()][s.getCol()].getSquareType().equals(Type.MediumQuestion) || (Board[s.getRow()][s.getCol()].getSquareType().equals(Type.HardQuestion))))
+    			getImageByString("I"+s.getRow()+s.getCol()).setImage(Question);
+    		if(Board[s.getRow()][s.getCol()].getSquareType().equals(Type.Blocked))
+    			getImageByString("I"+s.getRow()+s.getCol()).setImage(Blocked);
+		}
+    }
+    
+    private void RemovePossibleLEVEL2() { // function to remove the possible moves
+    	for(Square s : 	Game.getInstance().getKnight().allPossibleMovesLevel2()) {
+    		
+    		if(Board[s.getRow()][s.getCol()].getSquareType().equals(Type.Regular) || Board[s.getRow()][s.getCol()].getSquareType().equals(Type.RandomJump))
+    			getImageByString("I"+s.getRow()+s.getCol()).setImage(null); // set image null to remove the possible moves
+    		if(Board[s.getRow()][s.getCol()].getSquareType().equals(Type.EasyQuestion) || (Board[s.getRow()][s.getCol()].getSquareType().equals(Type.MediumQuestion) || (Board[s.getRow()][s.getCol()].getSquareType().equals(Type.HardQuestion))))
+    			getImageByString("I"+s.getRow()+s.getCol()).setImage(Question);
+    		if(Board[s.getRow()][s.getCol()].getSquareType().equals(Type.Blocked))
+    			getImageByString("I"+s.getRow()+s.getCol()).setImage(Blocked);
+    		
 		}
     }
     
@@ -755,7 +787,7 @@ public class GameController implements Initializable{
 		Square s1= randomRegularSquare(); // build one square with easy question.
 		s1.setSquareType(Type.EasyQuestion);
 		getImageByString("I"+s1.getRow()+s1.getCol()).setImage(Question);
-
+		
 		
 		Square s2= randomRegularSquare(); // build one square with medium question.
 		s2.setSquareType(Type.MediumQuestion);
@@ -780,7 +812,7 @@ public class GameController implements Initializable{
     			
     			case "RandomJump":{ // set new square with RandomJump type.
     				s.setSquareType(Type.RandomJump);
-    				System.out.println(s.getCol() + " " +s.getRow());
+    				System.out.println("New RANDOM" +s.getCol() + " " +s.getRow());
     				break;
     			}
     			
@@ -839,7 +871,10 @@ public class GameController implements Initializable{
 
     	//Nothing happens if a player presses on a blocked square
     	if(!Board[i][j].getSquareType().equals(Type.Blocked)) {
-    		RemovePossible();
+    		
+    		if(SysData.getInstance().getGame().getLevel()==1)
+    			RemovePossible();
+    		else RemovePossibleLEVEL2();
     		Square prevPlace=Game.getInstance().getKnight().getCurrentPlace();
 			Game.getInstance().getKnight().setCurrentPlace(Board[i][j]);
     		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
@@ -865,7 +900,11 @@ public class GameController implements Initializable{
     	
     	else if(Board[i][j].getSquareType().equals(Type.Blocked))
     			getImageByString("I"+i+j).setImage(Blocked);
-		SetPossible();
+    	
+    	if(SysData.getInstance().getGame().getLevel()==1)
+    		SetPossible();
+    	else if(SysData.getInstance().getGame().getLevel()==2||SysData.getInstance().getGame().getLevel()==3|| SysData.getInstance().getGame().getLevel()==4)
+    		SetPossibleLEVEL2();
         score.setText(Integer.toString(Game.getInstance().getPlayer().getScore()));
 		
 //		try {
@@ -1906,7 +1945,11 @@ public class GameController implements Initializable{
     	S00.setImage(Visited);
     	I07.setImage(QUEEN);
     	Game.getInstance().getPlayer().setScore(1);
-    	SetPossible();
+    	
+    	if(SysData.getInstance().getGame().getLevel()==1)
+    		SetPossible();
+    	else	SetPossibleLEVEL2();
+
 
 	}
 	

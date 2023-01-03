@@ -147,14 +147,7 @@ public class Game {
 	public static void setInstance(Game instance) {
 		Game.instance = instance;
 	}
-
-	// we need to write it
-    public void restartGame()/////////////////////////////////////////////////////////////////////////////////////////
-    {
-    	
-    }
     
-	
 	public  Square squareByIndx(int i, int j) {
 		if(board == null)
 			return null;
@@ -180,18 +173,7 @@ public class Game {
 		else return score-=4;
 		
 	}
-	
-	public int NextLevel(int score, int level) {
-		if(score>=15)
-			return ++level;
-		
-		else return level;
-	}
-	
-	/*public Square[][] LeadBoard(){
-		
-		
-	}*/
+
 	
 	public boolean Winner(int score) {
 		if(score>200)
@@ -199,35 +181,8 @@ public class Game {
 		return false;
 	}
 	
-	public Game GameOver(Game g) {
-		/*
-		 * 
-		 * if(game is over return game*/
-		
-		return null;
-	}
-	
 	public void ForgetLast3() {
 		
 	}
-	
-	public Square JumpRandomly(Knight k, Square s) {
-		
-		// choose random move from the possible moves
-		
-		return null;
-	}
-	
-	public void ChangeSquareType() {
-		
-	}
-	
-	public boolean PauseGame(Game g) {
-		return false;
-	}
-	
-	
-	
-	
 
 }

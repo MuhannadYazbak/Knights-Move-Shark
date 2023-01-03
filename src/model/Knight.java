@@ -2510,6 +2510,10 @@ public class Knight extends Piece{
 			
 			
 			}
+		
+		System.out.println("start");
+		System.out.println(possibleMoves);
+		System.out.println("end");
 		return possibleMoves;
 	}
 	

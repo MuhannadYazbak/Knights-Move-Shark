@@ -1,6 +1,4 @@
-/controller/
-/lib/
 /model/
-/utils/
-/views/
 /testUnits/
+/utils/
+/controller/
