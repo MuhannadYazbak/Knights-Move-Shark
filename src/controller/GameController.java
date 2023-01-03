@@ -672,14 +672,13 @@ public class GameController implements Initializable{
     	for(Square s : 	Game.getInstance().getKnight().allPossibleMoves()) {
     		
     		if(Board[s.getRow()][s.getCol()].getSquareType().equals(Type.Regular) || Board[s.getRow()][s.getCol()].getSquareType().equals(Type.RandomJump))
-    			{System.out.println("test");
     			getImageByString("I"+s.getRow()+s.getCol()).setImage(Possible); // set image with name Possible (White color) to show the possible moves
-    			}
+    			
 	    	if(Board[s.getRow()][s.getCol()].getSquareType().equals(Type.EasyQuestion) || Board[s.getRow()][s.getCol()].getSquareType().equals(Type.HardQuestion) || 
-	    			Board[s.getRow()][s.getCol()].getSquareType().equals(Type.MediumQuestion)) {System.out.println("Question????????????????????????");
+	    			Board[s.getRow()][s.getCol()].getSquareType().equals(Type.MediumQuestion)) {
 		    	getImageByString("I"+s.getRow()+s.getCol()).setImage(QuestionWhite); 
 	    	}
-		}System.out.println("************************************************");
+		}
     }
     
     private void SetPossibleLEVEL2() { // function to show the possible moves by setting white color on the square
@@ -908,7 +907,7 @@ public class GameController implements Initializable{
         score.setText(Integer.toString(Game.getInstance().getPlayer().getScore()));
 
         if(Game.getInstance().Winner(Game.getInstance().getScore()))
-			{System.out.println("vvvvvv");
+			{
         		try {
 			
 				popWinner();
