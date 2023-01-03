@@ -12,13 +12,12 @@ import model.Square;
 
 class kingMovement extends TimerTask  {
 	Set<Square> possibleMoves;
-	private Alert alert = new Alert(Alert.AlertType.INFORMATION);
 	private Image KING = new Image(getClass().getResourceAsStream("/lib/king.png"));
 
     @Override
     public void run() {
     	possibleMoves = Game.getInstance().getKing().allPossibleMoves();
-    	 
+    	System.out.println("i am called");
 	    
 	    for(Square s: possibleMoves) {
 			GameController.getPossibleMovesKing().add(GameController.getImageByString("I"+s.getRow()+s.getCol()));

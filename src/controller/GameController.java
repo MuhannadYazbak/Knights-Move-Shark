@@ -143,10 +143,11 @@ public class GameController implements Initializable{
 		//checking if this is the first move in level 4 to start king movement
 		if(!level4Started && Game.getInstance().getLevel() == 4) {
 			level4Started = true;
+			I07.setImage(null);
 			System.out.println("first Move");
-			// the king will move every 10 seconds (currently set to 4 to see clearer)
 			
-			timer.schedule(new kingMovement(), 0, 4000);
+			// the king will change speed move every 10 seconds
+			timer.schedule(new kingSpeed(), 0, 10000);
 		}
     	
     	while(!remainingTime.getText().equals("0")) {
@@ -518,12 +519,67 @@ public class GameController implements Initializable{
 		    		
 		    		case "4":{
 		    			
-		    			Boolean buttonFlag=true, gameStillGoing = true;
+		    			Boolean buttonFlag=true;
+		    			
+	    				if(Game.getInstance().getKing().getCurrentPlace().getCol()==Game.getInstance().getKnight().getCurrentPlace().getCol() && 
+		    					Game.getInstance().getKing().getCurrentPlace().getRow() == Game.getInstance().getKnight().getCurrentPlace().getRow()) {
+		    				try {
+		    					
+		    					timer.cancel();
+		    					timer.purge();
+		    					alert.setTitle("Game Over!");
+		    					alert.setContentText("Good Luck Next Time.");
+		    					alert.setHeaderText("Thank You For Playing.");
+		    					alert.showAndWait();
+		    					backToMain();
+		    				
+
+		    					
+		    				} catch (Error e) {
+		    					e.printStackTrace();
+		    				} catch (Exception e) {
+		    					e.printStackTrace();
+		    				}
+		    				
+		    				
+		    			}
+	    				
+	    				if(remainingTime.getText().equals("0")){
+		    				timer.cancel();
+	    					timer.purge();
+		    		    	
+		    		    	}
+	    				
+	    				
+		    			if(Game.getInstance().getPlayer().getScore() >=15) {
+		    				
+
+		    				try {
+		    					
+		    					
+		    					timer.cancel();
+		    		    		timer.purge();
+		    					alert.setTitle("Congrats!");
+		    					alert.setContentText("Press ok to continue.");
+		    					alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have won the game!");
+		    					alert.showAndWait();
+		    					backToMain();
+		    					} catch (Error e) {
+		    							e.printStackTrace();
+		    						} catch (Exception e) {
+		    							
+		    							e.printStackTrace();
+		    						}
+		    							countDown();
+		    					        
+		    					        break;
+		    						}
+		    			
 
 		    				
-		    				for(Square s : Game.getInstance().getKnight().allPossibleMoves()) {
-		    				PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));
-		    				}
+		    				for(Square s : Game.getInstance().getKnight().allPossibleMovesLevel2()) {
+		    					PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));
+		    					}
 		    				
 		    				for(Button b: PossibleButtons) {
 			    				if(buttonFlag) {
@@ -537,28 +593,7 @@ public class GameController implements Initializable{
 			    				
 			    			}
 		    				
-		    				if(Game.getInstance().getKing().getCurrentPlace().getCol()==Game.getInstance().getKnight().getCurrentPlace().getCol() && 
-			    					Game.getInstance().getKing().getCurrentPlace().getRow() == Game.getInstance().getKnight().getCurrentPlace().getRow()) {
-			    				try {
-			    					gameStillGoing = false;
-			    					timer.cancel();
-			    					timer.purge();
-			    					alert.setTitle("Game Over!");
-			    					alert.setContentText("Good Luck Next Time.");
-			    					alert.setHeaderText("Thank You For Playing.");
-			    					alert.showAndWait();
-			    					backToMain();
-			    				
 
-			    					
-			    				} catch (Error e) {
-			    					e.printStackTrace();
-			    				} catch (Exception e) {
-			    					e.printStackTrace();
-			    				}
-			    				
-			    				
-			    			}
 		    				
 			    			PossibleButtons.clear();
 			    			//buttonFlag=true;
@@ -577,29 +612,7 @@ public class GameController implements Initializable{
 			    			
 			    			// checking if the player finished the game
 			    			
-			    			if(Game.getInstance().getPlayer().getScore() >=15) {
-//		    				for(Player p: SysData.getInstance().getHistoryGamesForShow()) {
-//		    					if(p.getName().equals(Game.getInstance().getPlayer().getName()) && p.getScore()>=15 )
-//		    						{
-		    						
-		    							try {
-		    								gameStillGoing = false;
-		    								timer.cancel();
-		    		    					timer.purge();
-		    								alert.setTitle("Congrats!");
-		    								alert.setContentText("Press ok to continue.");
-		    								alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have won the game!");
-		    								alert.showAndWait();
-		    								backToMain();
-		    							} catch (Error e) {
-		    								e.printStackTrace();
-		    							} catch (Exception e) {
-		    								e.printStackTrace();
-		    							}
-		    							countDown();
-		    					        
-		    					        break;
-		    						}
+
 								
 //		    				}
 //		    			}
@@ -609,7 +622,7 @@ public class GameController implements Initializable{
 			    			if(remainingTime.getText().equals("0")){
 			    				timer.cancel();
 		    					timer.purge();
-			    		    	gameStillGoing = false;
+			    		    	
 			    		    	}
 			    			
 			    			
@@ -625,7 +638,6 @@ public class GameController implements Initializable{
     	try {
     		timer.cancel();
 			timer.purge();
-//	    	gameStillGoing = false;
 			alert.setTitle("game Over!");
 			alert.setContentText("Time Out.");
 			alert.setHeaderText("Thank You For Playing.");
