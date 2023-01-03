@@ -3,7 +3,10 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.ResourceBundle;
+import java.util.Stack;
 import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 
@@ -91,6 +94,8 @@ public class GameController implements Initializable{
     private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
     static Timer timer = new Timer();
     static Timer timer2 = new Timer();
+    private Queue<Square> last3 = new LinkedList<Square>();
+    private Stack<Integer> countScore = new Stack<Integer>();
     
     public static Timer getTimer2() {
 		return timer2;
@@ -118,8 +123,8 @@ public class GameController implements Initializable{
 	private Image Question = new Image(getClass().getResourceAsStream("/lib/Qm.png"));
 	private Image QuestionWhite = new Image(getClass().getResourceAsStream("/lib/Qw.png"));
 	private Image Blocked = new Image(getClass().getResourceAsStream("/lib/blocked.png"));
-
-
+	private Image GREEN = new Image(getClass().getResourceAsStream("/lib/gb.png"));
+	private Image BROWN = new Image(getClass().getResourceAsStream("/lib/sb.png"));
     //private HashSet<ImageView> PossibleMovesKnight = new HashSet<ImageView>();
 	
     private HashSet<ImageView> PossibleMovesQueen = new HashSet<ImageView>();
@@ -201,14 +206,18 @@ public class GameController implements Initializable{
 		    			/*
 		    			 * If statment to check if the player can move on to the next level 
 		    			 */
-		    			if(SysData.getInstance().getHistoryGamesForShow().contains(Game.getInstance().getPlayer())) {
-		    				for(Player p: SysData.getInstance().getHistoryGamesForShow()) {
-		    					if(p.getName().equals(Game.getInstance().getPlayer().getName()) && p.getScore()>=15 )
+		    					if(Game.getInstance().getPlayer().getScore()>=15 )
 		    						{
 		    							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
+		    							level.setText(Integer.toString(Game.getInstance().getLevel()));
 		    							levelUp=true;
+		    							SetImagesNULL();
 		    							ResetSquareType(); // to set all the square as regular squares and be ready for the next level
 		    							GenerateSquareType();
+		    							Game.getInstance().getKnight().setCurrentPlace(Board[0][0]);
+		    							getImageByString("I00").setImage(KNIGHT);
+		    							Game.getInstance().getQueen().setCurrentPlace(Board[0][7]);
+		    							getImageByString("I07").setImage(QUEEN);
 		    							try {
 		    								alert.setTitle("Congrats!");
 		    								alert.setContentText("Press ok to continue.");
@@ -221,11 +230,12 @@ public class GameController implements Initializable{
 		    							}
 		    							countDown();
 		    					        
+		    							SetPossibleLEVEL2();
 		    					        break;
-		    						}
+		    						
 								
-		    				}
-		    			}
+		    				
+		    						}
 					
 		    			
 		    			if(movedFlag == true) {
@@ -233,7 +243,6 @@ public class GameController implements Initializable{
 							PossibleMovesQueen.add(getImageByString("I"+s.getRow()+s.getCol()));
 						}
 						Game.getInstance().getQueen().setPrev_Place(Game.getInstance().getQueen().getCurrentPlace());
-						//Square queen_prev = Game.getInstance().getQueen().getCurrentPlace();
 						Game.getInstance().getQueen().moveThePiece(	Game.getInstance().getQueen().allPossibleMoves());
 						ImageView temp = null;
 						String s = "I" +Integer.toString(Game.getInstance().getQueen().getCurrentPlace().getRow())
@@ -291,15 +300,7 @@ public class GameController implements Initializable{
 			    		
 		    			for(Square s : Game.getInstance().getKnight().allPossibleMovesLevel2()) {
 		    				PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));
-//		    				String pos = "I"+s.getRow()+s.getCol();
-//		    				for(ImageView i : allImages ) {
-//								if(i.getId().equals(pos)) {
-//									i.setImage(Possible);
-//									
-//								}
-//								
-//							}
-		    				//SetPossible();
+
 		    				
 		    			}
 					
@@ -333,31 +334,36 @@ public class GameController implements Initializable{
 		    			/*
 		    			 * If statment to check if the player can move on to the next level 
 		    			 */
-		    			if(SysData.getInstance().getHistoryGamesForShow().contains(Game.getInstance().getPlayer())) {
-		    				for(Player p: SysData.getInstance().getHistoryGamesForShow()) {
-		    					if(p.getName().equals(Game.getInstance().getPlayer().getName()) && p.getScore()>=15 )
-		    						{
-		    							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
-		    							levelUp=true;
-		    							ResetSquareType(); // to set all the square as regular squares and be ready for the next level
-		    							GenerateSquareType();
-		    							try {
-		    								alert.setTitle("Congrats!");
-		    								alert.setContentText("Press ok to continue.");
-		    								alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have now reached to the next level!");
-		    								alert.showAndWait();
-		    							} catch (Error e) {
-		    								e.printStackTrace();
-		    							} catch (Exception e) {
-		    								e.printStackTrace();
-		    							}
-		    							countDown();
-		    					        
-		    					        break;
-		    						}
-								
-		    				}
-		    			}
+		    			if(Game.getInstance().getPlayer().getScore()>=15 )
+						{
+							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
+							level.setText(Integer.toString(Game.getInstance().getLevel()));
+							levelUp=true;
+							SetImagesNULL();
+							ResetSquareType(); // to set all the square as regular squares and be ready for the next level
+							GenerateSquareType();
+							Game.getInstance().getKnight().setCurrentPlace(Board[0][0]);
+							getImageByString("I00").setImage(KNIGHT);
+							Game.getInstance().getKing().setCurrentPlace(Board[0][7]);
+							getImageByString("I07").setImage(KING);
+							try {
+								alert.setTitle("Congrats!");
+								alert.setContentText("Press ok to continue.");
+								alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have now reached to the next level!");
+								alert.showAndWait();
+							} catch (Error e) {
+								e.printStackTrace();
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							countDown();
+					        
+							SetPossibleLEVEL2();
+					        break;
+						
+					
+				
+						}
 					
 		    			try {
 		    				
@@ -474,31 +480,36 @@ public class GameController implements Initializable{
 			    			
 			    			// checking if the player finished the game
 			    			
-			    			if(SysData.getInstance().getHistoryGamesForShow().contains(Game.getInstance().getPlayer())) {
-			    				for(Player p: SysData.getInstance().getHistoryGamesForShow()) {
-			    					if(p.getName().equals(Game.getInstance().getPlayer().getName()) && p.getScore()>=15 )
-			    						{
-			    							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
-			    							levelUp=true;
-			    							ResetSquareType(); // to set all the square as regular squares and be ready for the next level
-			    							GenerateSquareType();
-			    							try {
-			    								alert.setTitle("Congrats!");
-			    								alert.setContentText("Press ok to continue.");
-			    								alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have now reached to the next level!");
-			    								alert.showAndWait();
-			    							} catch (Error e) {
-			    								e.printStackTrace();
-			    							} catch (Exception e) {
-			    								e.printStackTrace();
-			    							}
-			    							countDown();
-			    					        
-			    					        break;
-			    						}
-									
-			    				}
-			    			}
+			    			if(Game.getInstance().getPlayer().getScore()>=15 )
+    						{
+    							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
+    							level.setText(Integer.toString(Game.getInstance().getLevel()));
+    							levelUp=true;
+    							SetImagesNULL();
+    							ResetSquareType(); // to set all the square as regular squares and be ready for the next level
+    							GenerateSquareType();
+    							Game.getInstance().getKnight().setCurrentPlace(Board[0][0]);
+    							getImageByString("I00").setImage(KNIGHT);
+    							Game.getInstance().getKing().setCurrentPlace(Board[0][7]);
+    							getImageByString("I07").setImage(KING);
+    							try {
+    								alert.setTitle("Congrats!");
+    								alert.setContentText("Press ok to continue.");
+    								alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have now reached to the next level!");
+    								alert.showAndWait();
+    							} catch (Error e) {
+    								e.printStackTrace();
+    							} catch (Exception e) {
+    								e.printStackTrace();
+    							}
+    							countDown();
+    					        
+    							SetPossibleLEVEL2();
+    					        break;
+    						
+						
+    				
+    						}
 			    			if(Game.getInstance().getKing().getCurrentPlace().getCol()==Game.getInstance().getKnight().getCurrentPlace().getCol() && 
 			    					Game.getInstance().getKing().getCurrentPlace().getRow() == Game.getInstance().getKnight().getCurrentPlace().getRow()) {
 			    				try {
@@ -671,6 +682,16 @@ public class GameController implements Initializable{
     	}
     }
     
+	private void SetImagesNULL() {
+		for(int i=0;i<8;i++) {
+			for(int j=0;j<8;j++) {
+				getImageByString("I"+i+j).setImage(null);
+				if((j-i)%2==0 || (j-i)==0)
+					getImageByStringBoard("S"+i+j).setImage(GREEN);
+				else getImageByStringBoard("S"+i+j).setImage(BROWN);
+			}
+		}
+	}
     private ImageView getImageByStringBoard(String s) { //by sending string (rowNum, colNum) to the function we will get ImageView that starts with the letter S+rowNum+colNum
     	for(ImageView i : getBoardImages()) {
     		if(s.equals(i.getId())) {
@@ -715,7 +736,7 @@ public class GameController implements Initializable{
     private void SetPossibleLEVEL2() { // function to show the possible moves by setting white color on the square
     	
     	for(Square s : 	Game.getInstance().getKnight().allPossibleMovesLevel2()) {
-    		if(Board[s.getRow()][s.getCol()].getSquareType().equals(Type.Regular) || Board[s.getRow()][s.getCol()].getSquareType().equals(Type.RandomJump))
+    		if(Board[s.getRow()][s.getCol()].getSquareType().equals(Type.Regular) || Board[s.getRow()][s.getCol()].getSquareType().equals(Type.RandomJump) || Board[s.getRow()][s.getCol()].getSquareType().equals(Type.Forget))
     			getImageByString("I"+s.getRow()+s.getCol()).setImage(Possible);// set image with name Possible (White color) to show the possible moves
 	    	if(Board[s.getRow()][s.getCol()].getSquareType().equals(Type.EasyQuestion) || Board[s.getRow()][s.getCol()].getSquareType().equals(Type.HardQuestion) || 
 	    			Board[s.getRow()][s.getCol()].getSquareType().equals(Type.MediumQuestion)) {
@@ -786,6 +807,7 @@ public class GameController implements Initializable{
     		for(int k=0;k<3;k++) {
     			Square s= randomRegularSquare();
         		s.setSquareType(Type.Forget);
+        		System.out.println("Forget -> "+s.getRow() + " "+ s.getCol());
     		}
     		
     		break;
@@ -894,18 +916,31 @@ public class GameController implements Initializable{
     }
     
     // method to handle player pressing any button based on button type
-    private void PressedButton(String s) {
+private void PressedButton(String s) {
     	
     	int i = Character.getNumericValue(s.charAt(2)); // Row number for the pressed square
     	int j = Character.getNumericValue(s.charAt(3)); // Column number for the pressed square
-
+    	Game.getInstance().getKnight().setPrev_Place(Game.getInstance().getKnight().getCurrentPlace());
+    	
     	//Nothing happens if a player presses on a blocked square
     	if(!Board[i][j].getSquareType().equals(Type.Blocked)) {
+    		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+    		System.out.println(Game.getInstance().getKnight().getPrev_Place().toString());
     		
     		if(SysData.getInstance().getGame().getLevel()==1)
     			RemovePossible();
     		else RemovePossibleLEVEL2();
     		Square prevPlace=Game.getInstance().getKnight().getCurrentPlace();
+    		
+    		countScore.add(Game.getInstance().getScore());
+    		if(last3.size()<3)
+    			last3.add(prevPlace);
+    		
+    		else if(last3.size()==3)
+    			{
+    				last3.remove();
+    				last3.add(prevPlace);
+    			}
 			Game.getInstance().getKnight().setCurrentPlace(Board[i][j]);
     		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
     		getImageByString("I"+prevPlace.getRow()+prevPlace.getCol()).setImage(null);
@@ -976,12 +1011,10 @@ public class GameController implements Initializable{
     	// moving knight to random square and creating a new random jump square
     	case RandomJump: {
     		try {
-    			pauseKing = true;
 				alert.setTitle("OOPs!");
 				alert.setContentText("random jump.");
 				alert.setHeaderText("Get Ready, "+ Game.getInstance().getPlayer().getName());
 				alert.showAndWait();
-				pauseKing = false;
 			} catch (Error e) {
 				e.printStackTrace();
 			} catch (Exception e) {
@@ -1011,6 +1044,26 @@ public class GameController implements Initializable{
     		GetNewSquareByType(i,j,Type.Forget);
     		getImageByString("I"+i+j).setImage(KNIGHT);
     		Game.getInstance().getKnight().setCurrentPlace(Board[i][j]);
+    		
+    		for(Square sq: last3) {
+    			if(sq.isVisisted()) {
+    				getImageByStringBoard("S"+i+j).setImage(Visited);
+    			}
+    			
+    			else if(!sq.isVisisted())
+    				getImageByStringBoard("S"+i+j).setImage(null);
+    		}
+    		
+    		int first,second,last;
+    		if(countScore.size()>=3) {
+    		first=countScore.pop();
+    		second=countScore.pop();
+    		last=countScore.pop();
+    		Game.getInstance().setScore(last);	
+    		countScore.push(first);
+    		countScore.push(second);
+    		countScore.push(last);
+    		}
     		
     		if(Board[i][j].isVisisted()) {
 				Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-1);
