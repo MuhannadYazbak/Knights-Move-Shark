@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -13,7 +14,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -88,14 +91,26 @@ public class QuestionsWizardController implements Initializable {
 
 	@FXML
 	private void deleteQuestion(ActionEvent event)throws IOException {
-		SysData.getInstance().removeQuestion(SysData.getInstance().getSelectedQ());
-		questions.removeAll();
-		Parent pane = FXMLLoader.load(getClass().getResource("/views/QuestionsWizard.fxml"));
-		Scene scene = new Scene(pane);
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		stage.setScene(scene);
-		stage.setTitle("Questions Wizard");
-		stage.show();
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setTitle("Delete Question Confirmation");
+		alert.setHeaderText("Are you sure, delete question");
+		alert.setContentText("Going to delete question "+SysData.getInstance().getSelectedQ());
+		Optional<ButtonType> result = alert.showAndWait();
+		if(result.isEmpty()) {
+			System.out.println("delete canceled");
+		}else if(result.get() == ButtonType.OK) {
+			SysData.getInstance().removeQuestion(SysData.getInstance().getSelectedQ());
+			questions.removeAll();
+			Parent pane = FXMLLoader.load(getClass().getResource("/views/QuestionsWizard.fxml"));
+			Scene scene = new Scene(pane);
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.setScene(scene);
+			stage.setTitle("Questions Wizard");
+			stage.show();
+		}else if(result.get() == ButtonType.CANCEL) {
+			System.out.println("Delete canceled");
+		}
+		
 	}
 
 }

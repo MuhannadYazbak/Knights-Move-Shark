@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -16,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -85,22 +87,34 @@ public class AddQuestionController implements Initializable {
 		String original = selected.getQuestionText();
 		// check if it is adding new question
 		if (original.isBlank()) {
-			SysData.getInstance().addQuestion(onScreen);
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 			alert.setContentText(onScreen.toString());
 			alert.setTitle("Adding new question");
 			alert.setHeaderText("About to add a new question");
-			alert.showAndWait();
+			Optional<ButtonType>result =alert.showAndWait();
+			if (result.isEmpty()) {
+				System.out.println("alert closed");
+			} else if(result.get() == ButtonType.OK) {
+				SysData.getInstance().addQuestion(onScreen);
+			}else {
+				System.out.println("alert closed");
+			}
 		}
 		// updating an existing question
 		else {
-			SysData.getInstance().updateQuestion(SysData.getInstance().getQuestions().get(original), onScreen);
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 			alert.setContentText(onScreen.toString());
 			alert.setTitle("Updating question");
 			alert.setHeaderText("About to update an existing question");
-			alert.showAndWait();
+			Optional<ButtonType> result =alert.showAndWait();
+			if (result.isEmpty()) {
+				System.out.println("alert closed");
+			} else if(result.get() == ButtonType.OK) {
+				SysData.getInstance().updateQuestion(SysData.getInstance().getQuestions().get(original), onScreen);
+			}else {
+				System.out.println("alert closed");
 			
+			}
 		}
 	 Parent pane = FXMLLoader.load(getClass().getResource("/views/QuestionsWizard.fxml"));
 		Scene scene = new Scene(pane);
@@ -112,7 +126,7 @@ public class AddQuestionController implements Initializable {
 	}
 	
 	@FXML
-	private void checkQuestion(KeyEvent event) throws IOException {
+	private void checkQuestion() throws IOException {
 		// Verify that the user supplied all needed fields in order to add/update question
 		onScreen = new Question(qText.getText(), diffBox.getValue(), a1Text.getText(), a2Text.getText(), a3Text.getText(), a4Text.getText(),rightAnswerBox.getValue(), "Shark" );
 				if (!onScreen.getQuestionText().isBlank() && onScreen.getLevel() != null && !onScreen.getAnswer1().isBlank()

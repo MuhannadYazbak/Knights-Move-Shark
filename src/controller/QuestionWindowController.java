@@ -76,10 +76,10 @@ public class QuestionWindowController implements Initializable {
 			 switch(question.getRightAnswer()) {
 				case 1:
 				if (option1.isSelected()) {
-					Game.getInstance().setScore(Game.getInstance().getScore()+1);
+					Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+1);
 					right.showAndWait();
 				} else if(Game.getInstance().getScore()>=3) {
-					Game.getInstance().setScore(Game.getInstance().getScore()-2);
+					Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-2);
 					wrong.showAndWait();
 					
 				}else {
@@ -89,10 +89,10 @@ public class QuestionWindowController implements Initializable {
 				break;
 				case 2:
 					if (option2.isSelected()) {
-						Game.getInstance().setScore(Game.getInstance().getScore()+1);
+						Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+1);
 						right.showAndWait();
 					} else if(Game.getInstance().getScore()>=3) {
-						Game.getInstance().setScore(Game.getInstance().getScore()-2);
+						Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-2);
 						wrong.showAndWait();
 						
 					}else {
@@ -102,10 +102,10 @@ public class QuestionWindowController implements Initializable {
 					break;
 				case 3:
 					if (option3.isSelected()) {
-						Game.getInstance().setScore(Game.getInstance().getScore()+1);
+						Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+1);
 						right.showAndWait();
 					} else if(Game.getInstance().getScore()>=3) {
-						Game.getInstance().setScore(Game.getInstance().getScore()-2);
+						Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-2);
 						wrong.showAndWait();
 						
 					}else {
@@ -115,10 +115,10 @@ public class QuestionWindowController implements Initializable {
 					break;
 				case 4:
 					if (option4.isSelected()) {
-						Game.getInstance().setScore(Game.getInstance().getScore()+1);
+						Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+1);
 						right.showAndWait();
 					} else if(Game.getInstance().getScore()>=3) {
-						Game.getInstance().setScore(Game.getInstance().getScore()-2);
+						Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-2);
 						wrong.showAndWait();
 						
 					}else {
@@ -132,10 +132,10 @@ public class QuestionWindowController implements Initializable {
 			 switch(question.getRightAnswer()) {
 				case 1:
 				if (option1.isSelected()) {
-					Game.getInstance().setScore(Game.getInstance().getScore()+2);
+					Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+2);
 					right.showAndWait();
 				} else if(Game.getInstance().getScore()>=3) {
-					Game.getInstance().setScore(Game.getInstance().getScore()-3);
+					Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-3);
 					wrong.showAndWait();
 					
 				}else {
@@ -145,10 +145,10 @@ public class QuestionWindowController implements Initializable {
 				break;
 				case 2:
 					if (option2.isSelected()) {
-						Game.getInstance().setScore(Game.getInstance().getScore()+2);
+						Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+2);
 						right.showAndWait();
 					} else if(Game.getInstance().getScore()>=3) {
-						Game.getInstance().setScore(Game.getInstance().getScore()-3);
+						Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-3);
 						wrong.showAndWait();
 						
 					}else {
@@ -158,10 +158,10 @@ public class QuestionWindowController implements Initializable {
 					break;
 				case 3:
 					if (option3.isSelected()) {
-						Game.getInstance().setScore(Game.getInstance().getScore()+2);
+						Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+2);
 						right.showAndWait();
 					} else if(Game.getInstance().getScore()>=3) {
-						Game.getInstance().setScore(Game.getInstance().getScore()-3);
+						Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-3);
 						wrong.showAndWait();
 						
 					}else {
@@ -171,10 +171,10 @@ public class QuestionWindowController implements Initializable {
 					break;
 				case 4:
 					if (option4.isSelected()) {
-						Game.getInstance().setScore(Game.getInstance().getScore()+2);
+						Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+2);
 						right.showAndWait();
 					} else if(Game.getInstance().getScore()>=3) {
-						Game.getInstance().setScore(Game.getInstance().getScore()-3);
+						Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-3);
 						wrong.showAndWait();
 						
 					}else {
@@ -188,10 +188,10 @@ public class QuestionWindowController implements Initializable {
 			 switch(question.getRightAnswer()) {
 				case 1:
 				if (option1.isSelected()) {
-					Game.getInstance().setScore(Game.getInstance().getScore()+3);
+					Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+3);
 					right.showAndWait();
 				} else if(Game.getInstance().getScore()>=3) {
-					Game.getInstance().setScore(Game.getInstance().getScore()-4);
+					Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-4);
 					wrong.showAndWait();
 					
 				}else {
@@ -201,10 +201,10 @@ public class QuestionWindowController implements Initializable {
 				break;
 				case 2:
 					if (option2.isSelected()) {
-						Game.getInstance().setScore(Game.getInstance().getScore()+3);
+						Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+3);
 						right.showAndWait();
 					} else if(Game.getInstance().getScore()>=3) {
-						Game.getInstance().setScore(Game.getInstance().getScore()-4);
+						Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-4);
 						wrong.showAndWait();
 						
 					}else {
@@ -214,10 +214,10 @@ public class QuestionWindowController implements Initializable {
 					break;
 				case 3:
 					if (option3.isSelected()) {
-						Game.getInstance().setScore(Game.getInstance().getScore()+3);
+						Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+3);
 						right.showAndWait();
 					} else if(Game.getInstance().getScore()>=3) {
-						Game.getInstance().setScore(Game.getInstance().getScore()-4);
+						Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-4);
 						wrong.showAndWait();
 						
 					}else {
@@ -227,10 +227,10 @@ public class QuestionWindowController implements Initializable {
 					break;
 				case 4:
 					if (option4.isSelected()) {
-						Game.getInstance().setScore(Game.getInstance().getScore()+3);
+						Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+3);
 						right.showAndWait();
 					} else if(Game.getInstance().getScore()>=3) {
-						Game.getInstance().setScore(Game.getInstance().getScore()-4);
+						Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-4);
 						wrong.showAndWait();
 						
 					}else {
