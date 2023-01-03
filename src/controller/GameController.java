@@ -87,10 +87,20 @@ public class GameController implements Initializable{
     
     private static final Integer STARTTIME = 60;
     private Timeline timeline;
+    public static Boolean pauseKing = false;
     private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
     static Timer timer = new Timer();
+    static Timer timer2 = new Timer();
     
-    public static Timer getTimer() {
+    public static Timer getTimer2() {
+		return timer2;
+	}
+
+	public static void setTimer2(Timer timer2) {
+		GameController.timer2 = timer2;
+	}
+
+	public static Timer getTimer() {
 		return timer;
 	}
 
@@ -143,7 +153,7 @@ public class GameController implements Initializable{
 		//checking if this is the first move in level 4 to start king movement
 		if(!level4Started && Game.getInstance().getLevel() == 4) {
 			level4Started = true;
-			I07.setImage(null);
+			I07.setImage(KING);
 			System.out.println("first Move");
 			
 			// the king will change speed move every 10 seconds
@@ -525,6 +535,8 @@ public class GameController implements Initializable{
 		    					Game.getInstance().getKing().getCurrentPlace().getRow() == Game.getInstance().getKnight().getCurrentPlace().getRow()) {
 		    				try {
 		    					
+		    					timer2.cancel();
+		    					timer2.purge();
 		    					timer.cancel();
 		    					timer.purge();
 		    					alert.setTitle("Game Over!");
@@ -545,6 +557,8 @@ public class GameController implements Initializable{
 		    			}
 	    				
 	    				if(remainingTime.getText().equals("0")){
+	    					timer2.cancel();
+	    					timer2.purge();
 		    				timer.cancel();
 	    					timer.purge();
 		    		    	
@@ -556,7 +570,8 @@ public class GameController implements Initializable{
 
 		    				try {
 		    					
-		    					
+		    					timer2.cancel();
+		    					timer2.purge();
 		    					timer.cancel();
 		    		    		timer.purge();
 		    					alert.setTitle("Congrats!");
@@ -620,6 +635,8 @@ public class GameController implements Initializable{
 			    			// checking timer because in case 4 there is a while loop
 			    			
 			    			if(remainingTime.getText().equals("0")){
+			    				timer2.cancel();
+		    					timer2.purge();
 			    				timer.cancel();
 		    					timer.purge();
 			    		    	
@@ -636,6 +653,8 @@ public class GameController implements Initializable{
     	}
     	if(remainingTime.getText().equals("0")){
     	try {
+    		timer2.cancel();
+			timer2.purge();
     		timer.cancel();
 			timer.purge();
 			alert.setTitle("game Over!");
@@ -957,10 +976,12 @@ public class GameController implements Initializable{
     	// moving knight to random square and creating a new random jump square
     	case RandomJump: {
     		try {
+    			pauseKing = true;
 				alert.setTitle("OOPs!");
 				alert.setContentText("random jump.");
 				alert.setHeaderText("Get Ready, "+ Game.getInstance().getPlayer().getName());
 				alert.showAndWait();
+				pauseKing = false;
 			} catch (Error e) {
 				e.printStackTrace();
 			} catch (Exception e) {
@@ -1084,6 +1105,7 @@ public class GameController implements Initializable{
     }
     
     private void popQuestion() throws IOException {
+    	pauseKing =true;
 		timeline.pause();
     	Parent pane = FXMLLoader.load(getClass().getResource("/views/QuestionWindow.fxml"));
 		Scene scene = new Scene(pane);
@@ -1092,10 +1114,12 @@ public class GameController implements Initializable{
 		newstage.setTitle("Question PopUp");
 		newstage.showAndWait();
 		timeline.play();
+		pauseKing =false;
 
     }
     
     private void popWinner() throws IOException {
+    	pauseKing =true;
 		timeline.pause();
     	Parent pane = FXMLLoader.load(getClass().getResource("/views/WinnerWindow.fxml"));
 		Scene scene = new Scene(pane);

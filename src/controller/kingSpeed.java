@@ -11,11 +11,11 @@ class kingSpeed extends TimerTask  {
 
 	@Override
 	public void run() {
-		System.out.println("the speed in now " + period/1000);
 		period = period - 1000;
+		System.out.println("the speed in now " + period/1000);
 		timer.cancel();
-		Timer timer = new Timer();
-		timer.schedule(new kingMovement(), 0, period);
+//		Timer timer = new Timer();
+		GameController.getTimer2().schedule(new kingMovement(), 0, period);
 		// TODO Auto-generated method stub
 		
 	}
