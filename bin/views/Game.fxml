@@ -15,7 +15,7 @@
             <Image url="@../lib/bgg.jpg" />
          </image>
       </ImageView>
-      <Label prefHeight="70.0" prefWidth="1124.0" style="-fx-background-color: #612D00;" />
+      <Label prefHeight="70.0" prefWidth="1200.0" style="-fx-background-color: #612D00;" />
       <Label layoutX="369.0" layoutY="21.0" text="Player name:" textFill="WHITE">
          <font>
             <Font size="20.0" />
