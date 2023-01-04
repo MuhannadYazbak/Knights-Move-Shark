@@ -1,5 +1,10 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
 import utils.Difficulty;
 
 import utils.Type;
@@ -18,6 +23,7 @@ public class Game {
 	private boolean gameOver;
     private boolean youWon;
     private PieceFactory pieceFactory;
+    private Stack<lastObj> last = new Stack<>();
 	
 	//Singleton class
     public static Game getInstance() {
@@ -33,6 +39,7 @@ public class Game {
     	queen = (Queen) pieceFactory.makePiece("Queen", new Square(0, 7));
     	this.knight = (Knight) pieceFactory.makePiece("Knight", new Square(0, 0));
         this.startNewGame();
+        getLast().add(new lastObj(new Square(0,0), 0));
     }
     
     //method thats starts a new game and initialises values to their starting position
@@ -55,6 +62,24 @@ public class Game {
 
     
 
+
+	public static int getID() {
+		return ID;
+	}
+
+	public static void setID(int iD) {
+		ID = iD;
+	}
+
+	
+
+	public Stack<lastObj> getLast() {
+		return last;
+	}
+
+	public void setLast(Stack<lastObj> last) {
+		this.last = last;
+	}
 
 	public int getId() {
 		return id;
