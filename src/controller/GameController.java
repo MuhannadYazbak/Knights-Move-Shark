@@ -151,7 +151,7 @@ public class GameController implements Initializable{
 	private boolean levelUp=false;
     private Alert alert = new Alert(Alert.AlertType.INFORMATION);
 	
-    private Boolean buttonFlag=true;
+    //private Boolean buttonFlag=true;
 	@FXML
     void MoveTo() {
 		//Boolean buttonFlag=true;
@@ -169,7 +169,7 @@ public class GameController implements Initializable{
 	    		switch(level.getText()) {
 	    		
 		    		case"1":{		    			
-		    			Boolean movedFlag = false;
+		    			Boolean movedFlag = false,buttonFlag=true;
 		    		
 		    			for(Square s : Game.getInstance().getKnight().allPossibleMoves()) {
 		    				PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));System.out.println("testttttttttttttttttttttttt");
@@ -301,7 +301,7 @@ public class GameController implements Initializable{
 		    		}
 		    	
 		    		case "2":{
-		    			Boolean movedFlag = false;
+		    			Boolean movedFlag = false, buttonFlag=true;
 			    		
 		    			for(Square s : Game.getInstance().getKnight().allPossibleMovesLevel2()) {
 		    				PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));
@@ -440,7 +440,7 @@ public class GameController implements Initializable{
 		    		}
 		    		
 		    		case "3":{
-		    			Boolean  gameStillGoing = true;
+		    			Boolean  gameStillGoing = true, buttonFlag=true;
 		    			Timer timer = new Timer();
 		    			// the king will move every 10 seconds
 //		    			timer.schedule(new kingMovement(), 0, 10000);
@@ -550,7 +550,7 @@ public class GameController implements Initializable{
 		    		
 		    		case "4":{
 		    			
-		    			//Boolean buttonFlag=true;
+		    			Boolean buttonFlag=true;
 		    			
 	    				if(Game.getInstance().getKing().getCurrentPlace().getCol()==Game.getInstance().getKnight().getCurrentPlace().getCol() && 
 		    					Game.getInstance().getKing().getCurrentPlace().getRow() == Game.getInstance().getKnight().getCurrentPlace().getRow()) {
@@ -942,7 +942,7 @@ private void PressedButton(String s) {
     		else RemovePossibleLEVEL2();
     		Square prevPlace=Game.getInstance().getKnight().getCurrentPlace();
     		
-    		countScore.add(Game.getInstance().getScore());
+    		countScore.add(Game.getInstance().getPlayer().getScore());
     		if(last3.size()<3)
     			last3.add(prevPlace);
     		
@@ -980,9 +980,10 @@ private void PressedButton(String s) {
     		SetPossible();
     	else if(SysData.getInstance().getGame().getLevel()==2||SysData.getInstance().getGame().getLevel()==3|| SysData.getInstance().getGame().getLevel()==4)
     		SetPossibleLEVEL2();
+    	
         score.setText(Integer.toString(Game.getInstance().getPlayer().getScore()));
 
-        if(Game.getInstance().Winner(Game.getInstance().getScore()))
+        if(Game.getInstance().Winner(Game.getInstance().getPlayer().getScore()))
 			{
         		try {
 			
@@ -1031,7 +1032,13 @@ private void PressedButton(String s) {
 				e.printStackTrace();
 			}
 			countDown();
-	        
+			if(Board[i][j].isVisisted()) {
+				Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-1);
+		    }
+			else {
+				Board[i][j].setVisisted(true);
+				Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()+1);
+				}
 	        
     		Board[i][j].setSquareType(Type.Regular);
     		GetNewSquareByType(i,j,Type.RandomJump);
