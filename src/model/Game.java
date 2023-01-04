@@ -40,7 +40,7 @@ public class Game {
         gameOver = false;
         youWon = false;
         this.score = 0;
-        this.level = 1;
+        this.level = 2;
         // need to add level initialisation
     }
     public void startNewGameLevel2() {

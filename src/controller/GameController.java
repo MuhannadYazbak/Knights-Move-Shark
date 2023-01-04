@@ -214,6 +214,7 @@ public class GameController implements Initializable{
 		    							SetImagesNULL();
 		    							ResetSquareType(); // to set all the square as regular squares and be ready for the next level
 		    							GenerateSquareType();
+		    							SetAllNotVisited();
 		    							Game.getInstance().getKnight().setCurrentPlace(Board[0][0]);
 		    							getImageByString("I00").setImage(KNIGHT);
 		    							Game.getInstance().getQueen().setCurrentPlace(Board[0][7]);
@@ -347,6 +348,7 @@ public class GameController implements Initializable{
 							SetImagesNULL();
 							ResetSquareType(); // to set all the square as regular squares and be ready for the next level
 							GenerateSquareType();
+							SetAllNotVisited();
 							Game.getInstance().getKnight().setCurrentPlace(Board[0][0]);
 							getImageByString("I00").setImage(KNIGHT);
 							Game.getInstance().getKing().setCurrentPlace(Board[0][7]);
@@ -403,7 +405,7 @@ public class GameController implements Initializable{
 						+Integer.toString(Game.getInstance().getQueen().getPrev_Place().getCol());
 						for(ImageView i : allImages ) {
 							if(i.getId().equals(prev)) {
-								if(Board[Game.getInstance().getQueen().getPrev_Place().getRow()][Game.getInstance().getQueen().getPrev_Place().getCol()].getSquareType() == Type.Regular || Board[Game.getInstance().getQueen().getPrev_Place().getRow()][Game.getInstance().getQueen().getPrev_Place().getCol()].getSquareType() == Type.RandomJump ) {	
+								if(Board[Game.getInstance().getQueen().getPrev_Place().getRow()][Game.getInstance().getQueen().getPrev_Place().getCol()].getSquareType() == Type.Regular || Board[Game.getInstance().getQueen().getPrev_Place().getRow()][Game.getInstance().getQueen().getPrev_Place().getCol()].getSquareType() == Type.Forget ) {	
 								i.setImage(null);}
 							else if(Board[Game.getInstance().getQueen().getPrev_Place().getRow()][Game.getInstance().getQueen().getPrev_Place().getCol()].getSquareType()== Type.EasyQuestion ||
 									Board[Game.getInstance().getQueen().getPrev_Place().getRow()][Game.getInstance().getQueen().getPrev_Place().getCol()].getSquareType() ==  Type.HardQuestion ||
@@ -498,6 +500,7 @@ public class GameController implements Initializable{
     							SetImagesNULL();
     							ResetSquareType(); // to set all the square as regular squares and be ready for the next level
     							GenerateSquareType();
+    							SetAllNotVisited();
     							Game.getInstance().getKnight().setCurrentPlace(Board[0][0]);
     							getImageByString("I00").setImage(KNIGHT);
     							Game.getInstance().getKing().setCurrentPlace(Board[0][7]);
@@ -746,9 +749,11 @@ public class GameController implements Initializable{
     private void SetPossibleLEVEL2() { // function to show the possible moves by setting white color on the square
     	
     	for(Square s : 	Game.getInstance().getKnight().allPossibleMovesLevel2()) {
-    		if(Board[s.getRow()][s.getCol()].getSquareType().equals(Type.Regular) || Board[s.getRow()][s.getCol()].getSquareType().equals(Type.RandomJump) || Board[s.getRow()][s.getCol()].getSquareType().equals(Type.Forget))
+    		if(Board[s.getRow()][s.getCol()].getSquareType().equals(Type.Regular) || Board[s.getRow()][s.getCol()].getSquareType().equals(Type.RandomJump))
     			getImageByString("I"+s.getRow()+s.getCol()).setImage(Possible);// set image with name Possible (White color) to show the possible moves
-	    	if(Board[s.getRow()][s.getCol()].getSquareType().equals(Type.EasyQuestion) || Board[s.getRow()][s.getCol()].getSquareType().equals(Type.HardQuestion) || 
+	    	if(Board[s.getRow()][s.getCol()].getSquareType().equals(Type.Forget))
+	    		getImageByString("I"+s.getRow()+s.getCol()).setImage(Possible);
+    		if(Board[s.getRow()][s.getCol()].getSquareType().equals(Type.EasyQuestion) || Board[s.getRow()][s.getCol()].getSquareType().equals(Type.HardQuestion) || 
 	    			Board[s.getRow()][s.getCol()].getSquareType().equals(Type.MediumQuestion)) {
 		    	getImageByString("I"+s.getRow()+s.getCol()).setImage(QuestionWhite); 
 	    	}
@@ -769,7 +774,7 @@ public class GameController implements Initializable{
     private void RemovePossibleLEVEL2() { // function to remove the possible moves
     	for(Square s : 	Game.getInstance().getKnight().allPossibleMovesLevel2()) {
     		
-    		if(Board[s.getRow()][s.getCol()].getSquareType().equals(Type.Regular) || Board[s.getRow()][s.getCol()].getSquareType().equals(Type.RandomJump))
+    		if(Board[s.getRow()][s.getCol()].getSquareType().equals(Type.Regular) || Board[s.getRow()][s.getCol()].getSquareType().equals(Type.RandomJump)|| Board[s.getRow()][s.getCol()].getSquareType().equals(Type.Forget))
     			getImageByString("I"+s.getRow()+s.getCol()).setImage(null); // set image null to remove the possible moves
     		if(Board[s.getRow()][s.getCol()].getSquareType().equals(Type.EasyQuestion) || (Board[s.getRow()][s.getCol()].getSquareType().equals(Type.MediumQuestion) || (Board[s.getRow()][s.getCol()].getSquareType().equals(Type.HardQuestion))))
     			getImageByString("I"+s.getRow()+s.getCol()).setImage(Question);
@@ -794,6 +799,15 @@ public class GameController implements Initializable{
     	for(int i=0 ; i<8 ; i++) {
 			for(int j=0; j<8 ; j++) {
 				Board[i][j].setSquareType(Type.Regular);
+			}
+			
+		}
+    }
+    
+    private void SetAllNotVisited() {
+    	for(int i=0 ; i<8 ; i++) {
+			for(int j=0; j<8 ; j++) {
+				Board[i][j].setVisisted(false);
 			}
 			
 		}
@@ -941,15 +955,15 @@ private void PressedButton(String s) {
     			RemovePossible();
     		else RemovePossibleLEVEL2();
     		Square prevPlace=Game.getInstance().getKnight().getCurrentPlace();
-    		
     		countScore.add(Game.getInstance().getPlayer().getScore());
+    		Square squ = new Square(prevPlace);
     		if(last3.size()<3)
-    			last3.add(prevPlace);
+    			last3.add(squ);
     		
     		else if(last3.size()==3)
     			{
     				last3.remove();
-    				last3.add(prevPlace);
+    				last3.add(squ);
     			}
 			Game.getInstance().getKnight().setCurrentPlace(Board[i][j]);
     		getImageByStringBoard("S"+prevPlace.getRow()+prevPlace.getCol()).setImage(Visited);
@@ -1031,7 +1045,7 @@ private void PressedButton(String s) {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			countDown();
+			//countDown();
 			if(Board[i][j].isVisisted()) {
 				Game.getInstance().getPlayer().setScore(Game.getInstance().getPlayer().getScore()-1);
 		    }
@@ -1063,12 +1077,16 @@ private void PressedButton(String s) {
     		Game.getInstance().getKnight().setCurrentPlace(Board[i][j]);
     		
     		for(Square sq: last3) {
-    			if(sq.isVisisted()) {
-    				getImageByStringBoard("S"+i+j).setImage(Visited);
-    			}
     			
-    			else if(!sq.isVisisted())
-    				getImageByStringBoard("S"+i+j).setImage(null);
+    			
+    			if(!sq.isVisisted())
+    				{System.out.println("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
+    				if(sq.getCol()-sq.getRow()%2!=0)
+    					{getImageByStringBoard("S"+i+j).setImage(BROWN);System.out.println(sq.getRow()+ " " + sq.getCol());}
+    				
+    				if(sq.getCol()-sq.getRow()%2==0)
+    					{getImageByStringBoard("S"+i+j).setImage(GREEN);System.out.println(sq.getRow()+ " " + sq.getCol());}
+    				}
     		}
     		
     		int first,second,last;
