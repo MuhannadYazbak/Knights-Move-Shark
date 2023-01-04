@@ -88,7 +88,7 @@ public class GameController implements Initializable{
     @FXML
     private AnchorPane screen;
     
-    private static final Integer STARTTIME = 60;
+    private static final Integer STARTTIME = 90;
     private Timeline timeline;
     public static Boolean pauseKing = false;
     private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
@@ -151,10 +151,10 @@ public class GameController implements Initializable{
 	private boolean levelUp=false;
     private Alert alert = new Alert(Alert.AlertType.INFORMATION);
 	
-
+    private Boolean buttonFlag=true;
 	@FXML
     void MoveTo() {
-		
+		//Boolean buttonFlag=true;
 		//checking if this is the first move in level 4 to start king movement
 		if(!level4Started && Game.getInstance().getLevel() == 4) {
 			level4Started = true;
@@ -169,17 +169,17 @@ public class GameController implements Initializable{
 	    		switch(level.getText()) {
 	    		
 		    		case"1":{		    			
-		    			Boolean movedFlag = false, buttonFlag=true;
+		    			Boolean movedFlag = false;
 		    		
 		    			for(Square s : Game.getInstance().getKnight().allPossibleMoves()) {
-		    				PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));
-		    				
+		    				PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));System.out.println("testttttttttttttttttttttttt");
+		    				System.out.println(s.toString());
 		    			}
 					
 		    			for(Button b: PossibleButtons) {
 		    				if(buttonFlag) {
 		    					if(b.isPressed())
-									{	    							
+									{	    							System.out.println(b.getId());
 		    							PressedButton(b.getId());
 		    							buttonFlag=false;
 		    							movedFlag = true;
@@ -190,7 +190,7 @@ public class GameController implements Initializable{
 		    			
 		    			PossibleButtons.clear();
 		    			//buttonFlag=true;
-		    			if(buttonFlag) {
+		    			if(buttonFlag) {System.out.println("case 1");
 		    				try {
 		    					alert.setTitle("Wrong Square Pressed!");
 		    					alert.setContentText("Press ok to continue.");
@@ -202,7 +202,7 @@ public class GameController implements Initializable{
 		    					e.printStackTrace();
 		    				}
 		    			}
-		    			
+		    			//buttonFlag=true;
 		    			/*
 		    			 * If statment to check if the player can move on to the next level 
 		    			 */
@@ -301,7 +301,7 @@ public class GameController implements Initializable{
 		    		}
 		    	
 		    		case "2":{
-		    			Boolean movedFlag = false, buttonFlag=true;
+		    			Boolean movedFlag = false;
 			    		
 		    			for(Square s : Game.getInstance().getKnight().allPossibleMovesLevel2()) {
 		    				PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));
@@ -323,7 +323,7 @@ public class GameController implements Initializable{
 		    			
 		    			PossibleButtons.clear();
 		    			//buttonFlag=true;
-		    			if(buttonFlag) {
+		    			if(buttonFlag) {System.out.println("case 2");
 		    				try {
 		    					alert.setTitle("Wrong Square Pressed!");
 		    					alert.setContentText("Press ok to continue.");
@@ -339,7 +339,7 @@ public class GameController implements Initializable{
 		    			/*
 		    			 * If statment to check if the player can move on to the next level 
 		    			 */
-		    			if(Game.getInstance().getPlayer().getScore()>=15 )
+		    			if(Game.getInstance().getPlayer().getScore()>=30 )
 						{
 							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
 							level.setText(Integer.toString(Game.getInstance().getLevel()));
@@ -396,14 +396,19 @@ public class GameController implements Initializable{
 							}
 							
 						}
+		    			}
 						
 						
 						String prev = "I" +Integer.toString(Game.getInstance().getQueen().getPrev_Place().getRow())
 						+Integer.toString(Game.getInstance().getQueen().getPrev_Place().getCol());
 						for(ImageView i : allImages ) {
 							if(i.getId().equals(prev)) {
-								i.setImage(null);
-								
+								if(Board[Game.getInstance().getQueen().getPrev_Place().getRow()][Game.getInstance().getQueen().getPrev_Place().getCol()].getSquareType() == Type.Regular || Board[Game.getInstance().getQueen().getPrev_Place().getRow()][Game.getInstance().getQueen().getPrev_Place().getCol()].getSquareType() == Type.RandomJump ) {	
+								i.setImage(null);}
+							else if(Board[Game.getInstance().getQueen().getPrev_Place().getRow()][Game.getInstance().getQueen().getPrev_Place().getCol()].getSquareType()== Type.EasyQuestion ||
+									Board[Game.getInstance().getQueen().getPrev_Place().getRow()][Game.getInstance().getQueen().getPrev_Place().getCol()].getSquareType() ==  Type.HardQuestion ||
+									Board[Game.getInstance().getQueen().getPrev_Place().getRow()][Game.getInstance().getQueen().getPrev_Place().getCol()].getSquareType() == Type.MediumQuestion) {
+								i.setImage(Question);
 							}
 							
 						}
@@ -435,7 +440,7 @@ public class GameController implements Initializable{
 		    		}
 		    		
 		    		case "3":{
-		    			Boolean buttonFlag=true, gameStillGoing = true;
+		    			Boolean  gameStillGoing = true;
 		    			Timer timer = new Timer();
 		    			// the king will move every 10 seconds
 //		    			timer.schedule(new kingMovement(), 0, 10000);
@@ -470,7 +475,7 @@ public class GameController implements Initializable{
 		    				
 			    			PossibleButtons.clear();
 			    			//buttonFlag=true;
-			    			if(buttonFlag) {
+			    			if(buttonFlag) {System.out.println("case 3");
 			    				try {
 			    					alert.setTitle("Wrong Square Pressed!");
 			    					alert.setContentText("Press ok to continue.");
@@ -485,7 +490,7 @@ public class GameController implements Initializable{
 			    			
 			    			// checking if the player finished the game
 			    			
-			    			if(Game.getInstance().getPlayer().getScore()>=15 )
+			    			if(Game.getInstance().getPlayer().getScore()>=45 )
     						{
     							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
     							level.setText(Integer.toString(Game.getInstance().getLevel()));
@@ -545,7 +550,7 @@ public class GameController implements Initializable{
 		    		
 		    		case "4":{
 		    			
-		    			Boolean buttonFlag=true;
+		    			//Boolean buttonFlag=true;
 		    			
 	    				if(Game.getInstance().getKing().getCurrentPlace().getCol()==Game.getInstance().getKnight().getCurrentPlace().getCol() && 
 		    					Game.getInstance().getKing().getCurrentPlace().getRow() == Game.getInstance().getKnight().getCurrentPlace().getRow()) {
@@ -581,7 +586,7 @@ public class GameController implements Initializable{
 		    		    	}
 	    				
 	    				
-		    			if(Game.getInstance().getPlayer().getScore() >=15) {
+		    			if(Game.getInstance().getPlayer().getScore() >=60) {
 		    				
 
 		    				try {
@@ -628,7 +633,7 @@ public class GameController implements Initializable{
 		    				
 			    			PossibleButtons.clear();
 			    			//buttonFlag=true;
-			    			if(buttonFlag) {
+			    			if(buttonFlag) {System.out.println("case 4");
 			    				try {
 			    					alert.setTitle("Wrong Square Pressed!");
 			    					alert.setContentText("Press ok to continue.");
@@ -869,7 +874,7 @@ public class GameController implements Initializable{
     			
     			case "RandomJump":{ // set new square with RandomJump type.
     				s.setSquareType(Type.RandomJump);
-    				System.out.println("New RANDOM" +s.getCol() + " " +s.getRow());
+    				System.out.println("New RANDOM" +s.getRow() + " " +s.getCol());
     				break;
     			}
     			
@@ -929,8 +934,8 @@ private void PressedButton(String s) {
     	
     	//Nothing happens if a player presses on a blocked square
     	if(!Board[i][j].getSquareType().equals(Type.Blocked)) {
-    		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-    		System.out.println(Game.getInstance().getKnight().getPrev_Place().toString());
+    		//System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+    		//System.out.println(Game.getInstance().getKnight().getPrev_Place().toString());
     		
     		if(SysData.getInstance().getGame().getLevel()==1)
     			RemovePossible();
