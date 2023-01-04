@@ -130,7 +130,7 @@ public class GameController implements Initializable{
     private HashSet<ImageView> PossibleMovesQueen = new HashSet<ImageView>();
     private static HashSet<ImageView> PossibleMovesKing = new HashSet<ImageView>();
     private static Type selectedQuestionType;
-    private static Boolean level4Started = false;
+    private static Boolean level4Started = false, level3Started = false;
     
     
     public static Type getSelectedQuestionType() {
@@ -156,6 +156,14 @@ public class GameController implements Initializable{
     void MoveTo() {
 		
 		//checking if this is the first move in level 4 to start king movement
+		if(!level3Started && Game.getInstance().getLevel() == 3) {
+			level3Started = true;
+			I07.setImage(KING);
+			System.out.println("first Move");
+			
+			// the king will change speed move every 10 seconds
+			timer.schedule(new kingSpeed(), 0, 10000);
+		}
 		if(!level4Started && Game.getInstance().getLevel() == 4) {
 			level4Started = true;
 			I07.setImage(KING);
@@ -206,7 +214,7 @@ public class GameController implements Initializable{
 		    			/*
 		    			 * If statment to check if the player can move on to the next level 
 		    			 */
-		    					if(Game.getInstance().getPlayer().getScore()>=15 )
+		    					if(Game.getInstance().getPlayer().getScore()>=15)
 		    						{
 		    							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
 		    							level.setText(Integer.toString(Game.getInstance().getLevel()));
@@ -358,7 +366,7 @@ public class GameController implements Initializable{
 							}
 							countDown();
 					        
-							SetPossibleLEVEL2();
+							SetPossible();
 					        break;
 						
 					
@@ -430,26 +438,82 @@ public class GameController implements Initializable{
 		    		}
 		    		
 		    		case "3":{
-		    			Boolean buttonFlag=true, gameStillGoing = true;
-		    			Timer timer = new Timer();
-		    			// the king will move every 10 seconds
-//		    			timer.schedule(new kingMovement(), 0, 10000);
-//		    			// the king will move every 8 seconds
-//		    			timer.schedule(new kingMovement(), 10000, 8000);
-//		    			// the king will move every 7 seconds
-//		    			timer.schedule(new kingMovement(), 20000, 70000);
-//		    			// the king will move every 6 seconds
-//		    			timer.schedule(new kingMovement(), 30000, 6000);
-//		    			// the king will move every 5 seconds
-//		    			timer.schedule(new kingMovement(), 40000, 5000);
-//		    			// the king will move every 1 seconds
-//		    			timer.schedule(new kingMovement(), 50000, 1000);
 		    			
-		    			while(gameStillGoing) {
+		    			Boolean buttonFlag=true;
+		    			
+	    				if(Game.getInstance().getKing().getCurrentPlace().getCol()==Game.getInstance().getKnight().getCurrentPlace().getCol() && 
+		    					Game.getInstance().getKing().getCurrentPlace().getRow() == Game.getInstance().getKnight().getCurrentPlace().getRow()) {
+		    				try {
+		    					
+		    					timer2.cancel();
+		    					timer2.purge();
+		    					timer.cancel();
+		    					timer.purge();
+		    					alert.setTitle("Game Over!");
+		    					alert.setContentText("Good Luck Next Time.");
+		    					alert.setHeaderText("Thank You For Playing.");
+		    					alert.showAndWait();
+		    					backToMain();
 		    				
-		    				for(Square s : Game.getInstance().getKnight().allPossibleMoves()) {
-		    				PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));
+
+		    					
+		    				} catch (Error e) {
+		    					e.printStackTrace();
+		    				} catch (Exception e) {
+		    					e.printStackTrace();
 		    				}
+		    				
+		    				
+		    			}
+	    				
+	    				if(remainingTime.getText().equals("0")){
+	    					timer2.cancel();
+	    					timer2.purge();
+		    				timer.cancel();
+	    					timer.purge();
+		    		    	
+		    		    	}
+	    				
+	    				
+	    				/*
+		    			 * If statment to check if the player can move on to the next level 
+		    			 */
+		    			if(Game.getInstance().getPlayer().getScore()>=15 )
+						{
+							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
+							level.setText(Integer.toString(Game.getInstance().getLevel()));
+							levelUp=true;
+							SetImagesNULL();
+							ResetSquareType(); // to set all the square as regular squares and be ready for the next level
+							GenerateSquareType();
+							Game.getInstance().getKnight().setCurrentPlace(Board[0][0]);
+							getImageByString("I00").setImage(KNIGHT);
+							Game.getInstance().getKing().setCurrentPlace(Board[0][7]);
+							getImageByString("I07").setImage(KING);
+							try {
+								alert.setTitle("Congrats!");
+								alert.setContentText("Press ok to continue.");
+								alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have now reached to the next level!");
+								alert.showAndWait();
+							} catch (Error e) {
+								e.printStackTrace();
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							countDown();
+					        
+							SetPossibleLEVEL2();
+					        break;
+						
+					
+				
+						}
+		    			
+
+		    				
+		    				for(Square s : Game.getInstance().getKnight().allPossibleMovesLevel2()) {
+		    					PossibleButtons.add(getButtonByString("CI"+s.getRow()+s.getCol()));
+		    					}
 		    				
 		    				for(Button b: PossibleButtons) {
 			    				if(buttonFlag) {
@@ -462,6 +526,8 @@ public class GameController implements Initializable{
 			    				}
 			    				
 			    			}
+		    				
+
 		    				
 			    			PossibleButtons.clear();
 			    			//buttonFlag=true;
@@ -480,61 +546,25 @@ public class GameController implements Initializable{
 			    			
 			    			// checking if the player finished the game
 			    			
-			    			if(Game.getInstance().getPlayer().getScore()>=15 )
-    						{
-    							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
-    							level.setText(Integer.toString(Game.getInstance().getLevel()));
-    							levelUp=true;
-    							SetImagesNULL();
-    							ResetSquareType(); // to set all the square as regular squares and be ready for the next level
-    							GenerateSquareType();
-    							Game.getInstance().getKnight().setCurrentPlace(Board[0][0]);
-    							getImageByString("I00").setImage(KNIGHT);
-    							Game.getInstance().getKing().setCurrentPlace(Board[0][7]);
-    							getImageByString("I07").setImage(KING);
-    							try {
-    								alert.setTitle("Congrats!");
-    								alert.setContentText("Press ok to continue.");
-    								alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have now reached to the next level!");
-    								alert.showAndWait();
-    							} catch (Error e) {
-    								e.printStackTrace();
-    							} catch (Exception e) {
-    								e.printStackTrace();
-    							}
-    							countDown();
-    					        
-    							SetPossibleLEVEL2();
-    					        break;
-    						
-						
-    				
-    						}
-			    			if(Game.getInstance().getKing().getCurrentPlace().getCol()==Game.getInstance().getKnight().getCurrentPlace().getCol() && 
-			    					Game.getInstance().getKing().getCurrentPlace().getRow() == Game.getInstance().getKnight().getCurrentPlace().getRow()) {
-			    				try {
-			    					alert.setTitle("Game Over!");
-			    					alert.setContentText("Good Luck Next Time.");
-			    					alert.setHeaderText("Thank You For Playing.");
-			    					alert.showAndWait();
-			    					SysData.getInstance().addHistory(Game.getInstance().getPlayer());
-			    					backToMain();
-			    				
 
-			    					
-			    				} catch (Error e) {
-			    					e.printStackTrace();
-			    				} catch (Exception e) {
-			    					e.printStackTrace();
-			    				}
-			    				
-			    				
-			    			}
+								
+//		    				}
+//		    			}
+			    			
+			    			// checking timer because in case 4 there is a while loop
+			    			
+			    			if(remainingTime.getText().equals("0")){
+			    				timer2.cancel();
+		    					timer2.purge();
+			    				timer.cancel();
+		    					timer.purge();
+			    		    	
+			    		    	}
 			    			
 			    			
 			    			
 		    				
-		    			}
+		    			
 		    			break;
 		    		}
 		    		
