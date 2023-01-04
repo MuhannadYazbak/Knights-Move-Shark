@@ -52,7 +52,8 @@ class kingMovement extends TimerTask  {
     		if(Game.getInstance().getKing().getCurrentPlace().getCol()==Game.getInstance().getKnight().getCurrentPlace().getCol() && 
     				Game.getInstance().getKing().getCurrentPlace().getRow() == Game.getInstance().getKnight().getCurrentPlace().getRow()) {
     			try {
-    				GameController.getTimer().cancel();		
+    				GameController.getTimer2().cancel();
+    				GameController.getTimer().cancel();
     			} catch (Error e) {
     				e.printStackTrace();
     			} catch (Exception e) {
