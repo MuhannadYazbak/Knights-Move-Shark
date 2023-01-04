@@ -153,7 +153,7 @@ public class GameController implements Initializable{
 	
 
 	@FXML
-    void MoveTo() {
+    void MoveTo(ActionEvent event) {
 		
 		//checking if this is the first move in level 4 to start king movement
 		if(!level3Started && Game.getInstance().getLevel() == 3) {
@@ -214,36 +214,36 @@ public class GameController implements Initializable{
 		    			/*
 		    			 * If statment to check if the player can move on to the next level 
 		    			 */
-		    					if(Game.getInstance().getPlayer().getScore()>=15)
-		    						{
-		    							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
-		    							level.setText(Integer.toString(Game.getInstance().getLevel()));
-		    							levelUp=true;
-		    							SetImagesNULL();
-		    							ResetSquareType(); // to set all the square as regular squares and be ready for the next level
-		    							GenerateSquareType();
-		    							Game.getInstance().getKnight().setCurrentPlace(Board[0][0]);
-		    							getImageByString("I00").setImage(KNIGHT);
-		    							Game.getInstance().getQueen().setCurrentPlace(Board[0][7]);
-		    							getImageByString("I07").setImage(QUEEN);
-		    							try {
-		    								alert.setTitle("Congrats!");
-		    								alert.setContentText("Press ok to continue.");
-		    								alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have now reached to the next level!");
-		    								alert.showAndWait();
-		    							} catch (Error e) {
-		    								e.printStackTrace();
-		    							} catch (Exception e) {
-		    								e.printStackTrace();
-		    							}
-		    							countDown();
-		    					        
-		    							SetPossibleLEVEL2();
-		    					        break;
-		    						
-								
-		    				
-		    						}
+//		    					if(Game.getInstance().getPlayer().getScore()>=15)
+//		    						{
+//		    							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
+//		    							level.setText(Integer.toString(Game.getInstance().getLevel()));
+//		    							levelUp=true;
+//		    							SetImagesNULL();
+//		    							ResetSquareType(); // to set all the square as regular squares and be ready for the next level
+//		    							GenerateSquareType();
+//		    							Game.getInstance().getKnight().setCurrentPlace(Board[0][0]);
+//		    							getImageByString("I00").setImage(KNIGHT);
+//		    							Game.getInstance().getQueen().setCurrentPlace(Board[0][7]);
+//		    							getImageByString("I07").setImage(QUEEN);
+//		    							try {
+//		    								alert.setTitle("Congrats!");
+//		    								alert.setContentText("Press ok to continue.");
+//		    								alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have now reached to the next level!");
+//		    								alert.showAndWait();
+//		    							} catch (Error e) {
+//		    								e.printStackTrace();
+//		    							} catch (Exception e) {
+//		    								e.printStackTrace();
+//		    							}
+//		    							countDown();
+//		    					        
+//		    							SetPossibleLEVEL2();
+//		    					        break;
+//		    						
+//								
+//		    				
+//		    						}
 					
 		    			
 		    			if(movedFlag == true) {
@@ -342,36 +342,36 @@ public class GameController implements Initializable{
 		    			/*
 		    			 * If statment to check if the player can move on to the next level 
 		    			 */
-		    			if(Game.getInstance().getPlayer().getScore()>=15 )
-						{
-							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
-							level.setText(Integer.toString(Game.getInstance().getLevel()));
-							levelUp=true;
-							SetImagesNULL();
-							ResetSquareType(); // to set all the square as regular squares and be ready for the next level
-							GenerateSquareType();
-							Game.getInstance().getKnight().setCurrentPlace(Board[0][0]);
-							getImageByString("I00").setImage(KNIGHT);
-							Game.getInstance().getKing().setCurrentPlace(Board[0][7]);
-							getImageByString("I07").setImage(KING);
-							try {
-								alert.setTitle("Congrats!");
-								alert.setContentText("Press ok to continue.");
-								alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have now reached to the next level!");
-								alert.showAndWait();
-							} catch (Error e) {
-								e.printStackTrace();
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-							countDown();
-					        
-							SetPossible();
-					        break;
-						
-					
-				
-						}
+//		    			if(Game.getInstance().getPlayer().getScore()>=15 )
+//						{
+//							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
+//							level.setText(Integer.toString(Game.getInstance().getLevel()));
+//							levelUp=true;
+//							SetImagesNULL();
+//							ResetSquareType(); // to set all the square as regular squares and be ready for the next level
+//							GenerateSquareType();
+//							Game.getInstance().getKnight().setCurrentPlace(Board[0][0]);
+//							getImageByString("I00").setImage(KNIGHT);
+//							Game.getInstance().getKing().setCurrentPlace(Board[0][7]);
+//							getImageByString("I07").setImage(KING);
+//							try {
+//								alert.setTitle("Congrats!");
+//								alert.setContentText("Press ok to continue.");
+//								alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have now reached to the next level!");
+//								alert.showAndWait();
+//							} catch (Error e) {
+//								e.printStackTrace();
+//							} catch (Exception e) {
+//								e.printStackTrace();
+//							}
+//							countDown();
+//					        
+//							SetPossible();
+//					        break;
+//						
+//					
+//				
+//						}
 					
 		    			try {
 		    				
@@ -478,36 +478,36 @@ public class GameController implements Initializable{
 	    				/*
 		    			 * If statment to check if the player can move on to the next level 
 		    			 */
-		    			if(Game.getInstance().getPlayer().getScore()>=15 )
-						{
-							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
-							level.setText(Integer.toString(Game.getInstance().getLevel()));
-							levelUp=true;
-							SetImagesNULL();
-							ResetSquareType(); // to set all the square as regular squares and be ready for the next level
-							GenerateSquareType();
-							Game.getInstance().getKnight().setCurrentPlace(Board[0][0]);
-							getImageByString("I00").setImage(KNIGHT);
-							Game.getInstance().getKing().setCurrentPlace(Board[0][7]);
-							getImageByString("I07").setImage(KING);
-							try {
-								alert.setTitle("Congrats!");
-								alert.setContentText("Press ok to continue.");
-								alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have now reached to the next level!");
-								alert.showAndWait();
-							} catch (Error e) {
-								e.printStackTrace();
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-							countDown();
-					        
-							SetPossibleLEVEL2();
-					        break;
-						
-					
-				
-						}
+//		    			if(Game.getInstance().getPlayer().getScore()>=15 )
+//						{
+//							Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
+//							level.setText(Integer.toString(Game.getInstance().getLevel()));
+//							levelUp=true;
+//							SetImagesNULL();
+//							ResetSquareType(); // to set all the square as regular squares and be ready for the next level
+//							GenerateSquareType();
+//							Game.getInstance().getKnight().setCurrentPlace(Board[0][0]);
+//							getImageByString("I00").setImage(KNIGHT);
+//							Game.getInstance().getKing().setCurrentPlace(Board[0][7]);
+//							getImageByString("I07").setImage(KING);
+//							try {
+//								alert.setTitle("Congrats!");
+//								alert.setContentText("Press ok to continue.");
+//								alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have now reached to the next level!");
+//								alert.showAndWait();
+//							} catch (Error e) {
+//								e.printStackTrace();
+//							} catch (Exception e) {
+//								e.printStackTrace();
+//							}
+//							countDown();
+//					        
+//							SetPossibleLEVEL2();
+//					        break;
+//						
+//					
+//				
+//						}
 		    			
 
 		    				
@@ -606,30 +606,30 @@ public class GameController implements Initializable{
 		    		    	}
 	    				
 	    				
-		    			if(Game.getInstance().getPlayer().getScore() >=15) {
-		    				
-
-		    				try {
-		    					
-		    					timer2.cancel();
-		    					timer2.purge();
-		    					timer.cancel();
-		    		    		timer.purge();
-		    					alert.setTitle("Congrats!");
-		    					alert.setContentText("Press ok to continue.");
-		    					alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have won the game!");
-		    					alert.showAndWait();
-		    					backToMain();
-		    					} catch (Error e) {
-		    							e.printStackTrace();
-		    						} catch (Exception e) {
-		    							
-		    							e.printStackTrace();
-		    						}
-		    							countDown();
-		    					        
-		    					        break;
-		    						}
+//		    			if(Game.getInstance().getPlayer().getScore() >=15) {
+//		    				
+//
+//		    				try {
+//		    					
+//		    					timer2.cancel();
+//		    					timer2.purge();
+//		    					timer.cancel();
+//		    		    		timer.purge();
+//		    					alert.setTitle("Congrats!");
+//		    					alert.setContentText("Press ok to continue.");
+//		    					alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have won the game!");
+//		    					alert.showAndWait();
+//		    					backToMain();
+//		    					} catch (Error e) {
+//		    							e.printStackTrace();
+//		    						} catch (Exception e) {
+//		    							
+//		    							e.printStackTrace();
+//		    						}
+//		    							countDown();
+//		    					        
+//		    					        break;
+//		    						}
 		    			
 
 		    				
@@ -693,6 +693,131 @@ public class GameController implements Initializable{
     		break;	
     	}
     	if(remainingTime.getText().equals("0")){
+    		if(Game.getInstance().getPlayer().getScore()>=15 && Game.getInstance().getLevel() == 1)
+			{
+				Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
+				level.setText(Integer.toString(Game.getInstance().getLevel()));
+				levelUp=true;
+				SetImagesNULL();
+				ResetSquareType(); // to set all the square as regular squares and be ready for the next level
+				GenerateSquareType();
+				Game.getInstance().getKnight().setCurrentPlace(Board[0][0]);
+				getImageByString("I00").setImage(KNIGHT);
+				Game.getInstance().getQueen().setCurrentPlace(Board[0][7]);
+				getImageByString("I07").setImage(QUEEN);
+				try {
+					alert.setTitle("Congrats!");
+					alert.setContentText("Press ok to continue.");
+					alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have now reached to the next level!");
+					alert.showAndWait();
+				} catch (Error e) {
+					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				countDown();
+		        
+				SetPossibleLEVEL2();
+		        //break;
+			
+		
+	
+			}
+    		else if(Game.getInstance().getPlayer().getScore()>=30 && Game.getInstance().getLevel() == 2)
+    			{
+    				Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
+    				level.setText(Integer.toString(Game.getInstance().getLevel()));
+    				levelUp=true;
+    				SetImagesNULL();
+    				ResetSquareType(); // to set all the square as regular squares and be ready for the next level
+    				GenerateSquareType();
+    				Game.getInstance().getKnight().setCurrentPlace(Board[0][0]);
+    				getImageByString("I00").setImage(KNIGHT);
+    				Game.getInstance().getQueen().setCurrentPlace(Board[0][7]);
+    				getImageByString("I07").setImage(QUEEN);
+    				try {
+    					alert.setTitle("Congrats!");
+    					alert.setContentText("Press ok to continue.");
+    					alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have now reached to the next level!");
+    					alert.showAndWait();
+    				} catch (Error e) {
+    					e.printStackTrace();
+    				} catch (Exception e) {
+    					e.printStackTrace();
+    				}
+    				countDown();
+    		        
+    				SetPossibleLEVEL2();
+    		        //break;
+    			
+    		
+    	
+    			}
+        		else if(Game.getInstance().getPlayer().getScore()>=45 && Game.getInstance().getLevel() == 3)
+        			{
+        				Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
+        				level.setText(Integer.toString(Game.getInstance().getLevel()));
+        				levelUp=true;
+        				SetImagesNULL();
+        				ResetSquareType(); // to set all the square as regular squares and be ready for the next level
+        				GenerateSquareType();
+        				Game.getInstance().getKnight().setCurrentPlace(Board[0][0]);
+        				getImageByString("I00").setImage(KNIGHT);
+        				Game.getInstance().getQueen().setCurrentPlace(Board[0][7]);
+        				getImageByString("I07").setImage(QUEEN);
+        				try {
+        					timer2.cancel();
+        					timer2.purge();
+        					timer.cancel();
+        		    		timer.purge();
+        					alert.setTitle("Congrats!");
+        					alert.setContentText("Press ok to continue.");
+        					alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have now reached to the next level!");
+        					alert.showAndWait();
+        				} catch (Error e) {
+        					e.printStackTrace();
+        				} catch (Exception e) {
+        					e.printStackTrace();
+        				}
+        				countDown();
+        		        
+        				SetPossibleLEVEL2();
+        		        //break;
+        			
+        		
+        	
+        			}
+    		else if(Game.getInstance().getPlayer().getScore() >=60 && Game.getInstance().getLevel() == 4) {
+				
+				try {
+					
+					timer2.cancel();
+					timer2.purge();
+					timer.cancel();
+		    		timer.purge();
+					alert.setTitle("Congrats!");
+					alert.setContentText("Press ok to continue.");
+					alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have won the game!");
+					alert.showAndWait();
+					if (Game.getInstance().getPlayer().getScore()>200) {
+						Parent pane = FXMLLoader.load(getClass().getResource("/views/WinnerWindow.fxml"));
+						Scene scene = new Scene(pane);
+						Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+						stage.setScene(scene);
+						stage.setTitle("Cup Winner");
+						stage.show();
+					}
+					backToMain();
+					} catch (Error e) {
+							e.printStackTrace();
+						} catch (Exception e) {
+							
+							e.printStackTrace();
+						}
+							countDown();
+					        
+					        //break;
+						}else {
     	try {
     		timer2.cancel();
 			timer2.purge();
@@ -709,6 +834,7 @@ public class GameController implements Initializable{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+    	}
     	}
     }
     
