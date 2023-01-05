@@ -83,12 +83,18 @@ public class QuestionsWizardController implements Initializable {
 
 	}
 	
+	/*
+	 * when a question is clicked on it saves it so it can be then updated or deleted when button is pressed.
+	 */
 	@FXML
 	private void selectQuestion(MouseEvent event) throws IOException {
 		SysData.getInstance().setSelectedQ(qTable.getSelectionModel().getSelectedItem());
 	}
 	
 
+	/*
+	 * deleted selected question and refresh the questions 
+	 */
 	@FXML
 	private void deleteQuestion(ActionEvent event)throws IOException {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
