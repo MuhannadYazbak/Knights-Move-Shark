@@ -160,10 +160,9 @@ public class GameController implements Initializable {
 	private boolean levelUp = false;
 	private Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
-	// private Boolean buttonFlag=true;
 	@FXML
 	void MoveTo() {
-		// Boolean buttonFlag=true;
+		
 		// checking if this is the first move in level 3 or 4 to start king movement
 		if (!level3Started && Game.getInstance().getLevel() == 3) {
 			level3Started = true;
@@ -201,7 +200,7 @@ public class GameController implements Initializable {
 				}
 
 				PossibleButtons.clear();
-				// buttonFlag=true;
+				
 				if (buttonFlag) {
 					try {
 						alert.setTitle("Wrong Square Pressed!");
@@ -442,11 +441,6 @@ public class GameController implements Initializable {
 					}
 				}
 
-				// checking if the player finished the game
-
-//		    				}
-//		    			}
-
 				// checking timer because in case 4 there is a while loop
 
 				if (remainingTime.getText().equals("0")) {
@@ -512,7 +506,6 @@ public class GameController implements Initializable {
 				}
 
 				PossibleButtons.clear();
-				// buttonFlag=true;
 				if (buttonFlag) {
 					try {
 						alert.setTitle("Wrong Square Pressed!");
@@ -525,12 +518,7 @@ public class GameController implements Initializable {
 						e.printStackTrace();
 					}
 				}
-
-				// checking if the player finished the game
-
-//		    				}
-//		    			}
-
+				
 				// checking timer because in case 4 there is a while loop
 
 				if (remainingTime.getText().equals("0")) {
@@ -572,10 +560,7 @@ public class GameController implements Initializable {
 				countDown();
 
 				SetPossibleLEVEL2();
-		        //break;
-
-
-
+				
 			}
     		else if(Game.getInstance().getPlayer().getScore()>=30 && Game.getInstance().getLevel() == 2)
     			{
@@ -602,10 +587,7 @@ public class GameController implements Initializable {
     				countDown();
 
     				SetPossibleLEVEL2();
-    		        //break;
-
-
-
+    		    
     			}
         		else if(Game.getInstance().getPlayer().getScore()>=45 && Game.getInstance().getLevel() == 3)
         			{
@@ -636,10 +618,7 @@ public class GameController implements Initializable {
         				countDown();
 
         				SetPossibleLEVEL2();
-        		        //break;
-
-
-
+        		    
         			}
     		else if(Game.getInstance().getPlayer().getScore() >=60 && Game.getInstance().getLevel() == 4) {
 
@@ -673,7 +652,6 @@ public class GameController implements Initializable {
 						}
 							countDown();
 
-					        //break;
 						}else {
     	try {
     		timer2.cancel();
@@ -693,7 +671,7 @@ public class GameController implements Initializable {
 	}
 		}}
 
-	private void SetImagesNULL() {
+	private void SetImagesNULL() { // function to set all the board image to the original one and the piece image null
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				getImageByString("I" + i + j).setImage(null);
@@ -1261,6 +1239,7 @@ public class GameController implements Initializable {
 
 	}
 
+	// a method that returns a random square
 	public Square randomSquare() {
 
 		int randomNumber1, randomNumber2;
@@ -1270,6 +1249,7 @@ public class GameController implements Initializable {
 
 	}
 
+	// a method to start the countdown from the start
 	private void countDown() {
 		remainingTime.textProperty().bind(timeSeconds.asString());
 		if (timeline != null)
@@ -1298,13 +1278,6 @@ public class GameController implements Initializable {
 		Game.getInstance().getKnight().setPrev_Place(new Square(0, 0));
 		Game.getInstance().getQueen().setPrev_Place(new Square(0, 7));
 		Game.getInstance().getQueen().setCurrentPlace(new Square(0, 7));
-//		Parent pane = FXMLLoader.load(getClass().getResource("/views/MainMenu.fxml"));
-//		Scene scene = new Scene(pane);
-//		Stage stage = new Stage();
-//		stage.setScene(scene);
-//		stage.setResizable(false);
-//		stage.setTitle("Main Menu");
-//		stage.show();
 		Platform.exit();
 	}
 
@@ -1312,200 +1285,40 @@ public class GameController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 
-		BoardImages.add(S00);
-		BoardImages.add(S01);
-		BoardImages.add(S02);
-		BoardImages.add(S03);
-		BoardImages.add(S04);
-		BoardImages.add(S05);
-		BoardImages.add(S06);
-		BoardImages.add(S07);
-		BoardImages.add(S10);
-		BoardImages.add(S11);
-		BoardImages.add(S12);
-		BoardImages.add(S13);
-		BoardImages.add(S14);
-		BoardImages.add(S15);
-		BoardImages.add(S16);
-		BoardImages.add(S17);
-		BoardImages.add(S20);
-		BoardImages.add(S21);
-		BoardImages.add(S22);
-		BoardImages.add(S23);
-		BoardImages.add(S24);
-		BoardImages.add(S25);
-		BoardImages.add(S26);
-		BoardImages.add(S27);
-		BoardImages.add(S30);
-		BoardImages.add(S31);
-		BoardImages.add(S32);
-		BoardImages.add(S33);
-		BoardImages.add(S34);
-		BoardImages.add(S35);
-		BoardImages.add(S36);
-		BoardImages.add(S37);
-		BoardImages.add(S40);
-		BoardImages.add(S41);
-		BoardImages.add(S42);
-		BoardImages.add(S43);
-		BoardImages.add(S44);
-		BoardImages.add(S45);
-		BoardImages.add(S46);
-		BoardImages.add(S47);
-		BoardImages.add(S50);
-		BoardImages.add(S51);
-		BoardImages.add(S52);
-		BoardImages.add(S53);
-		BoardImages.add(S54);
-		BoardImages.add(S55);
-		BoardImages.add(S56);
-		BoardImages.add(S57);
-		BoardImages.add(S60);
-		BoardImages.add(S61);
-		BoardImages.add(S62);
-		BoardImages.add(S63);
-		BoardImages.add(S64);
-		BoardImages.add(S65);
-		BoardImages.add(S66);
-		BoardImages.add(S67);
-		BoardImages.add(S70);
-		BoardImages.add(S71);
-		BoardImages.add(S72);
-		BoardImages.add(S73);
-		BoardImages.add(S74);
-		BoardImages.add(S75);
-		BoardImages.add(S76);
-		BoardImages.add(S77);
+		BoardImages.add(S00);BoardImages.add(S01);BoardImages.add(S02);BoardImages.add(S03);BoardImages.add(S04);BoardImages.add(S05);
+		BoardImages.add(S06);BoardImages.add(S07);BoardImages.add(S10);BoardImages.add(S11);BoardImages.add(S12);BoardImages.add(S13);
+		BoardImages.add(S14);BoardImages.add(S15);BoardImages.add(S16);BoardImages.add(S17);BoardImages.add(S20);BoardImages.add(S21);
+		BoardImages.add(S22);BoardImages.add(S23);BoardImages.add(S24);BoardImages.add(S25);BoardImages.add(S26);BoardImages.add(S27);
+		BoardImages.add(S30);BoardImages.add(S31);BoardImages.add(S32);BoardImages.add(S33);BoardImages.add(S34);BoardImages.add(S35);
+		BoardImages.add(S36);BoardImages.add(S37);BoardImages.add(S40);BoardImages.add(S41);BoardImages.add(S42);BoardImages.add(S43);
+		BoardImages.add(S44);BoardImages.add(S45);BoardImages.add(S46);BoardImages.add(S47);BoardImages.add(S50);BoardImages.add(S51);
+		BoardImages.add(S52);BoardImages.add(S53);BoardImages.add(S54);BoardImages.add(S55);BoardImages.add(S56);BoardImages.add(S57);
+		BoardImages.add(S60);BoardImages.add(S61);BoardImages.add(S62);BoardImages.add(S63);BoardImages.add(S64);BoardImages.add(S65);
+		BoardImages.add(S66);BoardImages.add(S67);BoardImages.add(S70);BoardImages.add(S71);BoardImages.add(S72);BoardImages.add(S73);
+		BoardImages.add(S74);BoardImages.add(S75);BoardImages.add(S76);BoardImages.add(S77);
 
-		allImages.add(I00);
-		allImages.add(I01);
-		allImages.add(I02);
-		allImages.add(I03);
-		allImages.add(I04);
-		allImages.add(I05);
-		allImages.add(I06);
-		allImages.add(I07);
-		allImages.add(I10);
-		allImages.add(I11);
-		allImages.add(I12);
-		allImages.add(I13);
-		allImages.add(I14);
-		allImages.add(I15);
-		allImages.add(I16);
-		allImages.add(I17);
-		allImages.add(I20);
-		allImages.add(I21);
-		allImages.add(I22);
-		allImages.add(I23);
-		allImages.add(I24);
-		allImages.add(I25);
-		allImages.add(I26);
-		allImages.add(I27);
-		allImages.add(I30);
-		allImages.add(I31);
-		allImages.add(I32);
-		allImages.add(I33);
-		allImages.add(I34);
-		allImages.add(I35);
-		allImages.add(I36);
-		allImages.add(I37);
-		allImages.add(I40);
-		allImages.add(I41);
-		allImages.add(I42);
-		allImages.add(I43);
-		allImages.add(I44);
-		allImages.add(I45);
-		allImages.add(I46);
-		allImages.add(I47);
-		allImages.add(I50);
-		allImages.add(I51);
-		allImages.add(I52);
-		allImages.add(I53);
-		allImages.add(I54);
-		allImages.add(I55);
-		allImages.add(I56);
-		allImages.add(I57);
-		allImages.add(I60);
-		allImages.add(I61);
-		allImages.add(I62);
-		allImages.add(I63);
-		allImages.add(I64);
-		allImages.add(I65);
-		allImages.add(I66);
-		allImages.add(I67);
-		allImages.add(I70);
-		allImages.add(I71);
-		allImages.add(I72);
-		allImages.add(I73);
-		allImages.add(I74);
-		allImages.add(I75);
-		allImages.add(I76);
+		allImages.add(I00);allImages.add(I01);allImages.add(I02);allImages.add(I03);allImages.add(I04);allImages.add(I05);allImages.add(I06);
+		allImages.add(I07);allImages.add(I10);allImages.add(I11);allImages.add(I12);allImages.add(I13);allImages.add(I14);allImages.add(I15);
+		allImages.add(I16);allImages.add(I17);allImages.add(I20);allImages.add(I21);allImages.add(I22);allImages.add(I23);allImages.add(I24);
+		allImages.add(I25);allImages.add(I26);allImages.add(I27);allImages.add(I30);allImages.add(I31);allImages.add(I32);allImages.add(I33);
+		allImages.add(I34);allImages.add(I35);allImages.add(I36);allImages.add(I37);allImages.add(I40);allImages.add(I41);allImages.add(I42);
+		allImages.add(I43);allImages.add(I44);allImages.add(I45);allImages.add(I46);allImages.add(I47);allImages.add(I50);allImages.add(I51);
+		allImages.add(I52);allImages.add(I53);allImages.add(I54);allImages.add(I55);allImages.add(I56);allImages.add(I57);allImages.add(I60);
+		allImages.add(I61);allImages.add(I62);allImages.add(I63);allImages.add(I64);allImages.add(I65);allImages.add(I66);allImages.add(I67);
+		allImages.add(I70);allImages.add(I71);allImages.add(I72);allImages.add(I73);allImages.add(I74);allImages.add(I75);allImages.add(I76);
 		allImages.add(I77);
 
-		allButtons.add(CI00);
-		allButtons.add(CI13);
-		allButtons.add(CI26);
-		allButtons.add(CI41);
-		allButtons.add(CI54);
-		allButtons.add(CI66);
-		allButtons.add(CI01);
-		allButtons.add(CI14);
-		allButtons.add(CI27);
-		allButtons.add(CI42);
-		allButtons.add(CI55);
-		allButtons.add(CI67);
-		allButtons.add(CI02);
-		allButtons.add(CI15);
-		allButtons.add(CI30);
-		allButtons.add(CI43);
-		allButtons.add(CI56);
-		allButtons.add(CI70);
-		allButtons.add(CI03);
-		allButtons.add(CI16);
-		allButtons.add(CI31);
-		allButtons.add(CI44);
-		allButtons.add(CI57);
-		allButtons.add(CI71);
-		allButtons.add(CI04);
-		allButtons.add(CI17);
-		allButtons.add(CI32);
-		allButtons.add(CI45);
-		allButtons.add(CI60);
-		allButtons.add(CI72);
-		allButtons.add(CI05);
-		allButtons.add(CI20);
-		allButtons.add(CI33);
-		allButtons.add(CI46);
-		allButtons.add(CI61);
-		allButtons.add(CI73);
-		allButtons.add(CI06);
-		allButtons.add(CI21);
-		allButtons.add(CI34);
-		allButtons.add(CI47);
-		allButtons.add(CI62);
-		allButtons.add(CI74);
-		allButtons.add(CI07);
-		allButtons.add(CI22);
-		allButtons.add(CI35);
-		allButtons.add(CI50);
-		allButtons.add(CI63);
-		allButtons.add(CI75);
-		allButtons.add(CI10);
-		allButtons.add(CI23);
-		allButtons.add(CI36);
-		allButtons.add(CI51);
-		allButtons.add(CI64);
-		allButtons.add(CI76);
-		allButtons.add(CI11);
-		allButtons.add(CI24);
-		allButtons.add(CI37);
-		allButtons.add(CI52);
-		allButtons.add(CI65);
-		allButtons.add(CI77);
-		allButtons.add(CI12);
-		allButtons.add(CI25);
-		allButtons.add(CI40);
-		allButtons.add(CI53);
+		allButtons.add(CI00);allButtons.add(CI13);allButtons.add(CI26);allButtons.add(CI41);allButtons.add(CI54);allButtons.add(CI66);
+		allButtons.add(CI01);allButtons.add(CI14);allButtons.add(CI27);allButtons.add(CI42);allButtons.add(CI55);allButtons.add(CI67);
+		allButtons.add(CI02);allButtons.add(CI15);allButtons.add(CI30);allButtons.add(CI43);allButtons.add(CI56);allButtons.add(CI70);
+		allButtons.add(CI03);allButtons.add(CI16);allButtons.add(CI31);allButtons.add(CI44);allButtons.add(CI57);allButtons.add(CI71);
+		allButtons.add(CI04);allButtons.add(CI17);allButtons.add(CI32);allButtons.add(CI45);allButtons.add(CI60);allButtons.add(CI72);
+		allButtons.add(CI05);allButtons.add(CI20);allButtons.add(CI33);allButtons.add(CI46);allButtons.add(CI61);allButtons.add(CI73);
+		allButtons.add(CI06);allButtons.add(CI21);allButtons.add(CI34);allButtons.add(CI47);allButtons.add(CI62);allButtons.add(CI74);
+		allButtons.add(CI07);allButtons.add(CI22);allButtons.add(CI35);allButtons.add(CI50);allButtons.add(CI63);allButtons.add(CI75);
+		allButtons.add(CI10);allButtons.add(CI23);allButtons.add(CI36);allButtons.add(CI51);allButtons.add(CI64);allButtons.add(CI76);
+		allButtons.add(CI11);allButtons.add(CI24);allButtons.add(CI37);allButtons.add(CI52);allButtons.add(CI65);allButtons.add(CI77);
+		allButtons.add(CI12);allButtons.add(CI25);allButtons.add(CI40);allButtons.add(CI53);
 
 		countDown();
 
@@ -1536,7 +1349,6 @@ public class GameController implements Initializable {
 			alert.setContentText("Good Luck Next Time.");
 			alert.setHeaderText("Thank You For Playing.");
 			alert.showAndWait();
-//			GameController.backToMain();
 
 		} catch (Error e) {
 			e.printStackTrace();
