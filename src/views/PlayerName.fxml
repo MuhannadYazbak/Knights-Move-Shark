@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -50,5 +51,8 @@
         	<Font name="System Bold" size="30.0" />
          </font>
       </Label>
+      <RadioButton fx:id="skin1" layoutX="40.0" layoutY="94.0" mnemonicParsing="false" text="Standard" textFill="WHITE" />
+      <RadioButton fx:id="skin2" layoutX="40.0" layoutY="134.0" mnemonicParsing="false" text="A.I.M" textFill="WHITE" />
+      <RadioButton fx:id="skin3" layoutX="40.0" layoutY="176.0" mnemonicParsing="false" text="Abstrakt" textFill="WHITE" />
    </children>
 </AnchorPane>
