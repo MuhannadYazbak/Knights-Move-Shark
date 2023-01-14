@@ -206,7 +206,7 @@ public class GameController implements Initializable {
 					}
 
 				}
-
+				System.out.println(PossibleButtons);
 				PossibleButtons.clear();
 				
 				if (buttonFlag) {
@@ -222,7 +222,7 @@ public class GameController implements Initializable {
 						e.printStackTrace();
 					}
 				}
-				 buttonFlag=true;
+				buttonFlag=true;
 
 				if (movedFlag == true) {
 					for (Square s : Game.getInstance().getQueen().allPossibleMoves()) {
@@ -284,9 +284,10 @@ public class GameController implements Initializable {
 
 					}
 
-					break;
-
+					
+					
 				}
+				break;
 			}
 
 			case "2": {
@@ -672,24 +673,25 @@ public class GameController implements Initializable {
 						}
 							countDown();
 
-						}else {
-    	try {
-    		final Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    		timer2.cancel();
-			timer2.purge();
-			timer.cancel();
-			timer.purge();
-			alert.setTitle("Game Over!");
-			alert.setContentText("Good Luck Next Time.");
-			alert.setHeaderText("Thank You For Playing.");
-			alert.showAndWait();
-			backToMain();
+						}
+    		else {
+    			try {
+    				final Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    				timer2.cancel();
+    			timer2.purge();
+    			timer.cancel();
+    			timer.purge();
+    			alert.setTitle("Game Over!");
+    			alert.setContentText("Good Luck Next Time.");
+    			alert.setHeaderText("Thank You For Playing.");
+    			alert.showAndWait();
+    			backToMain();
     	
-		} catch(Exception e) {
-    		e.printStackTrace();
-    	}
+    			} catch(Exception e) {
+    				e.printStackTrace();
+    			}
     	
-	}
+    		}
 		}}
 
 	private void SetImagesNULL() { // function to set all the board image to the original one and the piece image null
@@ -803,6 +805,7 @@ public class GameController implements Initializable {
 				getImageByString("I" + s.getRow() + s.getCol()).setImage(Blocked);
 			}
 		}
+		
 	}
 
 	private void RemovePossibleLEVEL2() { // function to remove the possible moves
@@ -830,6 +833,7 @@ public class GameController implements Initializable {
 				getImageByString("I" + s.getRow() + s.getCol()).setImage(Blocked);
 
 		}
+		
 	}
 
 	private Square[][] BuildSquares() { // function to build 64 squares with Regular type
@@ -848,6 +852,7 @@ public class GameController implements Initializable {
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				Board[i][j].setSquareType(Type.Regular);
+				Board[i][j].setVisisted(false);
 			}
 
 		}
@@ -1018,7 +1023,7 @@ public class GameController implements Initializable {
 		else if (Board[i][j].getSquareType().equals(Type.Blocked))
 			getImageByString("I" + i + j).setImage(Blocked);
 
-		if (SysData.getInstance().getGame().getLevel() == 1)
+		if (Game.getInstance().getLevel() == 1)
 			SetPossible();
 		else if (SysData.getInstance().getGame().getLevel() == 2 || SysData.getInstance().getGame().getLevel() == 3
 				|| SysData.getInstance().getGame().getLevel() == 4)
