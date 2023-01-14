@@ -86,8 +86,11 @@ public class GameController implements Initializable {
 	@FXML
 	private Button backBtn;
 
+	 @FXML
+	    private Label remainingTime,level,score,playerName;
+	 
 	@FXML
-	private Label level, playerName, remainingTime, score;
+	private ImageView countdownimage,levelImage,playernameImage,scoreImage;
 
 	@FXML
 	private AnchorPane screen;
@@ -135,6 +138,11 @@ public class GameController implements Initializable {
 	private Image StepB = new Image(getClass().getResourceAsStream("/lib/sbNew.jpeg"));
 	private Image StepG = new Image(getClass().getResourceAsStream("/lib/gbNew.jpeg"));
 	private Image Step = new Image(getClass().getResourceAsStream("/lib/step.png"));
+	
+	private Image Level1 = new Image(getClass().getResourceAsStream("/lib/level1.png"));
+	private Image Level2 = new Image(getClass().getResourceAsStream("/lib/level2.png"));
+	private Image Level3 = new Image(getClass().getResourceAsStream("/lib/level3.png"));
+	private Image Level4 = new Image(getClass().getResourceAsStream("/lib/level4.png"));
 	
 	private HashSet<ImageView> PossibleMovesQueen = new HashSet<ImageView>();
 	private static HashSet<ImageView> PossibleMovesKing = new HashSet<ImageView>();
@@ -203,6 +211,7 @@ public class GameController implements Initializable {
 				
 				if (buttonFlag) {
 					try {
+						final Alert alert = new Alert(Alert.AlertType.INFORMATION);
 						alert.setTitle("Wrong Square Pressed!");
 						alert.setContentText("Press ok to continue.");
 						alert.setHeaderText("Please press only on the white squares.");
@@ -259,6 +268,7 @@ public class GameController implements Initializable {
 							&& Game.getInstance().getQueen().getCurrentPlace().getRow() == Game.getInstance()
 									.getKnight().getCurrentPlace().getRow()) {
 						try {
+							final Alert alert = new Alert(Alert.AlertType.INFORMATION);
 							alert.setTitle("Game Over!");
 							alert.setContentText("Good Luck Next Time.");
 							alert.setHeaderText("Thank You For Playing.");
@@ -301,6 +311,7 @@ public class GameController implements Initializable {
 				PossibleButtons.clear();
 				if (buttonFlag) {
 					try {
+						final Alert alert = new Alert(Alert.AlertType.INFORMATION);
 						alert.setTitle("Wrong Square Pressed!");
 						alert.setContentText("Press ok to continue.");
 						alert.setHeaderText("Please press only on the white squares.");
@@ -356,6 +367,7 @@ public class GameController implements Initializable {
 						&& Game.getInstance().getQueen().getCurrentPlace().getRow() == Game.getInstance().getKnight()
 								.getCurrentPlace().getRow()) {
 					try {
+						final Alert alert = new Alert(Alert.AlertType.INFORMATION);
 						alert.setTitle("Game Over!");
 						alert.setContentText("Good Luck Next Time.");
 						alert.setHeaderText("Thank You For Playing.");
@@ -382,7 +394,7 @@ public class GameController implements Initializable {
 						&& Game.getInstance().getKing().getCurrentPlace().getRow() == Game.getInstance().getKnight()
 								.getCurrentPlace().getRow()) {
 					try {
-
+						final Alert alert = new Alert(Alert.AlertType.INFORMATION);
 						timer2.cancel();
 						timer2.purge();
 						timer.cancel();
@@ -430,6 +442,7 @@ public class GameController implements Initializable {
 				// buttonFlag=true;
 				if (buttonFlag) {
 					try {
+						final Alert alert = new Alert(Alert.AlertType.INFORMATION);
 						alert.setTitle("Wrong Square Pressed!");
 						alert.setContentText("Press ok to continue.");
 						alert.setHeaderText("Please press only on the white squares.");
@@ -463,7 +476,7 @@ public class GameController implements Initializable {
 						&& Game.getInstance().getKing().getCurrentPlace().getRow() == Game.getInstance().getKnight()
 								.getCurrentPlace().getRow()) {
 					try {
-
+						final Alert alert = new Alert(Alert.AlertType.INFORMATION);
 						timer2.cancel();
 						timer2.purge();
 						timer.cancel();
@@ -508,6 +521,7 @@ public class GameController implements Initializable {
 				PossibleButtons.clear();
 				if (buttonFlag) {
 					try {
+						final Alert alert = new Alert(Alert.AlertType.INFORMATION);
 						alert.setTitle("Wrong Square Pressed!");
 						alert.setContentText("Press ok to continue.");
 						alert.setHeaderText("Please press only on the white squares.");
@@ -539,6 +553,7 @@ public class GameController implements Initializable {
 			{
 				Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
 				level.setText(Integer.toString(Game.getInstance().getLevel()));
+				levelImage.setImage(Level2);
 				levelUp=true;
 				SetImagesNULL();
 				ResetSquareType(); // to set all the square as regular squares and be ready for the next level
@@ -548,6 +563,7 @@ public class GameController implements Initializable {
 				Game.getInstance().getQueen().setCurrentPlace(Board[0][7]);
 				getImageByString("I07").setImage(QUEEN);
 				try {
+					final Alert alert = new Alert(Alert.AlertType.INFORMATION);
 					alert.setTitle("Congrats!");
 					alert.setContentText("Press ok to continue.");
 					alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have now reached to the next level!");
@@ -566,6 +582,7 @@ public class GameController implements Initializable {
     			{
     				Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
     				level.setText(Integer.toString(Game.getInstance().getLevel()));
+    				levelImage.setImage(Level3);
     				levelUp=true;
     				SetImagesNULL();
     				ResetSquareType(); // to set all the square as regular squares and be ready for the next level
@@ -575,6 +592,7 @@ public class GameController implements Initializable {
     				Game.getInstance().getQueen().setCurrentPlace(Board[0][7]);
     				getImageByString("I07").setImage(QUEEN);
     				try {
+    					final Alert alert = new Alert(Alert.AlertType.INFORMATION);
     					alert.setTitle("Congrats!");
     					alert.setContentText("Press ok to continue.");
     					alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have now reached to the next level!");
@@ -593,6 +611,7 @@ public class GameController implements Initializable {
         			{
         				Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
         				level.setText(Integer.toString(Game.getInstance().getLevel()));
+        				levelImage.setImage(Level4);
         				levelUp=true;
         				SetImagesNULL();
         				ResetSquareType(); // to set all the square as regular squares and be ready for the next level
@@ -602,6 +621,7 @@ public class GameController implements Initializable {
         				Game.getInstance().getQueen().setCurrentPlace(Board[0][7]);
         				getImageByString("I07").setImage(QUEEN);
         				try {
+        					final Alert alert = new Alert(Alert.AlertType.INFORMATION);
         					timer2.cancel();
         					timer2.purge();
         					timer.cancel();
@@ -623,7 +643,7 @@ public class GameController implements Initializable {
     		else if(Game.getInstance().getPlayer().getScore() >=60 && Game.getInstance().getLevel() == 4) {
 
 				try {
-
+					final Alert alert = new Alert(Alert.AlertType.INFORMATION);
 					timer2.cancel();
 					timer2.purge();
 					timer.cancel();
@@ -654,6 +674,7 @@ public class GameController implements Initializable {
 
 						}else {
     	try {
+    		final Alert alert = new Alert(Alert.AlertType.INFORMATION);
     		timer2.cancel();
 			timer2.purge();
 			timer.cancel();
@@ -851,7 +872,6 @@ public class GameController implements Initializable {
 			for (int k = 0; k < 3; k++) {
 				Square s = randomRegularSquare();
 				s.setSquareType(Type.Forget);
-				System.out.println(s);
 			}
 			
 			break;
@@ -1024,6 +1044,7 @@ public class GameController implements Initializable {
 		// moving knight to random square and creating a new random jump square
 		case RandomJump: {
 			try {
+				final Alert alert = new Alert(Alert.AlertType.INFORMATION);
 				alert.setTitle("OOPs!");
 				alert.setContentText("random jump.");
 				alert.setHeaderText("Get Ready, " + Game.getInstance().getPlayer().getName());
@@ -1058,8 +1079,9 @@ public class GameController implements Initializable {
 		}
 		case Forget: {
 			try {
+				final Alert alert = new Alert(Alert.AlertType.INFORMATION);
 				alert.setTitle("OOPs!");
-				alert.setContentText("you reached a forget square");
+				alert.setContentText("you are on a forget square");
 				alert.showAndWait();
 			} catch (Error e) {
 				e.printStackTrace();
