@@ -392,6 +392,7 @@ public class GameController implements Initializable {
 			case "3": {
 
 				Boolean buttonFlag = true;
+				pauseKing = false;
 
 				if (Game.getInstance().getKing().getCurrentPlace().getCol() == Game.getInstance().getKnight()
 						.getCurrentPlace().getCol()
@@ -403,11 +404,13 @@ public class GameController implements Initializable {
 						timer2.purge();
 						timer.cancel();
 						timer.purge();
+						pauseKing = true;
 						alert.setTitle("Game Over!");
 						alert.setContentText("Good Luck Next Time.");
 						alert.setHeaderText("Thank You For Playing.");
 						alert.showAndWait();
 						backToMain();
+						pauseKing=false;
 
 					} catch (Error e) {
 						e.printStackTrace();
@@ -422,6 +425,7 @@ public class GameController implements Initializable {
 					timer2.purge();
 					timer.cancel();
 					timer.purge();
+					pauseKing = true;
 
 				}
 
@@ -458,22 +462,13 @@ public class GameController implements Initializable {
 					}
 				}
 
-				// checking timer because in case 4 there is a while loop
-
-				if (remainingTime.getText().equals("0")) {
-					timer2.cancel();
-					timer2.purge();
-					timer.cancel();
-					timer.purge();
-
-				}
-
 				break;
 			}
 
 			case "4": {
 
 				Boolean buttonFlag = true;
+				pauseKing = false;
 
 				if (Game.getInstance().getKing().getCurrentPlace().getCol() == Game.getInstance().getKnight()
 						.getCurrentPlace().getCol()
@@ -504,6 +499,7 @@ public class GameController implements Initializable {
 					timer2.purge();
 					timer.cancel();
 					timer.purge();
+					pauseKing = false;
 
 				}
 
@@ -536,16 +532,6 @@ public class GameController implements Initializable {
 						e.printStackTrace();
 					}
 				}
-				
-				// checking timer because in case 4 there is a while loop
-
-				if (remainingTime.getText().equals("0")) {
-					timer2.cancel();
-					timer2.purge();
-					timer.cancel();
-					timer.purge();
-
-				}
 
 				break;
 			}
@@ -555,7 +541,8 @@ public class GameController implements Initializable {
 		if(remainingTime.getText().equals("0")){
     		if(Game.getInstance().getPlayer().getScore()>=15 && Game.getInstance().getLevel() == 1)
 			{
-				Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
+				Game.getInstance().setScoreLevel1(Game.getInstance().getPlayer().getScore());
+    			Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
 				level.setText(Integer.toString(Game.getInstance().getLevel()));
 				levelImage.setImage(Level2);
 				levelUp=true;
@@ -582,8 +569,9 @@ public class GameController implements Initializable {
 				SetPossibleLEVEL2();
 				
 			}
-    		else if(Game.getInstance().getPlayer().getScore()>=30 && Game.getInstance().getLevel() == 2)
+    		else if(Game.getInstance().getPlayer().getScore() - Game.getInstance().getScoreLevel1()>=15 && Game.getInstance().getLevel() == 2)
     			{
+    			Game.getInstance().setScoreLevel2(Game.getInstance().getPlayer().getScore());
     				Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
     				level.setText(Integer.toString(Game.getInstance().getLevel()));
     				levelImage.setImage(Level3);
@@ -611,8 +599,9 @@ public class GameController implements Initializable {
     				SetPossibleLEVEL2();
     		    
     			}
-        		else if(Game.getInstance().getPlayer().getScore()>=45 && Game.getInstance().getLevel() == 3)
+        		else if(Game.getInstance().getPlayer().getScore() - Game.getInstance().getScoreLevel2()>=15 && Game.getInstance().getLevel() == 3)
         			{
+        				Game.getInstance().setScoreLevel3(Game.getInstance().getPlayer().getScore());
         				Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
         				level.setText(Integer.toString(Game.getInstance().getLevel()));
         				levelImage.setImage(Level4);
@@ -630,6 +619,7 @@ public class GameController implements Initializable {
         					timer2.purge();
         					timer.cancel();
         		    		timer.purge();
+        		    		pauseKing = true;
         					alert.setTitle("Congrats!");
         					alert.setContentText("Press ok to continue.");
         					alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have now reached to the next level!");
@@ -644,14 +634,16 @@ public class GameController implements Initializable {
         				SetPossibleLEVEL2();
         		    
         			}
-    		else if(Game.getInstance().getPlayer().getScore() >=60 && Game.getInstance().getLevel() == 4) {
+    		else if(Game.getInstance().getPlayer().getScore() - Game.getInstance().getScoreLevel3()>=15 && Game.getInstance().getLevel() == 4) {
 
-				try {
+    			Game.getInstance().setScoreLevel4(Game.getInstance().getPlayer().getScore());
+    			try {
 					final Alert alert = new Alert(Alert.AlertType.INFORMATION);
 					timer2.cancel();
 					timer2.purge();
 					timer.cancel();
 		    		timer.purge();
+		    		pauseKing = true;
 					alert.setTitle("Congrats!");
 					alert.setContentText("Press ok to continue.");
 					alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have won the game!");
@@ -684,6 +676,7 @@ public class GameController implements Initializable {
     			timer2.purge();
     			timer.cancel();
     			timer.purge();
+    			pauseKing = true;
     			alert.setTitle("Game Over!");
     			alert.setContentText("Good Luck Next Time.");
     			alert.setHeaderText("Thank You For Playing.");

@@ -12,6 +12,7 @@ import utils.Type;
 public class Game {
 	private static int ID=1;
 	private int id;
+	private int scoreLevel1=0, scoreLevel2=0, scoreLevel3=0, scoreLevel4=0;
 	private Player player;
 	private int level;
 	private int score;
@@ -151,6 +152,40 @@ public class Game {
 
 	public void setGameOver(boolean gameOver) {
 		this.gameOver = gameOver;
+	}
+	
+	
+
+	public int getScoreLevel1() {
+		return scoreLevel1;
+	}
+
+	public void setScoreLevel1(int scoreLevel1) {
+		this.scoreLevel1 = scoreLevel1;
+	}
+
+	public int getScoreLevel2() {
+		return scoreLevel2;
+	}
+
+	public void setScoreLevel2(int scoreLevel2) {
+		this.scoreLevel2 = scoreLevel2;
+	}
+
+	public int getScoreLevel3() {
+		return scoreLevel3;
+	}
+
+	public void setScoreLevel3(int scoreLevel3) {
+		this.scoreLevel3 = scoreLevel3;
+	}
+
+	public int getScoreLevel4() {
+		return scoreLevel4;
+	}
+
+	public void setScoreLevel4(int scoreLevel4) {
+		this.scoreLevel4 = scoreLevel4;
 	}
 
 	public boolean isYouWon() {
