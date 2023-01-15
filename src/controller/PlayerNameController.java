@@ -16,22 +16,44 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 //TODO throw exp name == null
 
 public class PlayerNameController implements Initializable {
 	private String name;
-	@FXML 
-	private TextField playerName;
-	static Stage stage;
-	@FXML 
-	private Button enterBtn, backBtn;
 	
-	@FXML
-	private Label message;
+	static Stage stage;
+	 @FXML
+	    private Button backBtn;
+
+	    @FXML
+	    private Button enterBtn;
+
+	    @FXML
+	    private Label message;
+
+	    @FXML
+	    private TextField playerName;
+
+	    @FXML
+	    private AnchorPane screen;
+
+	    @FXML
+	    private RadioButton skin1;
+
+	    @FXML
+	    private RadioButton skin2;
+
+	    @FXML
+	    private RadioButton skin3;
+
+	    @FXML
+	    private Label title;
 	
 	@FXML
 	private void back(ActionEvent event) throws IOException {

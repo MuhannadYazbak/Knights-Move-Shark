@@ -206,7 +206,7 @@ public class GameController implements Initializable {
 					}
 
 				}
-				System.out.println(PossibleButtons);
+				
 				PossibleButtons.clear();
 				
 				if (buttonFlag) {
@@ -250,14 +250,17 @@ public class GameController implements Initializable {
 											.getQueen().getPrev_Place().getCol()].getSquareType() == Type.RandomJump) {
 								i.setImage(null);
 							} else if (Board[Game.getInstance().getQueen().getPrev_Place().getRow()][Game.getInstance()
-									.getQueen().getPrev_Place().getCol()].getSquareType() == Type.EasyQuestion
-									|| Board[Game.getInstance().getQueen().getPrev_Place().getRow()][Game.getInstance()
-											.getQueen().getPrev_Place().getCol()].getSquareType() == Type.HardQuestion
-									|| Board[Game.getInstance().getQueen().getPrev_Place().getRow()][Game.getInstance()
+									.getQueen().getPrev_Place().getCol()].getSquareType() == Type.EasyQuestion)
+								i.setImage(QuestionGreen);
+							
+							else if(Board[Game.getInstance().getQueen().getPrev_Place().getRow()][Game.getInstance()
+											.getQueen().getPrev_Place().getCol()].getSquareType() == Type.HardQuestion)
+								i.setImage(QuestionRed);
+							else if (Board[Game.getInstance().getQueen().getPrev_Place().getRow()][Game.getInstance()
 											.getQueen().getPrev_Place().getCol()]
-											.getSquareType() == Type.MediumQuestion) {
-								i.setImage(null);
-							}
+											.getSquareType() == Type.MediumQuestion) 
+								i.setImage(QuestionYellow);
+							
 
 						}
 					}

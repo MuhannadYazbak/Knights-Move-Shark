@@ -14,6 +14,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+import javafx.util.Duration;
 import model.Game;
 import model.Question;
 import model.SysData;
@@ -31,7 +35,13 @@ public class QuestionWindowController implements Initializable {
 	@FXML
 	private Button submitBtn;
 	
+	   @FXML
+	    private MediaView mediaView;
+	   
 	 private Question question;
+	 
+	 private Media media;
+	 	private MediaPlayer backgroundvideo=null;
 
 	private ArrayList<Question> questions = new ArrayList<>();
 	 
@@ -251,6 +261,23 @@ public class QuestionWindowController implements Initializable {
 	 */
 	 @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		 if (backgroundvideo == null) {//starts the background video
+				media = new Media(getClass().getResource("/lib/QB.mp4").toExternalForm());
+
+				backgroundvideo = new MediaPlayer(media);
+				mediaView.setMediaPlayer(backgroundvideo);
+
+				backgroundvideo.setOnEndOfMedia(new Runnable() {
+					@Override
+					public void run() {
+						backgroundvideo.seek(Duration.ZERO);
+						backgroundvideo.play();
+					}
+				});
+				backgroundvideo.play();
+			}
+			mediaView.toBack();
+			
 		questions = qArray(GameController.getSelectedQuestionType());
 		System.out.println("Question: "+question);
 		questionLbl.setText(question.getQuestionText());

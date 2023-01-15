@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1124.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RulesController">
+<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1124.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RulesController">
    <children>
       <Label alignment="CENTER" layoutX="522.0" layoutY="492.0" prefHeight="142.0" prefWidth="295.0" text="Rules " textFill="#024b10">
          <font>
@@ -37,77 +31,77 @@
       </Button>
       <Label layoutX="31.0" layoutY="23.0" text="Knight Move game is consisted of four 1 minute levels .  " textFill="#612d00">
          <font>
-            <Font name="Arial Italic" size="12.0" />
+            <Font name="Arial Bold" size="19.0" />
          </font>
       </Label>
       <Label layoutX="31.0" layoutY="47.0" text="Each level consists of 64 squares board, where the player is asked to move the kinght without being reached by the Queen/king and answering some questions when visiting a question square." textFill="#612d00">
          <font>
-            <Font name="Arial Italic" size="12.0" />
+            <Font name="Arial Bold" size="19.0" />
          </font>
       </Label>
-      <Label layoutX="31.0" layoutY="71.0" text="First Level:(turns: Knight-Queen), the Knight moves like in chess with the additional ability of circular moves around the board, the Queen can move as many sqaures in line\diagonal, 3 random jump squares." textFill="GREEN">
+      <Label layoutX="31.0" layoutY="102.0" text="First Level:(turns: Knight-Queen), the Knight moves like in chess with the additional ability of circular moves around the board, the Queen can move as many sqaures in line\diagonal, 3 random jump squares." textFill="GREEN">
          <font>
-            <Font name="Arial Italic" size="12.0" />
+            <Font name="Arial Bold" size="19.0" />
          </font>
       </Label>
-      <Label layoutX="31.0" layoutY="95.0" text="Second Level:(turns: Knight-Queen), the Knight can move 2 squares in line then one diagonal or the opposite, the Queen have same rules, 3 forgeting sqaures. " textFill="#939307">
+      <Label layoutX="31.0" layoutY="126.0" text="Second Level:(turns: Knight-Queen), the Knight can move 2 squares in line then one diagonal or the opposite, the Queen have same rules, 3 forgeting sqaures. " textFill="#939307">
          <font>
-            <Font name="Arial Italic" size="12.0" />
+            <Font name="Arial Bold" size="19.0" />
          </font>
       </Label>
-      <Label layoutX="31.0" layoutY="119.0" text="Third Level: The Kinght moves continuesly, the King in steady speed can move one square line/diagonal and increases it speed every 10 seconds, 2 random jump squares and 2 forgeting squares. " textFill="RED">
+      <Label layoutX="31.0" layoutY="150.0" text="Third Level: The Kinght moves continuesly, the King in steady speed can move one square line/diagonal and increases it speed every 10 seconds, 2 random jump squares and 2 forgeting squares. " textFill="RED">
          <font>
-            <Font name="Arial Italic" size="12.0" />
+            <Font name="Arial Bold" size="19.0" />
          </font>
       </Label>
-      <Label layoutX="31.0" layoutY="147.0" text="Fourth Level:  movement rules same like Third Level, 8 blocked squares which can not be visited neither by the Knight or the King." textFill="PURPLE">
+      <Label layoutX="31.0" layoutY="178.0" text="Fourth Level:  movement rules same like Third Level, 8 blocked squares which can not be visited neither by the Knight or the King." textFill="PURPLE">
          <font>
-            <Font name="Arial Italic" size="12.0" />
+            <Font name="Arial Bold" size="19.0" />
          </font>
       </Label>
-      <Label layoutX="31.0" layoutY="175.0" text="In Each level there is 3 question squares, one of each difficulty (Easy,Meduim,Hard) when the Knight visits it a question square the timer pauses and question will pop up and the player needs to answer it." textFill="#612d00">
+      <Label layoutX="31.0" layoutY="237.0" text="In Each level there is 3 question squares, one of each difficulty (Easy,Meduim,Hard) when the Knight visits \n a question square the timer pauses and question will pop up and the player needs to answer it." textFill="#612d00">
          <font>
-            <Font name="Arial Italic" size="12.0" />
+            <Font name="Arial Bold" size="19.0" />
          </font>
       </Label>
-      <Label layoutX="31.0" layoutY="198.0" text="Easy Question: right answer +1 point \ wrong Answer -2 points. " textFill="GREEN">
+      <Label layoutX="31.0" layoutY="277.0" text="Easy Question: right answer +1 point \ wrong Answer -2 points. " textFill="GREEN">
          <font>
-            <Font name="Arial Italic" size="12.0" />
+            <Font name="Arial Bold" size="19.0" />
          </font>
       </Label>
-      <Label layoutX="31.0" layoutY="221.0" text="Meduim Question: right answer +2 points \ wrong Answer -3 points." textFill="#b2b21a">
+      <Label layoutX="31.0" layoutY="299.0" text="Meduim Question: right answer +2 points \ wrong Answer -3 points." textFill="#b2b21a">
          <font>
-            <Font name="Arial Italic" size="12.0" />
+            <Font name="Arial Bold" size="19.0" />
          </font>
       </Label>
-      <Label layoutX="31.0" layoutY="245.0" text="Hard Question: right answer +3 points \ wrong answe -4 points." textFill="RED">
+      <Label layoutX="31.0" layoutY="319.0" text="Hard Question: right answer +3 points \ wrong answe -4 points." textFill="RED">
          <font>
-            <Font name="Arial Italic" size="12.0" />
+            <Font name="Arial Bold" size="19.0" />
          </font>
       </Label>
-      <Label layoutX="31.0" layoutY="268.0" text="Visiting unvisited sqaure +1 point, visiting already visited sqaure -1 point, visited squares will have different color." textFill="#612d00">
+      <Label layoutX="33.0" layoutY="363.0" text="Visiting unvisited sqaure +1 point, visiting already visited sqaure -1 point, visited squares will have different color." textFill="#612d00">
          <font>
-            <Font name="Arial Italic" size="12.0" />
+            <Font name="Arial Bold" size="19.0" />
          </font>
       </Label>
-      <Label layoutX="31.0" layoutY="317.0" text="When level is over the player should have earned at least 15 points to go through to next level, otherwise game is over." textFill="#612d00">
+      <Label layoutX="33.0" layoutY="453.0" text="When level is over the player should have earned at least 15 points to go through to next level, otherwise game is over." textFill="#612d00">
          <font>
-            <Font name="Arial Italic" size="12.0" />
+            <Font name="Arial Bold" size="19.0" />
          </font>
       </Label>
-      <Label layoutX="31.0" layoutY="294.0" text="When special square is visited, another sqaure of the same type is generated elsewhere on the board." textFill="#612d00">
+      <Label layoutX="31.0" layoutY="405.0" text="When special square is visited, another sqaure of the same type is generated elsewhere on the board." textFill="#612d00">
          <font>
-            <Font name="Arial Italic" size="12.0" />
+            <Font name="Arial Bold" size="19.0" />
          </font>
       </Label>
-      <Label layoutX="31.0" layoutY="340.0" text="Game is over when the Knight is reached by opponent or fails to earn 15 points in a level or when 4th level ends." textFill="#612d00">
+      <Label layoutX="33.0" layoutY="502.0" text="Game is over when the Knight is reached by opponent or fails to earn 15 points in a level or when 4th level ends." textFill="#612d00">
          <font>
-            <Font name="Arial Italic" size="12.0" />
+            <Font name="Arial Bold" size="19.0" />
          </font>
       </Label>
-      <Label layoutX="25.0" layoutY="367.0" text=" At Game over if the score is at least 200 points, player earns a cup." textFill="#612d00">
+      <Label layoutX="31.0" layoutY="603.0" text=" At Game over if the score is at least 200 points, player earns a cup." textFill="#612d00">
          <font>
-            <Font name="Arial Italic" size="12.0" />
+            <Font name="Arial Bold" size="19.0" />
          </font>
       </Label>
    </children>
