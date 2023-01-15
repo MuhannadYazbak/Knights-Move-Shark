@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.Game;
 
 public class SkinController {
 
@@ -33,6 +34,9 @@ public class SkinController {
     
     @FXML
     void MoveTo(MouseEvent event) throws IOException {
+    	if(OtherSkin.isPressed()) {
+    		Game.setSkin(1);
+    	}else Game.setSkin(0);
     	Parent pane = FXMLLoader.load(getClass().getResource("/views/PlayerName.fxml"));
 		Scene scene = new Scene(pane);
 		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();

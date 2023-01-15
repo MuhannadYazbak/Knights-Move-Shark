@@ -23,6 +23,7 @@ public class Game {
 	private static Game instance;
 	private boolean gameOver;
     private boolean youWon;
+    public static int skin;
     private PieceFactory pieceFactory;
     private Stack<lastObj> last = new Stack<>();
 	
@@ -33,7 +34,15 @@ public class Game {
 		return instance; 
 	}
     
-    // if no game has been started, this constructor is called
+    public static int getSkin() {
+		return skin;
+	}
+
+	public static void setSkin(int skin) {
+		Game.skin = skin;
+	}
+
+	// if no game has been started, this constructor is called
     private Game() { 
     	pieceFactory = new PieceFactory();
     	king = (King) pieceFactory.makePiece("King",new Square(0, 7));

@@ -135,9 +135,9 @@ public class GameController implements Initializable {
 	/*
 	 * images to use on board
 	 */
-	private Image KING = new Image(getClass().getResourceAsStream("/lib/king.png"));
-	private Image QUEEN = new Image(getClass().getResourceAsStream("/lib/queen.png"));
-	private Image KNIGHT = new Image(getClass().getResourceAsStream("/lib/knight.png"));
+	private Image KING ;
+	private Image QUEEN ;
+	private Image KNIGHT;
 	private Image Possible = new Image(getClass().getResourceAsStream("/lib/test12.gif"));
 	private Image QuestionRed = new Image(getClass().getResourceAsStream("/lib/qRed.png"));
 	private Image QuestionYellow = new Image(getClass().getResourceAsStream("/lib/Qyellow.png"));
@@ -1395,7 +1395,16 @@ public class GameController implements Initializable {
 		allButtons.add(CI10);allButtons.add(CI23);allButtons.add(CI36);allButtons.add(CI51);allButtons.add(CI64);allButtons.add(CI76);
 		allButtons.add(CI11);allButtons.add(CI24);allButtons.add(CI37);allButtons.add(CI52);allButtons.add(CI65);allButtons.add(CI77);
 		allButtons.add(CI12);allButtons.add(CI25);allButtons.add(CI40);allButtons.add(CI53);
-
+		if(Game.getSkin()==1) {
+			 KING = new Image(getClass().getResourceAsStream("/lib/setAKing (1).png"));
+			 QUEEN = new Image(getClass().getResourceAsStream("/lib/setAQ.png"));
+			 KNIGHT = new Image(getClass().getResourceAsStream("/lib/setAKn.png"));
+			
+		}else{
+		 KING = new Image(getClass().getResourceAsStream("/lib/king.png"));
+		 QUEEN = new Image(getClass().getResourceAsStream("/lib/queen.png"));
+		 KNIGHT = new Image(getClass().getResourceAsStream("/lib/knight.png"));
+		}
 		countDown();
 
 		BackgroundVideo();
