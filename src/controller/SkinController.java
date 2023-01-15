@@ -20,7 +20,10 @@ public class SkinController {
     private Button backBtn;
 
     @FXML
-    private Button choosenskin;
+    private Button OtherSkin;
+
+    @FXML
+    private Button RegularSkin;
 
     @FXML
     private AnchorPane screen;

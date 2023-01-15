@@ -39,7 +39,7 @@
             <Image url="@../lib/setA.png" />
          </image>
       </ImageView>
-      <Button fx:id="choosenskin" layoutX="664.0" layoutY="254.0" mnemonicParsing="false" onMousePressed="#MoveTo" opacity="0.0" prefHeight="160.0" prefWidth="172.0" />
-      <Button fx:id="choosenskin1" layoutX="309.0" layoutY="261.0" mnemonicParsing="false" onMousePressed="#MoveTo" opacity="0.0" prefHeight="160.0" prefWidth="172.0" />
+      <Button fx:id="OtherSkin" layoutX="664.0" layoutY="254.0" mnemonicParsing="false" onMousePressed="#MoveTo" opacity="0.0" prefHeight="160.0" prefWidth="172.0" />
+      <Button fx:id="RegularSkin" layoutX="309.0" layoutY="261.0" mnemonicParsing="false" onMousePressed="#MoveTo" opacity="0.0" prefHeight="160.0" prefWidth="172.0" />
    </children>
 </AnchorPane>
