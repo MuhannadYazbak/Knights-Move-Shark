@@ -102,15 +102,6 @@ public class MainMenuController implements Initializable{
 	}
 	
 
-//    @FXML
-//    void CHOOSESKIN(ActionEvent event) throws IOException {
-//    	Parent pane = FXMLLoader.load(getClass().getResource("/views/ChooseSkin.fxml"));
-//		Scene scene = new Scene(pane);
-//		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-//		stage.setScene(scene);
-//		stage.setTitle("Questions Wizard");
-//		stage.show();
-//    }
 	@FXML
 	private void showQuestionsWizard(ActionEvent event) throws IOException {
 		Parent pane = FXMLLoader.load(getClass().getResource("/views/QuestionsWizard.fxml"));
