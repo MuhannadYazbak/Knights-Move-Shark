@@ -18,7 +18,7 @@
       </ImageView>
       <VBox fx:id="vbox" alignment="CENTER" layoutX="374.0" layoutY="274.0" prefHeight="437.0" prefWidth="432.0" />
       <MediaView fx:id="mediaView" fitHeight="750.0" fitWidth="1124.0" />
-      <Button fx:id="startNewGameBtn" layoutX="348.0" layoutY="274.0" mnemonicParsing="false" onAction="#enterPlayerName" prefHeight="67.0" prefWidth="306.0" style="-fx-background-color: white; -fx-border-color: #612D00; -fx-border-width: 0px 5px 0px 5px;" text="Start New Game" textFill="#024b10">
+      <Button fx:id="startNewGameBtn" layoutX="420.0" layoutY="274.0" mnemonicParsing="false" onAction="#enterPlayerName" prefHeight="67.0" prefWidth="306.0" style="-fx-background-color: white; -fx-border-color: #612D00; -fx-border-width: 0px 5px 0px 5px;" text="Start New Game" textFill="#024b10">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
@@ -33,7 +33,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="historyBtn" layoutX="341.0" layoutY="425.0" mnemonicParsing="false" onAction="#history" prefHeight="67.0" prefWidth="306.0" style="-fx-background-color: white; -fx-border-color: #612D00; -fx-border-width: 0px 5px 0px 5px;" text="History" textFill="#024b10">
+      <Button fx:id="historyBtn" layoutX="420.0" layoutY="366.0" mnemonicParsing="false" onAction="#history" prefHeight="67.0" prefWidth="306.0" style="-fx-background-color: white; -fx-border-color: #612D00; -fx-border-width: 0px 5px 0px 5px;" text="History" textFill="#024b10">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
@@ -48,7 +48,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="questionsWizardBtn" layoutX="341.0" layoutY="510.0" mnemonicParsing="false" onAction="#showQuestionsWizard" prefHeight="67.0" prefWidth="306.0" style="-fx-background-color: white; -fx-border-color: #612D00; -fx-border-width: 0px 5px 0px 5px;" text="Questions Wizard" textFill="#024b10">
+      <Button fx:id="questionsWizardBtn" layoutX="420.0" layoutY="456.0" mnemonicParsing="false" onAction="#showQuestionsWizard" prefHeight="67.0" prefWidth="306.0" style="-fx-background-color: white; -fx-border-color: #612D00; -fx-border-width: 0px 5px 0px 5px;" text="Questions Wizard" textFill="#024b10">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
@@ -63,7 +63,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="Rules" layoutX="341.0" layoutY="591.0" mnemonicParsing="false" onAction="#rulesPage" prefHeight="67.0" prefWidth="306.0" style="-fx-background-color: white; -fx-border-color: #612D00; -fx-border-width: 0px 5px 0px 5px;" text="Rules Of The Game" textFill="#024b10">
+      <Button fx:id="Rules" layoutX="420.0" layoutY="545.0" mnemonicParsing="false" onAction="#rulesPage" prefHeight="67.0" prefWidth="306.0" style="-fx-background-color: white; -fx-border-color: #612D00; -fx-border-width: 0px 5px 0px 5px;" text="Rules Of The Game" textFill="#024b10">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
@@ -78,7 +78,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="exitBtn" layoutX="341.0" layoutY="668.0" mnemonicParsing="false" onAction="#exit" prefHeight="67.0" prefWidth="306.0" style="-fx-background-color: white; -fx-border-color: #612D00; -fx-border-width: 0px 5px 0px 5px;" text="Exit" textFill="#024b10">
+      <Button fx:id="exitBtn" layoutX="420.0" layoutY="631.0" mnemonicParsing="false" onAction="#exit" prefHeight="67.0" prefWidth="306.0" style="-fx-background-color: white; -fx-border-color: #612D00; -fx-border-width: 0px 5px 0px 5px;" text="Exit" textFill="#024b10">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>

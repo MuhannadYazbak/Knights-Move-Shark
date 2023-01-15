@@ -24,6 +24,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Game;
@@ -44,6 +47,12 @@ public class GameController implements Initializable {
 			S50, S51, S52, S53, S54, S55, S56, S57, S60, S61, S62, S63, S64, S65, S66, S67, S70, S71, S72, S73, S74,
 			S75, S76, S77;
 
+	@FXML
+    private Button pauseBtn;
+	
+	@FXML
+	private ImageView musicButtonImage;
+	
 	/*
 	 * HashSet to use all the board images.
 	 */
@@ -94,7 +103,7 @@ public class GameController implements Initializable {
 
 	@FXML
 	private AnchorPane screen;
-
+	private boolean musicFlag=true;
 	private static final Integer STARTTIME = 60;
 	private Timeline timeline;
 	public static Boolean pauseKing = false;
@@ -102,6 +111,11 @@ public class GameController implements Initializable {
 	static Timer timer = new Timer();
 	static Timer timer2 = new Timer();
 
+	@FXML
+    private MediaView mediaView;
+	 private Media media;
+	 private MediaPlayer backgroundvideo=null;
+	 	
 	public static Timer getTimer2() {
 		return timer2;
 	}
@@ -143,6 +157,9 @@ public class GameController implements Initializable {
 	private Image Level2 = new Image(getClass().getResourceAsStream("/lib/level2.png"));
 	private Image Level3 = new Image(getClass().getResourceAsStream("/lib/level3.png"));
 	private Image Level4 = new Image(getClass().getResourceAsStream("/lib/level4.png"));
+	
+	private Image PauseButtonImage = new Image(getClass().getResourceAsStream("/lib/pause.png"));
+	private Image PlayButtonImage = new Image(getClass().getResourceAsStream("/lib/play-button.png"));
 	
 	private HashSet<ImageView> PossibleMovesQueen = new HashSet<ImageView>();
 	private static HashSet<ImageView> PossibleMovesKing = new HashSet<ImageView>();
@@ -1303,7 +1320,43 @@ public class GameController implements Initializable {
 		Game.getInstance().getQueen().setCurrentPlace(new Square(0, 7));
 		Platform.exit();
 	}
+	
+	private void BackgroundVideo()
+	{
+		if (backgroundvideo == null) {//starts the background video
+			media = new Media(getClass().getResource("/lib/BM.mp4").toExternalForm());
 
+			backgroundvideo = new MediaPlayer(media);
+			mediaView.setMediaPlayer(backgroundvideo);
+
+			backgroundvideo.setOnEndOfMedia(new Runnable() {
+				@Override
+				public void run() {
+					backgroundvideo.seek(Duration.ZERO);
+					backgroundvideo.play();
+				}
+			});
+			backgroundvideo.play();
+			
+		}
+		mediaView.toBack();
+	}
+	
+	@FXML
+    void PauseMusic(ActionEvent event) {
+		if(musicFlag)
+			{
+				backgroundvideo.pause();
+				musicButtonImage.setImage(PlayButtonImage);
+				musicFlag=false;
+			}
+		else {
+				backgroundvideo.play();
+				musicButtonImage.setImage(PauseButtonImage);
+				musicFlag=true;
+		}
+    }
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
@@ -1345,6 +1398,8 @@ public class GameController implements Initializable {
 
 		countDown();
 
+		BackgroundVideo();
+		
 		level.setText(Integer.toString(SysData.getInstance().getGame().getLevel()));
 		score.setText(Integer.toString(SysData.getInstance().getGame().getScore()));
 		playerName.setText(Game.getInstance().getPlayer().getName());
