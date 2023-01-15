@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1124.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SkinController">
+   <children>
+      <ImageView fitHeight="750.0" fitWidth="1124.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/1.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="82.0" fitWidth="89.0" layoutX="40.0" layoutY="662.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/back.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="backBtn" contentDisplay="CENTER" layoutX="40.0" layoutY="664.0" mnemonicParsing="false" onAction="#back" opacity="0.0" prefHeight="70.0" prefWidth="82.0" style="-fx-background-color: white;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Label fx:id="title" layoutX="409.0" layoutY="131.0" prefHeight="46.0" prefWidth="431.0" text="Please click on the skin" textFill="WHITE">
+         <font>
+        	<Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="309.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/setB.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="656.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lib/setA.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="choosenskin" layoutX="664.0" layoutY="254.0" mnemonicParsing="false" onMousePressed="#MoveTo" opacity="0.0" prefHeight="160.0" prefWidth="172.0" />
+      <Button fx:id="choosenskin1" layoutX="309.0" layoutY="261.0" mnemonicParsing="false" onMousePressed="#MoveTo" opacity="0.0" prefHeight="160.0" prefWidth="172.0" />
+   </children>
+</AnchorPane>
