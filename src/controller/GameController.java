@@ -104,7 +104,7 @@ public class GameController implements Initializable {
 	@FXML
 	private AnchorPane screen;
 	private boolean musicFlag=true;
-	private static final Integer STARTTIME = 60;
+	private static final Integer STARTTIME = 10;
 	private Timeline timeline;
 	public static Boolean pauseKing = false;
 	private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
@@ -570,7 +570,7 @@ public class GameController implements Initializable {
 				getImageByString("I00").setImage(KNIGHT);
 				Game.getInstance().getQueen().setCurrentPlace(Board[0][7]);
 				getImageByString("I07").setImage(QUEEN);
-				try {
+				try {System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
 					final Alert alert = new Alert(Alert.AlertType.INFORMATION);
 					alert.setTitle("Congrats!");
 					alert.setContentText("Press ok to continue.");
