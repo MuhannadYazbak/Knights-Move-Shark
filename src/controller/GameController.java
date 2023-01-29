@@ -556,7 +556,7 @@ public class GameController implements Initializable {
 			break;
 		}
 		if(remainingTime.getText().equals("0")){
-    		if(Game.getInstance().getPlayer().getScore()>=15 && Game.getInstance().getLevel() == 1)
+    		if(Game.getInstance().getPlayer().getScore()>=2 && Game.getInstance().getLevel() == 1)
 			{
 				Game.getInstance().setScoreLevel1(Game.getInstance().getPlayer().getScore());
     			Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
@@ -570,7 +570,7 @@ public class GameController implements Initializable {
 				getImageByString("I00").setImage(KNIGHT);
 				Game.getInstance().getQueen().setCurrentPlace(Board[0][7]);
 				getImageByString("I07").setImage(QUEEN);
-				try {System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+				try {
 					final Alert alert = new Alert(Alert.AlertType.INFORMATION);
 					alert.setTitle("Congrats!");
 					alert.setContentText("Press ok to continue.");
@@ -586,7 +586,7 @@ public class GameController implements Initializable {
 				SetPossibleLEVEL2();
 				
 			}
-    		else if(Game.getInstance().getPlayer().getScore() - Game.getInstance().getScoreLevel1()>=15 && Game.getInstance().getLevel() == 2)
+    		else if(Game.getInstance().getPlayer().getScore() - Game.getInstance().getScoreLevel1()>=4 && Game.getInstance().getLevel() == 2)
     			{
     			Game.getInstance().setScoreLevel2(Game.getInstance().getPlayer().getScore());
     				Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
@@ -616,7 +616,7 @@ public class GameController implements Initializable {
     				SetPossibleLEVEL2();
     		    
     			}
-        		else if(Game.getInstance().getPlayer().getScore() - Game.getInstance().getScoreLevel2()>=15 && Game.getInstance().getLevel() == 3)
+        		else if(Game.getInstance().getPlayer().getScore() - Game.getInstance().getScoreLevel2()>=6 && Game.getInstance().getLevel() == 3)
         			{
         				Game.getInstance().setScoreLevel3(Game.getInstance().getPlayer().getScore());
         				Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
@@ -651,7 +651,7 @@ public class GameController implements Initializable {
         				SetPossibleLEVEL2();
         		    
         			}
-    		else if(Game.getInstance().getPlayer().getScore() - Game.getInstance().getScoreLevel3()>=15 && Game.getInstance().getLevel() == 4) {
+    		else if(Game.getInstance().getPlayer().getScore() - Game.getInstance().getScoreLevel3()>=8 && Game.getInstance().getLevel() == 4) {
 
     			Game.getInstance().setScoreLevel4(Game.getInstance().getPlayer().getScore());
     			try {
