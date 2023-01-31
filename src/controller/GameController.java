@@ -104,7 +104,7 @@ public class GameController implements Initializable {
 	@FXML
 	private AnchorPane screen;
 	private boolean musicFlag=true;
-	private static final Integer STARTTIME = 10;
+	private static final Integer STARTTIME = 60;
 	private Timeline timeline;
 	public static Boolean pauseKing = false;
 	private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
@@ -586,7 +586,7 @@ public class GameController implements Initializable {
 				SetPossibleLEVEL2();
 				
 			}
-    		else if(Game.getInstance().getPlayer().getScore() - Game.getInstance().getScoreLevel1()>=4 && Game.getInstance().getLevel() == 2)
+    		else if(Game.getInstance().getPlayer().getScore() - Game.getInstance().getScoreLevel1()>=2 && Game.getInstance().getLevel() == 2)
     			{
     			Game.getInstance().setScoreLevel2(Game.getInstance().getPlayer().getScore());
     				Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
@@ -616,7 +616,7 @@ public class GameController implements Initializable {
     				SetPossibleLEVEL2();
     		    
     			}
-        		else if(Game.getInstance().getPlayer().getScore() - Game.getInstance().getScoreLevel2()>=6 && Game.getInstance().getLevel() == 3)
+        		else if(Game.getInstance().getPlayer().getScore() - Game.getInstance().getScoreLevel2()>=2 && Game.getInstance().getLevel() == 3)
         			{
         				Game.getInstance().setScoreLevel3(Game.getInstance().getPlayer().getScore());
         				Game.getInstance().setLevel(Game.getInstance().getLevel()+1);
@@ -651,7 +651,7 @@ public class GameController implements Initializable {
         				SetPossibleLEVEL2();
         		    
         			}
-    		else if(Game.getInstance().getPlayer().getScore() - Game.getInstance().getScoreLevel3()>=8 && Game.getInstance().getLevel() == 4) {
+    		else if(Game.getInstance().getPlayer().getScore() - Game.getInstance().getScoreLevel3()>=2 && Game.getInstance().getLevel() == 4) {
 
     			Game.getInstance().setScoreLevel4(Game.getInstance().getPlayer().getScore());
     			try {
@@ -665,7 +665,7 @@ public class GameController implements Initializable {
 					alert.setContentText("Press ok to continue.");
 					alert.setHeaderText("Congratulations, "+ Game.getInstance().getPlayer().getName() +".\n" + "You have won the game!");
 					alert.showAndWait();
-					if (Game.getInstance().getPlayer().getScore()>200) {
+					if (Game.getInstance().getPlayer().getScore()>10) {
 						Parent pane = FXMLLoader.load(getClass().getResource("/views/WinnerWindow.fxml"));
 						Scene scene = new Scene(pane);
 						//Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
@@ -1313,7 +1313,7 @@ public class GameController implements Initializable {
 		stage.show();
 	}
 
-	static void backToMain() throws IOException {
+	private void backToMain() throws IOException {
 		Game.getInstance().getKnight().setCurrentPlace(new Square(0, 0));
 		Game.getInstance().getKnight().setPrev_Place(new Square(0, 0));
 		Game.getInstance().getQueen().setPrev_Place(new Square(0, 7));
